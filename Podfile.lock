@@ -27,6 +27,7 @@ PODS:
     - SDWebImage/Core (= 5.8.4)
   - SDWebImage/Core (5.8.4)
   - SVProgressHUD (2.2.5)
+  - SwiftGen (6.2.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - RxSwift
   - SDWebImage
   - SVProgressHUD
+  - SwiftGen
 
 SPEC REPOS:
   trunk:
@@ -56,6 +58,7 @@ SPEC REPOS:
     - RxSwift
     - SDWebImage
     - SVProgressHUD
+    - SwiftGen
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
@@ -71,7 +74,8 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftGen: 62e69d127507be1538d4263e137b2290cd6ab272
 
-PODFILE CHECKSUM: b39009fb4f746f7a2fee0fc142e17a7f5bff0da4
+PODFILE CHECKSUM: 284db10941658839874f899381315f244a0b13e0
 
 COCOAPODS: 1.8.4

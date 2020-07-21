@@ -17,4 +17,5 @@ target 'netflix' do
 	pod 'RAMAnimatedTabBarController'
 	pod 'Hero'
   	pod 'lottie-ios'
+	pod 'SwiftGen'
 end

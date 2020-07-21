@@ -117,5 +117,12 @@ extension SceneCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController)  {
         currentViewController = SceneCoordinator.actualViewController(for: viewController)
     }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        return true
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return TabBarAnimatedTransitioning()
+    }
 }
-

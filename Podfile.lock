@@ -7,7 +7,6 @@ PODS:
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
-  - RAMAnimatedTabBarController (5.2.0)
   - Reusable (4.1.1):
     - Reusable/Storyboard (= 4.1.1)
     - Reusable/View (= 4.1.1)
@@ -34,7 +33,6 @@ DEPENDENCIES:
   - Hero
   - lottie-ios
   - Moya
-  - RAMAnimatedTabBarController
   - Reusable
   - RxCocoa
   - RxDataSources
@@ -50,7 +48,6 @@ SPEC REPOS:
     - Hero
     - lottie-ios
     - Moya
-    - RAMAnimatedTabBarController
     - Reusable
     - RxCocoa
     - RxDataSources
@@ -66,7 +63,6 @@ SPEC CHECKSUMS:
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
-  RAMAnimatedTabBarController: 6863a386e7ae2ab227cd60aa73ab8ff56cdacfdd
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
@@ -76,6 +72,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftGen: 62e69d127507be1538d4263e137b2290cd6ab272
 
-PODFILE CHECKSUM: 284db10941658839874f899381315f244a0b13e0
+PODFILE CHECKSUM: 1a9f975ccfa0e91f02e398cc3697fc9e3b33634e
 
 COCOAPODS: 1.8.4

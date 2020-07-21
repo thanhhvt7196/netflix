@@ -14,7 +14,6 @@ target 'netflix' do
 	pod 'RxDataSources'
 	pod 'Moya'
 	pod 'SDWebImage'
-	pod 'RAMAnimatedTabBarController'
 	pod 'Hero'
   	pod 'lottie-ios'
 	pod 'SwiftGen'

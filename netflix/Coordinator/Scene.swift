@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RAMAnimatedTabBarController
 
 protocol TargetScene {
     var transition: SceneTransitionType { get }
@@ -21,49 +20,40 @@ extension Scene: TargetScene {
     var transition: SceneTransitionType {
         switch self {
         case .tabbar:
-            let rootTabbarController = RootTabbarController.instantiate()
+            let rootTabbarController = AnimatedTabBarController.instantiate()
             
             let homeViewModel = HomeViewModel()
             let homeViewController = HomeViewController.instantiate(withViewModel: homeViewModel)
             let homeNavController = UINavigationController(rootViewController: homeViewController)
-            let homeTabbarItem = RAMAnimatedTabBarItem(title: Strings.home, image: Asset.tabIconHomeNormal.image.tinted(color: .lightGray), selectedImage: Asset.mcflyBrowseNormal.image)
-            homeTabbarItem.animation = RAMBounceAnimation()
-            homeTabbarItem.animation.textSelectedColor = .white
+            let homeTabbarItem = UITabBarItem(title: Strings.home, image: Asset.tabIconHomeNormal.image, selectedImage: Asset.tabIconHomeNormal.image)
             homeNavController.tabBarItem = homeTabbarItem
             
             let searchViewModel = SearchViewModel()
             let searchViewController = SearchViewController.instantiate(withViewModel: searchViewModel)
             let searchNavController = UINavigationController(rootViewController: searchViewController)
-            let searchTabbarItem = RAMAnimatedTabBarItem(title: Strings.search, image: Asset.tabIconSearchNormal.image.tinted(color: .lightGray), selectedImage: Asset.mcflySearchNormal.image)
-            searchTabbarItem.animation = RAMBounceAnimation()
-            searchTabbarItem.animation.textSelectedColor = .white
+            let searchTabbarItem = UITabBarItem(title: Strings.search, image: Asset.tabIconSearchNormal.image, selectedImage: Asset.tabIconSearchNormal.image)
             searchNavController.tabBarItem = searchTabbarItem
             
             let newMoviesViewModel = NewMoviesViewModel()
             let newMoviesViewController = NewMoviesViewController.instantiate(withViewModel: newMoviesViewModel)
             let newMoviesNavController = UINavigationController(rootViewController: newMoviesViewController)
-            let newMoviesTabbarItem = RAMAnimatedTabBarItem(title: Strings.comingSoon, image: Asset.extrasCardsIconNormal.image.tinted(color: .lightGray), selectedImage: Asset.extrasCardsIconNormal.image)
-            newMoviesTabbarItem.animation = RAMBounceAnimation()
-            newMoviesTabbarItem.animation.textSelectedColor = .white
+            let newMoviesTabbarItem = UITabBarItem(title: Strings.comingSoon, image: Asset.extrasCardsIconNormal.image, selectedImage: Asset.extrasCardsIconNormal.image)
             newMoviesNavController.tabBarItem = newMoviesTabbarItem
             
             let myListViewModel = MyListViewModel()
             let myListViewController = MyListViewController.instantiate(withViewModel: myListViewModel)
             let myListNavController = UINavigationController(rootViewController: myListViewController)
-            let myListTabbarItem = RAMAnimatedTabBarItem(title: Strings.myList, image: Asset.icMylistNormal.image.tinted(color: .lightGray), selectedImage: Asset.icMylistNormal.image)
-            myListTabbarItem.animation = RAMBounceAnimation()
-            myListTabbarItem.animation.textSelectedColor = .white
+            let myListTabbarItem = UITabBarItem(title: Strings.myList, image: Asset.icMylistNormal.image, selectedImage: Asset.icMylistNormal.image)
             myListNavController.tabBarItem = myListTabbarItem
             
             let moreViewModel = MoreViewModel()
             let moreViewController = MoreViewController.instantiate(withViewModel: moreViewModel)
             let moreNavController = UINavigationController(rootViewController: moreViewController)
-            let moreTabbarItem = RAMAnimatedTabBarItem(title: Strings.more, image: Asset.mcflyMoreNormal.image.tinted(color: .lightGray), selectedImage: Asset.mcflyMoreNormal.image)
-            moreTabbarItem.animation = RAMBounceAnimation()
-            moreTabbarItem.animation.textSelectedColor = .white
+            let moreTabbarItem = UITabBarItem(title: Strings.more, image: Asset.mcflyMoreNormal.image, selectedImage: Asset.mcflyMoreNormal.image)
             moreNavController.tabBarItem = moreTabbarItem
             
-            rootTabbarController.setViewControllers([homeNavController, searchNavController, newMoviesNavController, myListNavController, moreNavController], animated: true)
+            
+            rootTabbarController.viewControllers = [homeNavController, searchNavController, newMoviesNavController, myListNavController, moreNavController]
             return .tabBar(rootTabbarController)
         }
     }

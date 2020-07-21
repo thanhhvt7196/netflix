@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "S_Azure_1X_Normal.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "S_Azure_2X_Normal@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "S_Azure_3X_Normal@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

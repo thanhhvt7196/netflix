@@ -2,6 +2,7 @@ PODS:
   - Alamofire (5.2.2)
   - Differentiator (4.0.1)
   - Hero (1.5.0)
+  - lottie-ios (3.1.8)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
@@ -30,6 +31,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Hero
+  - lottie-ios
   - Moya
   - RAMAnimatedTabBarController
   - Reusable
@@ -44,6 +46,7 @@ SPEC REPOS:
     - Alamofire
     - Differentiator
     - Hero
+    - lottie-ios
     - Moya
     - RAMAnimatedTabBarController
     - Reusable
@@ -58,6 +61,7 @@ SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   RAMAnimatedTabBarController: 6863a386e7ae2ab227cd60aa73ab8ff56cdacfdd
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
@@ -68,6 +72,6 @@ SPEC CHECKSUMS:
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 40afb72c95727cc7d5cad3f7b2bfc66cff5910a9
+PODFILE CHECKSUM: b39009fb4f746f7a2fee0fc142e17a7f5bff0da4
 
 COCOAPODS: 1.8.4

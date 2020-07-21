@@ -7,12 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C1035E424C6EB6B00571EA6 /* playPause.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035DE24C6EB6A00571EA6 /* playPause.json */; };
+		0C1035E524C6EB6B00571EA6 /* playSpinner.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035DF24C6EB6B00571EA6 /* playSpinner.json */; };
+		0C1035E624C6EB6B00571EA6 /* ratings-all.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035E024C6EB6B00571EA6 /* ratings-all.json */; };
+		0C1035E724C6EB6B00571EA6 /* countdown.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035E124C6EB6B00571EA6 /* countdown.json */; };
+		0C1035E824C6EB6B00571EA6 /* checkAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035E224C6EB6B00571EA6 /* checkAnimation.json */; };
+		0C1035E924C6EB6B00571EA6 /* download-dp-icon.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035E324C6EB6B00571EA6 /* download-dp-icon.json */; };
 		0C1EE85F24C69D370046BB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1EE85E24C69D370046BB24 /* AppDelegate.swift */; };
 		0C1EE86124C69D370046BB24 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1EE86024C69D370046BB24 /* SceneDelegate.swift */; };
 		0C1EE86324C69D370046BB24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1EE86224C69D370046BB24 /* ViewController.swift */; };
 		0C1EE86624C69D370046BB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C1EE86424C69D370046BB24 /* Main.storyboard */; };
 		0C1EE86824C69D390046BB24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C1EE86724C69D390046BB24 /* Assets.xcassets */; };
 		0C1EE86B24C69D390046BB24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C1EE86924C69D390046BB24 /* LaunchScreen.storyboard */; };
+		0C2BAA6B24C6E8CF003FD8A9 /* dtmf_56.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6124C6E8CE003FD8A9 /* dtmf_56.wav */; };
+		0C2BAA6C24C6E8CF003FD8A9 /* dtmf_52.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6224C6E8CE003FD8A9 /* dtmf_52.wav */; };
+		0C2BAA6D24C6E8CF003FD8A9 /* dtmf_57.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6324C6E8CE003FD8A9 /* dtmf_57.wav */; };
+		0C2BAA6E24C6E8CF003FD8A9 /* dtmf_55.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6424C6E8CE003FD8A9 /* dtmf_55.wav */; };
+		0C2BAA6F24C6E8CF003FD8A9 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6524C6E8CE003FD8A9 /* silence.wav */; };
+		0C2BAA7024C6E8CF003FD8A9 /* MESSAGE_SOUND_BOOM_BOOM.aif in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6624C6E8CE003FD8A9 /* MESSAGE_SOUND_BOOM_BOOM.aif */; };
+		0C2BAA7124C6E8CF003FD8A9 /* dtmf_54.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6724C6E8CE003FD8A9 /* dtmf_54.wav */; };
+		0C2BAA7224C6E8CF003FD8A9 /* dtmf_51.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6824C6E8CF003FD8A9 /* dtmf_51.wav */; };
+		0C2BAA7324C6E8CF003FD8A9 /* dtmf_53.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6924C6E8CF003FD8A9 /* dtmf_53.wav */; };
+		0C2BAA7424C6E8CF003FD8A9 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6A24C6E8CF003FD8A9 /* ringtone.mp3 */; };
+		0C2BAA7624C6E8D9003FD8A9 /* dtmf_50.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA7524C6E8D9003FD8A9 /* dtmf_50.wav */; };
+		0C2BAA7924C6E8F1003FD8A9 /* nf-icon.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA7824C6E8F1003FD8A9 /* nf-icon.otf */; };
 		0C8D56C724C6DD2700E2CB08 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56C324C6DD2700E2CB08 /* Scene.swift */; };
 		0C8D56C824C6DD2700E2CB08 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56C424C6DD2700E2CB08 /* SceneCoordinatorType.swift */; };
 		0C8D56C924C6DD2700E2CB08 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56C524C6DD2700E2CB08 /* SceneTransitionType.swift */; };
@@ -45,10 +63,17 @@
 		0C8D571024C6DED200E2CB08 /* RootTabbarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8D570F24C6DED200E2CB08 /* RootTabbarController.storyboard */; };
 		0C8D571224C6DF1A00E2CB08 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D571124C6DF1A00E2CB08 /* HomeViewController.swift */; };
 		0C8D571424C6DF5F00E2CB08 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8D571324C6DF5F00E2CB08 /* HomeViewController.storyboard */; };
+		0CAAC6CF24C6E9EE00898523 /* icon-addList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CAAC6CE24C6E9EE00898523 /* icon-addList.json */; };
 		B369BEB8824D10ED8ED7299F /* Pods_netflix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D964BB58E033736DF7F8F26 /* Pods_netflix.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C1035DE24C6EB6A00571EA6 /* playPause.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = playPause.json; sourceTree = "<group>"; };
+		0C1035DF24C6EB6B00571EA6 /* playSpinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = playSpinner.json; sourceTree = "<group>"; };
+		0C1035E024C6EB6B00571EA6 /* ratings-all.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ratings-all.json"; sourceTree = "<group>"; };
+		0C1035E124C6EB6B00571EA6 /* countdown.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countdown.json; sourceTree = "<group>"; };
+		0C1035E224C6EB6B00571EA6 /* checkAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkAnimation.json; sourceTree = "<group>"; };
+		0C1035E324C6EB6B00571EA6 /* download-dp-icon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "download-dp-icon.json"; sourceTree = "<group>"; };
 		0C1EE85B24C69D370046BB24 /* netflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C1EE85E24C69D370046BB24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C1EE86024C69D370046BB24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +82,18 @@
 		0C1EE86724C69D390046BB24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C1EE86A24C69D390046BB24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C1EE86C24C69D390046BB24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0C2BAA6124C6E8CE003FD8A9 /* dtmf_56.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_56.wav; sourceTree = "<group>"; };
+		0C2BAA6224C6E8CE003FD8A9 /* dtmf_52.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_52.wav; sourceTree = "<group>"; };
+		0C2BAA6324C6E8CE003FD8A9 /* dtmf_57.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_57.wav; sourceTree = "<group>"; };
+		0C2BAA6424C6E8CE003FD8A9 /* dtmf_55.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_55.wav; sourceTree = "<group>"; };
+		0C2BAA6524C6E8CE003FD8A9 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
+		0C2BAA6624C6E8CE003FD8A9 /* MESSAGE_SOUND_BOOM_BOOM.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = MESSAGE_SOUND_BOOM_BOOM.aif; sourceTree = "<group>"; };
+		0C2BAA6724C6E8CE003FD8A9 /* dtmf_54.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_54.wav; sourceTree = "<group>"; };
+		0C2BAA6824C6E8CF003FD8A9 /* dtmf_51.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_51.wav; sourceTree = "<group>"; };
+		0C2BAA6924C6E8CF003FD8A9 /* dtmf_53.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_53.wav; sourceTree = "<group>"; };
+		0C2BAA6A24C6E8CF003FD8A9 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
+		0C2BAA7524C6E8D9003FD8A9 /* dtmf_50.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_50.wav; sourceTree = "<group>"; };
+		0C2BAA7824C6E8F1003FD8A9 /* nf-icon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nf-icon.otf"; sourceTree = "<group>"; };
 		0C8D56C324C6DD2700E2CB08 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		0C8D56C424C6DD2700E2CB08 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		0C8D56C524C6DD2700E2CB08 /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
@@ -89,6 +126,7 @@
 		0C8D570F24C6DED200E2CB08 /* RootTabbarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RootTabbarController.storyboard; sourceTree = "<group>"; };
 		0C8D571124C6DF1A00E2CB08 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0C8D571324C6DF5F00E2CB08 /* HomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
+		0CAAC6CE24C6E9EE00898523 /* icon-addList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "icon-addList.json"; sourceTree = "<group>"; };
 		9D964BB58E033736DF7F8F26 /* Pods_netflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FA004B2D94CA1A9FB1573B /* Pods-netflix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netflix.release.xcconfig"; path = "Target Support Files/Pods-netflix/Pods-netflix.release.xcconfig"; sourceTree = "<group>"; };
 		C3FCEC81BEFD75F4281C81A9 /* Pods-netflix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netflix.debug.xcconfig"; path = "Target Support Files/Pods-netflix/Pods-netflix.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +165,7 @@
 		0C1EE85D24C69D370046BB24 /* netflix */ = {
 			isa = PBXGroup;
 			children = (
+				0C2BAA5E24C6E8B8003FD8A9 /* Resources */,
 				0C8D570624C6DE7500E2CB08 /* Base */,
 				0C8D570324C6DE6500E2CB08 /* Modules */,
 				0C8D56CF24C6DD3B00E2CB08 /* Utils */,
@@ -135,11 +174,55 @@
 				0C1EE86024C69D370046BB24 /* SceneDelegate.swift */,
 				0C1EE86224C69D370046BB24 /* ViewController.swift */,
 				0C1EE86424C69D370046BB24 /* Main.storyboard */,
-				0C1EE86724C69D390046BB24 /* Assets.xcassets */,
 				0C1EE86924C69D390046BB24 /* LaunchScreen.storyboard */,
 				0C1EE86C24C69D390046BB24 /* Info.plist */,
 			);
 			path = netflix;
+			sourceTree = "<group>";
+		};
+		0C2BAA5E24C6E8B8003FD8A9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0CAAC6CD24C6E9E600898523 /* Lotties */,
+				0C2BAA7724C6E8E6003FD8A9 /* Fonts */,
+				0C2BAA6024C6E8C5003FD8A9 /* Sounds */,
+				0C2BAA5F24C6E8BD003FD8A9 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0C2BAA5F24C6E8BD003FD8A9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0C1EE86724C69D390046BB24 /* Assets.xcassets */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		0C2BAA6024C6E8C5003FD8A9 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				0C2BAA7524C6E8D9003FD8A9 /* dtmf_50.wav */,
+				0C2BAA6824C6E8CF003FD8A9 /* dtmf_51.wav */,
+				0C2BAA6224C6E8CE003FD8A9 /* dtmf_52.wav */,
+				0C2BAA6924C6E8CF003FD8A9 /* dtmf_53.wav */,
+				0C2BAA6724C6E8CE003FD8A9 /* dtmf_54.wav */,
+				0C2BAA6424C6E8CE003FD8A9 /* dtmf_55.wav */,
+				0C2BAA6124C6E8CE003FD8A9 /* dtmf_56.wav */,
+				0C2BAA6324C6E8CE003FD8A9 /* dtmf_57.wav */,
+				0C2BAA6624C6E8CE003FD8A9 /* MESSAGE_SOUND_BOOM_BOOM.aif */,
+				0C2BAA6A24C6E8CF003FD8A9 /* ringtone.mp3 */,
+				0C2BAA6524C6E8CE003FD8A9 /* silence.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		0C2BAA7724C6E8E6003FD8A9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0C2BAA7824C6E8F1003FD8A9 /* nf-icon.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		0C8D56C224C6DD1B00E2CB08 /* Coordinator */ = {
@@ -226,6 +309,20 @@
 			path = Tabbar;
 			sourceTree = "<group>";
 		};
+		0CAAC6CD24C6E9E600898523 /* Lotties */ = {
+			isa = PBXGroup;
+			children = (
+				0CAAC6CE24C6E9EE00898523 /* icon-addList.json */,
+				0C1035E224C6EB6B00571EA6 /* checkAnimation.json */,
+				0C1035E124C6EB6B00571EA6 /* countdown.json */,
+				0C1035E324C6EB6B00571EA6 /* download-dp-icon.json */,
+				0C1035DE24C6EB6A00571EA6 /* playPause.json */,
+				0C1035DF24C6EB6B00571EA6 /* playSpinner.json */,
+				0C1035E024C6EB6B00571EA6 /* ratings-all.json */,
+			);
+			path = Lotties;
+			sourceTree = "<group>";
+		};
 		8AAA4BE8B7A81AE1BF04D84E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,11 +400,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C2BAA6B24C6E8CF003FD8A9 /* dtmf_56.wav in Resources */,
 				0C8D571424C6DF5F00E2CB08 /* HomeViewController.storyboard in Resources */,
+				0C1035E424C6EB6B00571EA6 /* playPause.json in Resources */,
 				0C1EE86B24C69D390046BB24 /* LaunchScreen.storyboard in Resources */,
+				0C2BAA7224C6E8CF003FD8A9 /* dtmf_51.wav in Resources */,
+				0C1035E624C6EB6B00571EA6 /* ratings-all.json in Resources */,
+				0C1035E524C6EB6B00571EA6 /* playSpinner.json in Resources */,
+				0C2BAA7424C6E8CF003FD8A9 /* ringtone.mp3 in Resources */,
+				0C2BAA6C24C6E8CF003FD8A9 /* dtmf_52.wav in Resources */,
+				0C2BAA7624C6E8D9003FD8A9 /* dtmf_50.wav in Resources */,
 				0C1EE86824C69D390046BB24 /* Assets.xcassets in Resources */,
+				0C2BAA6D24C6E8CF003FD8A9 /* dtmf_57.wav in Resources */,
+				0C1035E824C6EB6B00571EA6 /* checkAnimation.json in Resources */,
+				0C2BAA7124C6E8CF003FD8A9 /* dtmf_54.wav in Resources */,
+				0C1035E724C6EB6B00571EA6 /* countdown.json in Resources */,
+				0C2BAA6E24C6E8CF003FD8A9 /* dtmf_55.wav in Resources */,
 				0C8D571024C6DED200E2CB08 /* RootTabbarController.storyboard in Resources */,
+				0C2BAA7924C6E8F1003FD8A9 /* nf-icon.otf in Resources */,
+				0C2BAA6F24C6E8CF003FD8A9 /* silence.wav in Resources */,
+				0CAAC6CF24C6E9EE00898523 /* icon-addList.json in Resources */,
+				0C1035E924C6EB6B00571EA6 /* download-dp-icon.json in Resources */,
+				0C2BAA7024C6E8CF003FD8A9 /* MESSAGE_SOUND_BOOM_BOOM.aif in Resources */,
 				0C1EE86624C69D370046BB24 /* Main.storyboard in Resources */,
+				0C2BAA7324C6E8CF003FD8A9 /* dtmf_53.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

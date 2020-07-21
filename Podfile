@@ -16,4 +16,5 @@ target 'netflix' do
 	pod 'SDWebImage'
 	pod 'RAMAnimatedTabBarController'
 	pod 'Hero'
+  	pod 'lottie-ios'
 end

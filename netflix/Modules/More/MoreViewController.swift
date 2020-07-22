@@ -10,12 +10,22 @@ import Foundation
 import Reusable
 import RxSwift
 import RxCocoa
-import SVProgressHUD
 
 class MoreViewController: BaseViewController, StoryboardBased, ViewModelBased {
     var viewModel: MoreViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareUI()
+    }
+    
+    private func prepareUI() {
+        configNavigationBar()
+    }
+}
+
+extension MoreViewController {
+    private func configNavigationBar() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }

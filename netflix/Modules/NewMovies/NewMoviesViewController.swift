@@ -11,12 +11,22 @@ import UIKit
 import Reusable
 import RxSwift
 import RxCocoa
-import SVProgressHUD
 
 class NewMoviesViewController: BaseViewController, StoryboardBased, ViewModelBased {
     var viewModel: NewMoviesViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareUI()
+    }
+    
+    private func prepareUI() {
+        configNavigationBar()
+    }
+}
+
+extension NewMoviesViewController {
+    private func configNavigationBar() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }

@@ -21,6 +21,14 @@ struct APIParamKeys {
     static let APIKey = "api_key"
 }
 
+struct ErrorMessage {
+    static let notFound = "Not found"
+    static let authenticalError = "Authentical error"
+    static let badRequest = "Bad request"
+    static let serverError = "Server error"
+    static let errorOccur = "An error occur"
+}
+
 struct APIConstants {
     static let DEFAULT_TIMEOUT_INTERVAL: TimeInterval = 60.0
 }

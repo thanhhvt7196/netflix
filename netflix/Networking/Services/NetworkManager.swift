@@ -1,23 +1,46 @@
 //
 //  NetworkManager.swift
-//  netflix
+//  EnjapanMoya
 //
-//  Created by thanh tien on 7/21/20.
-//  Copyright © 2020 thanh tien. All rights reserved.
+//  Created by HieuTQ on 2/26/20.
+//  Copyright © 2020 HieuTQ. All rights reserved.
 //
 
 import Foundation
+import Moya
 import Alamofire
 import RxSwift
-import Moya
+
+
+struct VoidAlias: Codable {}
+
+private func JSONResponseDataFormatter(_ data: Data) -> String {
+    do {
+        let dataAsJSON = try JSONSerialization.jsonObject(with: data)
+        let prettyData = try JSONSerialization.data(withJSONObject: dataAsJSON, options: .prettyPrinted)
+        return String(data: prettyData, encoding: .utf8) ?? String(data: data, encoding: .utf8) ?? ""
+    } catch {
+        return String(data: data, encoding: .utf8) ?? ""
+    }
+}
 
 class NetworkManager {
+    static let apiProvider: MoyaProvider<APIMovie> = {
+        let plugins = [NetworkLoggerPlugin(configuration: .init(formatter: .init(responseData: JSONResponseDataFormatter),
+                                                                logOptions: .verbose))]
+        
+        return MoyaProvider<APIMovie>(session: APISession.session, plugins: plugins)
+    }()
+}
+
+class APISession {
     static let eventMonitor = ClosureEventMonitor()
-    static let sharedProvider: MoyaProvider<APIMovie> = {
+    static let session: Session = {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = APIConstants.DEFAULT_TIMEOUT_INTERVAL
+        configuration.timeoutIntervalForResource = APIConstants.DEFAULT_TIMEOUT_INTERVAL
         let sessionManager = Session(configuration: configuration, interceptor: RequestHandler(), eventMonitors: [eventMonitor])
-        return MoyaProvider<APIMovie>(session: sessionManager)
+        return sessionManager
     }()
 }
 
@@ -36,7 +59,7 @@ class RequestHandler: RequestInterceptor {
                 || response.statusCode == HTTPStatusCodes.Forbidden.rawValue {
             requestsToRetry.append(completion)
             if !isRefreshing {
-                // retry here
+                // handle retry here
                 completion(.doNotRetry)
             }
             

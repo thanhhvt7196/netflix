@@ -31,16 +31,25 @@ extension APIMovie: TargetType {
     var sampleData: Data {
         switch self {
         case .getPopularMovies:
-        return JSONHelper.dataFromFile(path: "Networking/SampleData/PopularMoviesSample") ?? Data()
+            return JSONHelper.dataFromFile(path: "Networking/SampleData/PopularMoviesSample") ?? Data()
         }
     }
     
     var task: Task {
-        return .requestPlain
+        var parameters = [String: Any]()
+        var encoding: ParameterEncoding = JSONEncoding.default
+        switch self {
+        case .getPopularMovies:
+            parameters = [APIParamKeys.APIKey: APIURL.APIKey]
+            encoding = URLEncoding.default
+            return .requestParameters(parameters: parameters, encoding: encoding)
+        }
     }
     
     var headers: [String : String]? {
-        return nil
+        return [
+            HTTPHeaderField.contentType.rawValue: ContentType.json.rawValue,
+        ]
     }
     
     var baseURL: URL {

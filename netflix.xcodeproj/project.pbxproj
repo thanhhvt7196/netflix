@@ -53,15 +53,14 @@
 		0C4A35CA24C71576007671C2 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4A35C924C71576007671C2 /* JSONHelper.swift */; };
 		0C59847C24C6F94800DDF1A0 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59847B24C6F94800DDF1A0 /* UIImage+Extension.swift */; };
 		0C59848224C700E000DDF1A0 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59848124C700E000DDF1A0 /* Strings.swift */; };
-		0C5A366824C717690039FB84 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A366724C717680039FB84 /* NetworkManager.swift */; };
 		0C5A366A24C717A40039FB84 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A366924C717A40039FB84 /* HTTPStatusCodes.swift */; };
-		0C5A366C24C718EB0039FB84 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A366B24C718EB0039FB84 /* APIClient.swift */; };
-		0C5A366E24C719210039FB84 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A366D24C719210039FB84 /* BaseResponse.swift */; };
-		0C5A367824C719790039FB84 /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A367224C719790039FB84 /* ErrorHelper.swift */; };
-		0C5A367924C719790039FB84 /* ErrorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A367324C719790039FB84 /* ErrorDetails.swift */; };
-		0C5A367A24C719790039FB84 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A367424C719790039FB84 /* ErrorResponse.swift */; };
-		0C5A367C24C719790039FB84 /* BaseResponseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A367624C719790039FB84 /* BaseResponseDetail.swift */; };
-		0C5A367D24C719790039FB84 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A367724C719790039FB84 /* Result.swift */; };
+		0C8679EF24C7D8F00053496B /* HostAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679EE24C7D8F00053496B /* HostAPIClient.swift */; };
+		0C8679F124C7D9700053496B /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679F024C7D9700053496B /* APIResult.swift */; };
+		0C8679F324C7D9780053496B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679F224C7D9780053496B /* APIError.swift */; };
+		0C8679F524C7D98A0053496B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679F424C7D98A0053496B /* NetworkManager.swift */; };
+		0C8679FE24C80ADC0053496B /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679FD24C80ADC0053496B /* ErrorTracker.swift */; };
+		0C867A0224C8151C0053496B /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C867A0124C8151C0053496B /* ProgressHUD.swift */; };
+		0C867A0424C815CA0053496B /* ProgressHUD+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C867A0324C815CA0053496B /* ProgressHUD+Rx.swift */; };
 		0C8D56C724C6DD2700E2CB08 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56C324C6DD2700E2CB08 /* Scene.swift */; };
 		0C8D56C824C6DD2700E2CB08 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56C424C6DD2700E2CB08 /* SceneCoordinatorType.swift */; };
 		0C8D56C924C6DD2700E2CB08 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56C524C6DD2700E2CB08 /* SceneTransitionType.swift */; };
@@ -81,7 +80,6 @@
 		0C8D56F924C6DD5100E2CB08 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56E024C6DD5000E2CB08 /* Observable+Extension.swift */; };
 		0C8D56FA24C6DD5100E2CB08 /* Hero+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56E124C6DD5000E2CB08 /* Hero+Rx.swift */; };
 		0C8D56FB24C6DD5100E2CB08 /* String+Int+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56E224C6DD5000E2CB08 /* String+Int+Decodable.swift */; };
-		0C8D56FC24C6DD5100E2CB08 /* SVProgressHUD+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56E324C6DD5000E2CB08 /* SVProgressHUD+Rx.swift */; };
 		0C8D56FE24C6DD5100E2CB08 /* UITabbarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56E524C6DD5100E2CB08 /* UITabbarController+Extension.swift */; };
 		0C8D56FF24C6DD5100E2CB08 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56E624C6DD5100E2CB08 /* URL+Extension.swift */; };
 		0C8D570024C6DD5100E2CB08 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56E724C6DD5100E2CB08 /* Int+Extension.swift */; };
@@ -147,15 +145,14 @@
 		0C4A35C924C71576007671C2 /* JSONHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
 		0C59847B24C6F94800DDF1A0 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		0C59848124C700E000DDF1A0 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		0C5A366724C717680039FB84 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0C5A366924C717A40039FB84 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
-		0C5A366B24C718EB0039FB84 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		0C5A366D24C719210039FB84 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
-		0C5A367224C719790039FB84 /* ErrorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
-		0C5A367324C719790039FB84 /* ErrorDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorDetails.swift; sourceTree = "<group>"; };
-		0C5A367424C719790039FB84 /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
-		0C5A367624C719790039FB84 /* BaseResponseDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResponseDetail.swift; sourceTree = "<group>"; };
-		0C5A367724C719790039FB84 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		0C8679EE24C7D8F00053496B /* HostAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostAPIClient.swift; sourceTree = "<group>"; };
+		0C8679F024C7D9700053496B /* APIResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResult.swift; sourceTree = "<group>"; };
+		0C8679F224C7D9780053496B /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		0C8679F424C7D98A0053496B /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0C8679FD24C80ADC0053496B /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
+		0C867A0124C8151C0053496B /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
+		0C867A0324C815CA0053496B /* ProgressHUD+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+Rx.swift"; sourceTree = "<group>"; };
 		0C8D56C324C6DD2700E2CB08 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		0C8D56C424C6DD2700E2CB08 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		0C8D56C524C6DD2700E2CB08 /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
@@ -175,7 +172,6 @@
 		0C8D56E024C6DD5000E2CB08 /* Observable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Observable+Extension.swift"; path = "../../../../../Downloads/myNews-master/myNews/Utils/Extension/Observable+Extension.swift"; sourceTree = "<group>"; };
 		0C8D56E124C6DD5000E2CB08 /* Hero+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hero+Rx.swift"; sourceTree = "<group>"; };
 		0C8D56E224C6DD5000E2CB08 /* String+Int+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Int+Decodable.swift"; sourceTree = "<group>"; };
-		0C8D56E324C6DD5000E2CB08 /* SVProgressHUD+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SVProgressHUD+Rx.swift"; path = "../../../../../Downloads/myNews-master/myNews/Utils/Extension/SVProgressHUD+Rx.swift"; sourceTree = "<group>"; };
 		0C8D56E524C6DD5100E2CB08 /* UITabbarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabbarController+Extension.swift"; sourceTree = "<group>"; };
 		0C8D56E624C6DD5100E2CB08 /* URL+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 		0C8D56E724C6DD5100E2CB08 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
@@ -275,6 +271,7 @@
 		0C1EE85D24C69D370046BB24 /* netflix */ = {
 			isa = PBXGroup;
 			children = (
+				0C8679F624C7DDC80053496B /* Services */,
 				0C4A35BE24C713A4007671C2 /* Model */,
 				0C4A35B924C711EC007671C2 /* Networking */,
 				0C2BAA5E24C6E8B8003FD8A9 /* Resources */,
@@ -384,10 +381,10 @@
 		0C4A35C224C71488007671C2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0C8679EE24C7D8F00053496B /* HostAPIClient.swift */,
 				0C4A35BA24C71201007671C2 /* APIMovie.swift */,
-				0C5A366724C717680039FB84 /* NetworkManager.swift */,
 				0C5A366924C717A40039FB84 /* HTTPStatusCodes.swift */,
-				0C5A366B24C718EB0039FB84 /* APIClient.swift */,
+				0C8679F424C7D98A0053496B /* NetworkManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -420,12 +417,8 @@
 		0C5A367124C7196F0039FB84 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				0C5A367624C719790039FB84 /* BaseResponseDetail.swift */,
-				0C5A367324C719790039FB84 /* ErrorDetails.swift */,
-				0C5A367224C719790039FB84 /* ErrorHelper.swift */,
-				0C5A367424C719790039FB84 /* ErrorResponse.swift */,
-				0C5A367724C719790039FB84 /* Result.swift */,
-				0C5A366D24C719210039FB84 /* BaseResponse.swift */,
+				0C8679F024C7D9700053496B /* APIResult.swift */,
+				0C8679F224C7D9780053496B /* APIError.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -436,6 +429,13 @@
 				0C4A35C324C71496007671C2 /* PopularMoviesResponse.swift */,
 			);
 			path = Movies;
+			sourceTree = "<group>";
+		};
+		0C8679F624C7DDC80053496B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		0C8D56C224C6DD1B00E2CB08 /* Coordinator */ = {
@@ -471,7 +471,6 @@
 				0C8D56E024C6DD5000E2CB08 /* Observable+Extension.swift */,
 				0C8D56DF24C6DD5000E2CB08 /* String+Extension.swift */,
 				0C8D56E224C6DD5000E2CB08 /* String+Int+Decodable.swift */,
-				0C8D56E324C6DD5000E2CB08 /* SVProgressHUD+Rx.swift */,
 				0C8D56DC24C6DD5000E2CB08 /* UIAlertController+Rx.swift */,
 				0C8D56DD24C6DD5000E2CB08 /* UIApplication+Extension.swift */,
 				0C8D56E924C6DD5100E2CB08 /* UIBarButtonItem+Rx.swift */,
@@ -485,6 +484,9 @@
 				0C8D56D524C6DD4F00E2CB08 /* UIViewController+Extension.swift */,
 				0C8D56E624C6DD5100E2CB08 /* URL+Extension.swift */,
 				0C59847B24C6F94800DDF1A0 /* UIImage+Extension.swift */,
+				0C8679FD24C80ADC0053496B /* ErrorTracker.swift */,
+				0C867A0124C8151C0053496B /* ProgressHUD.swift */,
+				0C867A0324C815CA0053496B /* ProgressHUD+Rx.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -704,11 +706,12 @@
 			files = (
 				0C8D56C724C6DD2700E2CB08 /* Scene.swift in Sources */,
 				0C4A35C424C71496007671C2 /* PopularMoviesResponse.swift in Sources */,
+				0C867A0224C8151C0053496B /* ProgressHUD.swift in Sources */,
 				0C8D570024C6DD5100E2CB08 /* Int+Extension.swift in Sources */,
 				0C8D56EB24C6DD5100E2CB08 /* Date+Extension.swift in Sources */,
+				0C867A0424C815CA0053496B /* ProgressHUD+Rx.swift in Sources */,
 				0C1035FC24C6F08000571EA6 /* MyListViewController.swift in Sources */,
 				0C1EE86324C69D370046BB24 /* ViewController.swift in Sources */,
-				0C5A367D24C719790039FB84 /* Result.swift in Sources */,
 				0C5A366A24C717A40039FB84 /* HTTPStatusCodes.swift in Sources */,
 				0C8D56FA24C6DD5100E2CB08 /* Hero+Rx.swift in Sources */,
 				0C8D56F324C6DD5100E2CB08 /* UIImageView+Rx.swift in Sources */,
@@ -721,6 +724,7 @@
 				0C10360124C6F0DB00571EA6 /* MoreViewModel.swift in Sources */,
 				0C8D56F624C6DD5100E2CB08 /* UIApplication+Extension.swift in Sources */,
 				0C8D56FE24C6DD5100E2CB08 /* UITabbarController+Extension.swift in Sources */,
+				0C8679F124C7D9700053496B /* APIResult.swift in Sources */,
 				0C8D570224C6DD5100E2CB08 /* UIBarButtonItem+Rx.swift in Sources */,
 				0C1035EC24C6EDD400571EA6 /* SearchViewModel.swift in Sources */,
 				0C1035EE24C6EDDC00571EA6 /* SearchViewController.swift in Sources */,
@@ -731,34 +735,30 @@
 				0C8D56F524C6DD5100E2CB08 /* UIAlertController+Rx.swift in Sources */,
 				0C8D570124C6DD5100E2CB08 /* ActivityIndicator.swift in Sources */,
 				0C8D570524C6DE7100E2CB08 /* HomeViewModel.swift in Sources */,
-				0C5A366824C717690039FB84 /* NetworkManager.swift in Sources */,
-				0C5A367924C719790039FB84 /* ErrorDetails.swift in Sources */,
 				0C8D56F924C6DD5100E2CB08 /* Observable+Extension.swift in Sources */,
 				0C1EE85F24C69D370046BB24 /* AppDelegate.swift in Sources */,
 				0C10360324C6F10200571EA6 /* MoreViewController.swift in Sources */,
 				0C1EE86124C69D370046BB24 /* SceneDelegate.swift in Sources */,
 				0C8D56CA24C6DD2700E2CB08 /* SceneCoordinator.swift in Sources */,
 				0C105FB124C6F4CB00E7A0A1 /* Assets.swift in Sources */,
+				0C8679FE24C80ADC0053496B /* ErrorTracker.swift in Sources */,
+				0C8679F324C7D9780053496B /* APIError.swift in Sources */,
 				0C59847C24C6F94800DDF1A0 /* UIImage+Extension.swift in Sources */,
+				0C8679F524C7D98A0053496B /* NetworkManager.swift in Sources */,
 				0C8D56F224C6DD5100E2CB08 /* UIView+Extension.swift in Sources */,
 				0C8D56F824C6DD5100E2CB08 /* String+Extension.swift in Sources */,
 				0C59848224C700E000DDF1A0 /* Strings.swift in Sources */,
 				0C4A35BD24C7125A007671C2 /* Constants.swift in Sources */,
 				0C8D56C924C6DD2700E2CB08 /* SceneTransitionType.swift in Sources */,
-				0C5A366C24C718EB0039FB84 /* APIClient.swift in Sources */,
 				0C4A35CA24C71576007671C2 /* JSONHelper.swift in Sources */,
+				0C8679EF24C7D8F00053496B /* HostAPIClient.swift in Sources */,
 				0C4A35C024C713AF007671C2 /* Movie.swift in Sources */,
 				0C1035F324C6EF7000571EA6 /* NewMoviesViewModel.swift in Sources */,
-				0C5A367C24C719790039FB84 /* BaseResponseDetail.swift in Sources */,
-				0C5A366E24C719210039FB84 /* BaseResponse.swift in Sources */,
-				0C8D56FC24C6DD5100E2CB08 /* SVProgressHUD+Rx.swift in Sources */,
 				0C8D56EC24C6DD5100E2CB08 /* UITextfield+Extension.swift in Sources */,
 				0C8D56FF24C6DD5100E2CB08 /* URL+Extension.swift in Sources */,
 				0C8D571224C6DF1A00E2CB08 /* HomeViewController.swift in Sources */,
 				0C8D56EA24C6DD5100E2CB08 /* Double+Extension.swift in Sources */,
 				0C4A35BB24C71201007671C2 /* APIMovie.swift in Sources */,
-				0C5A367824C719790039FB84 /* ErrorHelper.swift in Sources */,
-				0C5A367A24C719790039FB84 /* ErrorResponse.swift in Sources */,
 				0C8D56F724C6DD5100E2CB08 /* UIStackView+Extension.swift in Sources */,
 				0C8D56F424C6DD5100E2CB08 /* UIColor+Extension.swift in Sources */,
 			);

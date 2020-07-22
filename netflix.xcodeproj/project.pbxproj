@@ -26,6 +26,8 @@
 		0C10360324C6F10200571EA6 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C10360224C6F10200571EA6 /* MoreViewController.swift */; };
 		0C10360524C6F12A00571EA6 /* MoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C10360424C6F12A00571EA6 /* MoreViewController.storyboard */; };
 		0C105FB124C6F4CB00E7A0A1 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C105FB024C6F4CB00E7A0A1 /* Assets.swift */; };
+		0C1DA0FA24C84D8800B8408B /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1DA0F924C84D8800B8408B /* Genre.swift */; };
+		0C1DA0FD24C84DAD00B8408B /* GenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1DA0FC24C84DAD00B8408B /* GenresResponse.swift */; };
 		0C1EE85F24C69D370046BB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1EE85E24C69D370046BB24 /* AppDelegate.swift */; };
 		0C1EE86124C69D370046BB24 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1EE86024C69D370046BB24 /* SceneDelegate.swift */; };
 		0C1EE86624C69D370046BB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C1EE86424C69D370046BB24 /* Main.storyboard */; };
@@ -117,6 +119,8 @@
 		0C10360224C6F10200571EA6 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		0C10360424C6F12A00571EA6 /* MoreViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoreViewController.storyboard; sourceTree = "<group>"; };
 		0C105FB024C6F4CB00E7A0A1 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		0C1DA0F924C84D8800B8408B /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		0C1DA0FC24C84DAD00B8408B /* GenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresResponse.swift; sourceTree = "<group>"; };
 		0C1EE85B24C69D370046BB24 /* netflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C1EE85E24C69D370046BB24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C1EE86024C69D370046BB24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -252,6 +256,14 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		0C1DA0FB24C84D9E00B8408B /* Genres */ = {
+			isa = PBXGroup;
+			children = (
+				0C1DA0FC24C84DAD00B8408B /* GenresResponse.swift */,
+			);
+			path = Genres;
+			sourceTree = "<group>";
+		};
 		0C1EE85224C69D370046BB24 = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				0C4A35BF24C713AF007671C2 /* Movie.swift */,
+				0C1DA0F924C84D8800B8408B /* Genre.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -373,6 +386,7 @@
 		0C4A35C124C71483007671C2 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				0C1DA0FB24C84D9E00B8408B /* Genres */,
 				0C5A367E24C719D40039FB84 /* Movies */,
 				0C5A367124C7196F0039FB84 /* Base */,
 			);
@@ -747,6 +761,7 @@
 				0C8D56F524C6DD5100E2CB08 /* UIAlertController+Rx.swift in Sources */,
 				0C8D570124C6DD5100E2CB08 /* ActivityIndicator.swift in Sources */,
 				0C8D570524C6DE7100E2CB08 /* HomeViewModel.swift in Sources */,
+				0C1DA0FA24C84D8800B8408B /* Genre.swift in Sources */,
 				0C8D56F924C6DD5100E2CB08 /* Observable+Extension.swift in Sources */,
 				0C1EE85F24C69D370046BB24 /* AppDelegate.swift in Sources */,
 				0C10360324C6F10200571EA6 /* MoreViewController.swift in Sources */,
@@ -756,6 +771,7 @@
 				0C8679FE24C80ADC0053496B /* ErrorTracker.swift in Sources */,
 				0C8679F324C7D9780053496B /* APIError.swift in Sources */,
 				0C59847C24C6F94800DDF1A0 /* UIImage+Extension.swift in Sources */,
+				0C1DA0FD24C84DAD00B8408B /* GenresResponse.swift in Sources */,
 				0C8679F524C7D98A0053496B /* NetworkManager.swift in Sources */,
 				0C8D56F224C6DD5100E2CB08 /* UIView+Extension.swift in Sources */,
 				0C8D56F824C6DD5100E2CB08 /* String+Extension.swift in Sources */,

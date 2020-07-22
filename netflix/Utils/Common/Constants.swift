@@ -13,6 +13,9 @@ struct APIURL {
     static let version = "/3"
     static let movie = "/movie"
     static let popular = "/popular"
+    static let genre = "/genre"
+    static let list = "/list"
+    static let tv = "/tv"
 }
 
 struct Constants {

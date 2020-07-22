@@ -38,7 +38,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isFirstLaunch {
-            addGenreButtons()
             isFirstLaunch = false
         }
         view.bringSubviewToFront(iconImageView)
@@ -50,7 +49,10 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     private func bind() {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:))).map { _ in 3 }.asDriverOnErrorJustComplete()
-        let input = HomeViewModel.Input(fetchTrigger: viewWillAppear)
+        let viewDidAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:))).filter({ [weak self] _ -> Bool in
+            return (self?.isFirstLaunch ?? false)
+        }).mapToVoid().asDriverOnErrorJustComplete()
+        let input = HomeViewModel.Input(fetchTrigger: viewWillAppear, getGenresTrigger: viewDidAppear)
         let output = viewModel.transform(input: input)
         
         output.error
@@ -66,7 +68,15 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
             })
             .disposed(by: bag)
         
-        output.indicator.drive(ProgressHelper.rx.isAnimating).disposed(by: bag)
+//        output.indicator.drive(ProgressHelper.rx.isAnimating).disposed(by: bag)
+        
+        output.genres
+            .drive(onNext: { [weak self] genres in
+                guard let self = self else { return }
+                print(genres)
+                self.addGenreButtons()
+            })
+            .disposed(by: bag)
     }
 }
 
@@ -76,13 +86,16 @@ extension HomeViewController {
     }
     
     private func addGenreButtons() {
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.type = .push
-        
         let spacing: CGFloat = 10
         let defaultWidth = (categoryView.frame.size.width - spacing * 4)/3
         let tvShowButtonLeading = tvShowButton.leadingAnchor.constraint(equalTo: categoryView.leadingAnchor, constant: spacing)
+        
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = .fade
+        transition.subtype = .fromLeft
+        categoryView.layer.add(transition, forKey: nil)
+        
         tvShowButton.translatesAutoresizingMaskIntoConstraints = false
         categoryView.addSubview(tvShowButton)
         tvShowButtonLeading.isActive = true

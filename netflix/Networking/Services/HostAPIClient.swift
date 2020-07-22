@@ -40,7 +40,7 @@ class HostAPIClient {
     
     static func performApiNetworkCall<T: Codable>(router: APIMovie, type: T.Type) -> Observable<T> {
         return Observable.create { observer in
-            NetworkManager.apiProvider.request(.getPopularMovies) { result in
+            NetworkManager.apiProvider.request(router) { result in
                 switch result {
                 case .failure(let error):
                     if let data = error.response?.data {

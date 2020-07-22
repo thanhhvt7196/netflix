@@ -19,7 +19,7 @@ class MyListViewController: BaseViewController, StoryboardBased, ViewModelBased 
         prepareUI()
     }
     
-    private func prepareUI() {
+    override func prepareUI() {
         configNavigationBar()
     }
 }

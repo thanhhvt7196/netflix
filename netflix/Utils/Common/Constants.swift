@@ -13,12 +13,17 @@ struct APIURL {
     static let version = "/3"
     static let movie = "/movie"
     static let popular = "/popular"
-    
+}
+
+struct Constants {
     static let APIKey = "1e0dcaa7e93980fb84e1d2430d01b887"
+    static let USLanguageCode = "en-US"
 }
 
 struct APIParamKeys {
     static let APIKey = "api_key"
+    static let page = "page"
+    static let language = "language"
 }
 
 struct ErrorMessage {

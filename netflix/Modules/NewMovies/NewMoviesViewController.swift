@@ -20,7 +20,7 @@ class NewMoviesViewController: BaseViewController, StoryboardBased, ViewModelBas
         prepareUI()
     }
     
-    private func prepareUI() {
+    override func prepareUI() {
         configNavigationBar()
     }
 }

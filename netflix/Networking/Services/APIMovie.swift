@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 enum APIMovie {
-    case getPopularMovies
+    case getPopularMovies(page: Int)
 }
 
 extension APIMovie: TargetType {
@@ -39,8 +39,8 @@ extension APIMovie: TargetType {
         var parameters = [String: Any]()
         var encoding: ParameterEncoding = JSONEncoding.default
         switch self {
-        case .getPopularMovies:
-            parameters = [APIParamKeys.APIKey: APIURL.APIKey]
+        case .getPopularMovies(let page):
+            parameters = [APIParamKeys.APIKey: Constants.APIKey, APIParamKeys.page: page, APIParamKeys.language: Constants.USLanguageCode]
             encoding = URLEncoding.default
             return .requestParameters(parameters: parameters, encoding: encoding)
         }

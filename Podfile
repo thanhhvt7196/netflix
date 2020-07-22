@@ -7,7 +7,6 @@ target 'netflix' do
 
   # Pods for netflix
 	pod 'Reusable'
-	pod 'SVProgressHUD'
 	pod 'Alamofire'
 	pod 'RxSwift'
 	pod 'RxCocoa'
@@ -17,4 +16,5 @@ target 'netflix' do
 	pod 'Hero'
   	pod 'lottie-ios'
 	pod 'SwiftGen'
+	pod 'NVActivityIndicatorView'
 end

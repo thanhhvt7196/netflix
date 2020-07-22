@@ -36,3 +36,8 @@ extension String {
 
 }
 
+extension String {
+    var urlEscaped: String {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+    }
+}

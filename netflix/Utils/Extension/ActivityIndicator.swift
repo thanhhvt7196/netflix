@@ -10,9 +10,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-public class ActivityIndicator: SharedSequenceConvertibleType {
-    public typealias Element = Bool
-    public typealias SharingStrategy = DriverSharingStrategy
+class ActivityIndicator: SharedSequenceConvertibleType {
+    typealias Element = Bool
+    typealias SharingStrategy = DriverSharingStrategy
 
     private let _lock = NSRecursiveLock()
     private let _relay = BehaviorRelay<Bool>(value: false)
@@ -46,13 +46,13 @@ public class ActivityIndicator: SharedSequenceConvertibleType {
         _lock.unlock()
     }
 
-    public func asSharedSequence() -> SharedSequence<SharingStrategy, Element> {
+    func asSharedSequence() -> SharedSequence<SharingStrategy, Element> {
         return _loading
     }
 }
 
 extension ObservableConvertibleType {
-    public func trackActivity(_ activityIndicator: ActivityIndicator) -> Observable<Element> {
+    func trackActivity(_ activityIndicator: ActivityIndicator) -> Observable<Element> {
         return activityIndicator.trackActivityOfObservable(self)
     }
 }

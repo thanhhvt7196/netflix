@@ -8,7 +8,6 @@
 
 import Foundation
 import Reusable
-import SVProgressHUD
 import RxSwift
 import RxCocoa
 
@@ -17,5 +16,16 @@ class MyListViewController: BaseViewController, StoryboardBased, ViewModelBased 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareUI()
+    }
+    
+    private func prepareUI() {
+        configNavigationBar()
+    }
+}
+
+extension MyListViewController {
+    private func configNavigationBar() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }

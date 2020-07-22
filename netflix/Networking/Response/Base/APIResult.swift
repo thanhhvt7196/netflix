@@ -1,9 +1,8 @@
 //
 //  APIResult.swift
-//  EnjapanMoya
+//  netflix
 //
-//  Created by HieuTQ on 2/26/20.
-//  Copyright © 2020 HieuTQ. All rights reserved.
+//  Created by kennyS on 2/26/20.
 //
 
 import Foundation

@@ -64,7 +64,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     }
     
     private func bind() {
-        let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:))).map { _ in 3 }.asDriverOnErrorJustComplete()
+        let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:))).map { _ in 1 }.asDriverOnErrorJustComplete()
         let viewDidAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:))).filter({ [weak self] _ -> Bool in
             return (self?.isFirstLaunch ?? false)
         }).mapToVoid().asDriverOnErrorJustComplete()
@@ -87,10 +87,23 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         
 //        output.indicator.drive(ProgressHelper.rx.isAnimating).disposed(by: bag)
         
-        output.genres
-            .drive(onNext: { [weak self] genres in
+        output.TVGenres
+            .drive(onNext: { genres in
+                TVGenreRealmObject.deleteAllGenres()
+                TVGenreRealmObject.save(genres: genres)
+            })
+            .disposed(by: bag)
+        
+        output.movieGenres
+            .drive(onNext: { genres in
+                MovieGenreRealmObject.deleteAllGenres()
+                MovieGenreRealmObject.save(genres: genres)
+            })
+            .disposed(by: bag)
+        
+        Observable.zip(output.TVGenres.asObservable(), output.movieGenres.asObservable())
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                print(genres)
                 self.initialGenreButtons()
                 self.addGenreButtons()
             })

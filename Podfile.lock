@@ -10,6 +10,11 @@ PODS:
   - NVActivityIndicatorView (5.0.0):
     - NVActivityIndicatorView/Base (= 5.0.0)
   - NVActivityIndicatorView/Base (5.0.0)
+  - Realm (5.3.2):
+    - Realm/Headers (= 5.3.2)
+  - Realm/Headers (5.3.2)
+  - RealmSwift (5.3.2):
+    - Realm (= 5.3.2)
   - Reusable (4.1.1):
     - Reusable/Storyboard (= 4.1.1)
     - Reusable/View (= 4.1.1)
@@ -36,6 +41,7 @@ DEPENDENCIES:
   - lottie-ios
   - Moya
   - NVActivityIndicatorView
+  - RealmSwift
   - Reusable
   - RxCocoa
   - RxDataSources
@@ -51,6 +57,8 @@ SPEC REPOS:
     - lottie-ios
     - Moya
     - NVActivityIndicatorView
+    - Realm
+    - RealmSwift
     - Reusable
     - RxCocoa
     - RxDataSources
@@ -66,6 +74,8 @@ SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   NVActivityIndicatorView: f109ed069924ac1b4adbc1ae9cfaeac0be1d6c2c
+  Realm: c6794276ca8884808ba168a22f9d71362b170b85
+  RealmSwift: 42ec6cec3170aeeda407f797f07268a7d055ebc7
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
@@ -74,6 +84,6 @@ SPEC CHECKSUMS:
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SwiftGen: 62e69d127507be1538d4263e137b2290cd6ab272
 
-PODFILE CHECKSUM: a8830c4e8994be550024084025ba976219151e9d
+PODFILE CHECKSUM: 30faecc8aafd17d2960b83d88ca349baf65b0364
 
 COCOAPODS: 1.9.3

@@ -17,4 +17,5 @@ target 'netflix' do
   	pod 'lottie-ios'
 	pod 'SwiftGen'
 	pod 'NVActivityIndicatorView'
+	pod 'RealmSwift'
 end

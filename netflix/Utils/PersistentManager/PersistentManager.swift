@@ -10,6 +10,7 @@ import Foundation
 
 enum UserDefaultKeys {
     static let categoryType = "CategoryType"
+    static let currentGenre = "CurrentGenre"
 }
 
 
@@ -28,6 +29,15 @@ class PersistentManager {
             } else {
                 return .home
             }
+        }
+    }
+    
+    var currentGenre: Genre? {
+        set {
+            defaults.set(newValue, forKey: UserDefaultKeys.currentGenre)
+        }
+        get {
+            return defaults.object(forKey: UserDefaultKeys.currentGenre) as? Genre
         }
     }
     

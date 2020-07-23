@@ -11,10 +11,6 @@ import RxSwift
 import RxCocoa
 
 class ChooseCategoryTypeViewModel: ViewModel {
-    init() {
-        
-    }
-    
     func transform(input: Input) -> Output {
         let types = CategoryType.allCases
         let selectedType = input.selectedItem.flatMapLatest { indexPath -> Driver<CategoryType> in

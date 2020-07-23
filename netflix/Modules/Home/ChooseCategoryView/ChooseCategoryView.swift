@@ -18,6 +18,8 @@ class ChooseCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     
     var viewModel: ChooseCategoryViewModel!
     let selectedGenre = PublishSubject<Genre>()
+    private let bottomInset: CGFloat = 180
+    private let tableViewRowHeight: CGFloat = 60
     
     private let bag = DisposeBag()
     
@@ -76,11 +78,33 @@ class ChooseCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func configTableView() {
-        tableView.bounces = false
+        tableView.delegate = self
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: .leastNonzeroMagnitude))
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         tableView.backgroundColor = .clear
-        tableView.rowHeight = 60
+        tableView.rowHeight = tableViewRowHeight
         tableView.register(cellType: HomeChooseCategoryCell.self)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+    }
+}
+
+extension ChooseCategoryView: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let rows = tableView.indexPathsForVisibleRows else {
+            return
+        }
+        for index in rows {
+            if let cell = tableView.cellForRow(at: index) {
+                let cellRect = tableView.rectForRow(at: index)
+                let rect = CGRect(x: 0, y: tableView.bounds.origin.y + tableViewRowHeight, width: tableView.bounds.size.width, height: tableView.bounds.size.height - bottomInset)
+                
+                if rect.contains(cellRect) {
+                    cell.alpha = 1
+                } else {
+                    let cellRectLocation = tableView.convert(cell.frame, to: tableView.superview)
+                    cell.alpha = cellRectLocation.origin.y < 0 ? 1 : (tableView.bounds.height - cellRectLocation.origin.y)/(bottomInset + tableViewRowHeight)
+                }
+            }
+        }
     }
 }

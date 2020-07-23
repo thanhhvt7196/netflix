@@ -38,7 +38,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HvP-BD-R3V">
-                    <rect key="frame" x="187" y="722" width="40" height="40"/>
+                    <rect key="frame" x="187" y="772" width="40" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="1FR-rO-MIF"/>
@@ -46,17 +46,17 @@
                     </constraints>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tooltip_close_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="RsC-4w-4qq">
-                    <rect key="frame" x="198" y="733" width="18" height="18"/>
+                    <rect key="frame" x="198" y="783" width="18" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="1Da-gs-uE4"/>
                         <constraint firstAttribute="width" constant="18" id="HrR-l1-FCM"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="LDZ-x9-lSH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="02h-UJ-zUB"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HvP-BD-R3V" secondAttribute="bottom" constant="100" id="0vB-gF-eGr"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HvP-BD-R3V" secondAttribute="bottom" constant="50" id="0vB-gF-eGr"/>
                 <constraint firstAttribute="bottom" secondItem="LDZ-x9-lSH" secondAttribute="bottom" id="4pi-ha-wzu"/>
                 <constraint firstItem="LDZ-x9-lSH" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="L93-td-4vW"/>
                 <constraint firstItem="HvP-BD-R3V" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Uvf-LH-eTC"/>

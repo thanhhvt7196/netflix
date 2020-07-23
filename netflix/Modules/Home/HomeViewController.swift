@@ -164,6 +164,13 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 self.animateGenresDeselected()
             })
             .disposed(by: bag)
+        
+        allGenreButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.showChooseCategoryView()
+            })
+            .disposed(by: bag)
     }
 }
 

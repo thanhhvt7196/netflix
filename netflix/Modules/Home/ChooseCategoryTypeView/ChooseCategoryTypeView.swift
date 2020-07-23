@@ -20,6 +20,8 @@ class ChooseCategoryTypeView: UIView, NibOwnerLoadable, ViewModelBased {
     var viewModel: ChooseCategoryTypeViewModel!
     let selectedCategoryType = PublishSubject<CategoryType>()
     
+    private let tableViewRowHeight: CGFloat = 60
+    
     private let bag = DisposeBag()
     
     required init?(coder: NSCoder) {
@@ -81,7 +83,7 @@ class ChooseCategoryTypeView: UIView, NibOwnerLoadable, ViewModelBased {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: .leastNonzeroMagnitude))
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         tableView.backgroundColor = .clear
-        tableView.rowHeight = 60
+        tableView.rowHeight = tableViewRowHeight
         tableView.register(cellType: HomeCategoryTypeCell.self)
     }
 }

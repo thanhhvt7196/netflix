@@ -10,7 +10,10 @@ import Foundation
 import Moya
 
 enum APIMovie {
-    case getPopularMovies
+    case getPopularMovies(page: Int)
+    
+    case getTvShowGenresList
+    case getMovieGenresList
 }
 
 extension APIMovie: TargetType {
@@ -18,12 +21,16 @@ extension APIMovie: TargetType {
         switch self {
         case .getPopularMovies:
             return APIURL.version + APIURL.movie + APIURL.popular
+        case .getTvShowGenresList:
+            return APIURL.version + APIURL.genre + APIURL.tv + APIURL.list
+        case .getMovieGenresList:
+            return APIURL.version + APIURL.genre + APIURL.movie + APIURL.list
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getPopularMovies:
+        default:
             return .get
         }
     }
@@ -32,16 +39,19 @@ extension APIMovie: TargetType {
         switch self {
         case .getPopularMovies:
             return JSONHelper.dataFromFile(path: "Networking/SampleData/PopularMoviesSample") ?? Data()
+        default:
+            return Data()
         }
     }
     
     var task: Task {
-        var parameters = [String: Any]()
-        var encoding: ParameterEncoding = JSONEncoding.default
+        var parameters: [String: Any] = [APIParamKeys.APIKey: Constants.APIKey]
+        var encoding: ParameterEncoding = URLEncoding.default
         switch self {
-        case .getPopularMovies:
-            parameters = [APIParamKeys.APIKey: APIURL.APIKey]
-            encoding = URLEncoding.default
+        case .getPopularMovies(let page):
+            parameters = [APIParamKeys.APIKey: Constants.APIKey, APIParamKeys.page: page, APIParamKeys.language: Constants.USLanguageCode]
+            return .requestParameters(parameters: parameters, encoding: encoding)
+        default:
             return .requestParameters(parameters: parameters, encoding: encoding)
         }
     }

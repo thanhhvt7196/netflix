@@ -62,3 +62,57 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    func setGradientBackground(colorTop: UIColor, colorBottom: UIColor) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorBottom.cgColor, colorTop.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.locations = [0, 1]
+        gradientLayer.frame = bounds
+
+       layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func setBlurBackground() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.alpha = 0.3
+        self.addSubview(blurEffectView)
+    }
+}
+
+extension UIView {
+    func deactiveWidthConstraints() {
+        let widthConstraints = constraints.filter { $0.firstAttribute == .width }
+        NSLayoutConstraint.deactivate(widthConstraints)
+    }
+    
+    func deactiveHeightConstraints() {
+        let heightConstraints = constraints.filter { $0.firstAttribute == .height }
+        NSLayoutConstraint.deactivate(heightConstraints)
+    }
+    
+    func deactiveTopConstraints() {
+        let topConstraints = constraints.filter { $0.firstAttribute == .top }
+        NSLayoutConstraint.deactivate(topConstraints)
+    }
+    
+    func deactiveBottomConstraints() {
+        let bottomConstraints = constraints.filter { $0.firstAttribute == .bottom }
+        NSLayoutConstraint.deactivate(bottomConstraints)
+    }
+    
+    func deactiveLeadingConstraints() {
+        let leadingConstraints = constraints.filter { $0.firstAttribute == .leading }
+        NSLayoutConstraint.deactivate(leadingConstraints)
+    }
+    
+    func deactiveTrailingConstraints() {
+        let trailingConstraints = constraints.filter { $0.firstAttribute == .trailing }
+        NSLayoutConstraint.deactivate(trailingConstraints)
+    }
+}

@@ -16,24 +16,86 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQ0-y4-bHw">
-                                <rect key="frame" x="174.5" y="433" width="65.5" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-uU-NfQ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UvO-N5-aYq">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OH9-x4-QAk">
+                                                <rect key="frame" x="10" y="5" width="34" height="34"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="OH9-x4-QAk" secondAttribute="height" id="b0D-Bz-Wku"/>
+                                                </constraints>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLG-XL-uZR">
+                                                <rect key="frame" x="54" y="0.0" width="340" height="44"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="eLG-XL-uZR" firstAttribute="leading" secondItem="OH9-x4-QAk" secondAttribute="trailing" constant="10" id="1gt-XA-uWZ"/>
+                                            <constraint firstAttribute="height" constant="44" id="OHp-yY-rWY"/>
+                                            <constraint firstItem="OH9-x4-QAk" firstAttribute="top" secondItem="UvO-N5-aYq" secondAttribute="top" constant="5" id="SEa-91-TVv"/>
+                                            <constraint firstItem="eLG-XL-uZR" firstAttribute="top" secondItem="UvO-N5-aYq" secondAttribute="top" id="U6e-cn-E2F"/>
+                                            <constraint firstAttribute="trailing" secondItem="eLG-XL-uZR" secondAttribute="trailing" constant="20" id="ZAa-pu-9Fb"/>
+                                            <constraint firstAttribute="bottom" secondItem="OH9-x4-QAk" secondAttribute="bottom" constant="5" id="akH-ZE-xoT"/>
+                                            <constraint firstAttribute="bottom" secondItem="eLG-XL-uZR" secondAttribute="bottom" id="sMc-bA-PL6"/>
+                                            <constraint firstItem="OH9-x4-QAk" firstAttribute="leading" secondItem="UvO-N5-aYq" secondAttribute="leading" constant="10" id="wAN-hf-jk9"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="UvO-N5-aYq" secondAttribute="trailing" id="Ift-b4-mrK"/>
+                                    <constraint firstAttribute="bottom" secondItem="UvO-N5-aYq" secondAttribute="bottom" id="PZM-rn-Rs0"/>
+                                    <constraint firstItem="UvO-N5-aYq" firstAttribute="leading" secondItem="G9U-uU-NfQ" secondAttribute="leading" id="brO-ra-oc1"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_netflix_n_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="r8W-mv-c00">
+                                <rect key="frame" x="10" y="49" width="34" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="r8W-mv-c00" secondAttribute="height" id="hCR-As-odA"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CSD-o1-NBE">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="pQ0-y4-bHw" firstAttribute="centerY" secondItem="dLn-2P-2cd" secondAttribute="centerY" id="WSD-ca-0Rd"/>
-                            <constraint firstItem="pQ0-y4-bHw" firstAttribute="centerX" secondItem="dLn-2P-2cd" secondAttribute="centerX" id="j0z-xf-gLV"/>
+                            <constraint firstItem="CSD-o1-NBE" firstAttribute="top" secondItem="G9U-uU-NfQ" secondAttribute="bottom" id="11C-kn-chW"/>
+                            <constraint firstItem="r8W-mv-c00" firstAttribute="leading" secondItem="OH9-x4-QAk" secondAttribute="leading" id="2dc-vK-8aK"/>
+                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="trailing" secondItem="G9U-uU-NfQ" secondAttribute="trailing" id="3Mc-dL-mCy"/>
+                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="top" secondItem="UvO-N5-aYq" secondAttribute="top" id="5mq-iJ-OUb"/>
+                            <constraint firstItem="r8W-mv-c00" firstAttribute="top" secondItem="OH9-x4-QAk" secondAttribute="top" id="6nj-fN-uj5"/>
+                            <constraint firstItem="r8W-mv-c00" firstAttribute="bottom" secondItem="OH9-x4-QAk" secondAttribute="bottom" id="BG8-gb-Kdp"/>
+                            <constraint firstItem="G9U-uU-NfQ" firstAttribute="top" secondItem="dLn-2P-2cd" secondAttribute="top" id="Cxg-YV-UMN"/>
+                            <constraint firstItem="r8W-mv-c00" firstAttribute="trailing" secondItem="OH9-x4-QAk" secondAttribute="trailing" id="FMS-ZO-568"/>
+                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="bottom" secondItem="CSD-o1-NBE" secondAttribute="bottom" id="Ipa-yH-e4h"/>
+                            <constraint firstItem="G9U-uU-NfQ" firstAttribute="leading" secondItem="Nsl-Wf-8IK" secondAttribute="leading" id="Vsj-a2-Zbu"/>
+                            <constraint firstItem="CSD-o1-NBE" firstAttribute="leading" secondItem="Nsl-Wf-8IK" secondAttribute="leading" id="Yfd-jY-4do"/>
+                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="trailing" secondItem="CSD-o1-NBE" secondAttribute="trailing" id="uNV-QO-iZf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nsl-Wf-8IK"/>
                     </view>
+                    <connections>
+                        <outlet property="categoryView" destination="eLG-XL-uZR" id="cxU-tQ-zBl"/>
+                        <outlet property="gradientView" destination="G9U-uU-NfQ" id="DQU-Rt-Dc9"/>
+                        <outlet property="iconImageView" destination="r8W-mv-c00" id="JTS-V4-n6m"/>
+                        <outlet property="logoButton" destination="OH9-x4-QAk" id="sfd-X1-51k"/>
+                        <outlet property="tableView" destination="CSD-o1-NBE" id="IAD-R8-CDr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VsQ-xg-378" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="94" y="-186"/>
+            <point key="canvasLocation" x="92.753623188405811" y="-186.16071428571428"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_netflix_n_Normal" width="24" height="44"/>
+    </resources>
 </document>

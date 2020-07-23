@@ -77,8 +77,8 @@ class ArrowDownButton: UIView {
         dropdownIcon.image = Asset.iconDropdownNormal.image
         dropdownIcon.contentMode = .scaleAspectFit
         dropdownIcon.translatesAutoresizingMaskIntoConstraints = false
-        dropdownIcon.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        dropdownIcon.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        dropdownIcon.widthAnchor.constraint(equalToConstant: 22).isActive = true
+        dropdownIcon.heightAnchor.constraint(equalToConstant: 22).isActive = true
     }
     
     private func setupStackView() {

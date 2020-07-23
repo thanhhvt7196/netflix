@@ -20,9 +20,9 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logoButton: UIButton!
     
-    private var tvShowButton = ArrowDownButton(title: "TV Shows")
-    private var moviesButton = ArrowDownButton(title: "Movies")
-    private var myListButton = ArrowDownButton(title: "My list")
+    private var tvShowButton = ArrowDownButton(title: CategoryType.tvShow.rawValue)
+    private var moviesButton = ArrowDownButton(title: CategoryType.movies.rawValue)
+    private var myListButton = ArrowDownButton(title: CategoryType.mylist.rawValue)
     private var allTVGenreButton = ArrowDownButton(title: "All genres")
     private var allMovieGenreButton = ArrowDownButton(title: "Movie genres")
     private var isFirstLaunch = true
@@ -38,6 +38,8 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     private var isShowingGenres = false
     private let topButtonSpacing: CGFloat = 10
+    private var defaultButtonWidth: CGFloat!
+    
     
     private let bag = DisposeBag()
     
@@ -51,6 +53,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isFirstLaunch {
+            defaultButtonWidth = (categoryView.frame.size.width - topButtonSpacing * 4)/3
             isFirstLaunch = false
         }
         view.bringSubviewToFront(iconImageView)
@@ -58,7 +61,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     override func prepareUI() {
         configNavigationBar()
-        initialGenreButtons()
     }
     
     private func bind() {
@@ -89,6 +91,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
             .drive(onNext: { [weak self] genres in
                 guard let self = self else { return }
                 print(genres)
+                self.initialGenreButtons()
                 self.addGenreButtons()
             })
             .disposed(by: bag)
@@ -98,10 +101,15 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         tvShowButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                if self.isShowingGenres == false {
+                switch PersistentManager.shared.categoryType {
+                case .home:
+                    PersistentManager.shared.categoryType = .tvShow
                     self.animateTVShowSelected()
-                } else {
-                    self.animateGenresDeselected()
+                    //load tv show data
+                case .tvShow:
+                    self.showChooseCategoryTypeView()
+                default:
+                    break
                 }
             })
             .disposed(by: bag)
@@ -109,10 +117,15 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         moviesButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                if self.isShowingGenres == false {
+                switch PersistentManager.shared.categoryType {
+                case .home:
+                    PersistentManager.shared.categoryType = .movies
                     self.animateMoviesSelected()
-                } else {
-                    self.animateGenresDeselected()
+                    //load tv show data
+                case .movies:
+                    self.showChooseCategoryTypeView()
+                default:
+                    break
                 }
             })
             .disposed(by: bag)
@@ -120,10 +133,15 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         myListButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                if self.isShowingGenres == false {
+                switch PersistentManager.shared.categoryType {
+                case .home:
+                    PersistentManager.shared.categoryType = .mylist
                     self.animateMyListSelected()
-                } else {
-                    self.animateGenresDeselected()
+                    //load tv show data
+                case .mylist:
+                    self.showChooseCategoryTypeView()
+                default:
+                    break
                 }
             })
             .disposed(by: bag)
@@ -131,6 +149,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         logoButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
+                PersistentManager.shared.categoryType = .home
                 self.animateGenresDeselected()
             })
             .disposed(by: bag)
@@ -161,12 +180,6 @@ extension HomeViewController {
         
         tvShowButtonLeading = tvShowButton.leadingAnchor.constraint(equalTo: categoryView.leadingAnchor, constant: -50)
         
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.type = .fade
-        transition.subtype = .fromLeft
-        categoryView.layer.add(transition, forKey: nil)
-        
         tvShowButton.translatesAutoresizingMaskIntoConstraints = false
         categoryView.addSubview(tvShowButton)
         tvShowButtonLeading.isActive = true
@@ -175,7 +188,7 @@ extension HomeViewController {
         tvShowButtonWidth = tvShowButton.widthAnchor.constraint(equalToConstant: 0)
         tvShowButtonWidth.isActive = true
         
-        moviesButtonLeading = moviesButton.leadingAnchor.constraint(equalTo: tvShowButton.trailingAnchor, constant: -50)
+        moviesButtonLeading = moviesButton.leadingAnchor.constraint(equalTo: categoryView.leadingAnchor, constant: topButtonSpacing + defaultButtonWidth - 50)
         moviesButton.translatesAutoresizingMaskIntoConstraints = false
         categoryView.addSubview(moviesButton)
         moviesButtonLeading.isActive = true
@@ -184,7 +197,7 @@ extension HomeViewController {
         moviesButtonWidth = moviesButton.widthAnchor.constraint(equalToConstant: 0)
         moviesButtonWidth.isActive = true
         
-        myListButtonLeading = myListButton.leadingAnchor.constraint(equalTo: moviesButton.trailingAnchor, constant: -50)
+        myListButtonLeading = myListButton.leadingAnchor.constraint(equalTo: categoryView.leadingAnchor, constant: (defaultButtonWidth + topButtonSpacing) * 2 - 50)
         myListButton.translatesAutoresizingMaskIntoConstraints = false
         categoryView.addSubview(myListButton)
         myListButtonLeading.isActive = true
@@ -209,14 +222,13 @@ extension HomeViewController {
     }
     
     private func addGenreButtons() {
-        let defaultWidth = (categoryView.frame.size.width - topButtonSpacing * 4)/3
-        tvShowButtonWidth.constant = defaultWidth
-        moviesButtonWidth.constant = defaultWidth
-        myListButtonWidth.constant = defaultWidth
+        tvShowButtonWidth.constant = defaultButtonWidth
+        moviesButtonWidth.constant = defaultButtonWidth
+        myListButtonWidth.constant = defaultButtonWidth
         
         tvShowButtonLeading.constant = topButtonSpacing
-        moviesButtonLeading.constant = topButtonSpacing
-        myListButtonLeading.constant = topButtonSpacing
+        moviesButtonLeading.constant = defaultButtonWidth + topButtonSpacing * 2
+        myListButtonLeading.constant = defaultButtonWidth * 2 + topButtonSpacing * 3
         
         UIView.animate(withDuration: 0.5) {
             self.tvShowButton.isHidden = false
@@ -239,6 +251,8 @@ extension HomeViewController {
         allMovieGenreButtonLeading.constant = -50
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.tvShowButton.isHidden = false
+            self.tvShowButton.alpha = 1
             self.tvShowButton.transformIcon = true
             self.tvShowButton.scale = true
         }) { _ in
@@ -260,16 +274,15 @@ extension HomeViewController {
     }
     
     private func animateGenresDeselected() {
-        let defaultWidth = (categoryView.frame.size.width - topButtonSpacing * 4)/3
-        tvShowButtonWidth.constant = defaultWidth
-        moviesButtonWidth.constant = defaultWidth
-        myListButtonWidth.constant = defaultWidth
+        tvShowButtonWidth.constant = defaultButtonWidth
+        moviesButtonWidth.constant = defaultButtonWidth
+        myListButtonWidth.constant = defaultButtonWidth
         tvShowButtonWidth.isActive = true
         moviesButtonWidth.isActive = true
         myListButtonWidth.isActive = true
-        moviesButtonLeading.constant = topButtonSpacing
-        myListButtonLeading.constant = topButtonSpacing
         tvShowButtonLeading.constant = topButtonSpacing
+        moviesButtonLeading.constant = defaultButtonWidth + topButtonSpacing * 2
+        myListButtonLeading.constant = defaultButtonWidth * 2 + topButtonSpacing * 3
         allTVGenreButtonLeading.constant = -50
         allMovieGenreButtonLeading.constant = -50
         
@@ -302,13 +315,14 @@ extension HomeViewController {
     
     private func animateMoviesSelected() {
         moviesButton.deactiveWidthConstraints()
-        let tvShowWidth = tvShowButton.frame.width
-        tvShowButtonLeading.constant = tvShowButtonLeading.constant - tvShowWidth - topButtonSpacing
+        moviesButtonLeading.constant = topButtonSpacing
         myListButtonLeading.constant = myListButtonLeading.constant - 50
         allMovieGenreButtonLeading.constant = topButtonSpacing * 2
         allTVGenreButtonLeading.constant = -50
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.moviesButton.isHidden = false
+            self.moviesButton.alpha = 1
             self.moviesButton.transformIcon = true
             self.moviesButton.scale = true
         }) { _ in
@@ -331,16 +345,12 @@ extension HomeViewController {
     
     private func animateMyListSelected() {
         myListButton.deactiveWidthConstraints()
-        tvShowButtonWidth.constant = 0
-        moviesButtonWidth.constant = 0
-        myListButtonLeading.constant = -topButtonSpacing
-//        let tvShowWidth = tvShowButton.frame.width
-//        let movieWidth = moviesButton.frame.width
-//        tvShowButtonLeading.constant = tvShowButtonLeading.constant - tvShowWidth - movieWidth - topButtonSpacing * 2
-//        allTVGenreButtonLeading.constant = -50
-//        allMovieGenreButtonLeading.constant = -50
+        moviesButtonLeading.constant = moviesButtonLeading.constant - 50
+        myListButtonLeading.constant = topButtonSpacing
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.myListButton.isHidden = false
+            self.myListButton.alpha = 1
             self.myListButton.transformIcon = true
             self.myListButton.scale = true
         }) { _ in
@@ -358,6 +368,45 @@ extension HomeViewController {
         }) { _ in
             self.tvShowButton.isHidden = true
             self.moviesButton.isHidden = true
+        }
+    }
+}
+
+extension HomeViewController {
+    private func showChooseCategoryTypeView() {
+        let chooseCategoryTypeViewModel = ChooseCategoryTypeViewModel()
+        let chooseCategoryTypeView = ChooseCategoryTypeView(viewModel: chooseCategoryTypeViewModel, frame: UIScreen.main.bounds)
+        UIApplication.addSubviewToWindow(view: chooseCategoryTypeView)
+        chooseCategoryTypeView
+            .selectedCategoryType
+            .subscribe(onNext: { [weak self] type in
+                guard let self = self else { return }
+                chooseCategoryTypeView.dismissWithAnimation {
+                    self.handleCategoryTypeChange(type: type)
+                }
+                
+            })
+            .disposed(by: bag)
+    }
+}
+
+extension HomeViewController {
+    private func handleCategoryTypeChange(type: CategoryType) {
+        guard type != PersistentManager.shared.categoryType else {
+            //load currentType data
+            return
+        }
+        PersistentManager.shared.categoryType = type
+        //load currentType data
+        switch type {
+        case .home:
+            animateGenresDeselected()
+        case .tvShow:
+            animateTVShowSelected()
+        case .movies:
+            animateMoviesSelected()
+        case .mylist:
+            animateMyListSelected()
         }
     }
 }

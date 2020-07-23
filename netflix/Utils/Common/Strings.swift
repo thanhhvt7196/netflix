@@ -12,6 +12,6 @@ struct Strings {
     static let home = "Home"
     static let search = "Search"
     static let comingSoon = "Coming soon"
-    static let myList = "My list"
+    static let myList = "My List"
     static let more = "More"
 }

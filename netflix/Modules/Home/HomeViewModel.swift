@@ -27,13 +27,24 @@ class HomeViewModel: ViewModel {
                 .asDriver(onErrorJustReturn: [])
         }
         
-        let genres = input.getGenresTrigger.flatMapLatest { [unowned self] _ in
+        let TVGenres = input.getGenresTrigger.flatMapLatest { [unowned self] _ in
             return self.getTVShowGenres()
                 .trackError(errorTracker)
                 .compactMap { $0.genres }
                 .asDriver(onErrorJustReturn: [])
         }
-        return Output(fetchResult: results, error: errorTracker.asDriver(), indicator: activityIndicator.asDriver(), genres: genres)
+        
+        let movieGenres = input.getGenresTrigger.flatMapLatest { [unowned self] _ in
+            return self.getMovieGenres()
+                .trackError(errorTracker)
+                .compactMap { $0.genres }
+                .asDriver(onErrorJustReturn: [])
+        }
+        return Output(fetchResult: results,
+                      error: errorTracker.asDriver(),
+                      indicator: activityIndicator.asDriver(),
+                      TVGenres: TVGenres,
+                      movieGenres: movieGenres)
     }
     
     private func getPopularMovies(page: Int) -> Observable<PopularMoviesResponse> {
@@ -42,6 +53,10 @@ class HomeViewModel: ViewModel {
     
     private func getTVShowGenres() -> Observable<GenresResponse> {
         return HostAPIClient.performApiNetworkCall(router: .getTvShowGenresList, type: GenresResponse.self)
+    }
+    
+    private func getMovieGenres() -> Observable<GenresResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getMovieGenresList, type: GenresResponse.self)
     }
 }
 
@@ -55,6 +70,7 @@ extension HomeViewModel {
         var fetchResult: Driver<[Movie]>
         var error: Driver<Error>
         var indicator: Driver<Bool>
-        var genres: Driver<[Genre]>
+        var TVGenres: Driver<[Genre]>
+        var movieGenres: Driver<[Genre]>
     }
 }

@@ -77,6 +77,7 @@ class ChooseCategoryTypeView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func configTableView() {
+        tableView.bounces = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: .leastNonzeroMagnitude))
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         tableView.backgroundColor = .clear

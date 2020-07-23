@@ -121,6 +121,9 @@ extension HomeViewController {
         moviesButton.isHidden = true
         myListButton.isHidden = true
         
+        allGenreButton.showDropdown = true
+        allGenreButton.fontSize = 11
+        
         tvShowButtonLeading = tvShowButton.leadingAnchor.constraint(equalTo: categoryView.leadingAnchor, constant: -50)
         
         let transition = CATransition()
@@ -183,18 +186,19 @@ extension HomeViewController {
             self.view.layoutIfNeeded()
         }
     }
-    
+}
+
+extension HomeViewController {
     private func animateTVShowSelected() {
         tvShowButton.deactiveWidthConstraints()
-        let transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         moviesButtonLeading.constant = moviesButtonLeading.constant - 50
         myListButtonLeading.constant = myListButtonLeading.constant - 50
         allGenreButtonLeading.constant = topButtonSpacing * 2
         tvShowButton.showDropdown = true
         
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-            self.tvShowButton.setTitle(title: "thanh20cmtsfhfhs")
-            self.tvShowButton.transform = transform
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.tvShowButton.scale = true
+            self.tvShowButton.setTitle(title: "thanh20cmtsfhfh")
         }) { _ in
             self.isShowingGenres = true
         }
@@ -221,8 +225,8 @@ extension HomeViewController {
         allGenreButtonLeading.constant = allGenreButtonLeading.constant - 50
         tvShowButton.showDropdown = false
         
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-            self.tvShowButton.transform = .identity
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.tvShowButton.scale = false
             self.tvShowButton.setTitle(title: "TV Shows")
         }) { _ in
             self.isShowingGenres = false

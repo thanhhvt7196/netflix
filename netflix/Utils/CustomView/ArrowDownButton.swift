@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 class ArrowDownButton: UIView {
-    let selectButton = UIButton()
+    fileprivate let selectButton = UIButton()
     private let titleLabel = UILabel()
     private let dropdownIcon = UIImageView()
     private let stackView = UIStackView()
@@ -32,6 +32,30 @@ class ArrowDownButton: UIView {
         }
     }
     
+    var scale = false {
+        didSet {
+            if scale {
+                let transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.transform = transform
+                titleLabel.font = .systemFont(ofSize: scaleFontSize)
+            } else {
+                self.transform = .identity
+                titleLabel.font = .systemFont(ofSize: fontSize)
+            }
+        }
+    }
+    
+    private let scaleFontSize: CGFloat = 14
+    
+    var fontSize: CGFloat = 12 {
+        didSet {
+            if fontSize > scaleFontSize {
+                fontSize = scaleFontSize
+            } 
+            titleLabel.font = .systemFont(ofSize: fontSize)
+        }
+    }
+    
     private func commonInit() {
         setupStackView()
         addSelectButton()
@@ -47,7 +71,7 @@ class ArrowDownButton: UIView {
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 1
-        titleLabel.font = .systemFont(ofSize: 13)
+        titleLabel.font = .systemFont(ofSize: fontSize)
     }
     
     private func setupDropdownIcon() {

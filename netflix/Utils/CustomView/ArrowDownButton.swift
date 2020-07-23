@@ -23,7 +23,12 @@ class ArrowDownButton: UIView {
     }
     
     func setTitle(title: String) {
-        titleLabel.text = title
+        UIView.transition(with: titleLabel,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            self.titleLabel.text = title
+        }, completion: nil)
     }
     
     var transformIcon = false {

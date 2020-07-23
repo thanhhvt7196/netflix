@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 class ArrowDownButton: UIView {
-    fileprivate let selectButton = UIButton()
+    fileprivate let selectButton = UIButton(type: .custom)
     private let titleLabel = UILabel()
     private let dropdownIcon = UIImageView()
     private let stackView = UIStackView()
@@ -26,9 +26,13 @@ class ArrowDownButton: UIView {
         titleLabel.text = title
     }
     
-    var showDropdown = false {
+    var transformIcon = false {
         didSet {
-            dropdownIcon.isHidden = !showDropdown
+            if transformIcon {
+                dropdownIcon.transform = .identity
+            } else {
+                dropdownIcon.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            }
         }
     }
     
@@ -36,22 +40,17 @@ class ArrowDownButton: UIView {
         didSet {
             if scale {
                 let transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-                self.transform = transform
-                titleLabel.font = .systemFont(ofSize: scaleFontSize)
+                self.titleLabel.transform = transform
+                stackView.spacing = 5
             } else {
-                self.transform = .identity
-                titleLabel.font = .systemFont(ofSize: fontSize)
+                self.titleLabel.transform = .identity
+                stackView.spacing = 0
             }
         }
     }
     
-    private let scaleFontSize: CGFloat = 14
-    
-    var fontSize: CGFloat = 12 {
+    var fontSize: CGFloat = 13 {
         didSet {
-            if fontSize > scaleFontSize {
-                fontSize = scaleFontSize
-            } 
             titleLabel.font = .systemFont(ofSize: fontSize)
         }
     }
@@ -64,7 +63,7 @@ class ArrowDownButton: UIView {
 
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(dropdownIcon)
-        dropdownIcon.isHidden = true
+        dropdownIcon.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     }
     
     private func setupTitleLabel() {

@@ -23,13 +23,15 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private var tvShowButton = ArrowDownButton(title: "TV Shows")
     private var moviesButton = ArrowDownButton(title: "Movies")
     private var myListButton = ArrowDownButton(title: "My list")
-    private var allGenreButton = ArrowDownButton(title: "All genres")
+    private var allTVGenreButton = ArrowDownButton(title: "All genres")
+    private var allMovieGenreButton = ArrowDownButton(title: "Movie genres")
     private var isFirstLaunch = true
     
     private var tvShowButtonLeading: NSLayoutConstraint!
     private var moviesButtonLeading: NSLayoutConstraint!
     private var myListButtonLeading: NSLayoutConstraint!
-    private var allGenreButtonLeading: NSLayoutConstraint!
+    private var allTVGenreButtonLeading: NSLayoutConstraint!
+    private var allMovieGenreButtonLeading: NSLayoutConstraint!
     private var tvShowButtonWidth: NSLayoutConstraint!
     private var moviesButtonWidth: NSLayoutConstraint!
     private var myListButtonWidth: NSLayoutConstraint!
@@ -99,8 +101,37 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 if self.isShowingGenres == false {
                     self.animateTVShowSelected()
                 } else {
-                    self.animateTVShowDeselected()
+                    self.animateGenresDeselected()
                 }
+            })
+            .disposed(by: bag)
+        
+        moviesButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                if self.isShowingGenres == false {
+                    self.animateMoviesSelected()
+                } else {
+                    self.animateGenresDeselected()
+                }
+            })
+            .disposed(by: bag)
+        
+        myListButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                if self.isShowingGenres == false {
+                    self.animateMyListSelected()
+                } else {
+                    self.animateGenresDeselected()
+                }
+            })
+            .disposed(by: bag)
+        
+        logoButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.animateGenresDeselected()
             })
             .disposed(by: bag)
     }
@@ -115,11 +146,18 @@ extension HomeViewController {
         tvShowButton.alpha = 0
         moviesButton.alpha = 0
         myListButton.alpha = 0
-        allGenreButton.alpha = 0
-        allGenreButton.isHidden = true
+        allTVGenreButton.alpha = 0
+        allMovieGenreButton.alpha = 0
+        allMovieGenreButton.isHidden = true
+        allTVGenreButton.isHidden = true
         tvShowButton.isHidden = true
         moviesButton.isHidden = true
         myListButton.isHidden = true
+        
+        allTVGenreButton.transformIcon = true
+        allTVGenreButton.fontSize = 11
+        allMovieGenreButton.transformIcon = true
+        allMovieGenreButton.fontSize = 11
         
         tvShowButtonLeading = tvShowButton.leadingAnchor.constraint(equalTo: categoryView.leadingAnchor, constant: -50)
         
@@ -155,12 +193,19 @@ extension HomeViewController {
         myListButtonWidth = myListButton.widthAnchor.constraint(equalToConstant: 0)
         myListButtonWidth.isActive = true
         
-        allGenreButtonLeading = allGenreButton.leadingAnchor.constraint(equalTo: tvShowButton.trailingAnchor, constant: -50)
-        allGenreButton.translatesAutoresizingMaskIntoConstraints = false
-        categoryView.addSubview(allGenreButton)
-        allGenreButtonLeading.isActive = true
-        allGenreButton.heightAnchor.constraint(equalTo: logoButton.heightAnchor).isActive = true
-        allGenreButton.centerYAnchor.constraint(equalTo: categoryView.centerYAnchor).isActive = true
+        allTVGenreButtonLeading = allTVGenreButton.leadingAnchor.constraint(equalTo: tvShowButton.trailingAnchor, constant: -50)
+        allTVGenreButton.translatesAutoresizingMaskIntoConstraints = false
+        categoryView.addSubview(allTVGenreButton)
+        allTVGenreButtonLeading.isActive = true
+        allTVGenreButton.heightAnchor.constraint(equalTo: logoButton.heightAnchor).isActive = true
+        allTVGenreButton.centerYAnchor.constraint(equalTo: categoryView.centerYAnchor).isActive = true
+        
+        allMovieGenreButtonLeading = allMovieGenreButton.leadingAnchor.constraint(equalTo: moviesButton.trailingAnchor, constant: -50)
+        allMovieGenreButton.translatesAutoresizingMaskIntoConstraints = false
+        categoryView.addSubview(allMovieGenreButton)
+        allMovieGenreButtonLeading.isActive = true
+        allMovieGenreButton.heightAnchor.constraint(equalTo: logoButton.heightAnchor).isActive = true
+        allMovieGenreButton.centerYAnchor.constraint(equalTo: categoryView.centerYAnchor).isActive = true
     }
     
     private func addGenreButtons() {
@@ -183,60 +228,136 @@ extension HomeViewController {
             self.view.layoutIfNeeded()
         }
     }
-    
+}
+
+extension HomeViewController {
     private func animateTVShowSelected() {
         tvShowButton.deactiveWidthConstraints()
-        let transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         moviesButtonLeading.constant = moviesButtonLeading.constant - 50
         myListButtonLeading.constant = myListButtonLeading.constant - 50
-        allGenreButtonLeading.constant = topButtonSpacing * 2
-        tvShowButton.showDropdown = true
+        allTVGenreButtonLeading.constant = topButtonSpacing * 2
+        allMovieGenreButtonLeading.constant = -50
         
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-            self.tvShowButton.setTitle(title: "thanh20cmtsfhfhs")
-            self.tvShowButton.transform = transform
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.tvShowButton.transformIcon = true
+            self.tvShowButton.scale = true
         }) { _ in
             self.isShowingGenres = true
         }
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.moviesButton.alpha = 0
             self.myListButton.alpha = 0
-            self.allGenreButton.alpha = 1
-            self.allGenreButton.isHidden = false
-            self.view.layoutIfNeeded()
+            self.allTVGenreButton.alpha = 1
+            self.allTVGenreButton.isHidden = false
+            self.allMovieGenreButton.alpha = 0
+            self.allMovieGenreButton.isHidden = true
+            self.categoryView.layoutIfNeeded()
         }) { _ in
             self.moviesButton.isHidden = true
             self.myListButton.isHidden = true
         }
     }
     
-    private func animateTVShowDeselected() {
+    private func animateGenresDeselected() {
+        let defaultWidth = (categoryView.frame.size.width - topButtonSpacing * 4)/3
+        tvShowButtonWidth.constant = defaultWidth
+        moviesButtonWidth.constant = defaultWidth
+        myListButtonWidth.constant = defaultWidth
         tvShowButtonWidth.isActive = true
         moviesButtonWidth.isActive = true
         myListButtonWidth.isActive = true
-        
         moviesButtonLeading.constant = topButtonSpacing
         myListButtonLeading.constant = topButtonSpacing
-        allGenreButtonLeading.constant = allGenreButtonLeading.constant - 50
-        tvShowButton.showDropdown = false
+        tvShowButtonLeading.constant = topButtonSpacing
+        allTVGenreButtonLeading.constant = -50
+        allMovieGenreButtonLeading.constant = -50
         
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-            self.tvShowButton.transform = .identity
-            self.tvShowButton.setTitle(title: "TV Shows")
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.tvShowButton.transformIcon = false
+            self.tvShowButton.scale = false
+            self.moviesButton.transformIcon = false
+            self.moviesButton.scale = false
+            self.myListButton.transformIcon = false
+            self.myListButton.scale = false
         }) { _ in
             self.isShowingGenres = false
         }
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.moviesButton.alpha = 1
             self.myListButton.alpha = 1
+            self.tvShowButton.alpha = 1
+            self.tvShowButton.isHidden = false
             self.moviesButton.isHidden = false
             self.myListButton.isHidden = false
-            self.allGenreButton.alpha = 0
-            self.view.layoutIfNeeded()
+            self.allTVGenreButton.alpha = 0
+            self.allMovieGenreButton.alpha = 0
+            self.categoryView.layoutIfNeeded()
         }) { _ in
-            self.allGenreButton.isHidden = true
+            self.allMovieGenreButton.isHidden = true
+            self.allTVGenreButton.isHidden = true
+        }
+    }
+    
+    private func animateMoviesSelected() {
+        moviesButton.deactiveWidthConstraints()
+        let tvShowWidth = tvShowButton.frame.width
+        tvShowButtonLeading.constant = tvShowButtonLeading.constant - tvShowWidth - topButtonSpacing
+        myListButtonLeading.constant = myListButtonLeading.constant - 50
+        allMovieGenreButtonLeading.constant = topButtonSpacing * 2
+        allTVGenreButtonLeading.constant = -50
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.moviesButton.transformIcon = true
+            self.moviesButton.scale = true
+        }) { _ in
+            self.isShowingGenres = true
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tvShowButton.alpha = 0
+            self.myListButton.alpha = 0
+            self.allMovieGenreButton.alpha = 1
+            self.allMovieGenreButton.isHidden = false
+            self.allTVGenreButton.alpha = 0
+            self.allTVGenreButton.isHidden = true
+            self.categoryView.layoutIfNeeded()
+        }) { _ in
+            self.tvShowButton.isHidden = true
+            self.myListButton.isHidden = true
+        }
+    }
+    
+    private func animateMyListSelected() {
+        myListButton.deactiveWidthConstraints()
+        tvShowButtonWidth.constant = 0
+        moviesButtonWidth.constant = 0
+        myListButtonLeading.constant = -topButtonSpacing
+//        let tvShowWidth = tvShowButton.frame.width
+//        let movieWidth = moviesButton.frame.width
+//        tvShowButtonLeading.constant = tvShowButtonLeading.constant - tvShowWidth - movieWidth - topButtonSpacing * 2
+//        allTVGenreButtonLeading.constant = -50
+//        allMovieGenreButtonLeading.constant = -50
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.myListButton.transformIcon = true
+            self.myListButton.scale = true
+        }) { _ in
+            self.isShowingGenres = true
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tvShowButton.alpha = 0
+            self.moviesButton.alpha = 0
+            self.allMovieGenreButton.alpha = 0
+            self.allMovieGenreButton.isHidden = true
+            self.allTVGenreButton.alpha = 0
+            self.allTVGenreButton.isHidden = true
+            self.categoryView.layoutIfNeeded()
+        }) { _ in
+            self.tvShowButton.isHidden = true
+            self.moviesButton.isHidden = true
         }
     }
 }

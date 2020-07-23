@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 class ArrowDownButton: UIView {
-    let selectButton = UIButton()
+    fileprivate let selectButton = UIButton(type: .custom)
     private let titleLabel = UILabel()
     private let dropdownIcon = UIImageView()
     private let stackView = UIStackView()
@@ -26,9 +26,32 @@ class ArrowDownButton: UIView {
         titleLabel.text = title
     }
     
-    var showDropdown = false {
+    var transformIcon = false {
         didSet {
-            dropdownIcon.isHidden = !showDropdown
+            if transformIcon {
+                dropdownIcon.transform = .identity
+            } else {
+                dropdownIcon.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            }
+        }
+    }
+    
+    var scale = false {
+        didSet {
+            if scale {
+                let transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.titleLabel.transform = transform
+                stackView.spacing = 5
+            } else {
+                self.titleLabel.transform = .identity
+                stackView.spacing = 0
+            }
+        }
+    }
+    
+    var fontSize: CGFloat = 13 {
+        didSet {
+            titleLabel.font = .systemFont(ofSize: fontSize)
         }
     }
     
@@ -40,14 +63,14 @@ class ArrowDownButton: UIView {
 
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(dropdownIcon)
-        dropdownIcon.isHidden = true
+        dropdownIcon.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     }
     
     private func setupTitleLabel() {
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 1
-        titleLabel.font = .systemFont(ofSize: 13)
+        titleLabel.font = .systemFont(ofSize: fontSize)
     }
     
     private func setupDropdownIcon() {

@@ -32,16 +32,19 @@ class PersistentManager {
         }
     }
     
-    var currentGenre: Genre? {
+    var currentGenre: Int? {
         set {
             defaults.set(newValue, forKey: UserDefaultKeys.currentGenre)
         }
         get {
-            return defaults.object(forKey: UserDefaultKeys.currentGenre) as? Genre
+            return defaults.integer(forKey: UserDefaultKeys.currentGenre)
         }
     }
     
+    let allGenre = Genre(id: 0, name: Strings.allGenres)
+    
     func clearWhenExit() {
         categoryType = .home
+        currentGenre = allGenre.id
     }
 }

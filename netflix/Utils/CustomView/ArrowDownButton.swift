@@ -119,4 +119,10 @@ extension Reactive where Base: ArrowDownButton {
     var tap: ControlEvent<Void> {
         return base.selectButton.rx.tap
     }
+    
+    var title: Binder<String> {
+        return Binder(base) { arrowDownButton, title in
+            arrowDownButton.setTitle(title: title)
+        }
+    }
 }

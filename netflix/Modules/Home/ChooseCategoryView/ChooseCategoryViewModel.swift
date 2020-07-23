@@ -21,6 +21,7 @@ class ChooseCategoryViewModel: ViewModel {
         default:
             genres = []
         }
+        genres.insert(PersistentManager.shared.allGenre, at: 0)
         let selectedGenre = input.selectedItem.flatMapLatest { indexPath -> Driver<Genre> in
             guard genres.indices.contains(indexPath.row) else {
                 return .empty()

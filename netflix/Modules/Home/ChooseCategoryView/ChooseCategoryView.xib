@@ -24,16 +24,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wZx-yl-vI8">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <rect key="frame" x="107" y="0.0" width="200" height="896"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="sXS-y2-cyz"/>
+                            </constraints>
                             <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="wZx-yl-vI8" firstAttribute="centerX" secondItem="LDZ-x9-lSH" secondAttribute="centerX" id="0la-1s-htL"/>
                         <constraint firstItem="wZx-yl-vI8" firstAttribute="top" secondItem="LDZ-x9-lSH" secondAttribute="top" id="A4N-Vv-MM1"/>
-                        <constraint firstAttribute="trailing" secondItem="wZx-yl-vI8" secondAttribute="trailing" id="ZCf-Al-xr9"/>
-                        <constraint firstItem="wZx-yl-vI8" firstAttribute="leading" secondItem="LDZ-x9-lSH" secondAttribute="leading" id="xgj-i8-Lil"/>
                         <constraint firstAttribute="bottom" secondItem="wZx-yl-vI8" secondAttribute="bottom" id="zYw-w4-X0a"/>
                     </constraints>
                 </view>

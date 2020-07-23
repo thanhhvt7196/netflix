@@ -30,17 +30,17 @@
                                                 </constraints>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLG-XL-uZR">
-                                                <rect key="frame" x="44" y="0.0" width="326" height="44"/>
+                                                <rect key="frame" x="54" y="0.0" width="340" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="eLG-XL-uZR" firstAttribute="leading" secondItem="OH9-x4-QAk" secondAttribute="trailing" id="1gt-XA-uWZ"/>
-                                            <constraint firstItem="eLG-XL-uZR" firstAttribute="centerX" secondItem="UvO-N5-aYq" secondAttribute="centerX" id="D8V-sN-5Fh"/>
+                                            <constraint firstItem="eLG-XL-uZR" firstAttribute="leading" secondItem="OH9-x4-QAk" secondAttribute="trailing" constant="10" id="1gt-XA-uWZ"/>
                                             <constraint firstAttribute="height" constant="44" id="OHp-yY-rWY"/>
                                             <constraint firstItem="OH9-x4-QAk" firstAttribute="top" secondItem="UvO-N5-aYq" secondAttribute="top" constant="5" id="SEa-91-TVv"/>
                                             <constraint firstItem="eLG-XL-uZR" firstAttribute="top" secondItem="UvO-N5-aYq" secondAttribute="top" id="U6e-cn-E2F"/>
+                                            <constraint firstAttribute="trailing" secondItem="eLG-XL-uZR" secondAttribute="trailing" constant="20" id="ZAa-pu-9Fb"/>
                                             <constraint firstAttribute="bottom" secondItem="OH9-x4-QAk" secondAttribute="bottom" constant="5" id="akH-ZE-xoT"/>
                                             <constraint firstAttribute="bottom" secondItem="eLG-XL-uZR" secondAttribute="bottom" id="sMc-bA-PL6"/>
                                             <constraint firstItem="OH9-x4-QAk" firstAttribute="leading" secondItem="UvO-N5-aYq" secondAttribute="leading" constant="10" id="wAN-hf-jk9"/>

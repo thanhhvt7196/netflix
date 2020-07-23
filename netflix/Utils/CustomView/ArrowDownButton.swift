@@ -8,25 +8,77 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
-class ArrowDownButton: UIButton {
+class ArrowDownButton: UIView {
+    let selectButton = UIButton()
+    private let titleLabel = UILabel()
+    private let dropdownIcon = UIImageView()
+    private let stackView = UIStackView()
+    
     convenience init(title: String) {
         self.init()
-        setTitle(title, for: .normal)
+        setTitle(title: title)
     }
     
-    var showDropDown = false {
+    func setTitle(title: String) {
+        titleLabel.text = title
+    }
+    
+    var showDropdown = false {
         didSet {
-            setImage(showDropDown ? Asset.iconDropdownNormal.image : nil, for: .normal)
+            dropdownIcon.isHidden = !showDropdown
         }
     }
     
     private func commonInit() {
-        semanticContentAttribute = .forceRightToLeft
-        contentMode = .center
-        imageView?.contentMode = .scaleAspectFit
-        setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        setupStackView()
+        addSelectButton()
+        setupTitleLabel()
+        setupDropdownIcon()
+
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(dropdownIcon)
+        dropdownIcon.isHidden = true
+    }
+    
+    private func setupTitleLabel() {
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 1
+        titleLabel.font = .systemFont(ofSize: 13)
+    }
+    
+    private func setupDropdownIcon() {
+        dropdownIcon.image = Asset.iconDropdownNormal.image
+        dropdownIcon.contentMode = .scaleAspectFit
+        dropdownIcon.translatesAutoresizingMaskIntoConstraints = false
+        dropdownIcon.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        dropdownIcon.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+    
+    private func setupStackView() {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackView)
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 0
+    }
+    
+    private func addSelectButton() {
+        selectButton.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(selectButton)
+        selectButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        selectButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        selectButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        selectButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        bringSubviewToFront(selectButton)
     }
     
     override init(frame: CGRect) {
@@ -37,5 +89,11 @@ class ArrowDownButton: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
+    }
+}
+
+extension Reactive where Base: ArrowDownButton {
+    var tap: ControlEvent<Void> {
+        return base.selectButton.rx.tap
     }
 }

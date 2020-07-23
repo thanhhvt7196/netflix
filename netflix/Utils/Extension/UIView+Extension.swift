@@ -84,3 +84,35 @@ extension UIView {
         self.addSubview(blurEffectView)
     }
 }
+
+extension UIView {
+    func deactiveWidthConstraints() {
+        let widthConstraints = constraints.filter { $0.firstAttribute == .width }
+        NSLayoutConstraint.deactivate(widthConstraints)
+    }
+    
+    func deactiveHeightConstraints() {
+        let heightConstraints = constraints.filter { $0.firstAttribute == .height }
+        NSLayoutConstraint.deactivate(heightConstraints)
+    }
+    
+    func deactiveTopConstraints() {
+        let topConstraints = constraints.filter { $0.firstAttribute == .top }
+        NSLayoutConstraint.deactivate(topConstraints)
+    }
+    
+    func deactiveBottomConstraints() {
+        let bottomConstraints = constraints.filter { $0.firstAttribute == .bottom }
+        NSLayoutConstraint.deactivate(bottomConstraints)
+    }
+    
+    func deactiveLeadingConstraints() {
+        let leadingConstraints = constraints.filter { $0.firstAttribute == .leading }
+        NSLayoutConstraint.deactivate(leadingConstraints)
+    }
+    
+    func deactiveTrailingConstraints() {
+        let trailingConstraints = constraints.filter { $0.firstAttribute == .trailing }
+        NSLayoutConstraint.deactivate(trailingConstraints)
+    }
+}

@@ -43,11 +43,3 @@ extension ViewModelBased where Self: StoryboardBased & UIViewController, ViewMod
             return viewController
     }
 }
-
-extension ViewModelBased where Self: NibLoadable & UIView {
-    static func instantiate<ViewModelType> (withViewModel viewModel: ViewModelType) -> Self where ViewModelType == Self.ViewModelType {
-        let view = Self.loadFromNib()
-        view.viewModel = viewModel
-        return view
-    }
-}

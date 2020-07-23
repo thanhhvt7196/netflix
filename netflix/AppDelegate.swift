@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        PersistentManager.shared.clearWhenExit()
         if #available(iOS 13.0, *) {
             // do nothing
             
@@ -27,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SceneCoordinator.shared.transition(to: Scene.tabbar)
         }
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        PersistentManager.shared.clearWhenExit()
     }
 
     // MARK: UISceneSession Lifecycle

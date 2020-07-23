@@ -33,7 +33,9 @@ extension UIView {
         let blurredView = UIVisualEffectView(effect: blurEffect)
         blurredView.frame = bounds
         blurredView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurredView.applyGradient(colors: [UIColor.clear.cgColor, UIColor.black.cgColor], locations: [0.0, 1.0])
         addSubview(blurredView)
+        sendSubviewToBack(blurredView)
         clipsToBounds = true
     }
 
@@ -61,27 +63,13 @@ extension UIView {
             self.layer.mask = mask
         }
     }
-}
-
-extension UIView {
-    func setGradientBackground(colorTop: UIColor, colorBottom: UIColor) {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorBottom.cgColor, colorTop.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-        gradientLayer.locations = [0, 1]
-        gradientLayer.frame = bounds
-
-       layer.insertSublayer(gradientLayer, at: 0)
-    }
     
-    func setBlurBackground() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.alpha = 0.3
-        self.addSubview(blurEffectView)
+    func applyGradient(colors: [CGColor], locations: [NSNumber]?) {
+        let gradient = CAGradientLayer()
+        gradient.colors = colors
+        gradient.locations = locations
+        gradient.frame = self.bounds
+        self.layer.insertSublayer(gradient, at: 0)
     }
 }
 
@@ -114,5 +102,17 @@ extension UIView {
     func deactiveTrailingConstraints() {
         let trailingConstraints = constraints.filter { $0.firstAttribute == .trailing }
         NSLayoutConstraint.deactivate(trailingConstraints)
+    }
+}
+
+extension UIView {
+    func dismissWithAnimation(completion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            self.alpha = 0
+        }) { [weak self] _ in
+            self?.removeFromSuperview()
+            completion?()
+        }
     }
 }

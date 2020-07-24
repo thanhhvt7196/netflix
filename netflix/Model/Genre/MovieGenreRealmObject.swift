@@ -54,7 +54,7 @@ class MovieGenreRealmObject: Object {
     
     static func getAllGenres() -> [Genre]? {
         let realm = try? Realm()
-        guard let genres = realm?.objects(MovieGenreRealmObject.self).sorted(byKeyPath: "createdTime", ascending: false) else {
+        guard let genres = realm?.objects(MovieGenreRealmObject.self).sorted(byKeyPath: "createdTime", ascending: true) else {
             return nil
         }
         return Array(genres.map { $0.getGenre() })

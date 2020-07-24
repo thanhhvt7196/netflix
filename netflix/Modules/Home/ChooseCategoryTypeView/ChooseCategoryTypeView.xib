@@ -23,19 +23,19 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puu-3s-5Wd">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Upi-yy-NfS">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Upi-yy-NfS">
                             <rect key="frame" x="107" y="0.0" width="200" height="896"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="200" id="YKY-cA-OJx"/>
+                                <constraint firstAttribute="width" constant="200" id="GKc-h1-fvs"/>
                             </constraints>
                             <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="Upi-yy-NfS" firstAttribute="centerX" secondItem="puu-3s-5Wd" secondAttribute="centerX" id="W73-6j-HnE"/>
                         <constraint firstAttribute="bottom" secondItem="Upi-yy-NfS" secondAttribute="bottom" id="c2w-Mz-fPB"/>
-                        <constraint firstItem="Upi-yy-NfS" firstAttribute="centerX" secondItem="puu-3s-5Wd" secondAttribute="centerX" id="eV2-EI-9tZ"/>
                         <constraint firstItem="Upi-yy-NfS" firstAttribute="top" secondItem="puu-3s-5Wd" secondAttribute="top" id="rTF-lu-it4"/>
                     </constraints>
                 </view>

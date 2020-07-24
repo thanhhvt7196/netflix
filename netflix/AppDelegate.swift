@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PersistentManager.shared.clearWhenExit()
         if #available(iOS 13.0, *) {
             // do nothing
-            
         } else {
             guard let window = window else {
                 return false

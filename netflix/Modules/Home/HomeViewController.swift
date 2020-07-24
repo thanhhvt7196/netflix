@@ -303,6 +303,8 @@ extension HomeViewController {
             self.myListButton.scale = false
         }) { _ in
             self.allGenreLeadingMovie.constant = -50
+            PersistentManager.shared.currentGenre = PersistentManager.shared.allGenre.id
+            self.allGenreButton.setTitle(title: Strings.allGenres)
         }
         
         UIView.animate(withDuration: 0.3, animations: {
@@ -409,10 +411,14 @@ extension HomeViewController {
 extension HomeViewController {
     private func handleCategoryTypeChange(type: CategoryType) {
         guard type != PersistentManager.shared.categoryType else {
+            PersistentManager.shared.currentGenre = PersistentManager.shared.allGenre.id
+            allGenreButton.setTitle(title: Strings.allGenres)
             //load currentType data
             return
         }
         PersistentManager.shared.categoryType = type
+        PersistentManager.shared.currentGenre = PersistentManager.shared.allGenre.id
+        allGenreButton.setTitle(title: Strings.allGenres)
         //load currentType data
         switch type {
         case .home:
@@ -427,6 +433,8 @@ extension HomeViewController {
     }
     
     private func handleCategoryChange(genre: Genre) {
-        
+        PersistentManager.shared.currentGenre = genre.id
+        allGenreButton.setTitle(title: genre.name ?? Strings.allGenres)
+        //load current genre data
     }
 }

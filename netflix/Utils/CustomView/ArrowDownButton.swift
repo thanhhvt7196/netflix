@@ -23,7 +23,12 @@ class ArrowDownButton: UIView {
     }
     
     func setTitle(title: String) {
-        titleLabel.text = title
+        UIView.transition(with: titleLabel,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            self.titleLabel.text = title
+        }, completion: nil)
     }
     
     var transformIcon = false {
@@ -118,5 +123,11 @@ class ArrowDownButton: UIView {
 extension Reactive where Base: ArrowDownButton {
     var tap: ControlEvent<Void> {
         return base.selectButton.rx.tap
+    }
+    
+    var title: Binder<String> {
+        return Binder(base) { arrowDownButton, title in
+            arrowDownButton.setTitle(title: title)
+        }
     }
 }

@@ -14,4 +14,5 @@ struct Strings {
     static let comingSoon = "Coming soon"
     static let myList = "My List"
     static let more = "More"
+    static let allGenres = "All genres"
 }

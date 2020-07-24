@@ -28,7 +28,7 @@ class HomeChooseCategoryCell: UITableViewCell, NibReusable {
     
     func configCell(genre: Genre) {
         titleLabel.text = genre.name
-        if genre == PersistentManager.shared.currentGenre {
+        if genre.id == PersistentManager.shared.currentGenre {
             titleLabel.textColor = .white
             titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
         } else {

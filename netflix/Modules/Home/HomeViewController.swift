@@ -17,8 +17,8 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var categoryView: UIView!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logoButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
     
     private var tvShowButton = ArrowDownButton(title: CategoryType.tvShow.rawValue)
     private var moviesButton = ArrowDownButton(title: CategoryType.movies.rawValue)
@@ -35,11 +35,15 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private var moviesButtonWidth: NSLayoutConstraint!
     private var myListButtonWidth: NSLayoutConstraint!
     
+    private let showCategoryTypeAnimationDuration = 0.5
+    private let categoryTypeButtonAnimationDuration = 0.3
+    
     private let topButtonSpacing: CGFloat = 10
     private var defaultButtonWidth: CGFloat!
     
-    
     private let bag = DisposeBag()
+    
+    private var homeCategoryView: HomeCategoryView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,27 +63,21 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     override func prepareUI() {
         configNavigationBar()
+        initialChildViews()
     }
     
     private func bind() {
-        let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:))).map { _ in 1 }.asDriverOnErrorJustComplete()
         let viewDidAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:))).filter({ [weak self] _ -> Bool in
             return (self?.isFirstLaunch ?? false)
         }).mapToVoid().asDriverOnErrorJustComplete()
         
-        let input = HomeViewModel.Input(fetchTrigger: viewWillAppear, getGenresTrigger: viewDidAppear)
+        let input = HomeViewModel.Input(getGenresTrigger: viewDidAppear)
         let output = viewModel.transform(input: input)
         
         output.error
             .drive(onNext: { [weak self] error in
                 guard let self = self else { return }
                 self.showErrorAlert(message: error.localizedDescription)
-            })
-            .disposed(by: bag)
-        
-        output.fetchResult
-            .drive(onNext: { movies in
-                print(movies.map { $0.originalTitle })
             })
             .disposed(by: bag)
         
@@ -104,6 +102,9 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 guard let self = self else { return }
                 self.initialGenreButtons()
                 self.addGenreButtons()
+                DispatchQueue.main.asyncAfter(deadline: .now() + self.showCategoryTypeAnimationDuration) {
+                    self.changeCategoryView(type: .home)
+                }
             })
             .disposed(by: bag)
     }
@@ -179,6 +180,11 @@ extension HomeViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    private func initialChildViews() {
+        let homeCategoryViewModel = HomeCategoryViewModel()
+        homeCategoryView = HomeCategoryView(viewModel: homeCategoryViewModel, frame: containerView.bounds)
+    }
+    
     private func initialGenreButtons() {
         tvShowButton.alpha = 0
         moviesButton.alpha = 0
@@ -238,7 +244,7 @@ extension HomeViewController {
         moviesButtonLeading.constant = defaultButtonWidth + topButtonSpacing * 2
         myListButtonLeading.constant = defaultButtonWidth * 2 + topButtonSpacing * 3
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: showCategoryTypeAnimationDuration) {
             self.tvShowButton.isHidden = false
             self.moviesButton.isHidden = false
             self.myListButton.isHidden = false
@@ -259,7 +265,7 @@ extension HomeViewController {
         myListButtonLeading.constant = myListButtonLeading.constant - 50
         allGenreLeadingTvShow.constant = topButtonSpacing * 2
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: categoryTypeButtonAnimationDuration, delay: 0, options: .curveEaseInOut, animations: {
             self.tvShowButton.isHidden = false
             self.tvShowButton.alpha = 1
             self.tvShowButton.transformIcon = true
@@ -268,7 +274,7 @@ extension HomeViewController {
             self.allGenreLeadingMovie.constant = -50
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: categoryTypeButtonAnimationDuration, animations: {
             self.moviesButton.alpha = 0
             self.myListButton.alpha = 0
             self.allGenreButton.alpha = 1
@@ -294,7 +300,7 @@ extension HomeViewController {
         myListButtonLeading.constant = defaultButtonWidth * 2 + topButtonSpacing * 3
         allGenreLeadingTvShow.constant = -50
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: categoryTypeButtonAnimationDuration, delay: 0, options: .curveEaseInOut, animations: {
             self.tvShowButton.transformIcon = false
             self.tvShowButton.scale = false
             self.moviesButton.transformIcon = false
@@ -307,7 +313,7 @@ extension HomeViewController {
             self.allGenreButton.setTitle(title: Strings.allGenres)
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: categoryTypeButtonAnimationDuration, animations: {
             self.moviesButton.alpha = 1
             self.myListButton.alpha = 1
             self.tvShowButton.alpha = 1
@@ -329,7 +335,7 @@ extension HomeViewController {
         myListButtonLeading.constant = myListButtonLeading.constant - 50
         allGenreLeadingMovie.constant = topButtonSpacing * 2
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: categoryTypeButtonAnimationDuration, delay: 0, options: .curveEaseInOut, animations: {
             self.moviesButton.isHidden = false
             self.moviesButton.alpha = 1
             self.moviesButton.transformIcon = true
@@ -338,7 +344,7 @@ extension HomeViewController {
             self.allGenreLeadingTvShow.constant = -50
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: categoryTypeButtonAnimationDuration, animations: {
             self.tvShowButton.alpha = 0
             self.myListButton.alpha = 0
             self.allGenreButton.alpha = 1
@@ -355,7 +361,7 @@ extension HomeViewController {
         moviesButtonLeading.constant = moviesButtonLeading.constant - 50
         myListButtonLeading.constant = topButtonSpacing
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: categoryTypeButtonAnimationDuration, delay: 0, options: .curveEaseInOut, animations: {
             self.myListButton.isHidden = false
             self.myListButton.alpha = 1
             self.myListButton.transformIcon = true
@@ -363,7 +369,7 @@ extension HomeViewController {
         }) { _ in
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: categoryTypeButtonAnimationDuration, animations: {
             self.tvShowButton.alpha = 0
             self.moviesButton.alpha = 0
             self.allGenreButton.alpha = 0
@@ -404,7 +410,7 @@ extension HomeViewController {
                     self.handleCategoryChange(genre: genre)
                 }
             })
-            .disposed(by: bag)
+            .disposed(by: chooseCategoryView.bag)
     }
 }
 
@@ -436,5 +442,18 @@ extension HomeViewController {
         PersistentManager.shared.currentGenre = genre.id
         allGenreButton.setTitle(title: genre.name ?? Strings.allGenres)
         //load current genre data
+    }
+}
+
+extension HomeViewController {
+    private func changeCategoryView(type: CategoryType) {
+        switch type {
+        case .home:
+            containerView.subviews.forEach({ $0.removeFromSuperview()})
+            containerView.addSubview(homeCategoryView)
+            homeCategoryView.loadData()
+        default:
+            break
+        }
     }
 }

@@ -16,6 +16,7 @@ struct APIURL {
     static let genre = "/genre"
     static let list = "/list"
     static let tv = "/tv"
+    static let nowPlaying = "/now_playing"
 }
 
 struct Constants {

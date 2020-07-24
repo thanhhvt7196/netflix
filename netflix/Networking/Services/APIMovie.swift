@@ -12,8 +12,12 @@ import Moya
 enum APIMovie {
     case getPopularMovies(page: Int)
     
-    case getTvShowGenresList
+    //Movie
     case getMovieGenresList
+    case getMovieNowPlayingList
+    
+    //TV Shows
+    case getTvShowGenresList
 }
 
 extension APIMovie: TargetType {
@@ -25,6 +29,8 @@ extension APIMovie: TargetType {
             return APIURL.version + APIURL.genre + APIURL.tv + APIURL.list
         case .getMovieGenresList:
             return APIURL.version + APIURL.genre + APIURL.movie + APIURL.list
+        case .getMovieNowPlayingList:
+            return APIURL.version + APIURL.movie + APIURL.nowPlaying
         }
     }
     

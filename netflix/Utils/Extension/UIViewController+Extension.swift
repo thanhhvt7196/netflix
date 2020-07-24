@@ -81,3 +81,12 @@ extension UIViewController {
         _ = view
     }
 }
+
+extension UIViewController {
+    func addChildControllerToSubview(viewController: UIViewController, to subview: UIView) {
+        addChild(viewController)
+        viewController.view.frame = subview.bounds
+        subview.addSubview(viewController.view)
+        viewController.didMove(toParent: self)
+    }
+}

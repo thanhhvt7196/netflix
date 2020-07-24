@@ -19,13 +19,6 @@ class HomeViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
-        let results = input.fetchTrigger.flatMapLatest { [unowned self] page in
-            return self.getPopularMovies(page: page)
-                .trackError(errorTracker)
-                .trackActivity(activityIndicator)
-                .compactMap { $0.results}
-                .asDriver(onErrorJustReturn: [])
-        }
         
         let TVGenres = input.getGenresTrigger.flatMapLatest { [unowned self] _ in
             return self.getTVShowGenres()
@@ -40,15 +33,10 @@ class HomeViewModel: ViewModel {
                 .compactMap { $0.genres }
                 .asDriver(onErrorJustReturn: [])
         }
-        return Output(fetchResult: results,
-                      error: errorTracker.asDriver(),
+        return Output(error: errorTracker.asDriver(),
                       indicator: activityIndicator.asDriver(),
                       TVGenres: TVGenres,
                       movieGenres: movieGenres)
-    }
-    
-    private func getPopularMovies(page: Int) -> Observable<PopularMoviesResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPopularMovies(page: page), type: PopularMoviesResponse.self)
     }
     
     private func getTVShowGenres() -> Observable<GenresResponse> {
@@ -62,12 +50,10 @@ class HomeViewModel: ViewModel {
 
 extension HomeViewModel {
     struct Input {
-        var fetchTrigger: Driver<Int>
         var getGenresTrigger: Driver<Void>
     }
     
     struct Output {
-        var fetchResult: Driver<[Movie]>
         var error: Driver<Error>
         var indicator: Driver<Bool>
         var TVGenres: Driver<[Genre]>

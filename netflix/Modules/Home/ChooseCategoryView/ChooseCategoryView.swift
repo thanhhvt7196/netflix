@@ -60,6 +60,17 @@ class ChooseCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
             }
             .disposed(by: bag)
         
+        output.genreList
+            .delay(DispatchTimeInterval.milliseconds(100))
+            .drive(onNext: { [weak self] genres in
+                guard let self = self else { return }
+                if let currentGenresIndex = genres.firstIndex(where: { $0.id == PersistentManager.shared.currentGenre }) {
+                    let indexPath = IndexPath(row: currentGenresIndex, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: .middle, animated: false)
+                }
+            })
+            .disposed(by: bag)
+        
         output.selectedGenre.drive(selectedGenre).disposed(by: bag)
     }
     

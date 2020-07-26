@@ -16,9 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jisoo" translatesAutoresizingMaskIntoConstraints="NO" id="vtb-bn-EBZ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ymC-nE-diU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                            </imageView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-uU-NfQ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                                 <subviews>
@@ -63,16 +64,9 @@
                                     <constraint firstAttribute="width" secondItem="r8W-mv-c00" secondAttribute="height" id="hCR-As-odA"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CSD-o1-NBE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="CSD-o1-NBE" firstAttribute="top" secondItem="G9U-uU-NfQ" secondAttribute="bottom" id="11C-kn-chW"/>
-                            <constraint firstItem="vtb-bn-EBZ" firstAttribute="leading" secondItem="Nsl-Wf-8IK" secondAttribute="leading" id="24f-VD-j5P"/>
                             <constraint firstItem="r8W-mv-c00" firstAttribute="leading" secondItem="OH9-x4-QAk" secondAttribute="leading" id="2dc-vK-8aK"/>
                             <constraint firstItem="Nsl-Wf-8IK" firstAttribute="trailing" secondItem="G9U-uU-NfQ" secondAttribute="trailing" id="3Mc-dL-mCy"/>
                             <constraint firstItem="Nsl-Wf-8IK" firstAttribute="top" secondItem="UvO-N5-aYq" secondAttribute="top" id="5mq-iJ-OUb"/>
@@ -80,22 +74,20 @@
                             <constraint firstItem="r8W-mv-c00" firstAttribute="bottom" secondItem="OH9-x4-QAk" secondAttribute="bottom" id="BG8-gb-Kdp"/>
                             <constraint firstItem="G9U-uU-NfQ" firstAttribute="top" secondItem="dLn-2P-2cd" secondAttribute="top" id="Cxg-YV-UMN"/>
                             <constraint firstItem="r8W-mv-c00" firstAttribute="trailing" secondItem="OH9-x4-QAk" secondAttribute="trailing" id="FMS-ZO-568"/>
-                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="bottom" secondItem="CSD-o1-NBE" secondAttribute="bottom" id="Ipa-yH-e4h"/>
-                            <constraint firstItem="vtb-bn-EBZ" firstAttribute="top" secondItem="dLn-2P-2cd" secondAttribute="top" id="OMU-ca-6lc"/>
-                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="trailing" secondItem="vtb-bn-EBZ" secondAttribute="trailing" id="VCu-E8-JCi"/>
+                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="trailing" secondItem="ymC-nE-diU" secondAttribute="trailing" id="LeD-3Q-zdC"/>
                             <constraint firstItem="G9U-uU-NfQ" firstAttribute="leading" secondItem="Nsl-Wf-8IK" secondAttribute="leading" id="Vsj-a2-Zbu"/>
-                            <constraint firstItem="CSD-o1-NBE" firstAttribute="leading" secondItem="Nsl-Wf-8IK" secondAttribute="leading" id="Yfd-jY-4do"/>
-                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="bottom" secondItem="vtb-bn-EBZ" secondAttribute="bottom" id="i4C-jH-6Yd"/>
-                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="trailing" secondItem="CSD-o1-NBE" secondAttribute="trailing" id="uNV-QO-iZf"/>
+                            <constraint firstItem="Nsl-Wf-8IK" firstAttribute="bottom" secondItem="ymC-nE-diU" secondAttribute="bottom" id="XPH-gH-ioX"/>
+                            <constraint firstItem="ymC-nE-diU" firstAttribute="top" secondItem="dLn-2P-2cd" secondAttribute="top" id="a0v-sN-vD8"/>
+                            <constraint firstItem="ymC-nE-diU" firstAttribute="leading" secondItem="Nsl-Wf-8IK" secondAttribute="leading" id="pZ7-T4-0Tj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nsl-Wf-8IK"/>
                     </view>
                     <connections>
                         <outlet property="categoryView" destination="eLG-XL-uZR" id="cxU-tQ-zBl"/>
+                        <outlet property="containerView" destination="ymC-nE-diU" id="RAP-Gg-wgY"/>
                         <outlet property="gradientView" destination="G9U-uU-NfQ" id="DQU-Rt-Dc9"/>
                         <outlet property="iconImageView" destination="r8W-mv-c00" id="JTS-V4-n6m"/>
                         <outlet property="logoButton" destination="OH9-x4-QAk" id="sfd-X1-51k"/>
-                        <outlet property="tableView" destination="CSD-o1-NBE" id="IAD-R8-CDr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VsQ-xg-378" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -105,6 +97,5 @@
     </scenes>
     <resources>
         <image name="icon_netflix_n_Normal" width="24" height="44"/>
-        <image name="jisoo" width="660" height="990"/>
     </resources>
 </document>

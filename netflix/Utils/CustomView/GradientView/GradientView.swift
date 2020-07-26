@@ -18,9 +18,9 @@ class GradientView: UIView {
         super.init(coder: aDecoder)
         let gradientLayer = self.layer as! CAGradientLayer
         gradientLayer.colors = [
+            UIColor.black.withAlphaComponent(0.5).cgColor,
             UIColor.clear.cgColor,
-            UIColor.clear.cgColor,
-            UIColor.black.withAlphaComponent(0.3).cgColor
+            UIColor.black.cgColor
         ]
         backgroundColor = UIColor.clear
     }

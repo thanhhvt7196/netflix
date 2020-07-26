@@ -21,7 +21,7 @@ class ChooseCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     private let bottomInset: CGFloat = 180
     private let tableViewRowHeight: CGFloat = 60
     
-    private let bag = DisposeBag()
+    let bag = DisposeBag()
     
     private func commonInit() {
         loadNibContent()

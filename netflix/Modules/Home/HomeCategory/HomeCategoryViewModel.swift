@@ -84,9 +84,12 @@ class HomeCategoryViewModel: ViewModel {
                 if let headerMovie = nowPlayingList.first {
                     sections.append(.headerMovie(title: nil, items: [.movieItem(movie: headerMovie)]))
                 }
-                if nowPlayingList.suffix(nowPlayingList.count - 1).count > 0 {
-                    sections.append(.nowPlayingMovie(title: Strings.nowPlaying, items: [.moviesListItem(movies: Array(nowPlayingList.suffix(nowPlayingList.count - 1)))]))
+                if nowPlayingList.count > 0 {
+                    if nowPlayingList.suffix(nowPlayingList.count - 1).count > 0 {
+                        sections.append(.nowPlayingMovie(title: Strings.nowPlaying, items: [.moviesListItem(movies: Array(nowPlayingList.suffix(nowPlayingList.count - 1)))]))
+                    }
                 }
+                
                 if tvShowAiringTodayList.count > 0 {
                     sections.append(.tvShowAiringToday(title: Strings.airingToday, items: [.moviesListItem(movies: tvShowAiringTodayList)]))
                 }

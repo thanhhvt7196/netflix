@@ -41,7 +41,6 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     
     func bindViewModel(viewModel: HeaderMovieViewModel) {
         self.viewModel = viewModel
-//        myListAnimationView.play()
         bindData()
     }
     

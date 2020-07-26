@@ -63,7 +63,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     override func prepareUI() {
         configNavigationBar()
-        initialChildViews()
     }
     
     private func bind() {
@@ -102,6 +101,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 guard let self = self else { return }
                 self.initialGenreButtons()
                 self.addGenreButtons()
+                self.initialChildViews()
                 DispatchQueue.main.asyncAfter(deadline: .now() + self.showCategoryTypeAnimationDuration) {
                     self.changeCategoryView(type: .home)
                 }

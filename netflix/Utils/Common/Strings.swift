@@ -15,4 +15,12 @@ struct Strings {
     static let myList = "My List"
     static let more = "More"
     static let allGenres = "All genres"
+    static let nowPlaying = "Now Playing"
+    static let airingToday = "Airing Today"
+    static let popularMovies = "Popular Movies"
+    static let popularTVShows = "Popular TV Shows"
+    static let topRatedMovies = "Top Rated Movies"
+    static let topRatedTVShows = "Top Rated TV Shows"
+    static let upcomingMovies = "Upcoming Movies"
+    static let onTheAir = "On The Air"
 }

@@ -1,14 +1,14 @@
 //
-//  NowPlayingMovieResponse.swift
+//  UpcomingMovieResponse.swift
 //  netflix
 //
-//  Created by thanh tien on 7/24/20.
+//  Created by thanh tien on 7/26/20.
 //  Copyright © 2020 thanh tien. All rights reserved.
 //
 
 import Foundation
 
-struct NowPlayingMovieResponse: Codable {
+struct UpcomingMovieResponse: Codable {
     var page: Int?
     var results: [Movie]?
     var totalResults: Int?
@@ -22,9 +22,4 @@ struct NowPlayingMovieResponse: Codable {
         case date
         case totalPages = "total_pages"
     }
-}
-
-struct PeriodDate: Codable {
-    var maximum: String?
-    var minimum: String?
 }

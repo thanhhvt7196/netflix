@@ -8,12 +8,12 @@
 import Foundation
 
 struct APIError: Error, Codable {
-    let status: Int?
-    let message: String
+    let status_code: Int?
+    let status_message: String
 }
 
 extension APIError: LocalizedError {
     var errorDescription: String? {
-        return NSLocalizedString(message, comment: "")
+        return NSLocalizedString(status_message, comment: "")
     }
 }

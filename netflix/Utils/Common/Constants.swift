@@ -10,6 +10,7 @@ import Foundation
 
 struct APIURL {
     static let baseURL = "https://api.themoviedb.org"
+    static let imageBaseURL = "https://image.tmdb.org/t/p/original"
     static let version = "/3"
     static let movie = "/movie"
     static let popular = "/popular"
@@ -17,6 +18,10 @@ struct APIURL {
     static let list = "/list"
     static let tv = "/tv"
     static let nowPlaying = "/now_playing"
+    static let airingToday = "/airing_today"
+    static let topRated = "/top_rated"
+    static let upcoming = "/upcoming"
+    static let onTheAir = "/on_the_air"
 }
 
 struct Constants {

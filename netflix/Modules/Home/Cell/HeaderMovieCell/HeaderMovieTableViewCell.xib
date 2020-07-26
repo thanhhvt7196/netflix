@@ -40,10 +40,10 @@
                                 <rect key="frame" x="0.0" y="169" width="256" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKZ-jb-dl3">
-                                        <rect key="frame" x="0.0" y="0.0" width="78" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="73" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RtC-O8-CZS" customClass="AnimationView" customModule="Lottie">
-                                                <rect key="frame" x="29" y="-1" width="20" height="20"/>
+                                                <rect key="frame" x="26.5" y="-1" width="20" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="K0I-BE-Xgw"/>
@@ -51,7 +51,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEb-Zm-LOT">
-                                                <rect key="frame" x="16.5" y="24" width="45" height="16"/>
+                                                <rect key="frame" x="14" y="24" width="45" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -66,32 +66,32 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Gn-26-H2m">
-                                        <rect key="frame" x="78" y="5" width="100" height="30"/>
+                                        <rect key="frame" x="73" y="5" width="110" height="30"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7gU-o4-T6J">
-                                                <rect key="frame" x="19" y="0.0" width="62" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7gU-o4-T6J">
+                                                <rect key="frame" x="28.5" y="0.0" width="53.5" height="30"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_play_solid_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="00y-AY-GUn">
-                                                        <rect key="frame" x="0.0" y="5" width="20" height="20"/>
+                                                        <rect key="frame" x="0.0" y="6" width="18" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="00y-AY-GUn" secondAttribute="height" id="JPW-Pv-dp9"/>
-                                                            <constraint firstAttribute="width" constant="20" id="vnc-65-XV7"/>
+                                                            <constraint firstAttribute="width" constant="18" id="vnc-65-XV7"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXh-Su-nl9">
-                                                        <rect key="frame" x="30" y="5.5" width="32" height="19.5"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                        <rect key="frame" x="23" y="6" width="30.5" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWn-v7-izo">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="SWn-v7-izo" secondAttribute="bottom" id="6eK-OG-23e"/>
                                             <constraint firstItem="7gU-o4-T6J" firstAttribute="centerX" secondItem="8Gn-26-H2m" secondAttribute="centerX" id="JaB-3k-Owa"/>
@@ -101,21 +101,21 @@
                                             <constraint firstAttribute="height" constant="30" id="i3f-Yd-rBu"/>
                                             <constraint firstAttribute="bottom" secondItem="7gU-o4-T6J" secondAttribute="bottom" id="l2A-oZ-Pa1"/>
                                             <constraint firstItem="SWn-v7-izo" firstAttribute="top" secondItem="8Gn-26-H2m" secondAttribute="top" id="nhh-4Q-39h"/>
-                                            <constraint firstAttribute="width" constant="100" id="qcC-xY-DYP"/>
+                                            <constraint firstAttribute="width" constant="110" id="qcC-xY-DYP"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jr2-lQ-vX4">
-                                        <rect key="frame" x="178" y="0.0" width="78" height="40"/>
+                                        <rect key="frame" x="183" y="0.0" width="73" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-round_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="hOF-7d-Cnc">
-                                                <rect key="frame" x="29" y="-1" width="20" height="20"/>
+                                                <rect key="frame" x="26.5" y="-1" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="i42-Tw-FoH"/>
                                                     <constraint firstAttribute="height" constant="20" id="ihv-1p-Lyj"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMX-e9-czX">
-                                                <rect key="frame" x="27" y="24" width="24" height="16"/>
+                                                <rect key="frame" x="24.5" y="24" width="24" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>

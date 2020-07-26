@@ -29,25 +29,25 @@ extension APIMovie: TargetType {
     var path: String {
         switch self {
         case .getPopularMovies:
-            return APIURL.version + APIURL.movie + APIURL.popular
+            return APIURL.version3 + APIURL.movie + APIURL.popular
         case .getTvShowGenresList:
-            return APIURL.version + APIURL.genre + APIURL.tv + APIURL.list
+            return APIURL.version3 + APIURL.genre + APIURL.tv + APIURL.list
         case .getMovieGenresList:
-            return APIURL.version + APIURL.genre + APIURL.movie + APIURL.list
+            return APIURL.version3 + APIURL.genre + APIURL.movie + APIURL.list
         case .getMovieNowPlayingList:
-            return APIURL.version + APIURL.movie + APIURL.nowPlaying
+            return APIURL.version3 + APIURL.movie + APIURL.nowPlaying
         case .getAiringTodayTVShowList:
-            return APIURL.version + APIURL.tv + APIURL.airingToday
+            return APIURL.version3 + APIURL.tv + APIURL.airingToday
         case .getPopularTVShows:
-            return APIURL.version + APIURL.tv + APIURL.popular
+            return APIURL.version3 + APIURL.tv + APIURL.popular
         case .getTopRatedMoviesList:
-            return APIURL.version + APIURL.movie + APIURL.topRated
+            return APIURL.version3 + APIURL.movie + APIURL.topRated
         case .getTopRatedTvShowsList:
-            return APIURL.version + APIURL.tv + APIURL.topRated
+            return APIURL.version3 + APIURL.tv + APIURL.topRated
         case .getUpcomingMoviesList:
-            return APIURL.version + APIURL.movie + APIURL.upcoming
+            return APIURL.version3 + APIURL.movie + APIURL.upcoming
         case .getTVShowOnTheAir:
-            return APIURL.version + APIURL.tv + APIURL.onTheAir
+            return APIURL.version3 + APIURL.tv + APIURL.onTheAir
         }
     }
     

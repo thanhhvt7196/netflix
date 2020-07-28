@@ -16,7 +16,6 @@ class MyListViewController: BaseViewController, StoryboardBased, ViewModelBased 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareUI()
     }
     
     override func prepareUI() {

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uNm-Gt-ugE">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Onboarding View Controller-->
+        <scene sceneID="r5N-Dj-uFq">
+            <objects>
+                <viewController id="uNm-Gt-ugE" customClass="OnboardingViewController" customModule="netflix" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VR3-Nm-vtC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rZM-hD-6r8">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="6gs-GF-UPz">
+                                <rect key="frame" x="187.5" y="745" width="39" height="37"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NC0-d8-ika">
+                                <rect key="frame" x="15" y="792" width="384" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Mob-me-36N"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="w9t-Kp-Z0D" firstAttribute="trailing" secondItem="rZM-hD-6r8" secondAttribute="trailing" id="2Ft-HS-qYm"/>
+                            <constraint firstItem="NC0-d8-ika" firstAttribute="centerX" secondItem="w9t-Kp-Z0D" secondAttribute="centerX" id="79P-q7-P3Q"/>
+                            <constraint firstItem="NC0-d8-ika" firstAttribute="top" secondItem="6gs-GF-UPz" secondAttribute="bottom" constant="10" id="9GN-kt-VCK"/>
+                            <constraint firstItem="NC0-d8-ika" firstAttribute="leading" secondItem="w9t-Kp-Z0D" secondAttribute="leading" constant="15" id="Fy9-JJ-isl"/>
+                            <constraint firstItem="rZM-hD-6r8" firstAttribute="leading" secondItem="w9t-Kp-Z0D" secondAttribute="leading" id="LWO-ZU-yZX"/>
+                            <constraint firstItem="w9t-Kp-Z0D" firstAttribute="bottom" secondItem="NC0-d8-ika" secondAttribute="bottom" constant="30" id="T12-3H-uyo"/>
+                            <constraint firstItem="6gs-GF-UPz" firstAttribute="centerX" secondItem="VR3-Nm-vtC" secondAttribute="centerX" id="Tsp-ZR-11D"/>
+                            <constraint firstItem="rZM-hD-6r8" firstAttribute="top" secondItem="w9t-Kp-Z0D" secondAttribute="top" id="oWp-Hd-Lfw"/>
+                            <constraint firstItem="w9t-Kp-Z0D" firstAttribute="bottom" secondItem="rZM-hD-6r8" secondAttribute="bottom" id="xnJ-G5-lxE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="w9t-Kp-Z0D"/>
+                    </view>
+                    <connections>
+                        <outlet property="pageControl" destination="6gs-GF-UPz" id="1ap-zu-hG3"/>
+                        <outlet property="scrollView" destination="rZM-hD-6r8" id="RvN-Nt-9ZO"/>
+                        <outlet property="signinButton" destination="NC0-d8-ika" id="goo-Xm-M8w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mb1-Cr-Rip" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="100"/>
+        </scene>
+    </scenes>
+</document>

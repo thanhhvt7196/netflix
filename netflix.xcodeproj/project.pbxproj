@@ -67,6 +67,14 @@
 		0C35E9E924D00D49001A612D /* Netflix_N_video_small.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9E624D00D49001A612D /* Netflix_N_video_small.mp4 */; };
 		0C35E9EC24D00E09001A612D /* redrings.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9EA24D00E09001A612D /* redrings.json */; };
 		0C35E9ED24D00E09001A612D /* remindMe.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9EB24D00E09001A612D /* remindMe.json */; };
+		0C35E9F024D02A2F001A612D /* OnboardingView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35E9EF24D02A2F001A612D /* OnboardingView1.swift */; };
+		0C35E9F224D02AB7001A612D /* OnboardingView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9F124D02AB7001A612D /* OnboardingView1.xib */; };
+		0C35E9F524D02CE0001A612D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35E9F424D02CE0001A612D /* OnboardingViewController.swift */; };
+		0C35E9F724D02D33001A612D /* OnboardingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9F624D02D33001A612D /* OnboardingViewController.storyboard */; };
+		0C35E9F924D0307E001A612D /* OnboardingView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35E9F824D0307E001A612D /* OnboardingView2.swift */; };
+		0C35E9FB24D03093001A612D /* OnboardingView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9FA24D03093001A612D /* OnboardingView2.xib */; };
+		0C35E9FD24D031BC001A612D /* OnboardingView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35E9FC24D031BC001A612D /* OnboardingView3.swift */; };
+		0C35E9FF24D031D3001A612D /* OnboardingView3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9FE24D031D3001A612D /* OnboardingView3.xib */; };
 		0C3BC71524CA09D600DFCEBA /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BC71424CA09D600DFCEBA /* Observable+Extension.swift */; };
 		0C3BC71924CA23ED00DFCEBA /* TVGenreRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BC71824CA23ED00DFCEBA /* TVGenreRealmObject.swift */; };
 		0C3BC71B24CA240A00DFCEBA /* MovieGenreRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BC71A24CA240A00DFCEBA /* MovieGenreRealmObject.swift */; };
@@ -213,6 +221,14 @@
 		0C35E9E624D00D49001A612D /* Netflix_N_video_small.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Netflix_N_video_small.mp4; sourceTree = "<group>"; };
 		0C35E9EA24D00E09001A612D /* redrings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = redrings.json; sourceTree = "<group>"; };
 		0C35E9EB24D00E09001A612D /* remindMe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = remindMe.json; sourceTree = "<group>"; };
+		0C35E9EF24D02A2F001A612D /* OnboardingView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView1.swift; sourceTree = "<group>"; };
+		0C35E9F124D02AB7001A612D /* OnboardingView1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingView1.xib; sourceTree = "<group>"; };
+		0C35E9F424D02CE0001A612D /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		0C35E9F624D02D33001A612D /* OnboardingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnboardingViewController.storyboard; sourceTree = "<group>"; };
+		0C35E9F824D0307E001A612D /* OnboardingView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView2.swift; sourceTree = "<group>"; };
+		0C35E9FA24D03093001A612D /* OnboardingView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingView2.xib; sourceTree = "<group>"; };
+		0C35E9FC24D031BC001A612D /* OnboardingView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView3.swift; sourceTree = "<group>"; };
+		0C35E9FE24D031D3001A612D /* OnboardingView3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingView3.xib; sourceTree = "<group>"; };
 		0C3BC71424CA09D600DFCEBA /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
 		0C3BC71824CA23ED00DFCEBA /* TVGenreRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVGenreRealmObject.swift; sourceTree = "<group>"; };
 		0C3BC71A24CA240A00DFCEBA /* MovieGenreRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreRealmObject.swift; sourceTree = "<group>"; };
@@ -491,6 +507,28 @@
 			path = Videos;
 			sourceTree = "<group>";
 		};
+		0C35E9EE24D02A20001A612D /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0C35E9EF24D02A2F001A612D /* OnboardingView1.swift */,
+				0C35E9F124D02AB7001A612D /* OnboardingView1.xib */,
+				0C35E9F824D0307E001A612D /* OnboardingView2.swift */,
+				0C35E9FA24D03093001A612D /* OnboardingView2.xib */,
+				0C35E9FC24D031BC001A612D /* OnboardingView3.swift */,
+				0C35E9FE24D031D3001A612D /* OnboardingView3.xib */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		0C35E9F324D02CC3001A612D /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0C35E9F424D02CE0001A612D /* OnboardingViewController.swift */,
+				0C35E9F624D02D33001A612D /* OnboardingViewController.storyboard */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		0C3BC71624CA23D400DFCEBA /* Genre */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,6 +670,7 @@
 		0C867A0724C83B1D0053496B /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				0C35E9EE24D02A20001A612D /* Onboarding */,
 				0CFCB18F24CEE40F005A290A /* ProgressHUD */,
 				0C0247DD24CE6F8E00C023A8 /* FloatingTextfield */,
 				0CE955A324CDE7680099648B /* NetflixTitleView */,
@@ -711,6 +750,7 @@
 		0C8D570324C6DE6500E2CB08 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0C35E9F324D02CC3001A612D /* Onboarding */,
 				0CE9559C24CDE4950099648B /* Login */,
 				0C8D570B24C6DEBC00E2CB08 /* Home */,
 				0C1035FF24C6F0D200571EA6 /* More */,
@@ -950,9 +990,11 @@
 				0C3BC72224CA29DF00DFCEBA /* ChooseCategoryView.xib in Resources */,
 				0C35E9E924D00D49001A612D /* Netflix_N_video_small.mp4 in Resources */,
 				0C8D571424C6DF5F00E2CB08 /* HomeViewController.storyboard in Resources */,
+				0C35E9FF24D031D3001A612D /* OnboardingView3.xib in Resources */,
 				0C1035E424C6EB6B00571EA6 /* playPause.json in Resources */,
 				0C10577124C97B1E00C88177 /* ChooseCategoryTypeView.xib in Resources */,
 				0C0247E324CE769900C023A8 /* FloatingTextfield.xib in Resources */,
+				0C35E9F224D02AB7001A612D /* OnboardingView1.xib in Resources */,
 				0C1EE86B24C69D390046BB24 /* LaunchScreen.storyboard in Resources */,
 				0CE955A224CDE5370099648B /* LoginViewController.storyboard in Resources */,
 				0C2BAA7224C6E8CF003FD8A9 /* dtmf_51.wav in Resources */,
@@ -960,6 +1002,7 @@
 				0C1035E624C6EB6B00571EA6 /* ratings-all.json in Resources */,
 				0C1C2CB424CADFE40012374F /* HomeCategoryView.xib in Resources */,
 				0C1035E524C6EB6B00571EA6 /* playSpinner.json in Resources */,
+				0C35E9F724D02D33001A612D /* OnboardingViewController.storyboard in Resources */,
 				0C2BAA7424C6E8CF003FD8A9 /* ringtone.mp3 in Resources */,
 				0C35E9EC24D00E09001A612D /* redrings.json in Resources */,
 				0C4A35C724C71524007671C2 /* PopularMoviesSample.json in Resources */,
@@ -979,6 +1022,7 @@
 				0C2BAA6E24C6E8CF003FD8A9 /* dtmf_55.wav in Resources */,
 				0C8D571024C6DED200E2CB08 /* AnimatedTabBarController.storyboard in Resources */,
 				0C1035FE24C6F0AC00571EA6 /* MyListViewController.storyboard in Resources */,
+				0C35E9FB24D03093001A612D /* OnboardingView2.xib in Resources */,
 				0C2BAA7924C6E8F1003FD8A9 /* nf-icon.otf in Resources */,
 				0CAAE56F24CD85E9001C65D7 /* HeaderMovieTableViewCell.xib in Resources */,
 				0C2BAA6F24C6E8CF003FD8A9 /* silence.wav in Resources */,
@@ -1051,6 +1095,7 @@
 				0C8D56EB24C6DD5100E2CB08 /* Date+Extension.swift in Sources */,
 				0CAAE56824CD8136001C65D7 /* HeaderViewForCategory.swift in Sources */,
 				0C0247E124CE768A00C023A8 /* FloatingTextfieldSetting.swift in Sources */,
+				0C35E9F024D02A2F001A612D /* OnboardingView1.swift in Sources */,
 				0C3BC71524CA09D600DFCEBA /* Observable+Extension.swift in Sources */,
 				0CAAE57324CD89D9001C65D7 /* ImageHelper.swift in Sources */,
 				0C3BC71B24CA240A00DFCEBA /* MovieGenreRealmObject.swift in Sources */,
@@ -1073,15 +1118,18 @@
 				0C8D56C824C6DD2700E2CB08 /* SceneCoordinatorType.swift in Sources */,
 				0C10360124C6F0DB00571EA6 /* MoreViewModel.swift in Sources */,
 				0C8D56F624C6DD5100E2CB08 /* UIApplication+Extension.swift in Sources */,
+				0C35E9FD24D031BC001A612D /* OnboardingView3.swift in Sources */,
 				0C8D56FE24C6DD5100E2CB08 /* UITabbarController+Extension.swift in Sources */,
 				0C8679F124C7D9700053496B /* APIResult.swift in Sources */,
 				0C8D570224C6DD5100E2CB08 /* UIBarButtonItem+Rx.swift in Sources */,
 				0CAAE57124CD861B001C65D7 /* HeaderMovieViewModel.swift in Sources */,
 				0C1035EC24C6EDD400571EA6 /* SearchViewModel.swift in Sources */,
 				0C3BC71924CA23ED00DFCEBA /* TVGenreRealmObject.swift in Sources */,
+				0C35E9F524D02CE0001A612D /* OnboardingViewController.swift in Sources */,
 				0C1035EE24C6EDDC00571EA6 /* SearchViewController.swift in Sources */,
 				0C8D570924C6DE7E00E2CB08 /* ViewModelBased.swift in Sources */,
 				0C8D56ED24C6DD5100E2CB08 /* UINavigationController+Extension.swift in Sources */,
+				0C35E9F924D0307E001A612D /* OnboardingView2.swift in Sources */,
 				0CFCB18E24CEDF03005A290A /* LoginObject.swift in Sources */,
 				0C1035F524C6EF9D00571EA6 /* NewMoviesViewController.swift in Sources */,
 				0C10576924C9706E00C88177 /* ChooseCategoryTypeView.swift in Sources */,

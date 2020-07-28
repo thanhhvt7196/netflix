@@ -25,7 +25,6 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareUI()
         bind()
         handleAction()
     }

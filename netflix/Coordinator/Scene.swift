@@ -15,6 +15,7 @@ protocol TargetScene {
 enum Scene {
     case tabbar
     case login
+    case onboarding
 }
 
 extension Scene: TargetScene {
@@ -60,6 +61,10 @@ extension Scene: TargetScene {
             let loginViewModel = LoginViewModel()
             let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel)
             return .root(loginViewController)
+        case .onboarding:
+            let onboardingViewController = OnboardingViewController.instantiate()
+            let navigationController = UINavigationController(rootViewController: onboardingViewController)
+            return .root(navigationController)
         }
     }
 }

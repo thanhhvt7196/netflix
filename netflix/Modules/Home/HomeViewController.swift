@@ -47,7 +47,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareUI()
         bind()
         handleAction()
     }

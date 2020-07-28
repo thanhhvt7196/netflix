@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0247E124CE768A00C023A8 /* FloatingTextfieldSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0247E024CE768A00C023A8 /* FloatingTextfieldSetting.swift */; };
+		0C0247E324CE769900C023A8 /* FloatingTextfield.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C0247E224CE769900C023A8 /* FloatingTextfield.xib */; };
+		0C0247E524CE783A00C023A8 /* FloatingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0247E424CE783A00C023A8 /* FloatingTextfield.swift */; };
+		0C0247E724CE786E00C023A8 /* TextfieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0247E624CE786E00C023A8 /* TextfieldWithIcon.swift */; };
+		0C0247E924CE7D5800C023A8 /* InputValidates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0247E824CE7D5800C023A8 /* InputValidates.swift */; };
 		0C1035E424C6EB6B00571EA6 /* playPause.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035DE24C6EB6A00571EA6 /* playPause.json */; };
 		0C1035E524C6EB6B00571EA6 /* playSpinner.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035DF24C6EB6B00571EA6 /* playSpinner.json */; };
 		0C1035E624C6EB6B00571EA6 /* ratings-all.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C1035E024C6EB6B00571EA6 /* ratings-all.json */; };
@@ -55,6 +60,13 @@
 		0C2BAA7424C6E8CF003FD8A9 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA6A24C6E8CF003FD8A9 /* ringtone.mp3 */; };
 		0C2BAA7624C6E8D9003FD8A9 /* dtmf_50.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA7524C6E8D9003FD8A9 /* dtmf_50.wav */; };
 		0C2BAA7924C6E8F1003FD8A9 /* nf-icon.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C2BAA7824C6E8F1003FD8A9 /* nf-icon.otf */; };
+		0C35E9E024CFF910001A612D /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35E9DF24CFF910001A612D /* SessionResponse.swift */; };
+		0C35E9E224CFFF61001A612D /* UserInfoServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35E9E124CFFF61001A612D /* UserInfoServices.swift */; };
+		0C35E9E724D00D49001A612D /* Netflix_N_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9E424D00D49001A612D /* Netflix_N_video.mp4 */; };
+		0C35E9E824D00D49001A612D /* Netflix_N_video_large.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9E524D00D49001A612D /* Netflix_N_video_large.mp4 */; };
+		0C35E9E924D00D49001A612D /* Netflix_N_video_small.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9E624D00D49001A612D /* Netflix_N_video_small.mp4 */; };
+		0C35E9EC24D00E09001A612D /* redrings.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9EA24D00E09001A612D /* redrings.json */; };
+		0C35E9ED24D00E09001A612D /* remindMe.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C35E9EB24D00E09001A612D /* remindMe.json */; };
 		0C3BC71524CA09D600DFCEBA /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BC71424CA09D600DFCEBA /* Observable+Extension.swift */; };
 		0C3BC71924CA23ED00DFCEBA /* TVGenreRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BC71824CA23ED00DFCEBA /* TVGenreRealmObject.swift */; };
 		0C3BC71B24CA240A00DFCEBA /* MovieGenreRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BC71A24CA240A00DFCEBA /* MovieGenreRealmObject.swift */; };
@@ -128,10 +140,22 @@
 		0CAAE56F24CD85E9001C65D7 /* HeaderMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CAAE56D24CD85E9001C65D7 /* HeaderMovieTableViewCell.xib */; };
 		0CAAE57124CD861B001C65D7 /* HeaderMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE57024CD861B001C65D7 /* HeaderMovieViewModel.swift */; };
 		0CAAE57324CD89D9001C65D7 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE57224CD89D9001C65D7 /* ImageHelper.swift */; };
+		0CE9559E24CDE4B70099648B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9559D24CDE4B70099648B /* LoginViewModel.swift */; };
+		0CE955A024CDE4E20099648B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9559F24CDE4E20099648B /* LoginViewController.swift */; };
+		0CE955A224CDE5370099648B /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE955A124CDE5370099648B /* LoginViewController.storyboard */; };
+		0CE955A524CDE7880099648B /* NetflixTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE955A424CDE7880099648B /* NetflixTitleView.swift */; };
+		0CE955A724CDE7D90099648B /* NetflixTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE955A624CDE7D90099648B /* NetflixTitleView.xib */; };
+		0CFCB18B24CEDB0D005A290A /* NewRequestTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCB18A24CEDB0D005A290A /* NewRequestTokenResponse.swift */; };
+		0CFCB18E24CEDF03005A290A /* LoginObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCB18D24CEDF03005A290A /* LoginObject.swift */; };
 		B369BEB8824D10ED8ED7299F /* Pods_netflix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D964BB58E033736DF7F8F26 /* Pods_netflix.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C0247E024CE768A00C023A8 /* FloatingTextfieldSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextfieldSetting.swift; sourceTree = "<group>"; };
+		0C0247E224CE769900C023A8 /* FloatingTextfield.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FloatingTextfield.xib; sourceTree = "<group>"; };
+		0C0247E424CE783A00C023A8 /* FloatingTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextfield.swift; sourceTree = "<group>"; };
+		0C0247E624CE786E00C023A8 /* TextfieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldWithIcon.swift; sourceTree = "<group>"; };
+		0C0247E824CE7D5800C023A8 /* InputValidates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidates.swift; sourceTree = "<group>"; };
 		0C1035DE24C6EB6A00571EA6 /* playPause.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = playPause.json; sourceTree = "<group>"; };
 		0C1035DF24C6EB6B00571EA6 /* playSpinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = playSpinner.json; sourceTree = "<group>"; };
 		0C1035E024C6EB6B00571EA6 /* ratings-all.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ratings-all.json"; sourceTree = "<group>"; };
@@ -182,6 +206,13 @@
 		0C2BAA6A24C6E8CF003FD8A9 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
 		0C2BAA7524C6E8D9003FD8A9 /* dtmf_50.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dtmf_50.wav; sourceTree = "<group>"; };
 		0C2BAA7824C6E8F1003FD8A9 /* nf-icon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nf-icon.otf"; sourceTree = "<group>"; };
+		0C35E9DF24CFF910001A612D /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
+		0C35E9E124CFFF61001A612D /* UserInfoServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoServices.swift; sourceTree = "<group>"; };
+		0C35E9E424D00D49001A612D /* Netflix_N_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Netflix_N_video.mp4; sourceTree = "<group>"; };
+		0C35E9E524D00D49001A612D /* Netflix_N_video_large.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Netflix_N_video_large.mp4; sourceTree = "<group>"; };
+		0C35E9E624D00D49001A612D /* Netflix_N_video_small.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Netflix_N_video_small.mp4; sourceTree = "<group>"; };
+		0C35E9EA24D00E09001A612D /* redrings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = redrings.json; sourceTree = "<group>"; };
+		0C35E9EB24D00E09001A612D /* remindMe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = remindMe.json; sourceTree = "<group>"; };
 		0C3BC71424CA09D600DFCEBA /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
 		0C3BC71824CA23ED00DFCEBA /* TVGenreRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVGenreRealmObject.swift; sourceTree = "<group>"; };
 		0C3BC71A24CA240A00DFCEBA /* MovieGenreRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreRealmObject.swift; sourceTree = "<group>"; };
@@ -255,6 +286,13 @@
 		0CAAE56D24CD85E9001C65D7 /* HeaderMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderMovieTableViewCell.xib; sourceTree = "<group>"; };
 		0CAAE57024CD861B001C65D7 /* HeaderMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMovieViewModel.swift; sourceTree = "<group>"; };
 		0CAAE57224CD89D9001C65D7 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		0CE9559D24CDE4B70099648B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0CE9559F24CDE4E20099648B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0CE955A124CDE5370099648B /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
+		0CE955A424CDE7880099648B /* NetflixTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetflixTitleView.swift; sourceTree = "<group>"; };
+		0CE955A624CDE7D90099648B /* NetflixTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetflixTitleView.xib; sourceTree = "<group>"; };
+		0CFCB18A24CEDB0D005A290A /* NewRequestTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRequestTokenResponse.swift; sourceTree = "<group>"; };
+		0CFCB18D24CEDF03005A290A /* LoginObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginObject.swift; sourceTree = "<group>"; };
 		9D964BB58E033736DF7F8F26 /* Pods_netflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FA004B2D94CA1A9FB1573B /* Pods-netflix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netflix.release.xcconfig"; path = "Target Support Files/Pods-netflix/Pods-netflix.release.xcconfig"; sourceTree = "<group>"; };
 		C3FCEC81BEFD75F4281C81A9 /* Pods-netflix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netflix.debug.xcconfig"; path = "Target Support Files/Pods-netflix/Pods-netflix.debug.xcconfig"; sourceTree = "<group>"; };
@@ -272,6 +310,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C0247DD24CE6F8E00C023A8 /* FloatingTextfield */ = {
+			isa = PBXGroup;
+			children = (
+				0C0247E024CE768A00C023A8 /* FloatingTextfieldSetting.swift */,
+				0C0247E224CE769900C023A8 /* FloatingTextfield.xib */,
+				0C0247E424CE783A00C023A8 /* FloatingTextfield.swift */,
+				0C0247E624CE786E00C023A8 /* TextfieldWithIcon.swift */,
+			);
+			path = FloatingTextfield;
+			sourceTree = "<group>";
+		};
 		0C1035EA24C6EDC400571EA6 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +437,7 @@
 		0C2BAA5E24C6E8B8003FD8A9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0C35E9E324D00D33001A612D /* Videos */,
 				0CAAC6CD24C6E9E600898523 /* Lotties */,
 				0C2BAA7724C6E8E6003FD8A9 /* Fonts */,
 				0C2BAA6024C6E8C5003FD8A9 /* Sounds */,
@@ -429,6 +479,16 @@
 				0C2BAA7824C6E8F1003FD8A9 /* nf-icon.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0C35E9E324D00D33001A612D /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				0C35E9E524D00D49001A612D /* Netflix_N_video_large.mp4 */,
+				0C35E9E624D00D49001A612D /* Netflix_N_video_small.mp4 */,
+				0C35E9E424D00D49001A612D /* Netflix_N_video.mp4 */,
+			);
+			path = Videos;
 			sourceTree = "<group>";
 		};
 		0C3BC71624CA23D400DFCEBA /* Genre */ = {
@@ -490,6 +550,7 @@
 		0C4A35BE24C713A4007671C2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0CFCB18C24CEDEE8005A290A /* Login */,
 				0C3BC71724CA23D900DFCEBA /* Movie */,
 				0C3BC71624CA23D400DFCEBA /* Genre */,
 			);
@@ -499,6 +560,7 @@
 		0C4A35C124C71483007671C2 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				0CFCB18924CEDB00005A290A /* Authentication */,
 				0CAAE55024CD5CC5001C65D7 /* TVShows */,
 				0C1DA0FB24C84D9E00B8408B /* Genres */,
 				0C5A367E24C719D40039FB84 /* Movies */,
@@ -532,6 +594,8 @@
 				0C4A35C924C71576007671C2 /* JSONHelper.swift */,
 				0C10576524C96D5300C88177 /* CategoryType+Enum.swift */,
 				0CAAE57224CD89D9001C65D7 /* ImageHelper.swift */,
+				0C0247E824CE7D5800C023A8 /* InputValidates.swift */,
+				0C35E9E124CFFF61001A612D /* UserInfoServices.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -568,6 +632,9 @@
 		0C867A0724C83B1D0053496B /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				0CFCB18F24CEE40F005A290A /* ProgressHUD */,
+				0C0247DD24CE6F8E00C023A8 /* FloatingTextfield */,
+				0CE955A324CDE7680099648B /* NetflixTitleView */,
 				0CAAE56624CD80C8001C65D7 /* HeaderViewForCategory */,
 				0CAAE56524CD80C2001C65D7 /* GradientView */,
 				0CAAE56424CD80BB001C65D7 /* ArrowDownButton */,
@@ -621,7 +688,6 @@
 				0C8D56E124C6DD5000E2CB08 /* Hero+Rx.swift */,
 				0C8D56E724C6DD5100E2CB08 /* Int+Extension.swift */,
 				0C3BC71424CA09D600DFCEBA /* Observable+Extension.swift */,
-				0C867A0124C8151C0053496B /* ProgressHUD.swift */,
 				0C867A0324C815CA0053496B /* ProgressHUD+Rx.swift */,
 				0C8D56DF24C6DD5000E2CB08 /* String+Extension.swift */,
 				0C8D56E224C6DD5000E2CB08 /* String+Int+Decodable.swift */,
@@ -645,6 +711,7 @@
 		0C8D570324C6DE6500E2CB08 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0CE9559C24CDE4950099648B /* Login */,
 				0C8D570B24C6DEBC00E2CB08 /* Home */,
 				0C1035FF24C6F0D200571EA6 /* More */,
 				0C1035F824C6EFEC00571EA6 /* MyList */,
@@ -690,13 +757,15 @@
 		0CAAC6CD24C6E9E600898523 /* Lotties */ = {
 			isa = PBXGroup;
 			children = (
-				0CAAC6CE24C6E9EE00898523 /* icon-addList.json */,
 				0C1035E224C6EB6B00571EA6 /* checkAnimation.json */,
 				0C1035E124C6EB6B00571EA6 /* countdown.json */,
 				0C1035E324C6EB6B00571EA6 /* download-dp-icon.json */,
+				0CAAC6CE24C6E9EE00898523 /* icon-addList.json */,
 				0C1035DE24C6EB6A00571EA6 /* playPause.json */,
 				0C1035DF24C6EB6B00571EA6 /* playSpinner.json */,
 				0C1035E024C6EB6B00571EA6 /* ratings-all.json */,
+				0C35E9EA24D00E09001A612D /* redrings.json */,
+				0C35E9EB24D00E09001A612D /* remindMe.json */,
 			);
 			path = Lotties;
 			sourceTree = "<group>";
@@ -753,6 +822,50 @@
 				0CAAE57024CD861B001C65D7 /* HeaderMovieViewModel.swift */,
 			);
 			path = HeaderMovieCell;
+			sourceTree = "<group>";
+		};
+		0CE9559C24CDE4950099648B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0CE9559D24CDE4B70099648B /* LoginViewModel.swift */,
+				0CE9559F24CDE4E20099648B /* LoginViewController.swift */,
+				0CE955A124CDE5370099648B /* LoginViewController.storyboard */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0CE955A324CDE7680099648B /* NetflixTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				0CE955A424CDE7880099648B /* NetflixTitleView.swift */,
+				0CE955A624CDE7D90099648B /* NetflixTitleView.xib */,
+			);
+			path = NetflixTitleView;
+			sourceTree = "<group>";
+		};
+		0CFCB18924CEDB00005A290A /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				0CFCB18A24CEDB0D005A290A /* NewRequestTokenResponse.swift */,
+				0C35E9DF24CFF910001A612D /* SessionResponse.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		0CFCB18C24CEDEE8005A290A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0CFCB18D24CEDF03005A290A /* LoginObject.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0CFCB18F24CEE40F005A290A /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				0C867A0124C8151C0053496B /* ProgressHUD.swift */,
+			);
+			path = ProgressHUD;
 			sourceTree = "<group>";
 		};
 		8AAA4BE8B7A81AE1BF04D84E /* Frameworks */ = {
@@ -835,24 +948,30 @@
 				0CAAE56A24CD81D2001C65D7 /* HeaderViewForCategory.xib in Resources */,
 				0C2BAA6B24C6E8CF003FD8A9 /* dtmf_56.wav in Resources */,
 				0C3BC72224CA29DF00DFCEBA /* ChooseCategoryView.xib in Resources */,
+				0C35E9E924D00D49001A612D /* Netflix_N_video_small.mp4 in Resources */,
 				0C8D571424C6DF5F00E2CB08 /* HomeViewController.storyboard in Resources */,
 				0C1035E424C6EB6B00571EA6 /* playPause.json in Resources */,
 				0C10577124C97B1E00C88177 /* ChooseCategoryTypeView.xib in Resources */,
+				0C0247E324CE769900C023A8 /* FloatingTextfield.xib in Resources */,
 				0C1EE86B24C69D390046BB24 /* LaunchScreen.storyboard in Resources */,
+				0CE955A224CDE5370099648B /* LoginViewController.storyboard in Resources */,
 				0C2BAA7224C6E8CF003FD8A9 /* dtmf_51.wav in Resources */,
 				0C3BC72624CA2B2E00DFCEBA /* HomeChooseCategoryCell.xib in Resources */,
 				0C1035E624C6EB6B00571EA6 /* ratings-all.json in Resources */,
 				0C1C2CB424CADFE40012374F /* HomeCategoryView.xib in Resources */,
 				0C1035E524C6EB6B00571EA6 /* playSpinner.json in Resources */,
 				0C2BAA7424C6E8CF003FD8A9 /* ringtone.mp3 in Resources */,
+				0C35E9EC24D00E09001A612D /* redrings.json in Resources */,
 				0C4A35C724C71524007671C2 /* PopularMoviesSample.json in Resources */,
 				0C1035F024C6EE2B00571EA6 /* SearchViewController.storyboard in Resources */,
 				0C2BAA6C24C6E8CF003FD8A9 /* dtmf_52.wav in Resources */,
 				0C10360524C6F12A00571EA6 /* MoreViewController.storyboard in Resources */,
 				0C1035F724C6EFCA00571EA6 /* NewMoviesViewController.storyboard in Resources */,
 				0C2BAA7624C6E8D9003FD8A9 /* dtmf_50.wav in Resources */,
+				0CE955A724CDE7D90099648B /* NetflixTitleView.xib in Resources */,
 				0C1EE86824C69D390046BB24 /* Assets.xcassets in Resources */,
 				0C2BAA6D24C6E8CF003FD8A9 /* dtmf_57.wav in Resources */,
+				0C35E9ED24D00E09001A612D /* remindMe.json in Resources */,
 				0C1035E824C6EB6B00571EA6 /* checkAnimation.json in Resources */,
 				0C2BAA7124C6E8CF003FD8A9 /* dtmf_54.wav in Resources */,
 				0C1035E724C6EB6B00571EA6 /* countdown.json in Resources */,
@@ -867,7 +986,9 @@
 				0C1035E924C6EB6B00571EA6 /* download-dp-icon.json in Resources */,
 				0C2BAA7024C6E8CF003FD8A9 /* MESSAGE_SOUND_BOOM_BOOM.aif in Resources */,
 				0C1EE86624C69D370046BB24 /* Main.storyboard in Resources */,
+				0C35E9E824D00D49001A612D /* Netflix_N_video_large.mp4 in Resources */,
 				0C2BAA7324C6E8CF003FD8A9 /* dtmf_53.wav in Resources */,
+				0C35E9E724D00D49001A612D /* Netflix_N_video.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -920,6 +1041,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CE955A524CDE7880099648B /* NetflixTitleView.swift in Sources */,
 				0C8D56C724C6DD2700E2CB08 /* Scene.swift in Sources */,
 				0C3BC72024CA295800DFCEBA /* ChooseCategoryView.swift in Sources */,
 				0C4A35C424C71496007671C2 /* PopularMoviesResponse.swift in Sources */,
@@ -928,9 +1050,11 @@
 				0C8D570024C6DD5100E2CB08 /* Int+Extension.swift in Sources */,
 				0C8D56EB24C6DD5100E2CB08 /* Date+Extension.swift in Sources */,
 				0CAAE56824CD8136001C65D7 /* HeaderViewForCategory.swift in Sources */,
+				0C0247E124CE768A00C023A8 /* FloatingTextfieldSetting.swift in Sources */,
 				0C3BC71524CA09D600DFCEBA /* Observable+Extension.swift in Sources */,
 				0CAAE57324CD89D9001C65D7 /* ImageHelper.swift in Sources */,
 				0C3BC71B24CA240A00DFCEBA /* MovieGenreRealmObject.swift in Sources */,
+				0C35E9E224CFFF61001A612D /* UserInfoServices.swift in Sources */,
 				0C867A0424C815CA0053496B /* ProgressHUD+Rx.swift in Sources */,
 				0CAAE55E24CD6F47001C65D7 /* HomeCategoryViewDataSource.swift in Sources */,
 				0C1035FC24C6F08000571EA6 /* MyListViewController.swift in Sources */,
@@ -940,6 +1064,7 @@
 				0CAAE55A24CD6BB3001C65D7 /* TVShowOnTheAirResponse.swift in Sources */,
 				0C8D56FA24C6DD5100E2CB08 /* Hero+Rx.swift in Sources */,
 				0C8D56F324C6DD5100E2CB08 /* UIImageView+Rx.swift in Sources */,
+				0CE9559E24CDE4B70099648B /* LoginViewModel.swift in Sources */,
 				0C1035FA24C6F05F00571EA6 /* MyListViewModel.swift in Sources */,
 				0C8D570A24C6DE7E00E2CB08 /* BaseViewController.swift in Sources */,
 				0C8D56FB24C6DD5100E2CB08 /* String+Int+Decodable.swift in Sources */,
@@ -957,6 +1082,7 @@
 				0C1035EE24C6EDDC00571EA6 /* SearchViewController.swift in Sources */,
 				0C8D570924C6DE7E00E2CB08 /* ViewModelBased.swift in Sources */,
 				0C8D56ED24C6DD5100E2CB08 /* UINavigationController+Extension.swift in Sources */,
+				0CFCB18E24CEDF03005A290A /* LoginObject.swift in Sources */,
 				0C1035F524C6EF9D00571EA6 /* NewMoviesViewController.swift in Sources */,
 				0C10576924C9706E00C88177 /* ChooseCategoryTypeView.swift in Sources */,
 				0C867A0924C83B2F0053496B /* ArrowDownButton.swift in Sources */,
@@ -965,6 +1091,7 @@
 				0C10577424C9812A00C88177 /* PersistentManager.swift in Sources */,
 				0CAAE55C24CD6C05001C65D7 /* UpcomingMovieResponse.swift in Sources */,
 				0C8D56F524C6DD5100E2CB08 /* UIAlertController+Rx.swift in Sources */,
+				0C0247E924CE7D5800C023A8 /* InputValidates.swift in Sources */,
 				0C8D570124C6DD5100E2CB08 /* ActivityIndicator.swift in Sources */,
 				0C10576B24C9709A00C88177 /* ChooseCategoryTypeViewModel.swift in Sources */,
 				0C8D570524C6DE7100E2CB08 /* HomeViewModel.swift in Sources */,
@@ -982,9 +1109,11 @@
 				0C8679F524C7D98A0053496B /* NetworkManager.swift in Sources */,
 				0C8D56F224C6DD5100E2CB08 /* UIView+Extension.swift in Sources */,
 				0C8D56F824C6DD5100E2CB08 /* String+Extension.swift in Sources */,
+				0CE955A024CDE4E20099648B /* LoginViewController.swift in Sources */,
 				0C59848224C700E000DDF1A0 /* Strings.swift in Sources */,
 				0C4A35BD24C7125A007671C2 /* Constants.swift in Sources */,
 				0CAAE55224CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift in Sources */,
+				0C35E9E024CFF910001A612D /* SessionResponse.swift in Sources */,
 				0C8D56C924C6DD2700E2CB08 /* SceneTransitionType.swift in Sources */,
 				0C89A94224CAD17100A0E9AC /* HomeCategoryViewModel.swift in Sources */,
 				0C4A35CA24C71576007671C2 /* JSONHelper.swift in Sources */,
@@ -995,12 +1124,15 @@
 				0CAAE55624CD63DC001C65D7 /* TopRatedTVShowsResponse.swift in Sources */,
 				0CAAE56E24CD85E9001C65D7 /* HeaderMovieTableViewCell.swift in Sources */,
 				0C8D56FF24C6DD5100E2CB08 /* URL+Extension.swift in Sources */,
+				0C0247E524CE783A00C023A8 /* FloatingTextfield.swift in Sources */,
 				0C89A94824CAD64500A0E9AC /* NowPlayingMovieResponse.swift in Sources */,
 				0C1C2CB224CADE7E0012374F /* HomeCategoryView.swift in Sources */,
+				0CFCB18B24CEDB0D005A290A /* NewRequestTokenResponse.swift in Sources */,
 				0C8D571224C6DF1A00E2CB08 /* HomeViewController.swift in Sources */,
 				0C8D56EA24C6DD5100E2CB08 /* Double+Extension.swift in Sources */,
 				0C10576624C96D5300C88177 /* CategoryType+Enum.swift in Sources */,
 				0C4A35BB24C71201007671C2 /* APIMovie.swift in Sources */,
+				0C0247E724CE786E00C023A8 /* TextfieldWithIcon.swift in Sources */,
 				0C10577624C98B1700C88177 /* GradientView.swift in Sources */,
 				0C8D56F724C6DD5100E2CB08 /* UIStackView+Extension.swift in Sources */,
 				0C8D56F424C6DD5100E2CB08 /* UIColor+Extension.swift in Sources */,

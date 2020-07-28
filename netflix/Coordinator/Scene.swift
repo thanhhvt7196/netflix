@@ -14,6 +14,7 @@ protocol TargetScene {
 
 enum Scene {
     case tabbar
+    case login
 }
 
 extension Scene: TargetScene {
@@ -55,6 +56,10 @@ extension Scene: TargetScene {
             
             rootTabbarController.viewControllers = [homeNavController, searchNavController, newMoviesNavController, myListNavController, moreNavController]
             return .tabBar(rootTabbarController)
+        case .login:
+            let loginViewModel = LoginViewModel()
+            let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel)
+            return .root(loginViewController)
         }
     }
 }

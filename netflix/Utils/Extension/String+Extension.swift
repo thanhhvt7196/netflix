@@ -41,3 +41,20 @@ extension String {
         return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
 }
+
+extension String {
+    var isValidPassword: Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "^[!-\\[|\\]-~]+$", options: .caseInsensitive)
+            return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
+        } catch {
+            return false
+        }
+    }
+}
+
+extension Optional where Wrapped == String {
+    var isNilOrEmpty: Bool {
+        return self == nil || self == ""
+    }
+}

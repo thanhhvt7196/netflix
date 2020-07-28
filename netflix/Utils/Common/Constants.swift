@@ -23,17 +23,28 @@ struct APIURL {
     static let topRated = "/top_rated"
     static let upcoming = "/upcoming"
     static let onTheAir = "/on_the_air"
+    static let authentication = "/authentication"
+    static let token = "/token"
+    static let new = "/new"
+    static let validateWithLogin = "/validate_with_login"
+    static let session = "/session"
 }
 
 struct Constants {
     static let APIKey = "1e0dcaa7e93980fb84e1d2430d01b887"
     static let USLanguageCode = "en-US"
+    
+    static let passwordMinLength = 4
+    static let passwordMaxlength = 16
 }
 
 struct APIParamKeys {
     static let APIKey = "api_key"
     static let page = "page"
     static let language = "language"
+    static let username = "username"
+    static let password = "password"
+    static let requestToken = "request_token"
 }
 
 struct ErrorMessage {
@@ -41,7 +52,7 @@ struct ErrorMessage {
     static let authenticalError = "Authentical error"
     static let badRequest = "Bad request"
     static let serverError = "Server error"
-    static let errorOccur = "An error occur"
+    static let errorOccur = "An error occurs"
 }
 
 struct APIConstants {

@@ -8,13 +8,14 @@
 
 import Foundation
 import UIKit
+import NVActivityIndicatorView
 
-class ProgressHelper: NSObject {
-    static let shared = ProgressHelper()
+class ProgressHUD: NSObject {
+    static let shared = ProgressHUD()
     
     private var backgroundView: UIView!
     private var activityIndicatorBackgroundView: UIView!
-    private var activityIndicatorView: UIActivityIndicatorView!
+    private var activityIndicatorView: NVActivityIndicatorView!
     private var isShowing = false
     
     private override init() {
@@ -22,18 +23,18 @@ class ProgressHelper: NSObject {
         if backgroundView == nil {
             backgroundView = UIView()
             backgroundView.frame = UIScreen.main.bounds
-            backgroundView.backgroundColor = .black
+            backgroundView.backgroundColor = .clear
             backgroundView.layer.opacity = 0.2
         }
         if activityIndicatorBackgroundView == nil {
             activityIndicatorBackgroundView = UIView()
             activityIndicatorBackgroundView.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
             activityIndicatorBackgroundView.center = backgroundView.center
-            activityIndicatorBackgroundView.backgroundColor = .black
+            activityIndicatorBackgroundView.backgroundColor = .clear
             activityIndicatorBackgroundView.layer.cornerRadius = 10
         }
         if activityIndicatorView == nil {
-            activityIndicatorView = UIActivityIndicatorView(style: .white)
+            activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50), type: .circleStrokeSpin, color: .white, padding: 0)
             activityIndicatorView.center = activityIndicatorBackgroundView.center
         }
     }

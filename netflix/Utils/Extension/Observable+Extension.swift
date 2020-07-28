@@ -51,7 +51,7 @@ extension ObservableType {
 
     func asDriverOnErrorJustComplete() -> Driver<Element> {
         return asDriver { error in
-            assertionFailure("Error \(error)")
+//            assertionFailure("Error \(error)")
             return Driver.empty()
         }
     }

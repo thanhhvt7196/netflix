@@ -11,6 +11,8 @@ import Foundation
 enum UserDefaultKeys {
     static let categoryType = "CategoryType"
     static let currentGenre = "CurrentGenre"
+    static let requestToken = "RequestToken"
+    static let sessionID = "SessionID"
 }
 
 
@@ -29,6 +31,24 @@ class PersistentManager {
             } else {
                 return .home
             }
+        }
+    }
+    
+    var sessionID: String {
+        set {
+            defaults.set(newValue, forKey: UserDefaultKeys.sessionID)
+        }
+        get {
+            return defaults.string(forKey: UserDefaultKeys.sessionID) ?? ""
+        }
+    }
+    
+    var requestToken: String {
+        set {
+            defaults.set(newValue, forKey: UserDefaultKeys.requestToken)
+        }
+        get {
+            return defaults.string(forKey: UserDefaultKeys.requestToken) ?? ""
         }
     }
     

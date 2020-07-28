@@ -10,10 +10,10 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-extension Reactive where Base: ProgressHelper {
+extension Reactive where Base: ProgressHUD {
     static var isAnimating: Binder<Bool> {
         return Binder(UIApplication.shared) { _, isVisible in
-            isVisible ? ProgressHelper.shared.show() : ProgressHelper.shared.hide()
+            isVisible ? ProgressHUD.shared.show() : ProgressHUD.shared.hide()
         }
     }
 }

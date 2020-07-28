@@ -51,13 +51,15 @@ class HomeCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
         
         output.error
             .drive(onNext: { error in
-                print(error)
+                print("Error blahblah = \(error)")
             })
             .disposed(by: bag)
         
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSources))
             .disposed(by: bag)
+        
+        output.indicator.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
     }
     
     private func handleAction() {
@@ -67,10 +69,11 @@ class HomeCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
 
 extension HomeCategoryView {
     private func configTableView() {
+        tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: .leastNonzeroMagnitude))
-        tableView.backgroundColor = .clear
         tableView.register(cellType: HeaderMovieTableViewCell.self)
+        
     }
     
     private func setupDataSources() {
@@ -105,9 +108,8 @@ extension HomeCategoryView: UITableViewDelegate {
         guard viewModel.dataSource.value.indices.contains(section) else {
             return .leastNonzeroMagnitude
         }
-        return viewModel.dataSource.value[section].title == nil ? .leastNonzeroMagnitude : 40
+        return viewModel.dataSource.value[section].title.isNilOrEmpty ? .leastNonzeroMagnitude : 40
     }
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard viewModel.dataSource.value.indices.contains(section) else {

@@ -86,4 +86,5 @@ extension UIColor {
     @nonobjc static let mediumPink = UIColor(red: 158/255, green: 26/255, blue: 97/255, alpha: 1)
     @nonobjc static let themeOrange = UIColor(red: 240/255, green: 110/255, blue: 48/255, alpha: 1)
     @nonobjc static let borderGray = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1)
+    @nonobjc static let gray4 = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1)
 }

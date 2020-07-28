@@ -23,6 +23,11 @@ enum APIMovie {
     case getPopularTVShows(page: Int)
     case getTopRatedTvShowsList(page: Int)
     case getTVShowOnTheAir(page: Int)
+    
+    //authentication
+    case createRequestToken
+    case verifyRequestToken(username: String, password: String, token: String)
+    case createSession(token: String)
 }
 
 extension APIMovie: TargetType {
@@ -48,11 +53,21 @@ extension APIMovie: TargetType {
             return APIURL.version3 + APIURL.movie + APIURL.upcoming
         case .getTVShowOnTheAir:
             return APIURL.version3 + APIURL.tv + APIURL.onTheAir
+        case .createRequestToken:
+            return APIURL.version3 + APIURL.authentication + APIURL.token + APIURL.new
+        case .verifyRequestToken:
+            return APIURL.version3 + APIURL.authentication + APIURL.token + APIURL.validateWithLogin
+        case .createSession:
+            return APIURL.version3 + APIURL.authentication + APIURL.session + APIURL.new
         }
     }
     
     var method: Moya.Method {
         switch self {
+        case .verifyRequestToken:
+            return .post
+        case .createSession:
+            return .post
         default:
             return .get
         }
@@ -70,6 +85,7 @@ extension APIMovie: TargetType {
     var task: Task {
         var parameters: [String: Any] = [APIParamKeys.APIKey: Constants.APIKey]
         var encoding: ParameterEncoding = URLEncoding.default
+        var urlParameter: [String: Any] = [:]
         switch self {
         case .getPopularMovies(let page):
             parameters = [APIParamKeys.APIKey: Constants.APIKey, APIParamKeys.page: page, APIParamKeys.language: Constants.USLanguageCode]
@@ -89,6 +105,16 @@ extension APIMovie: TargetType {
         case .getTVShowOnTheAir(let page):
             parameters = [APIParamKeys.APIKey: Constants.APIKey, APIParamKeys.page: page, APIParamKeys.language: Constants.USLanguageCode]
             return .requestParameters(parameters: parameters, encoding: encoding)
+        case .verifyRequestToken(let username, let password, let token):
+            encoding = JSONEncoding.default
+            urlParameter = [APIParamKeys.APIKey: Constants.APIKey]
+            parameters = [APIParamKeys.username: username, APIParamKeys.password: password, APIParamKeys.requestToken: token]
+            return .requestCompositeParameters(bodyParameters: parameters, bodyEncoding: encoding, urlParameters: urlParameter)
+        case .createSession(let token):
+            encoding = JSONEncoding.default
+            parameters = [APIParamKeys.requestToken: token]
+            urlParameter = [APIParamKeys.APIKey: Constants.APIKey]
+            return .requestCompositeParameters(bodyParameters: parameters, bodyEncoding: encoding, urlParameters: urlParameter)
         default:
             return .requestParameters(parameters: parameters, encoding: encoding)
         }

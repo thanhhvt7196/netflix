@@ -16,14 +16,17 @@ class HomeCategoryViewModel: ViewModel {
     
     func transform(input: Input) -> Output {
         let errorTracker = ErrorTracker()
+        let activityIndicator = ActivityIndicator()
         let nowPlayingList = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
             return self.getMovieNowplaying(page: 1)
+                .trackError(errorTracker)
                 .compactMap { $0.results }
                 .asDriver(onErrorJustReturn: [])
         }
         
         let tvShowAiringTodayList = input.fetchDataTrigger.flatMapLatest { [unowned self] in
             return self.getTVShowAiringToday(page: 1)
+            
                 .compactMap { $0.results }
                 .trackError(errorTracker)
                 .asDriver(onErrorJustReturn: [])
@@ -31,6 +34,7 @@ class HomeCategoryViewModel: ViewModel {
         
         let popularMoviesList = input.fetchDataTrigger.flatMapLatest { [unowned self] in
             return self.getPopularMovies(page: 1)
+                
                 .compactMap { $0.results }
                 .trackError(errorTracker)
                 .asDriver(onErrorJustReturn: [])
@@ -38,6 +42,7 @@ class HomeCategoryViewModel: ViewModel {
         
         let popularTVShowsList = input.fetchDataTrigger.flatMapLatest { [unowned self] in
             return self.getPopularTVShows(page: 1)
+                
                 .compactMap { $0.results }
                 .trackError(errorTracker)
                 .asDriver(onErrorJustReturn: [])
@@ -45,6 +50,7 @@ class HomeCategoryViewModel: ViewModel {
         
         let topRatedMoviesList = input.fetchDataTrigger.flatMapLatest { [unowned self] in
             return self.getTopRatedMovies(page: 1)
+                
                 .compactMap { $0.results }
                 .trackError(errorTracker)
                 .asDriver(onErrorJustReturn: [])
@@ -52,6 +58,7 @@ class HomeCategoryViewModel: ViewModel {
         
         let topRatedTVShowsList = input.fetchDataTrigger.flatMapLatest { [unowned self] in
             return self.getTopRatedTVShows(page: 1)
+                
                 .compactMap { $0.results }
                 .trackError(errorTracker)
                 .asDriver(onErrorJustReturn: [])
@@ -59,6 +66,7 @@ class HomeCategoryViewModel: ViewModel {
         
         let upcomingMoviesList = input.fetchDataTrigger.flatMapLatest { [unowned self] in
             return self.getUpcomingMovies(page: 1)
+                
                 .compactMap { $0.results }
                 .trackError(errorTracker)
                 .asDriver(onErrorJustReturn: [])
@@ -66,20 +74,23 @@ class HomeCategoryViewModel: ViewModel {
         
         let tvShowOnTheAirList = input.fetchDataTrigger.flatMapLatest { [unowned self] in
             return self.getTVShowOnTheAir(page: 1)
+                
                 .compactMap { $0.results }
                 .trackError(errorTracker)
                 .asDriver(onErrorJustReturn: [])
         }
         
-        Observable.zip(nowPlayingList.asObservable(),
-                       tvShowAiringTodayList.asObservable(),
-                       popularMoviesList.asObservable(),
-                       popularTVShowsList.asObservable(),
-                       topRatedMoviesList.asObservable(),
-                       topRatedTVShowsList.asObservable(),
-                       upcomingMoviesList.asObservable(),
-                       tvShowOnTheAirList.asObservable())
-            .map { nowPlayingList, tvShowAiringTodayList, popularMoviesList, popularTVShowsList, topRatedMoviesList, topRatedTVShowsList, upcomingMoviesList, tvShowOnTheAirList -> [HomeCategoryViewSectionModel] in
+        let data = Observable.zip(nowPlayingList.asObservable(),
+                                  tvShowAiringTodayList.asObservable(),
+                                  popularMoviesList.asObservable(),
+                                  popularTVShowsList.asObservable(),
+                                  topRatedMoviesList.asObservable(),
+                                  topRatedTVShowsList.asObservable(),
+                                  upcomingMoviesList.asObservable(),
+                                  tvShowOnTheAirList.asObservable())
+                            .trackActivity(activityIndicator)
+        
+        data.map { nowPlayingList, tvShowAiringTodayList, popularMoviesList, popularTVShowsList, topRatedMoviesList, topRatedTVShowsList, upcomingMoviesList, tvShowOnTheAirList -> [HomeCategoryViewSectionModel] in
                 var sections = [HomeCategoryViewSectionModel]()
                 if let headerMovie = nowPlayingList.first {
                     sections.append(.headerMovie(title: nil, items: [.movieItem(movie: headerMovie)]))
@@ -115,7 +126,8 @@ class HomeCategoryViewModel: ViewModel {
         }
         .bind(to: dataSource).disposed(by: bag)
         return Output(dataSource: dataSource,
-                      error: errorTracker.asDriver())
+                      error: errorTracker.asDriver(),
+                      indicator: activityIndicator.asDriver())
     }
     
     private func getMovieNowplaying(page: Int) -> Observable<NowPlayingMovieResponse> {
@@ -159,9 +171,6 @@ extension HomeCategoryViewModel {
     struct Output {
         var dataSource: BehaviorRelay<[HomeCategoryViewSectionModel]>
         var error: Driver<Error>
+        var indicator: Driver<Bool>
     }
-}
-
-extension HomeCategoryViewModel {
-    
 }

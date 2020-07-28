@@ -23,4 +23,11 @@ struct Strings {
     static let topRatedTVShows = "Top Rated TV Shows"
     static let upcomingMovies = "Upcoming Movies"
     static let onTheAir = "On The Air"
+    
+    static let username = "Username"
+    static let password = "Password"
+    static let usernameIsEmpty = "Username can not be empty"
+    static let passwordIsEmpty = "Password can not be empty"
+    static let passwordIsInvalid = "Password is invalid"
+    static let passwordInRange = "Password must be between %d and %d characters"
 }

@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             let sceneCoordinator = SceneCoordinator(window: window)
             SceneCoordinator.shared = sceneCoordinator
-            SceneCoordinator.shared.transition(to: Scene.tabbar)
+            SceneCoordinator.shared.transition(to: Scene.splash)
         }
         return true
     }

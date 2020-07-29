@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PXO-R3-3qo">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Splash View Controller-->
+        <scene sceneID="ck5-C9-RXl">
+            <objects>
+                <viewController id="PXO-R3-3qo" customClass="SplashViewController" customModule="netflix" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WiV-SN-eyS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxh-4G-Bhf">
+                                <rect key="frame" x="50" y="359.5" width="314" height="177"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dxh-4G-Bhf" secondAttribute="height" multiplier="16/9" id="m9G-Jc-G8v"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dxh-4G-Bhf" firstAttribute="leading" secondItem="ZQZ-HG-C73" secondAttribute="leading" constant="50" id="DCD-pf-HB6"/>
+                            <constraint firstItem="dxh-4G-Bhf" firstAttribute="centerX" secondItem="WiV-SN-eyS" secondAttribute="centerX" id="pc8-xN-qcT"/>
+                            <constraint firstItem="dxh-4G-Bhf" firstAttribute="centerY" secondItem="WiV-SN-eyS" secondAttribute="centerY" id="tqx-T5-7eF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZQZ-HG-C73"/>
+                    </view>
+                    <connections>
+                        <outlet property="playerView" destination="dxh-4G-Bhf" id="RUt-Yc-6EB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KJ3-pC-1fl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-113" y="-88"/>
+        </scene>
+    </scenes>
+</document>

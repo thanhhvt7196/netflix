@@ -17,7 +17,6 @@ class NewMoviesViewController: BaseViewController, StoryboardBased, ViewModelBas
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareUI()
     }
     
     override func prepareUI() {

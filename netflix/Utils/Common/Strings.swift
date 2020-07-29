@@ -9,6 +9,7 @@
 import Foundation
 
 struct Strings {
+    //common
     static let home = "Home"
     static let search = "Search"
     static let comingSoon = "Coming soon"
@@ -23,11 +24,19 @@ struct Strings {
     static let topRatedTVShows = "Top Rated TV Shows"
     static let upcomingMovies = "Upcoming Movies"
     static let onTheAir = "On The Air"
+    static let help = "Help"
+    static let privacy = "Privacy"
     
+    //login validate
     static let username = "Username"
     static let password = "Password"
     static let usernameIsEmpty = "Username can not be empty"
     static let passwordIsEmpty = "Password can not be empty"
     static let passwordIsInvalid = "Password is invalid"
     static let passwordInRange = "Password must be between %d and %d characters"
+    
+    //onboarding
+    static let watchOnAnyDevice = "Watch on any device"
+    static let streamOnMultiDevice = "Stream on your phone, tablet, laptop, and TV without paying more."
+    static let download321 = "3, 2, 1... Download"
 }

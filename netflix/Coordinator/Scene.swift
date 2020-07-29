@@ -13,8 +13,10 @@ protocol TargetScene {
 }
 
 enum Scene {
+    case splash
     case tabbar
     case login
+    case onboarding
 }
 
 extension Scene: TargetScene {
@@ -59,7 +61,14 @@ extension Scene: TargetScene {
         case .login:
             let loginViewModel = LoginViewModel()
             let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel)
-            return .root(loginViewController)
+            return .push(loginViewController)
+        case .onboarding:
+            let onboardingViewController = OnboardingViewController.instantiate()
+            let navigationController = UINavigationController(rootViewController: onboardingViewController)
+            return .root(navigationController)
+        case .splash:
+            let splashViewController = SplashViewController.instantiate()
+            return .root(splashViewController)
         }
     }
 }

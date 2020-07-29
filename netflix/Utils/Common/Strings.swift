@@ -26,6 +26,7 @@ struct Strings {
     static let onTheAir = "On The Air"
     static let help = "Help"
     static let privacy = "Privacy"
+    static let settings = "Settings"
     
     //login validate
     static let username = "Username"
@@ -39,4 +40,11 @@ struct Strings {
     static let watchOnAnyDevice = "Watch on any device"
     static let streamOnMultiDevice = "Stream on your phone, tablet, laptop, and TV without paying more."
     static let download321 = "3, 2, 1... Download"
+    
+    
+    //alert message
+    static let sureToSignOut = "Are you sure that you want to sign out?"
+    static let signOut = "Sign Out"
+    static let yes = "Yes"
+    static let no = "No"
 }

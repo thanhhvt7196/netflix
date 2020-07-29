@@ -64,7 +64,7 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showConfirmMessage(title: String, message: String, confirmTitle: String = "OK", cancelTitle: String = "Cancel", completion: @escaping(SelectCase) -> Void) {
+    func showConfirmMessage(title: String, message: String, confirmTitle: String = Strings.yes, cancelTitle: String = Strings.no, completion: @escaping(SelectCase) -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: confirmTitle,
                                       style: .default,
@@ -88,5 +88,15 @@ extension UIViewController {
         viewController.view.frame = subview.bounds
         subview.addSubview(viewController.view)
         viewController.didMove(toParent: self)
+    }
+}
+
+extension UIViewController: UIAdaptivePresentationControllerDelegate {
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        if let presentingViewController = presentingViewController {
+            SceneCoordinator.shared.setCurrentViewController(viewController: presentingViewController)
+        } else {
+            SceneCoordinator.shared.setCurrentViewController(viewController: self)
+        }
     }
 }

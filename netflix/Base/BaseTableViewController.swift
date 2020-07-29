@@ -1,9 +1,9 @@
 //
-//  BaseController.swift
-//  myNews
+//  BaseTableViewController.swift
+//  netflix
 //
-//  Created by kennyS on 12/16/19.
-//  Copyright © 2019 kennyS. All rights reserved.
+//  Created by thanh tien on 7/29/20.
+//  Copyright © 2020 thanh tien. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseTableViewController: UITableViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

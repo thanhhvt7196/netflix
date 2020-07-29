@@ -140,6 +140,7 @@
 		0C94B62C24D1228000BDE3CC /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C94B62B24D1228000BDE3CC /* WebViewController.storyboard */; };
 		0C94B64E24D151EF00BDE3CC /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B64D24D151EF00BDE3CC /* WebViewModel.swift */; };
 		0C94B65024D1540700BDE3CC /* WKWebview+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B64F24D1540700BDE3CC /* WKWebview+Extension.swift */; };
+		0C94B65224D16BF400BDE3CC /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B65124D16BF400BDE3CC /* BaseTableViewController.swift */; };
 		0CAAC6CF24C6E9EE00898523 /* icon-addList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CAAC6CE24C6E9EE00898523 /* icon-addList.json */; };
 		0CAAE55224CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE55124CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift */; };
 		0CAAE55424CD628D001C65D7 /* PopularTVShowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE55324CD628D001C65D7 /* PopularTVShowResponse.swift */; };
@@ -300,6 +301,7 @@
 		0C94B62B24D1228000BDE3CC /* WebViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebViewController.storyboard; sourceTree = "<group>"; };
 		0C94B64D24D151EF00BDE3CC /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		0C94B64F24D1540700BDE3CC /* WKWebview+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebview+Extension.swift"; sourceTree = "<group>"; };
+		0C94B65124D16BF400BDE3CC /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		0CAAC6CE24C6E9EE00898523 /* icon-addList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "icon-addList.json"; sourceTree = "<group>"; };
 		0CAAE55124CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiringTodayTVShowResponse.swift; sourceTree = "<group>"; };
 		0CAAE55324CD628D001C65D7 /* PopularTVShowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTVShowResponse.swift; sourceTree = "<group>"; };
@@ -782,6 +784,7 @@
 			children = (
 				0C8D570824C6DE7E00E2CB08 /* BaseViewController.swift */,
 				0C8D570724C6DE7E00E2CB08 /* ViewModelBased.swift */,
+				0C94B65124D16BF400BDE3CC /* BaseTableViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1208,6 +1211,7 @@
 				0C1035F324C6EF7000571EA6 /* NewMoviesViewModel.swift in Sources */,
 				0C8D56EC24C6DD5100E2CB08 /* UITextfield+Extension.swift in Sources */,
 				0CAAE55624CD63DC001C65D7 /* TopRatedTVShowsResponse.swift in Sources */,
+				0C94B65224D16BF400BDE3CC /* BaseTableViewController.swift in Sources */,
 				0CAAE56E24CD85E9001C65D7 /* HeaderMovieTableViewCell.swift in Sources */,
 				0C8D56FF24C6DD5100E2CB08 /* URL+Extension.swift in Sources */,
 				0C0247E524CE783A00C023A8 /* FloatingTextfield.swift in Sources */,

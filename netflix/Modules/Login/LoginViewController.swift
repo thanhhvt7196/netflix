@@ -13,21 +13,21 @@ import RxSwift
 import RxCocoa
 
 class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var usernameTextfield: FloatingTextfield!
     @IBOutlet weak var passwordTextfield: FloatingTextfield!
     
     var viewModel: LoginViewModel!
     private let bag = DisposeBag()
-    private let createRequestTokenTrigger = PublishSubject<Void>()
-    private let verifyRequestTokenTrigger = PublishSubject<LoginObject>()
-    private let createSessionTrigger = PublishSubject<String>()
+    private let loginInfo = PublishSubject<LoginObject>()
     
     private let leftBarButtonItem = UIBarButtonItem(image: Asset.chevronLeftNormal.image, style: .plain, target: self, action: nil)
     private let rightBarButtonItem = UIBarButtonItem(title: Strings.help, style: .done, target: self, action: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObservers()
         bind()
         handleAction()
     }
@@ -39,8 +39,38 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         configButton()
     }
     
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            var aRect = self.view.frame
+            aRect.size.height -= keyboardHeight
+            var signInButtonBottomPoint = signInButton.frame.origin
+            signInButtonBottomPoint.y += signInButton.frame.height
+            if aRect.contains(signInButtonBottomPoint) {
+                scrollView.scrollRectToVisible(passwordTextfield.frame, animated: true)
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -keyboardHeight, right: 0)
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func bind() {
-        let input = LoginViewModel.Input(createRequestTokenTrigger: createRequestTokenTrigger.asDriverOnErrorJustComplete())
+        let input = LoginViewModel.Input(loginInfo: loginInfo.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
         
         output.session
@@ -48,6 +78,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 print("SessionID = \(sessionID)")
                 PersistentManager.shared.requestToken = token
                 PersistentManager.shared.sessionID = sessionID
+                SceneCoordinator.shared.transition(to: Scene.tabbar)
             })
             .disposed(by: bag)
         
@@ -63,9 +94,12 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     private func handleAction() {
         signInButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
+            .withLatestFrom(Observable.combineLatest(usernameTextfield.rx.text, passwordTextfield.rx.text))
+            .subscribe(onNext: { [weak self] username, password in
                 guard let self = self else { return }
-                self.createRequestTokenTrigger.onNext(())
+                let loginObject = LoginObject(username: username, password: password)
+                self.loginInfo.onNext(loginObject)
+                self.view.endEditing(true)
             })
             .disposed(by: bag)
         
@@ -75,6 +109,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 let isValid = usernameIsValid && passwordIsValid
                 self.signInButton.backgroundColor = isValid ? .red : .clear
                 self.signInButton.setTitleColor(isValid ? .white : .gray4, for: .normal)
+                self.signInButton.isEnabled = isValid
             })
             .disposed(by: bag)
         
@@ -83,11 +118,18 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 SceneCoordinator.shared.pop(animated: true)
             })
             .disposed(by: bag)
+        
+        rightBarButtonItem.rx.tap
+            .subscribe(onNext: { _ in
+                SceneCoordinator.shared.transition(to: Scene.webView(url: Constants.helpURL))
+            })
+            .disposed(by: bag)
     }
 }
 
 extension LoginViewController {
     private func configNavigationBar() {
+        navigationController?.navigationBar.tintColor = .white
         navigationItem.leftBarButtonItem = leftBarButtonItem
         
         let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 120, height: 40))

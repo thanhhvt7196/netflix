@@ -52,6 +52,18 @@ class OnboardingViewController: BaseViewController, StoryboardBased {
                 SceneCoordinator.shared.transition(to: Scene.login)
             })
             .disposed(by: bag)
+        
+        helpButtonItem.rx.tap
+            .subscribe(onNext: { _ in
+                SceneCoordinator.shared.transition(to: Scene.webView(url: Constants.helpURL))
+            })
+            .disposed(by: bag)
+        
+        privacyButtonItem.rx.tap
+            .subscribe(onNext: { _ in
+                SceneCoordinator.shared.transition(to: Scene.webView(url: Constants.privacyURL))
+            })
+            .disposed(by: bag)
     }
 }
 

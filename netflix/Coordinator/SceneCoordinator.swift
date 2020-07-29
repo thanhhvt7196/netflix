@@ -26,6 +26,10 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
         currentViewController = window.rootViewController!
     }
     
+    func setCurrentViewController(viewController: UIViewController) {
+        currentViewController = SceneCoordinator.actualViewController(for: viewController)
+    }
+    
     static func actualViewController(for viewController: UIViewController) -> UIViewController {
         var controller = viewController
         if let tabBarController = controller as? UITabBarController {
@@ -71,15 +75,16 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
                 .bind(to: subject)
             navigationController.pushViewController(SceneCoordinator.actualViewController(for: viewController), animated: true)
         case let .present(viewController):
-            viewController.modalPresentationStyle = .fullScreen
+//            viewController.modalPresentationStyle = .fullScreen
+            viewController.presentationController?.delegate = currentViewController
             currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()
             }
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
-        case let .alert(viewController):
-            currentViewController.present(viewController, animated: true) {
-                subject.onCompleted()
-            }
+//        case let .alert(viewController):
+//            currentViewController.present(viewController, animated: true) {
+//                subject.onCompleted()
+//            }
         }
         
         return subject

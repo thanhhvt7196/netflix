@@ -13,8 +13,9 @@ import RxCocoa
 class LoginViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let userInfoService = UserInfoService()
-        let session = input.createRequestTokenTrigger.flatMapLatest { _ -> Driver<(String, String)> in
-            return userInfoService.login(username: "thanh20cm", password: "Clgtvltn1")
+        let session = input.loginInfo.flatMapLatest { loginObject -> Driver<(String, String)> in
+            guard let username = loginObject.username, let password = loginObject.password else { return .empty() }
+            return userInfoService.login(username: username, password: password)
                 .asDriverOnErrorJustComplete()
         }
         return Output(
@@ -37,7 +38,7 @@ class LoginViewModel: ViewModel {
 
 extension LoginViewModel {
     struct Input {
-        var createRequestTokenTrigger: Driver<Void>
+        var loginInfo: Driver<LoginObject>
     }
     
     struct Output {

@@ -136,6 +136,10 @@
 		0C8D571424C6DF5F00E2CB08 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8D571324C6DF5F00E2CB08 /* HomeViewController.storyboard */; };
 		0C94B62524D117E800BDE3CC /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B62424D117E800BDE3CC /* SplashViewController.swift */; };
 		0C94B62724D1180800BDE3CC /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C94B62624D1180800BDE3CC /* SplashViewController.storyboard */; };
+		0C94B62A24D1210B00BDE3CC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B62924D1210B00BDE3CC /* WebViewController.swift */; };
+		0C94B62C24D1228000BDE3CC /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C94B62B24D1228000BDE3CC /* WebViewController.storyboard */; };
+		0C94B64E24D151EF00BDE3CC /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B64D24D151EF00BDE3CC /* WebViewModel.swift */; };
+		0C94B65024D1540700BDE3CC /* WKWebview+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B64F24D1540700BDE3CC /* WKWebview+Extension.swift */; };
 		0CAAC6CF24C6E9EE00898523 /* icon-addList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CAAC6CE24C6E9EE00898523 /* icon-addList.json */; };
 		0CAAE55224CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE55124CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift */; };
 		0CAAE55424CD628D001C65D7 /* PopularTVShowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE55324CD628D001C65D7 /* PopularTVShowResponse.swift */; };
@@ -292,6 +296,10 @@
 		0C8D571324C6DF5F00E2CB08 /* HomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
 		0C94B62424D117E800BDE3CC /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		0C94B62624D1180800BDE3CC /* SplashViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashViewController.storyboard; sourceTree = "<group>"; };
+		0C94B62924D1210B00BDE3CC /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		0C94B62B24D1228000BDE3CC /* WebViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebViewController.storyboard; sourceTree = "<group>"; };
+		0C94B64D24D151EF00BDE3CC /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		0C94B64F24D1540700BDE3CC /* WKWebview+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebview+Extension.swift"; sourceTree = "<group>"; };
 		0CAAC6CE24C6E9EE00898523 /* icon-addList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "icon-addList.json"; sourceTree = "<group>"; };
 		0CAAE55124CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiringTodayTVShowResponse.swift; sourceTree = "<group>"; };
 		0CAAE55324CD628D001C65D7 /* PopularTVShowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTVShowResponse.swift; sourceTree = "<group>"; };
@@ -747,6 +755,7 @@
 				0C8D56D924C6DD4F00E2CB08 /* UIView+Extension.swift */,
 				0C8D56D524C6DD4F00E2CB08 /* UIViewController+Extension.swift */,
 				0C8D56E624C6DD5100E2CB08 /* URL+Extension.swift */,
+				0C94B64F24D1540700BDE3CC /* WKWebview+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -754,6 +763,7 @@
 		0C8D570324C6DE6500E2CB08 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0C94B62824D11FB100BDE3CC /* WebView */,
 				0C94B62324D117C800BDE3CC /* Splash */,
 				0C35E9F324D02CC3001A612D /* Onboarding */,
 				0CE9559C24CDE4950099648B /* Login */,
@@ -806,6 +816,16 @@
 				0C94B62624D1180800BDE3CC /* SplashViewController.storyboard */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		0C94B62824D11FB100BDE3CC /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				0C94B62924D1210B00BDE3CC /* WebViewController.swift */,
+				0C94B62B24D1228000BDE3CC /* WebViewController.storyboard */,
+				0C94B64D24D151EF00BDE3CC /* WebViewModel.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		0CAAC6CD24C6E9E600898523 /* Lotties */ = {
@@ -1043,6 +1063,7 @@
 				0C2BAA6F24C6E8CF003FD8A9 /* silence.wav in Resources */,
 				0CAAC6CF24C6E9EE00898523 /* icon-addList.json in Resources */,
 				0C1035E924C6EB6B00571EA6 /* download-dp-icon.json in Resources */,
+				0C94B62C24D1228000BDE3CC /* WebViewController.storyboard in Resources */,
 				0C2BAA7024C6E8CF003FD8A9 /* MESSAGE_SOUND_BOOM_BOOM.aif in Resources */,
 				0C1EE86624C69D370046BB24 /* Main.storyboard in Resources */,
 				0C35E9E824D00D49001A612D /* Netflix_N_video_large.mp4 in Resources */,
@@ -1178,6 +1199,7 @@
 				0C4A35BD24C7125A007671C2 /* Constants.swift in Sources */,
 				0CAAE55224CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift in Sources */,
 				0C35E9E024CFF910001A612D /* SessionResponse.swift in Sources */,
+				0C94B64E24D151EF00BDE3CC /* WebViewModel.swift in Sources */,
 				0C8D56C924C6DD2700E2CB08 /* SceneTransitionType.swift in Sources */,
 				0C89A94224CAD17100A0E9AC /* HomeCategoryViewModel.swift in Sources */,
 				0C4A35CA24C71576007671C2 /* JSONHelper.swift in Sources */,
@@ -1194,9 +1216,11 @@
 				0CFCB18B24CEDB0D005A290A /* NewRequestTokenResponse.swift in Sources */,
 				0C8D571224C6DF1A00E2CB08 /* HomeViewController.swift in Sources */,
 				0C8D56EA24C6DD5100E2CB08 /* Double+Extension.swift in Sources */,
+				0C94B65024D1540700BDE3CC /* WKWebview+Extension.swift in Sources */,
 				0C10576624C96D5300C88177 /* CategoryType+Enum.swift in Sources */,
 				0C4A35BB24C71201007671C2 /* APIMovie.swift in Sources */,
 				0C0247E724CE786E00C023A8 /* TextfieldWithIcon.swift in Sources */,
+				0C94B62A24D1210B00BDE3CC /* WebViewController.swift in Sources */,
 				0C10577624C98B1700C88177 /* GradientView.swift in Sources */,
 				0C8D56F724C6DD5100E2CB08 /* UIStackView+Extension.swift in Sources */,
 				0C8D56F424C6DD5100E2CB08 /* UIColor+Extension.swift in Sources */,

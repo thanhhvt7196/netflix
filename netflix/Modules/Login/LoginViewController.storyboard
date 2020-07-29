@@ -20,14 +20,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IUa-En-aQB">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="478.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4o8-dt-En6">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="298.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="150" id="Wbh-bt-cGt"/>
+                                                </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ixH-w9-f7c">
-                                                <rect key="frame" x="0.0" y="298.5" width="414" height="60"/>
+                                                <rect key="frame" x="0.0" y="150" width="414" height="60"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6d-Oh-9Q8" customClass="FloatingTextfield" customModule="netflix" customModuleProvider="target">
                                                         <rect key="frame" x="40" y="0.0" width="334" height="60"/>
@@ -44,7 +47,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKT-ml-hCA">
-                                                <rect key="frame" x="0.0" y="358.5" width="414" height="60"/>
+                                                <rect key="frame" x="0.0" y="210" width="414" height="60"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lA0-ry-Qtl" customClass="FloatingTextfield" customModule="netflix" customModuleProvider="target">
                                                         <rect key="frame" x="40" y="0.0" width="334" height="60"/>
@@ -60,14 +63,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKU-Sd-eDN">
-                                                <rect key="frame" x="0.0" y="418.5" width="414" height="15"/>
+                                                <rect key="frame" x="0.0" y="270" width="414" height="15"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="bhz-gt-M7l"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNN-2t-JLB">
-                                                <rect key="frame" x="0.0" y="433.5" width="414" height="45"/>
+                                                <rect key="frame" x="0.0" y="285" width="414" height="45"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jb4-T4-Usn">
                                                         <rect key="frame" x="40" y="0.0" width="334" height="45"/>
@@ -108,12 +111,12 @@
                             <constraint firstItem="DPy-iW-YT8" firstAttribute="top" secondItem="Zcf-oY-LCV" secondAttribute="top" id="J0p-2i-UKo"/>
                             <constraint firstAttribute="bottom" secondItem="DPy-iW-YT8" secondAttribute="bottom" id="f1Z-py-amm"/>
                             <constraint firstItem="DPy-iW-YT8" firstAttribute="leading" secondItem="NAc-Wv-Fiw" secondAttribute="leading" id="jIt-rD-XTr"/>
-                            <constraint firstItem="4o8-dt-En6" firstAttribute="height" secondItem="Zcf-oY-LCV" secondAttribute="height" multiplier="1/3" id="tfT-ed-xm2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NAc-Wv-Fiw"/>
                     </view>
                     <connections>
                         <outlet property="passwordTextfield" destination="lA0-ry-Qtl" id="hKR-RO-JfL"/>
+                        <outlet property="scrollView" destination="DPy-iW-YT8" id="pH3-au-tkk"/>
                         <outlet property="signInButton" destination="jb4-T4-Usn" id="qHS-j7-92j"/>
                         <outlet property="usernameTextfield" destination="g6d-Oh-9Q8" id="Leb-Sq-WO9"/>
                     </connections>

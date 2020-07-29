@@ -23,8 +23,8 @@ class ProgressHUD: NSObject {
         if backgroundView == nil {
             backgroundView = UIView()
             backgroundView.frame = UIScreen.main.bounds
-            backgroundView.backgroundColor = .clear
-            backgroundView.layer.opacity = 0.2
+            backgroundView.backgroundColor = .black
+            backgroundView.layer.opacity = 0.3
         }
         if activityIndicatorBackgroundView == nil {
             activityIndicatorBackgroundView = UIView()

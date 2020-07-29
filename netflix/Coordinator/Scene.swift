@@ -17,6 +17,7 @@ enum Scene {
     case tabbar
     case login
     case onboarding
+    case webView(url: String)
 }
 
 extension Scene: TargetScene {
@@ -69,6 +70,11 @@ extension Scene: TargetScene {
         case .splash:
             let splashViewController = SplashViewController.instantiate()
             return .root(splashViewController)
+        case .webView(let url):
+            let webViewModel = WebViewModel(url: url)
+            let webviewController = WebViewController.instantiate(withViewModel: webViewModel)
+            let navigationController = UINavigationController(rootViewController: webviewController)
+            return .present(navigationController)
         }
     }
 }

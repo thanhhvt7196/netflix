@@ -11,11 +11,9 @@ import Foundation
 struct LoginObject: Codable {
     var username: String?
     var password: String?
-    var requestToken: String?
     
     enum CodingKeys: String, CodingKey {
         case username
         case password
-        case requestToken = "request_token"
     }
 }

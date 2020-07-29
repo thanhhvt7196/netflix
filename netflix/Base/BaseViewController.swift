@@ -28,3 +28,13 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
     }
 }
+
+extension UIViewController: UIAdaptivePresentationControllerDelegate {
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        if let presentingViewController = presentingViewController {
+            SceneCoordinator.shared.setCurrentViewController(viewController: presentingViewController)
+        } else {
+            SceneCoordinator.shared.setCurrentViewController(viewController: self)
+        }
+    }
+}

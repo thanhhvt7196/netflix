@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tnd-0p-vq1">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Web View Controller-->
+        <scene sceneID="3r5-K1-5Tr">
+            <objects>
+                <viewController id="tnd-0p-vq1" customClass="WebViewController" customModule="netflix" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="349-Gp-9xb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="noN-Fp-r9x">
+                                <rect key="frame" x="0.0" y="44" width="414" height="2"/>
+                            </progressView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bq4-5B-wIx">
+                                <rect key="frame" x="0.0" y="46" width="414" height="816"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="noN-Fp-r9x" firstAttribute="leading" secondItem="349-Gp-9xb" secondAttribute="leading" id="Fep-UD-fP8"/>
+                            <constraint firstItem="noN-Fp-r9x" firstAttribute="top" secondItem="2x6-jM-9jB" secondAttribute="top" id="JgY-lO-nHR"/>
+                            <constraint firstItem="Bq4-5B-wIx" firstAttribute="leading" secondItem="2x6-jM-9jB" secondAttribute="leading" id="LBs-HK-aIr"/>
+                            <constraint firstItem="Bq4-5B-wIx" firstAttribute="top" secondItem="noN-Fp-r9x" secondAttribute="bottom" id="LcU-eh-fAC"/>
+                            <constraint firstItem="2x6-jM-9jB" firstAttribute="bottom" secondItem="Bq4-5B-wIx" secondAttribute="bottom" id="OFS-Nv-q2O"/>
+                            <constraint firstAttribute="trailing" secondItem="noN-Fp-r9x" secondAttribute="trailing" id="Qiv-Gl-k5a"/>
+                            <constraint firstItem="2x6-jM-9jB" firstAttribute="trailing" secondItem="Bq4-5B-wIx" secondAttribute="trailing" id="psI-xe-2D7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2x6-jM-9jB"/>
+                    </view>
+                    <connections>
+                        <outlet property="progressBar" destination="noN-Fp-r9x" id="WxC-zF-goJ"/>
+                        <outlet property="webView" destination="Bq4-5B-wIx" id="Meq-av-sRi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GDp-dB-OMa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="103.79464285714285"/>
+        </scene>
+    </scenes>
+</document>

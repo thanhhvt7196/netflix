@@ -17,6 +17,14 @@ class UserInfoService {
     let activityIndicator = PublishSubject<Bool>()
     private let loginResponse = PublishSubject<(String, String)>()
     
+    static func logout(completion: (() -> Void)? = nil) {
+        LoginObject.deleteLoginInfo()
+        PersistentManager.shared.requestToken = ""
+        PersistentManager.shared.sessionID = ""
+        PersistentManager.shared.clearWhenExit()
+        completion?()
+    }
+    
     func login(username: String, password: String) -> Observable<(String, String)> {
         activityIndicator.onNext(true)
         createNewRequestToken(username: username, password: password)

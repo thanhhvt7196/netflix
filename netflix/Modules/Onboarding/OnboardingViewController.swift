@@ -21,8 +21,11 @@ class OnboardingViewController: BaseViewController, StoryboardBased {
     private let helpButtonItem = UIBarButtonItem(title: Strings.help, style: .done, target: self, action: #selector(showHelpScreen))
     private let privacyButtonItem = UIBarButtonItem(title: Strings.privacy, style: .done, target: self, action: #selector(showPrivacyScreen))
     
+    private let bag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        handleAction()
     }
     
     var subviews = [UIView]()
@@ -41,6 +44,14 @@ class OnboardingViewController: BaseViewController, StoryboardBased {
         configPageControl()
         configButton()
         configNavigationBar()
+    }
+    
+    private func handleAction() {
+        signinButton.rx.tap
+            .subscribe(onNext: { _ in
+                SceneCoordinator.shared.transition(to: Scene.login)
+            })
+            .disposed(by: bag)
     }
 }
 
@@ -66,10 +77,22 @@ extension OnboardingViewController {
     }
     
     private func configNavigationBar() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         navigationItem.rightBarButtonItems = [privacyButtonItem, helpButtonItem]
         navigationController?.navigationBar.tintColor = .white
-        helpButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .bold)], for: .normal)
-        privacyButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .bold)], for: .normal)
+        helpButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .semibold)], for: .normal)
+        privacyButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .semibold)], for: .normal)
+        helpButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .semibold)], for: .selected)
+        privacyButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .semibold)], for: .selected)
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
+        let leftLogoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        leftLogoImageView.center = CGPoint(x: leftLogoImageView.frame.size.width/2, y: leftView.frame.size.height/2)
+        leftLogoImageView.image = Asset.netflixLogotypeNormal.image
+        leftLogoImageView.contentMode = .scaleAspectFit
+        leftView.addSubview(leftLogoImageView)
+
+        let leftBarButtonItem = UIBarButtonItem(customView: leftView)
+        navigationItem.leftBarButtonItem = leftBarButtonItem
     }
 }
 

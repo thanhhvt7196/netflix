@@ -23,6 +23,9 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private let verifyRequestTokenTrigger = PublishSubject<LoginObject>()
     private let createSessionTrigger = PublishSubject<String>()
     
+    private let leftBarButtonItem = UIBarButtonItem(image: Asset.chevronLeftNormal.image, style: .plain, target: self, action: nil)
+    private let rightBarButtonItem = UIBarButtonItem(title: Strings.help, style: .done, target: self, action: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -31,12 +34,12 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     override func prepareUI() {
         super.prepareUI()
+        configNavigationBar()
         configTextfield()
         configButton()
     }
     
     private func bind() {
-//        let input = LoginViewModel.Input(createRequestTokenTrigger: createRequestTokenTrigger.asDriverOnErrorJustComplete(), verifyRequestTokenTrigger: verifyRequestTokenTrigger.asDriverOnErrorJustComplete(), createSessionTrigger: createSessionTrigger.asDriverOnErrorJustComplete())
         let input = LoginViewModel.Input(createRequestTokenTrigger: createRequestTokenTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
         
@@ -74,10 +77,32 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 self.signInButton.setTitleColor(isValid ? .white : .gray4, for: .normal)
             })
             .disposed(by: bag)
+        
+        leftBarButtonItem.rx.tap
+            .subscribe(onNext: { _ in
+                SceneCoordinator.shared.pop(animated: true)
+            })
+            .disposed(by: bag)
     }
 }
 
 extension LoginViewController {
+    private func configNavigationBar() {
+        navigationItem.leftBarButtonItem = leftBarButtonItem
+        
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
+        let logoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        logoImageView.center = titleView.center
+        logoImageView.image = Asset.netflixLogotypeNormal.image
+        logoImageView.contentMode = .scaleAspectFit
+        titleView.addSubview(logoImageView)
+        navigationItem.titleView = titleView
+        
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+        rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .semibold)], for: .normal)
+        rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .semibold)], for: .selected)
+    }
+    
     private func configTextfield() {
         usernameTextfield.setup(setting:
             FloatingTextfieldSettingBuilder.shared()

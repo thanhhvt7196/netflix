@@ -134,6 +134,8 @@
 		0C8D571024C6DED200E2CB08 /* AnimatedTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8D570F24C6DED200E2CB08 /* AnimatedTabBarController.storyboard */; };
 		0C8D571224C6DF1A00E2CB08 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D571124C6DF1A00E2CB08 /* HomeViewController.swift */; };
 		0C8D571424C6DF5F00E2CB08 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8D571324C6DF5F00E2CB08 /* HomeViewController.storyboard */; };
+		0C94B62524D117E800BDE3CC /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B62424D117E800BDE3CC /* SplashViewController.swift */; };
+		0C94B62724D1180800BDE3CC /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C94B62624D1180800BDE3CC /* SplashViewController.storyboard */; };
 		0CAAC6CF24C6E9EE00898523 /* icon-addList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0CAAC6CE24C6E9EE00898523 /* icon-addList.json */; };
 		0CAAE55224CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE55124CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift */; };
 		0CAAE55424CD628D001C65D7 /* PopularTVShowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE55324CD628D001C65D7 /* PopularTVShowResponse.swift */; };
@@ -288,6 +290,8 @@
 		0C8D570F24C6DED200E2CB08 /* AnimatedTabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AnimatedTabBarController.storyboard; sourceTree = "<group>"; };
 		0C8D571124C6DF1A00E2CB08 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0C8D571324C6DF5F00E2CB08 /* HomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
+		0C94B62424D117E800BDE3CC /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		0C94B62624D1180800BDE3CC /* SplashViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashViewController.storyboard; sourceTree = "<group>"; };
 		0CAAC6CE24C6E9EE00898523 /* icon-addList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "icon-addList.json"; sourceTree = "<group>"; };
 		0CAAE55124CD5CD8001C65D7 /* AiringTodayTVShowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiringTodayTVShowResponse.swift; sourceTree = "<group>"; };
 		0CAAE55324CD628D001C65D7 /* PopularTVShowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTVShowResponse.swift; sourceTree = "<group>"; };
@@ -750,6 +754,7 @@
 		0C8D570324C6DE6500E2CB08 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0C94B62324D117C800BDE3CC /* Splash */,
 				0C35E9F324D02CC3001A612D /* Onboarding */,
 				0CE9559C24CDE4950099648B /* Login */,
 				0C8D570B24C6DEBC00E2CB08 /* Home */,
@@ -792,6 +797,15 @@
 				0C8D570F24C6DED200E2CB08 /* AnimatedTabBarController.storyboard */,
 			);
 			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		0C94B62324D117C800BDE3CC /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				0C94B62424D117E800BDE3CC /* SplashViewController.swift */,
+				0C94B62624D1180800BDE3CC /* SplashViewController.storyboard */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		0CAAC6CD24C6E9E600898523 /* Lotties */ = {
@@ -1017,6 +1031,7 @@
 				0C35E9ED24D00E09001A612D /* remindMe.json in Resources */,
 				0C1035E824C6EB6B00571EA6 /* checkAnimation.json in Resources */,
 				0C2BAA7124C6E8CF003FD8A9 /* dtmf_54.wav in Resources */,
+				0C94B62724D1180800BDE3CC /* SplashViewController.storyboard in Resources */,
 				0C1035E724C6EB6B00571EA6 /* countdown.json in Resources */,
 				0C10577A24C9949A00C88177 /* HomeCategoryTypeCell.xib in Resources */,
 				0C2BAA6E24C6E8CF003FD8A9 /* dtmf_55.wav in Resources */,
@@ -1085,6 +1100,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C94B62524D117E800BDE3CC /* SplashViewController.swift in Sources */,
 				0CE955A524CDE7880099648B /* NetflixTitleView.swift in Sources */,
 				0C8D56C724C6DD2700E2CB08 /* Scene.swift in Sources */,
 				0C3BC72024CA295800DFCEBA /* ChooseCategoryView.swift in Sources */,

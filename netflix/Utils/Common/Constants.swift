@@ -36,6 +36,9 @@ struct Constants {
     
     static let passwordMinLength = 4
     static let passwordMaxlength = 16
+    
+    static let privacyURL = "https://help.netflix.com/legal/privacy"
+    static let helpURL = "https://help.netflix.com/en"
 }
 
 struct APIParamKeys {

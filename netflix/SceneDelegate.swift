@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         let sceneCoordinator = SceneCoordinator(window: window)
         SceneCoordinator.shared = sceneCoordinator
-        SceneCoordinator.shared.transition(to: Scene.onboarding)
+        SceneCoordinator.shared.transition(to: Scene.splash)
     }
 
     @available(iOS 13.0, *)

@@ -68,7 +68,8 @@ extension Scene: TargetScene {
             let navigationController = UINavigationController(rootViewController: onboardingViewController)
             return .root(navigationController)
         case .splash:
-            let splashViewController = SplashViewController.instantiate()
+            let splashViewModel = SplashViewModel()
+            let splashViewController = SplashViewController.instantiate(withViewModel: splashViewModel)
             return .root(splashViewController)
         case .webView(let url):
             let webViewModel = WebViewModel(url: url)

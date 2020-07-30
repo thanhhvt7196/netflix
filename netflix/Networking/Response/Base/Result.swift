@@ -1,5 +1,5 @@
 //
-//  APIResult.swift
+//  Result.swift
 //  netflix
 //
 //  Created by kennyS on 2/26/20.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum APIResult<Value, Error> {
+enum Result<Value, Error> {
     case success(Value)
     case failure(Error)
     

@@ -94,7 +94,7 @@
 		0C59848224C700E000DDF1A0 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59848124C700E000DDF1A0 /* Strings.swift */; };
 		0C5A366A24C717A40039FB84 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A366924C717A40039FB84 /* HTTPStatusCodes.swift */; };
 		0C8679EF24C7D8F00053496B /* HostAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679EE24C7D8F00053496B /* HostAPIClient.swift */; };
-		0C8679F124C7D9700053496B /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679F024C7D9700053496B /* APIResult.swift */; };
+		0C8679F124C7D9700053496B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679F024C7D9700053496B /* Result.swift */; };
 		0C8679F324C7D9780053496B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679F224C7D9780053496B /* APIError.swift */; };
 		0C8679F524C7D98A0053496B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679F424C7D98A0053496B /* NetworkManager.swift */; };
 		0C8679FE24C80ADC0053496B /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8679FD24C80ADC0053496B /* ErrorTracker.swift */; };
@@ -155,6 +155,8 @@
 		0CAAE56F24CD85E9001C65D7 /* HeaderMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CAAE56D24CD85E9001C65D7 /* HeaderMovieTableViewCell.xib */; };
 		0CAAE57124CD861B001C65D7 /* HeaderMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE57024CD861B001C65D7 /* HeaderMovieViewModel.swift */; };
 		0CAAE57324CD89D9001C65D7 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAE57224CD89D9001C65D7 /* ImageHelper.swift */; };
+		0CD80D8424D29E1700155393 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD80D8324D29E1700155393 /* SplashViewModel.swift */; };
+		0CD80D8624D2A52F00155393 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD80D8524D2A52F00155393 /* UIWindow+Extension.swift */; };
 		0CE9559E24CDE4B70099648B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9559D24CDE4B70099648B /* LoginViewModel.swift */; };
 		0CE955A024CDE4E20099648B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9559F24CDE4E20099648B /* LoginViewController.swift */; };
 		0CE955A224CDE5370099648B /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE955A124CDE5370099648B /* LoginViewController.storyboard */; };
@@ -255,7 +257,7 @@
 		0C59848124C700E000DDF1A0 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		0C5A366924C717A40039FB84 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
 		0C8679EE24C7D8F00053496B /* HostAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostAPIClient.swift; sourceTree = "<group>"; };
-		0C8679F024C7D9700053496B /* APIResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResult.swift; sourceTree = "<group>"; };
+		0C8679F024C7D9700053496B /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		0C8679F224C7D9780053496B /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0C8679F424C7D98A0053496B /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0C8679FD24C80ADC0053496B /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
@@ -316,6 +318,8 @@
 		0CAAE56D24CD85E9001C65D7 /* HeaderMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderMovieTableViewCell.xib; sourceTree = "<group>"; };
 		0CAAE57024CD861B001C65D7 /* HeaderMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMovieViewModel.swift; sourceTree = "<group>"; };
 		0CAAE57224CD89D9001C65D7 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		0CD80D8324D29E1700155393 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		0CD80D8524D2A52F00155393 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		0CE9559D24CDE4B70099648B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		0CE9559F24CDE4E20099648B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0CE955A124CDE5370099648B /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
@@ -664,7 +668,7 @@
 		0C5A367124C7196F0039FB84 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				0C8679F024C7D9700053496B /* APIResult.swift */,
+				0C8679F024C7D9700053496B /* Result.swift */,
 				0C8679F224C7D9780053496B /* APIError.swift */,
 			);
 			path = Base;
@@ -758,6 +762,7 @@
 				0C8D56D524C6DD4F00E2CB08 /* UIViewController+Extension.swift */,
 				0C8D56E624C6DD5100E2CB08 /* URL+Extension.swift */,
 				0C94B64F24D1540700BDE3CC /* WKWebview+Extension.swift */,
+				0CD80D8524D2A52F00155393 /* UIWindow+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -817,6 +822,7 @@
 			children = (
 				0C94B62424D117E800BDE3CC /* SplashViewController.swift */,
 				0C94B62624D1180800BDE3CC /* SplashViewController.storyboard */,
+				0CD80D8324D29E1700155393 /* SplashViewModel.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -1160,7 +1166,7 @@
 				0C8D56F624C6DD5100E2CB08 /* UIApplication+Extension.swift in Sources */,
 				0C35E9FD24D031BC001A612D /* OnboardingView3.swift in Sources */,
 				0C8D56FE24C6DD5100E2CB08 /* UITabbarController+Extension.swift in Sources */,
-				0C8679F124C7D9700053496B /* APIResult.swift in Sources */,
+				0C8679F124C7D9700053496B /* Result.swift in Sources */,
 				0C8D570224C6DD5100E2CB08 /* UIBarButtonItem+Rx.swift in Sources */,
 				0CAAE57124CD861B001C65D7 /* HeaderMovieViewModel.swift in Sources */,
 				0C1035EC24C6EDD400571EA6 /* SearchViewModel.swift in Sources */,
@@ -1171,6 +1177,7 @@
 				0C8D56ED24C6DD5100E2CB08 /* UINavigationController+Extension.swift in Sources */,
 				0C35E9F924D0307E001A612D /* OnboardingView2.swift in Sources */,
 				0CFCB18E24CEDF03005A290A /* LoginObject.swift in Sources */,
+				0CD80D8624D2A52F00155393 /* UIWindow+Extension.swift in Sources */,
 				0C1035F524C6EF9D00571EA6 /* NewMoviesViewController.swift in Sources */,
 				0C10576924C9706E00C88177 /* ChooseCategoryTypeView.swift in Sources */,
 				0C867A0924C83B2F0053496B /* ArrowDownButton.swift in Sources */,
@@ -1227,6 +1234,7 @@
 				0C94B62A24D1210B00BDE3CC /* WebViewController.swift in Sources */,
 				0C10577624C98B1700C88177 /* GradientView.swift in Sources */,
 				0C8D56F724C6DD5100E2CB08 /* UIStackView+Extension.swift in Sources */,
+				0CD80D8424D29E1700155393 /* SplashViewModel.swift in Sources */,
 				0C8D56F424C6DD5100E2CB08 /* UIColor+Extension.swift in Sources */,
 				0C3BC71E24CA27A100DFCEBA /* ChooseCategoryViewModel.swift in Sources */,
 			);

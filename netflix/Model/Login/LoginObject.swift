@@ -28,6 +28,23 @@ class LoginObject: Object, Codable {
         case password
     }
     
+    func save() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                let loginObject = realm.create(LoginObject.self, value: self, update: .all)
+                realm.add(loginObject)
+            }
+        } catch let error as NSError {
+            debugPrint(error.localizedDescription)
+        }
+    }
+    
+    static func getLoginObject() -> LoginObject? {
+        let realm = try? Realm()
+        return realm?.objects(LoginObject.self).first
+    }
+    
     static func deleteLoginInfo() {
         let realm = try? Realm()
         guard let allLoginInfo = realm?.objects(LoginObject.self) else {

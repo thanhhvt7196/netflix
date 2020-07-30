@@ -37,13 +37,11 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
                 return tabBarController
             }
             controller = selectedViewController
-            
             return actualViewController(for: controller)
         }
-
+        
         if let navigationController = viewController as? UINavigationController {
             controller = navigationController.viewControllers.first!
-            
             return actualViewController(for: controller)
         }
         return controller
@@ -52,39 +50,35 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
     @discardableResult
     func transition(to scene: TargetScene) -> Observable<Void> {
         let subject = PublishSubject<Void>()
-
+        
         switch scene.transition {
         case let .tabBar(tabBarController):
             guard let selectedViewController = tabBarController.selectedViewController else {
-               fatalError("Selected view controller doesn't exists")
+                fatalError("Selected view controller doesn't exists")
             }
             currentViewController = SceneCoordinator.actualViewController(for: selectedViewController)
             window.rootViewController = tabBarController
         case let .root(viewController):
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
-            window.rootViewController = viewController
+//            window.rootViewController = viewController
+            window.switchRootViewController(to: viewController)
             subject.onCompleted()
         case let .push(viewController):
             guard let navigationController = currentViewController.navigationController else {
                 fatalError("Can't push a view controller without a current navigation controller")
             }
-
+            
             _ = navigationController.rx.delegate
                 .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
                 .map { _ in }
                 .bind(to: subject)
             navigationController.pushViewController(SceneCoordinator.actualViewController(for: viewController), animated: true)
         case let .present(viewController):
-//            viewController.modalPresentationStyle = .fullScreen
             viewController.presentationController?.delegate = currentViewController
             currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()
             }
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
-//        case let .alert(viewController):
-//            currentViewController.present(viewController, animated: true) {
-//                subject.onCompleted()
-//            }
         }
         
         return subject

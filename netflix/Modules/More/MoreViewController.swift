@@ -41,12 +41,8 @@ class MoreViewController: BaseViewController, StoryboardBased, ViewModelBased {
                     case .confirm:
                         ProgressHUD.shared.show()
                         UserInfoService.logout {
-                            UIView.animate(withDuration: 0.5 ,delay: 0, animations: {
-                                self.view.alpha = 0
-                            }) { _ in
-                                SceneCoordinator.shared.transition(to: Scene.onboarding)
-                                ProgressHUD.shared.hide()
-                            }
+                            SceneCoordinator.shared.transition(to: Scene.onboarding)
+                            ProgressHUD.shared.hide()
                         }
                     case .cancel:
                         return

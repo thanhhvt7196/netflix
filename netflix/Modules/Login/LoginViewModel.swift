@@ -13,14 +13,12 @@ import RxCocoa
 class LoginViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let userInfoService = UserInfoService()
-        let session = input.loginInfo.flatMapLatest { loginObject -> Driver<(String, String)> in
+        let loginResult = input.loginInfo.flatMapLatest { loginObject -> Driver<Result<Void, Error>> in
             guard let username = loginObject.username, let password = loginObject.password else { return .empty() }
             return userInfoService.login(username: username, password: password)
                 .asDriverOnErrorJustComplete()
         }
-        return Output(
-            session: session, error: userInfoService.errorTracker.asDriver(),
-            activityIndicator: userInfoService.activityIndicator.asDriver(onErrorJustReturn: false))
+        return Output(loginResult: loginResult, activityIndicator: userInfoService.activityIndicator.asDriver(onErrorJustReturn: false))
     }
     
     private func createNewRequestToken() -> Observable<NewRequestTokenResponse> {
@@ -42,8 +40,7 @@ extension LoginViewModel {
     }
     
     struct Output {
-        var session: Driver<(String, String)>
-        var error: Driver<Error>
+        var loginResult: Driver<Result<Void, Error>>
         var activityIndicator: Driver<Bool>
     }
 }

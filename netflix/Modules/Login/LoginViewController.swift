@@ -73,19 +73,15 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         let input = LoginViewModel.Input(loginInfo: loginInfo.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
         
-        output.session
-            .drive(onNext: { sessionID, token in
-                print("SessionID = \(sessionID)")
-                PersistentManager.shared.requestToken = token
-                PersistentManager.shared.sessionID = sessionID
-                SceneCoordinator.shared.transition(to: Scene.tabbar)
-            })
-            .disposed(by: bag)
-        
-        output.error
-            .drive(onNext: { [weak self] error in
+        output.loginResult
+            .drive(onNext: { [weak self] result in
                 guard let self = self else { return }
-                self.showErrorAlert(message: error.localizedDescription)
+                switch result {
+                case .failure(let error):
+                    self.showErrorAlert(message: error.localizedDescription)
+                case .success:
+                    SceneCoordinator.shared.transition(to: Scene.tabbar)
+                }
             })
             .disposed(by: bag)
         

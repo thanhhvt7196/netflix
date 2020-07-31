@@ -23,7 +23,8 @@ enum HomeCategoryViewSectionModel {
 }
 
 enum HomeCategoryViewSectionItem {
-    case movieItem(movie: Movie)
+    case headerMovie(movie: Movie)
+    case previewList(movies: [Movie])
     case moviesListItem(movies: [Movie])
 }
 

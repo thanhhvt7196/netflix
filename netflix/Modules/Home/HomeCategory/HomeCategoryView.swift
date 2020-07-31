@@ -73,20 +73,27 @@ extension HomeCategoryView {
         tableView.delegate = self
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: .leastNonzeroMagnitude))
         tableView.register(cellType: HeaderMovieTableViewCell.self)
-        
+        tableView.register(cellType: HomeNowPlayingCell.self)
+        tableView.register(cellType: MovieListTableViewCell.self)
     }
     
     private func setupDataSources() {
         dataSources = RxTableViewSectionedReloadDataSource(configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
             switch dataSource[indexPath] {
-            case .movieItem(let movie):
+            case .headerMovie(let movie):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieTableViewCell
                 let viewModel = HeaderMovieViewModel(movie: movie)
                 cell.bindViewModel(viewModel: viewModel)
                 return cell
-            default:
-                let cell = UITableViewCell()
-                cell.backgroundColor = .black
+            case .previewList(let movies):
+                let cell = tableView.dequeueReusableCell(for: indexPath) as HomeNowPlayingCell
+                let nowPlayingViewModel = HomeNowPlayingCellViewModel(movies: movies)
+                cell.bindViewModel(viewModel: nowPlayingViewModel)
+                return cell
+            case .moviesListItem(let movies):
+                let cell = tableView.dequeueReusableCell(for: indexPath) as MovieListTableViewCell
+                let movieListCellViewModel = MovieListCellViewModel(movies: movies)
+                cell.bindViewModel(viewModel: movieListCellViewModel)
                 return cell
             }
         })

@@ -93,11 +93,11 @@ class HomeCategoryViewModel: ViewModel {
         data.map { nowPlayingList, tvShowAiringTodayList, popularMoviesList, popularTVShowsList, topRatedMoviesList, topRatedTVShowsList, upcomingMoviesList, tvShowOnTheAirList -> [HomeCategoryViewSectionModel] in
                 var sections = [HomeCategoryViewSectionModel]()
                 if let headerMovie = nowPlayingList.first {
-                    sections.append(.headerMovie(title: nil, items: [.movieItem(movie: headerMovie)]))
+                    sections.append(.headerMovie(title: nil, items: [.headerMovie(movie: headerMovie)]))
                 }
                 if nowPlayingList.count > 0 {
                     if nowPlayingList.suffix(nowPlayingList.count - 1).count > 0 {
-                        sections.append(.nowPlayingMovie(title: Strings.nowPlaying, items: [.moviesListItem(movies: Array(nowPlayingList.suffix(nowPlayingList.count - 1)))]))
+                        sections.append(.nowPlayingMovie(title: Strings.nowPlaying, items: [.previewList(movies: Array(nowPlayingList.suffix(nowPlayingList.count - 1)))]))
                     }
                 }
                 

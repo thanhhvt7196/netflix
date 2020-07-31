@@ -11,10 +11,15 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class MovieItemCollectionViewCell: UICollectionViewCell, NibReusable {
+class MovieItemCollectionViewCell: UICollectionViewCell, NibReusable, ViewModelBased {
+    @IBOutlet weak var imageView: UIImageView!
+    
+    var viewModel: MovieItemCellViewModel!
+    private var bag = DisposeBag()
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        prepareUI()
     }
 
     private func prepareUI() {
@@ -23,9 +28,20 @@ class MovieItemCollectionViewCell: UICollectionViewCell, NibReusable {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        bag = DisposeBag()
     }
     
-    func configCell(movie: Movie) {
-        
+    func bindViewModel(viewModel: MovieItemCellViewModel) {
+        self.viewModel = viewModel
+        bindData()
+    }
+    
+    private func bindData() {
+        let input = MovieItemCellViewModel.Input()
+        let output = viewModel.transform(input: input)
+        output.movie
+            .compactMap { $0.posterPath }
+            .compactMap { ImageHelper.shared.pathToURL(path: $0, imageSize: .w200)}.drive(imageView.rx.imageURL)
+            .disposed(by: bag)
     }
 }

@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
     var viewModel: HomeViewModel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var gradientView: UIView!
@@ -60,10 +60,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         view.bringSubviewToFront(iconImageView)
     }
     
-    override func prepareUI() {
-        configNavigationBar()
-    }
-    
     private func bind() {
         let viewDidAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:))).filter({ [weak self] _ -> Bool in
             return (self?.isFirstLaunch ?? false)
@@ -78,8 +74,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 self.showErrorAlert(message: error.localizedDescription)
             })
             .disposed(by: bag)
-        
-//        output.indicator.drive(ProgressHelper.rx.isAnimating).disposed(by: bag)
         
         output.TVGenres
             .drive(onNext: { genres in
@@ -175,10 +169,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
 }
 
 extension HomeViewController {
-    private func configNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
     private func initialChildViews() {
         let homeCategoryViewModel = HomeCategoryViewModel()
         homeCategoryView = HomeCategoryView(viewModel: homeCategoryViewModel, frame: containerView.bounds)

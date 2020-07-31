@@ -17,6 +17,7 @@ class HomeCategoryViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
+        input.clearDataTrigger.map { _ in [] }.drive(dataSource).disposed(by: bag)
         let nowPlayingList = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
             return self.getMovieNowplaying(page: 1)
                 .trackError(errorTracker)
@@ -166,6 +167,7 @@ class HomeCategoryViewModel: ViewModel {
 extension HomeCategoryViewModel {
     struct Input {
         var fetchDataTrigger: Driver<Void>
+        var clearDataTrigger: Driver<Void>
     }
     
     struct Output {

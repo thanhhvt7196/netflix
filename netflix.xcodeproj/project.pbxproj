@@ -93,6 +93,12 @@
 		0C59847C24C6F94800DDF1A0 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59847B24C6F94800DDF1A0 /* UIImage+Extension.swift */; };
 		0C59848224C700E000DDF1A0 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59848124C700E000DDF1A0 /* Strings.swift */; };
 		0C5A366A24C717A40039FB84 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5A366924C717A40039FB84 /* HTTPStatusCodes.swift */; };
+		0C72B42D24D413E9007378A4 /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B42C24D413E9007378A4 /* CustomAnimator.swift */; };
+		0C72B42F24D41424007378A4 /* FadePushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B42E24D41424007378A4 /* FadePushAnimator.swift */; };
+		0C72B43124D4147A007378A4 /* FadePopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43024D4147A007378A4 /* FadePopAnimator.swift */; };
+		0C72B43424D41547007378A4 /* SystemPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43224D41547007378A4 /* SystemPushAnimator.swift */; };
+		0C72B43524D41547007378A4 /* SystemPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43324D41547007378A4 /* SystemPopAnimator.swift */; };
+		0C72B43724D416D2007378A4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43624D416D2007378A4 /* BaseViewController.swift */; };
 		0C78EC9F24D3C009004170F6 /* MovieListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78EC9E24D3C009004170F6 /* MovieListCellViewModel.swift */; };
 		0C78ECA824D3C10D004170F6 /* MovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78ECA624D3C10D004170F6 /* MovieListTableViewCell.swift */; };
 		0C78ECA924D3C10D004170F6 /* MovieListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C78ECA724D3C10D004170F6 /* MovieListTableViewCell.xib */; };
@@ -134,7 +140,7 @@
 		0C8D570224C6DD5100E2CB08 /* UIBarButtonItem+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D56E924C6DD5100E2CB08 /* UIBarButtonItem+Rx.swift */; };
 		0C8D570524C6DE7100E2CB08 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D570424C6DE7100E2CB08 /* HomeViewModel.swift */; };
 		0C8D570924C6DE7E00E2CB08 /* ViewModelBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D570724C6DE7E00E2CB08 /* ViewModelBased.swift */; };
-		0C8D570A24C6DE7E00E2CB08 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D570824C6DE7E00E2CB08 /* BaseViewController.swift */; };
+		0C8D570A24C6DE7E00E2CB08 /* FadeAnimatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D570824C6DE7E00E2CB08 /* FadeAnimatedViewController.swift */; };
 		0C8D570E24C6DEC800E2CB08 /* AnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D570D24C6DEC800E2CB08 /* AnimatedTabBarController.swift */; };
 		0C8D571024C6DED200E2CB08 /* AnimatedTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8D570F24C6DED200E2CB08 /* AnimatedTabBarController.storyboard */; };
 		0C8D571224C6DF1A00E2CB08 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D571124C6DF1A00E2CB08 /* HomeViewController.swift */; };
@@ -268,6 +274,12 @@
 		0C59847B24C6F94800DDF1A0 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		0C59848124C700E000DDF1A0 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		0C5A366924C717A40039FB84 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
+		0C72B42C24D413E9007378A4 /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
+		0C72B42E24D41424007378A4 /* FadePushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadePushAnimator.swift; sourceTree = "<group>"; };
+		0C72B43024D4147A007378A4 /* FadePopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadePopAnimator.swift; sourceTree = "<group>"; };
+		0C72B43224D41547007378A4 /* SystemPushAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPushAnimator.swift; sourceTree = "<group>"; };
+		0C72B43324D41547007378A4 /* SystemPopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPopAnimator.swift; sourceTree = "<group>"; };
+		0C72B43624D416D2007378A4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0C78EC9E24D3C009004170F6 /* MovieListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCellViewModel.swift; sourceTree = "<group>"; };
 		0C78ECA624D3C10D004170F6 /* MovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTableViewCell.swift; sourceTree = "<group>"; };
 		0C78ECA724D3C10D004170F6 /* MovieListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieListTableViewCell.xib; sourceTree = "<group>"; };
@@ -309,7 +321,7 @@
 		0C8D56E924C6DD5100E2CB08 /* UIBarButtonItem+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Rx.swift"; sourceTree = "<group>"; };
 		0C8D570424C6DE7100E2CB08 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0C8D570724C6DE7E00E2CB08 /* ViewModelBased.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelBased.swift; sourceTree = "<group>"; };
-		0C8D570824C6DE7E00E2CB08 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		0C8D570824C6DE7E00E2CB08 /* FadeAnimatedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeAnimatedViewController.swift; sourceTree = "<group>"; };
 		0C8D570D24C6DEC800E2CB08 /* AnimatedTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabBarController.swift; sourceTree = "<group>"; };
 		0C8D570F24C6DED200E2CB08 /* AnimatedTabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AnimatedTabBarController.storyboard; sourceTree = "<group>"; };
 		0C8D571124C6DF1A00E2CB08 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -604,6 +616,7 @@
 		0C4A35B524C710A0007671C2 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				0C72B42B24D413DC007378A4 /* TransitionAnimation */,
 				0C4A35B624C710A9007671C2 /* TabbarControllerAnimation */,
 			);
 			path = Animation;
@@ -707,6 +720,18 @@
 				0CAAE55B24CD6C05001C65D7 /* UpcomingMovieResponse.swift */,
 			);
 			path = Movies;
+			sourceTree = "<group>";
+		};
+		0C72B42B24D413DC007378A4 /* TransitionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				0C72B42C24D413E9007378A4 /* CustomAnimator.swift */,
+				0C72B42E24D41424007378A4 /* FadePushAnimator.swift */,
+				0C72B43024D4147A007378A4 /* FadePopAnimator.swift */,
+				0C72B43224D41547007378A4 /* SystemPushAnimator.swift */,
+				0C72B43324D41547007378A4 /* SystemPopAnimator.swift */,
+			);
+			path = TransitionAnimation;
 			sourceTree = "<group>";
 		};
 		0C78EC9D24D3BFC9004170F6 /* MovieListCell */ = {
@@ -831,9 +856,10 @@
 		0C8D570624C6DE7500E2CB08 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				0C8D570824C6DE7E00E2CB08 /* BaseViewController.swift */,
+				0C8D570824C6DE7E00E2CB08 /* FadeAnimatedViewController.swift */,
 				0C8D570724C6DE7E00E2CB08 /* ViewModelBased.swift */,
 				0C94B65124D16BF400BDE3CC /* BaseTableViewController.swift */,
+				0C72B43624D416D2007378A4 /* BaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1203,6 +1229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C78EC9F24D3C009004170F6 /* MovieListCellViewModel.swift in Sources */,
+				0C72B42D24D413E9007378A4 /* CustomAnimator.swift in Sources */,
 				0C94B62524D117E800BDE3CC /* SplashViewController.swift in Sources */,
 				0CE955A524CDE7880099648B /* NetflixTitleView.swift in Sources */,
 				0C8D56C724C6DD2700E2CB08 /* Scene.swift in Sources */,
@@ -1231,12 +1258,13 @@
 				0C8D56F324C6DD5100E2CB08 /* UIImageView+Rx.swift in Sources */,
 				0CE9559E24CDE4B70099648B /* LoginViewModel.swift in Sources */,
 				0C1035FA24C6F05F00571EA6 /* MyListViewModel.swift in Sources */,
-				0C8D570A24C6DE7E00E2CB08 /* BaseViewController.swift in Sources */,
+				0C8D570A24C6DE7E00E2CB08 /* FadeAnimatedViewController.swift in Sources */,
 				0C8D56FB24C6DD5100E2CB08 /* String+Int+Decodable.swift in Sources */,
 				0C78ECAC24D3C3D7004170F6 /* MovieItemCollectionViewCell.swift in Sources */,
 				0C8D56EE24C6DD5100E2CB08 /* UIViewController+Extension.swift in Sources */,
 				0C8D570E24C6DEC800E2CB08 /* AnimatedTabBarController.swift in Sources */,
 				0C8D56C824C6DD2700E2CB08 /* SceneCoordinatorType.swift in Sources */,
+				0C72B43424D41547007378A4 /* SystemPushAnimator.swift in Sources */,
 				0C10360124C6F0DB00571EA6 /* MoreViewModel.swift in Sources */,
 				0C8D56F624C6DD5100E2CB08 /* UIApplication+Extension.swift in Sources */,
 				0C35E9FD24D031BC001A612D /* OnboardingView3.swift in Sources */,
@@ -1257,6 +1285,7 @@
 				0CFCE75524D3C5E0001D8C18 /* HomePreviewCellViewModel.swift in Sources */,
 				0CD80D8624D2A52F00155393 /* UIWindow+Extension.swift in Sources */,
 				0C1035F524C6EF9D00571EA6 /* NewMoviesViewController.swift in Sources */,
+				0C72B43724D416D2007378A4 /* BaseViewController.swift in Sources */,
 				0C10576924C9706E00C88177 /* ChooseCategoryTypeView.swift in Sources */,
 				0C867A0924C83B2F0053496B /* ArrowDownButton.swift in Sources */,
 				0CAAE55424CD628D001C65D7 /* PopularTVShowResponse.swift in Sources */,
@@ -1305,6 +1334,7 @@
 				0C89A94824CAD64500A0E9AC /* NowPlayingMovieResponse.swift in Sources */,
 				0C1C2CB224CADE7E0012374F /* HomeCategoryView.swift in Sources */,
 				0CFCB18B24CEDB0D005A290A /* NewRequestTokenResponse.swift in Sources */,
+				0C72B43524D41547007378A4 /* SystemPopAnimator.swift in Sources */,
 				0C8D571224C6DF1A00E2CB08 /* HomeViewController.swift in Sources */,
 				0C8D56EA24C6DD5100E2CB08 /* Double+Extension.swift in Sources */,
 				0C94B65024D1540700BDE3CC /* WKWebview+Extension.swift in Sources */,
@@ -1313,9 +1343,11 @@
 				0C0247E724CE786E00C023A8 /* TextfieldWithIcon.swift in Sources */,
 				0C94B62A24D1210B00BDE3CC /* WebViewController.swift in Sources */,
 				0C10577624C98B1700C88177 /* GradientView.swift in Sources */,
+				0C72B43124D4147A007378A4 /* FadePopAnimator.swift in Sources */,
 				0C8D56F724C6DD5100E2CB08 /* UIStackView+Extension.swift in Sources */,
 				0CD80D8424D29E1700155393 /* SplashViewModel.swift in Sources */,
 				0C8D56F424C6DD5100E2CB08 /* UIColor+Extension.swift in Sources */,
+				0C72B42F24D41424007378A4 /* FadePushAnimator.swift in Sources */,
 				0C3BC71E24CA27A100DFCEBA /* ChooseCategoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

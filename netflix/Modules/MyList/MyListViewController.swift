@@ -11,20 +11,10 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class MyListViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class MyListViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
     var viewModel: MyListViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func prepareUI() {
-        configNavigationBar()
-    }
-}
-
-extension MyListViewController {
-    private func configNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }

@@ -12,7 +12,7 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class OnboardingViewController: BaseViewController, StoryboardBased {
+class OnboardingViewController: FadeAnimatedViewController, StoryboardBased {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var signinButton: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!

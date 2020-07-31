@@ -20,6 +20,7 @@ class HomeCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     private let bag = DisposeBag()
     
     private let fetchDataTrigger = PublishSubject<Void>()
+    private let clearDataTrigger = PublishSubject<Void>()
     private var dataSources: RxTableViewSectionedReloadDataSource<HomeCategoryViewSectionModel>!
     
     init(viewModel: HomeCategoryViewModel, frame: CGRect) {
@@ -46,7 +47,9 @@ class HomeCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bind() {
-        let input = HomeCategoryViewModel.Input(fetchDataTrigger: fetchDataTrigger.asDriverOnErrorJustComplete())
+        let input = HomeCategoryViewModel.Input(
+            fetchDataTrigger: fetchDataTrigger.asDriverOnErrorJustComplete(),
+            clearDataTrigger: clearDataTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
         
         output.error
@@ -102,6 +105,7 @@ extension HomeCategoryView {
 
 extension HomeCategoryView {
     func loadData() {
+        clearDataTrigger.onNext(())
         fetchDataTrigger.onNext(())
     }
 }

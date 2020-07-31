@@ -12,20 +12,10 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class NewMoviesViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class NewMoviesViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
     var viewModel: NewMoviesViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func prepareUI() {
-        configNavigationBar()
-    }
-}
-
-extension NewMoviesViewController {
-    private func configNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }

@@ -12,7 +12,7 @@ import AVKit
 import RxSwift
 import RxCocoa
 
-class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class SplashViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var playerView: UIView!
 
     var viewModel: SplashViewModel!

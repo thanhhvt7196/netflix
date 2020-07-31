@@ -11,20 +11,10 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class SearchViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
     var viewModel: SearchViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func prepareUI() {
-        configNavigationBar()
-    }
-}
-
-extension SearchViewController {
-    private func configNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }

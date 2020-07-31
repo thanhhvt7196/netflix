@@ -12,7 +12,7 @@ import Reusable
 import RxSwift
 import WebKit
 
-class WebViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class WebViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
     var viewModel: WebViewModel!
     
     @IBOutlet weak var progressBar: UIProgressView!

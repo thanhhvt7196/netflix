@@ -51,7 +51,7 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
         output.movie
             .map { $0.posterPath }
             .compactMap { $0 }
-            .compactMap { ImageHelper.shared.pathToURL(path: $0)}
+            .compactMap { ImageHelper.shared.pathToURL(path: $0, imageSize: .original)}
             .drive(posterImageView.rx.imageURL)
             .disposed(by: bag)
         

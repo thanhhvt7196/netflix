@@ -1,8 +1,8 @@
 //
-//  HomeCategoryView.swift
+//  TVShowCategoryView.swift
 //  netflix
 //
-//  Created by thanh tien on 7/24/20.
+//  Created by thanh tien on 8/1/20.
 //  Copyright © 2020 thanh tien. All rights reserved.
 //
 
@@ -13,16 +13,17 @@ import RxCocoa
 import RxDataSources
 import Reusable
 
-class HomeCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
+class TVShowCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: HomeCategoryViewModel!
+    var viewModel: TVShowCategoryViewModel!
     private let bag = DisposeBag()
     
     private let fetchDataTrigger = PublishSubject<Void>()
+    private let clearDataTrigger = PublishSubject<Void>()
     private var dataSources: RxTableViewSectionedReloadDataSource<HomeCategoryViewSectionModel>!
     
-    init(viewModel: HomeCategoryViewModel, frame: CGRect) {
+    init(viewModel: TVShowCategoryViewModel, frame: CGRect) {
         super.init(frame: frame)
         self.viewModel = viewModel
         commonInit()
@@ -46,7 +47,9 @@ class HomeCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bind() {
-        let input = HomeCategoryViewModel.Input(fetchDataTrigger: fetchDataTrigger.asDriverOnErrorJustComplete())
+        let input = TVShowCategoryViewModel.Input(
+            fetchDataTrigger: fetchDataTrigger.asDriverOnErrorJustComplete(),
+            clearDataTrigger: clearDataTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
         
         output.error
@@ -63,11 +66,24 @@ class HomeCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func handleAction() {
-        
+        tableView.rx.itemSelected
+            .flatMapLatest { [weak self] indexPath -> Observable<HeaderMovieTableViewCell> in
+                guard let self = self, let cell = self.tableView.cellForRow(at: indexPath) as? HeaderMovieTableViewCell else {
+                    return .empty()
+                }
+                return .just(cell)
+            }
+            .flatMapLatest { cell -> Observable<Movie> in
+                return .just(cell.viewModel.movie)
+            }
+            .subscribe(onNext: { movie in
+                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie))
+            })
+            .disposed(by: bag)
     }
 }
 
-extension HomeCategoryView {
+extension TVShowCategoryView {
     private func configTableView() {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
@@ -100,13 +116,14 @@ extension HomeCategoryView {
     }
 }
 
-extension HomeCategoryView {
+extension TVShowCategoryView {
     func loadData() {
+        clearDataTrigger.onNext(())
         fetchDataTrigger.onNext(())
     }
 }
 
-extension HomeCategoryView: UITableViewDelegate {
+extension TVShowCategoryView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

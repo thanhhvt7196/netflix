@@ -12,7 +12,7 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class OnboardingViewController: BaseViewController, StoryboardBased {
+class OnboardingViewController: FadeAnimatedViewController, StoryboardBased {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var signinButton: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -89,6 +89,7 @@ extension OnboardingViewController {
     }
     
     private func configNavigationBar() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         navigationItem.rightBarButtonItems = [privacyButtonItem, helpButtonItem]
         navigationController?.navigationBar.tintColor = .white

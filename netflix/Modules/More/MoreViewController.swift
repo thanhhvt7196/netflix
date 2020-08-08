@@ -11,7 +11,7 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class MoreViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class MoreViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var myListButton: UIButton!
     @IBOutlet weak var appSettingButton: UIButton!
     @IBOutlet weak var helpButton: UIButton!

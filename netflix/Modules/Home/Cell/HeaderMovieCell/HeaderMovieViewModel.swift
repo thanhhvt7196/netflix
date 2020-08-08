@@ -11,19 +11,26 @@ import RxSwift
 import RxCocoa
 
 class HeaderMovieViewModel: ViewModel {
-    var movie: Driver<Movie>
+    var movie: Movie
+    private let bag = DisposeBag()
     
     init(movie: Movie) {
-        self.movie = .just(movie)
+        self.movie = movie
     }
     func transform(input: Input) -> Output {
-        return Output(movie: movie)
+        input.showMovieDetailTrigger
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movie))
+            })
+            .disposed(by: bag)
+        return Output(movie: .just(movie))
     }
 }
 
 extension HeaderMovieViewModel {
     struct Input {
-        
+        var showMovieDetailTrigger: Driver<Void>
     }
     
     struct Output {

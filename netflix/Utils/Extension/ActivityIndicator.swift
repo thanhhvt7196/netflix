@@ -31,7 +31,9 @@ class ActivityIndicator: SharedSequenceConvertibleType {
                 self.sendStopLoading()
             }, onCompleted: {
                 self.sendStopLoading()
-            }, onSubscribe: subscribed)
+            }, onSubscribe:
+                subscribed
+        )
     }
 
     private func subscribed() {

@@ -18,6 +18,8 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var myListAnimationView: AnimationView!
+    @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet weak var myListButton: UIButton!
     
     var viewModel: HeaderMovieViewModel!
     private var bag = DisposeBag()
@@ -45,7 +47,8 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     }
     
     private func bindData() {
-        let input = HeaderMovieViewModel.Input()
+        let showMovieDetailTrigger = infoButton.rx.tap.asDriver()
+        let input = HeaderMovieViewModel.Input(showMovieDetailTrigger: showMovieDetailTrigger)
         let output = viewModel.transform(input: input)
 
         output.movie
@@ -57,6 +60,7 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
         
         output.movie
             .compactMap { $0.genreIds }
+            .filter { $0.count > 0 }
             .map { ids -> [String] in
                 let allMovieGenres = MovieGenreRealmObject.getAllGenres() ?? []
                 let allTVShowsGenres = TVGenreRealmObject.getAllGenres() ?? []
@@ -70,6 +74,13 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
             .drive(genreLabel.rx.text)
             .disposed(by: bag)
         
-        
+        output.movie
+            .compactMap { $0.genres }
+            .filter { $0.count > 0 }
+            .map { genres -> String in
+                return genres.compactMap { $0.name }.joined(separator: " • ")
+            }
+            .drive(genreLabel.rx.text)
+            .disposed(by: bag)
     }
 }

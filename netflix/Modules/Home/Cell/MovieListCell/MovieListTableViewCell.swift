@@ -35,6 +35,7 @@ class MovieListTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     func bindViewModel(viewModel: MovieListCellViewModel) {
         self.viewModel = viewModel
         bindData()
+        
     }
     
     private func bindData() {

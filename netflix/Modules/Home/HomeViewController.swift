@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
     var viewModel: HomeViewModel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var gradientView: UIView!
@@ -44,6 +44,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private let bag = DisposeBag()
     
     private var homeCategoryView: HomeCategoryView!
+    private var tvShowCategoryView: TVShowCategoryView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +61,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         view.bringSubviewToFront(iconImageView)
     }
     
-    override func prepareUI() {
-        configNavigationBar()
-    }
-    
     private func bind() {
         let viewDidAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:))).filter({ [weak self] _ -> Bool in
             return (self?.isFirstLaunch ?? false)
@@ -78,8 +75,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 self.showErrorAlert(message: error.localizedDescription)
             })
             .disposed(by: bag)
-        
-//        output.indicator.drive(ProgressHelper.rx.isAnimating).disposed(by: bag)
         
         output.TVGenres
             .drive(onNext: { genres in
@@ -116,6 +111,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 case .home:
                     PersistentManager.shared.categoryType = .tvShow
                     self.animateTVShowSelected()
+                    self.changeCategoryView(type: .tvShow)
                     //load tv show data
                 case .tvShow:
                     self.showChooseCategoryTypeView()
@@ -162,6 +158,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 guard let self = self else { return }
                 PersistentManager.shared.categoryType = .home
                 self.animateGenresDeselected()
+                self.changeCategoryView(type: .home)
             })
             .disposed(by: bag)
         
@@ -175,13 +172,12 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
 }
 
 extension HomeViewController {
-    private func configNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
     private func initialChildViews() {
         let homeCategoryViewModel = HomeCategoryViewModel()
         homeCategoryView = HomeCategoryView(viewModel: homeCategoryViewModel, frame: containerView.bounds)
+        
+        let tvShowCategoryViewModel = TVShowCategoryViewModel()
+        tvShowCategoryView = TVShowCategoryView(viewModel: tvShowCategoryViewModel, frame: containerView.bounds)
     }
     
     private func initialGenreButtons() {
@@ -392,6 +388,7 @@ extension HomeViewController {
                 guard let self = self else { return }
                 chooseCategoryTypeView.dismissWithAnimation {
                     self.handleCategoryTypeChange(type: type)
+                    self.changeCategoryView(type: type)
                 }
                 
             })
@@ -449,8 +446,12 @@ extension HomeViewController {
         switch type {
         case .home:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
-            containerView.addSubview(homeCategoryView)
+            containerView.addSubViewWithAnimation(view: homeCategoryView)
             homeCategoryView.loadData()
+        case .tvShow:
+            containerView.subviews.forEach({ $0.removeFromSuperview()})
+            containerView.addSubViewWithAnimation(view: tvShowCategoryView)
+            tvShowCategoryView.loadData()
         default:
             break
         }

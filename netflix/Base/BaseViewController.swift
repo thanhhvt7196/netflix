@@ -1,14 +1,12 @@
 //
-//  BaseController.swift
-//  myNews
+//  BaseViewController.swift
+//  netflix
 //
-//  Created by kennyS on 12/16/19.
-//  Copyright © 2019 kennyS. All rights reserved.
+//  Created by thanh tien on 7/31/20.
+//  Copyright © 2020 thanh tien. All rights reserved.
 //
 
 import Foundation
-import RxSwift
-import RxCocoa
 import UIKit
 
 class BaseViewController: UIViewController {

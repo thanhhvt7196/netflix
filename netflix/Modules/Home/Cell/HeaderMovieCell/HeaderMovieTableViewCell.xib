@@ -30,12 +30,24 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="arL-co-sTQ">
                         <rect key="frame" x="0.0" y="267" width="256" height="209"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z02-xo-JqY">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9V-dX-rq8">
                                 <rect key="frame" x="0.0" y="0.0" width="256" height="149"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z02-xo-JqY">
+                                        <rect key="frame" x="20" y="0.0" width="216" height="149"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Z02-xo-JqY" secondAttribute="bottom" id="LhT-Dc-Rj7"/>
+                                    <constraint firstItem="Z02-xo-JqY" firstAttribute="top" secondItem="P9V-dX-rq8" secondAttribute="top" id="fmP-Sb-Buw"/>
+                                    <constraint firstItem="Z02-xo-JqY" firstAttribute="leading" secondItem="P9V-dX-rq8" secondAttribute="leading" constant="20" id="mPx-C8-qrf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z02-xo-JqY" secondAttribute="trailing" constant="20" id="thj-fZ-5Ry"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SFj-qc-vQm">
                                 <rect key="frame" x="0.0" y="169" width="256" height="40"/>
                                 <subviews>
@@ -56,11 +68,19 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xS-Ze-nWB">
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="7xS-Ze-nWB" secondAttribute="trailing" id="69e-x9-JN1"/>
                                             <constraint firstAttribute="bottom" secondItem="lEb-Zm-LOT" secondAttribute="bottom" id="8q1-MG-9Nc"/>
+                                            <constraint firstAttribute="bottom" secondItem="7xS-Ze-nWB" secondAttribute="bottom" id="Hun-FH-uIO"/>
+                                            <constraint firstItem="7xS-Ze-nWB" firstAttribute="top" secondItem="JKZ-jb-dl3" secondAttribute="top" id="Sns-jj-yok"/>
                                             <constraint firstItem="lEb-Zm-LOT" firstAttribute="top" secondItem="RtC-O8-CZS" secondAttribute="bottom" constant="5" id="hq0-o9-VEC"/>
+                                            <constraint firstItem="7xS-Ze-nWB" firstAttribute="leading" secondItem="JKZ-jb-dl3" secondAttribute="leading" id="mgw-ld-4ot"/>
                                             <constraint firstItem="RtC-O8-CZS" firstAttribute="centerX" secondItem="JKZ-jb-dl3" secondAttribute="centerX" id="nQr-Kq-9eQ"/>
                                             <constraint firstItem="lEb-Zm-LOT" firstAttribute="centerX" secondItem="JKZ-jb-dl3" secondAttribute="centerX" id="pGY-kd-bxZ"/>
                                         </constraints>
@@ -120,12 +140,20 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7L-jB-sNP">
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="m7L-jB-sNP" firstAttribute="top" secondItem="jr2-lQ-vX4" secondAttribute="top" id="5pa-4p-Ist"/>
                                             <constraint firstItem="mMX-e9-czX" firstAttribute="top" secondItem="hOF-7d-Cnc" secondAttribute="bottom" constant="5" id="9kH-7u-RNJ"/>
                                             <constraint firstItem="mMX-e9-czX" firstAttribute="centerX" secondItem="jr2-lQ-vX4" secondAttribute="centerX" id="Fto-Mh-yQB"/>
                                             <constraint firstItem="hOF-7d-Cnc" firstAttribute="centerX" secondItem="jr2-lQ-vX4" secondAttribute="centerX" id="eRb-g7-g06"/>
+                                            <constraint firstAttribute="bottom" secondItem="m7L-jB-sNP" secondAttribute="bottom" id="fes-i6-dUT"/>
+                                            <constraint firstAttribute="trailing" secondItem="m7L-jB-sNP" secondAttribute="trailing" id="j2h-Vu-gyk"/>
+                                            <constraint firstItem="m7L-jB-sNP" firstAttribute="leading" secondItem="jr2-lQ-vX4" secondAttribute="leading" id="k1B-8a-IHP"/>
                                             <constraint firstAttribute="bottom" secondItem="mMX-e9-czX" secondAttribute="bottom" id="roc-30-J2e"/>
                                         </constraints>
                                     </view>
@@ -159,7 +187,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="genreLabel" destination="Z02-xo-JqY" id="RHT-c3-RII"/>
+                <outlet property="infoButton" destination="m7L-jB-sNP" id="7jY-h0-dFG"/>
                 <outlet property="myListAnimationView" destination="RtC-O8-CZS" id="3Nb-ej-iKb"/>
+                <outlet property="myListButton" destination="7xS-Ze-nWB" id="gC2-fC-zGE"/>
                 <outlet property="playButton" destination="SWn-v7-izo" id="QAn-Bo-PW4"/>
                 <outlet property="playView" destination="8Gn-26-H2m" id="kJw-Sp-FyU"/>
                 <outlet property="posterImageView" destination="aug-9L-53r" id="UJu-Hd-AzY"/>

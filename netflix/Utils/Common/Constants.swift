@@ -28,6 +28,8 @@ struct APIURL {
     static let new = "/new"
     static let validateWithLogin = "/validate_with_login"
     static let session = "/session"
+    static let discover = "/discover"
+    static let latest = "/latest"
 }
 
 struct Constants {
@@ -48,6 +50,9 @@ struct APIParamKeys {
     static let username = "username"
     static let password = "password"
     static let requestToken = "request_token"
+    static let sortBy = "sort_by"
+    static let withGenres = "with_genres"
+    static let withOriginalLanguage = "with_original_language"
 }
 
 struct ErrorMessage {

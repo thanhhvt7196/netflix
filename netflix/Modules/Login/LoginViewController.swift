@@ -12,7 +12,7 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class LoginViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
+class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var usernameTextfield: FloatingTextfield!

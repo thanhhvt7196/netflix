@@ -89,6 +89,7 @@ extension OnboardingViewController {
     }
     
     private func configNavigationBar() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         navigationItem.rightBarButtonItems = [privacyButtonItem, helpButtonItem]
         navigationController?.navigationBar.tintColor = .white

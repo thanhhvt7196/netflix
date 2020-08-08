@@ -41,3 +41,13 @@ extension UIApplication {
         return addSubviewToWindowWithoutAnimation(view: view)
     }
 }
+
+extension UIView {
+    func addSubViewWithAnimation(view: UIView) {
+        view.alpha = 0
+        UIView.animate(withDuration: 0.3) {
+            view.alpha = 1
+        }
+        addSubview(view)
+    }
+}

@@ -116,14 +116,12 @@ extension SceneCoordinator: UINavigationControllerDelegate {
                 return FadePushAnimator(type: .navigation)
             } else {
                 return nil
-//                return SystemPushAnimator(type: .navigation)
             }
         case .pop:
             if fromVC is FadeAnimatedViewController {
                 return FadePopAnimator(type: .navigation)
             } else {
                 return nil
-//                return SystemPopAnimator(type: .navigation)
             }
         default:
             return nil

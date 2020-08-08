@@ -23,6 +23,7 @@ struct Movie: Codable {
     var voteAverage: Double?
     var overview: String?
     var releaseDate: String?
+    var genres: [Genre]?
     
     enum CodingKeys: String, CodingKey {
         case popularity
@@ -39,5 +40,6 @@ struct Movie: Codable {
         case voteAverage = "vote_average"
         case overview
         case releaseDate = "release_date"
+        case genres
     }
 }

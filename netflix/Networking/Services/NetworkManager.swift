@@ -27,7 +27,6 @@ class NetworkManager {
     static let apiProvider: MoyaProvider<APIMovie> = {
         let plugins = [NetworkLoggerPlugin(configuration: .init(formatter: .init(responseData: JSONResponseDataFormatter),
                                                                 logOptions: .verbose))]
-        
         return MoyaProvider<APIMovie>(session: APISession.session, plugins: plugins)
     }()
 }

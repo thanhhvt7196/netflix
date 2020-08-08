@@ -11,14 +11,21 @@ import RxSwift
 import RxCocoa
 
 class MovieListCellViewModel: ViewModel {
-    private let movies: Driver<[Movie]>
+    private let movies: [Movie]
+    private let bag = DisposeBag()
     
     init(movies: [Movie]) {
-        self.movies = .just(movies)
+        self.movies = movies
     }
     
     func transform(input: Input) -> Output {
-        return Output(movies: movies)
+        input.itemSelected
+            .drive(onNext: { [weak self] indexPath in
+                guard let self = self, self.movies.indices.contains(indexPath.item) else { return }
+                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movies[indexPath.item]))
+            })
+            .disposed(by: bag)
+        return Output(movies: .just(movies))
     }
 }
 
@@ -29,6 +36,5 @@ extension MovieListCellViewModel {
     
     struct Output {
         var movies: Driver<[Movie]>
-        //        var movieSelected: Driver<Movie>
     }
 }

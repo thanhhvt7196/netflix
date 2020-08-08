@@ -23,6 +23,8 @@ enum APIMovie {
     case getPopularTVShows(page: Int)
     case getTopRatedTvShowsList(page: Int)
     case getTVShowOnTheAir(page: Int)
+    case discoverTV(sortBy: MovieSortType?, page: Int, genre: Genre?, originalLanguage: LanguageCodes?)
+    case getLatestTV
     
     //authentication
     case createRequestToken
@@ -59,6 +61,10 @@ extension APIMovie: TargetType {
             return APIURL.version3 + APIURL.authentication + APIURL.token + APIURL.validateWithLogin
         case .createSession:
             return APIURL.version3 + APIURL.authentication + APIURL.session + APIURL.new
+        case .discoverTV:
+            return APIURL.version3 + APIURL.discover + APIURL.tv
+        case .getLatestTV:
+            return APIURL.version3 + APIURL.tv + APIURL.latest
         }
     }
     
@@ -115,6 +121,19 @@ extension APIMovie: TargetType {
             parameters = [APIParamKeys.requestToken: token]
             urlParameter = [APIParamKeys.APIKey: Constants.APIKey]
             return .requestCompositeParameters(bodyParameters: parameters, bodyEncoding: encoding, urlParameters: urlParameter)
+        case .discoverTV(let sortBy, let page, let genres, let originalLanguage):
+            encoding = URLEncoding.default
+            if let sortType = sortBy?.rawValue {
+                parameters[APIParamKeys.sortBy] = sortType
+            }
+            if let genres = genres {
+                parameters[APIParamKeys.withGenres] = genres
+            }
+            if let language = originalLanguage?.rawValue.lowercased() {
+                parameters[APIParamKeys.withOriginalLanguage] = language
+            }
+            parameters[APIParamKeys.page] = page
+            return .requestParameters(parameters: parameters, encoding: encoding)
         default:
             return .requestParameters(parameters: parameters, encoding: encoding)
         }

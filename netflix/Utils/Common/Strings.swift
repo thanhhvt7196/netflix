@@ -23,10 +23,14 @@ struct Strings {
     static let topRatedMovies = "Top Rated Movies"
     static let topRatedTVShows = "Top Rated TV Shows"
     static let upcomingMovies = "Upcoming Movies"
-    static let onTheAir = "On The Air"
+    static let latestReleases = "Latest Releases"
     static let help = "Help"
     static let privacy = "Privacy"
     static let settings = "Settings"
+    static let mostFavoriteTVShow = "Most Favorite TV Shows"
+    static let USTVShow = "US TVShows"
+    static let KDramas = "K-dramas"
+    static let japaneseSeries = "Japanese Series"
     
     //login validate
     static let username = "Username"

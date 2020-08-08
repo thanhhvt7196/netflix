@@ -20,6 +20,10 @@ enum HomeCategoryViewSectionModel {
     case topRatedTVShows(title: String, items: [Item])
     case upcomingMovie(title: String, items: [Item])
     case tvShowOnTheAir(title: String, items: [Item])
+    case mostFavoriteTVShow(title: String, items: [Item])
+    case USTVShow(title: String, items: [Item])
+    case koreanTVShow(title: String, items: [Item])
+    case japaneseTVShow(title: String, items: [Item])
 }
 
 enum HomeCategoryViewSectionItem {
@@ -49,6 +53,14 @@ extension HomeCategoryViewSectionModel: SectionModelType {
             return items.map { $0 }
         case .topRatedTVShows(_, let items):
             return items.map { $0 }
+        case .mostFavoriteTVShow(_, let items):
+            return items.map { $0 }
+        case .USTVShow(_, let items):
+            return items.map { $0 }
+        case .koreanTVShow(_, let items):
+            return items.map { $0 }
+        case .japaneseTVShow(_, let items):
+            return items.map { $0 }
         }
     }
     
@@ -71,6 +83,14 @@ extension HomeCategoryViewSectionModel: SectionModelType {
         case .tvShowAiringToday(let title, _):
             return title
         case .upcomingMovie(let title, _):
+            return title
+        case .mostFavoriteTVShow(let title, _):
+            return title
+        case .USTVShow(let title, _):
+            return title
+        case .koreanTVShow(let title, _):
+            return title
+        case .japaneseTVShow(let title, _):
             return title
         }
     }
@@ -95,6 +115,14 @@ extension HomeCategoryViewSectionModel: SectionModelType {
             self = .upcomingMovie(title: title, items: items)
         case let .tvShowOnTheAir(title: title, items: _):
             self = .tvShowOnTheAir(title: title, items: items)
+        case let .mostFavoriteTVShow(title: title, items: _):
+            self = .mostFavoriteTVShow(title: title, items: items)
+        case let .USTVShow(title: title, items: _):
+            self = .USTVShow(title: title, items: items)
+        case let .koreanTVShow(title: title, items: _):
+            self = .koreanTVShow(title: title, items: items)
+        case let .japaneseTVShow(title: title, items: _):
+            self = .japaneseTVShow(title: title, items: items)
         }
     }
 }

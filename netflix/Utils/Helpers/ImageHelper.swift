@@ -19,7 +19,10 @@ enum ImageSize: String {
 class ImageHelper {
     static let shared = ImageHelper()
     
-    func pathToURL(path: String, imageSize: ImageSize) -> URL? {
+    func pathToURL(path: String?, imageSize: ImageSize) -> URL? {
+        guard let path = path else {
+            return nil
+        }
         return URL(string: APIURL.imageBaseURL + imageSize.rawValue + path)
     }
 }

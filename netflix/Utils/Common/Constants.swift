@@ -53,6 +53,7 @@ struct APIParamKeys {
     static let sortBy = "sort_by"
     static let withGenres = "with_genres"
     static let withOriginalLanguage = "with_original_language"
+    static let includeVideo = "include_video"
 }
 
 struct ErrorMessage {

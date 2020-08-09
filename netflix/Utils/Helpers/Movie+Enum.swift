@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum MovieSortType: String, CaseIterable {
+enum TVShowSortType: String, CaseIterable {
     case voteAverageDesc = "vote_average.desc"
     case voteAverageAsc = "vote_average.asc"
     case firstAirDateDesc = "first_air_date.desc"
@@ -17,4 +17,13 @@ enum MovieSortType: String, CaseIterable {
     case popularityAsc = "popularity.asc"
 }
 
-
+enum MovieSortType: String, CaseIterable {
+    case voteAverageDesc = "vote_average.desc"
+    case voteAverageAsc = "vote_average.asc"
+    case popularityDesc = "popularity.desc"
+    case popularityAsc = "popularity.asc"
+    case releaseDateDesc = "release_date.desc"
+    case releaseDateAsc = "release_date.asc"
+    case revenueDesc = "revenue.desc"
+    case revenueAsc = "revenue.asc"
+}

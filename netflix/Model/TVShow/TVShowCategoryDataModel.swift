@@ -9,12 +9,12 @@
 import Foundation
 
 struct TVShowCategoryDataModel: Codable {
-    var latestTV: Movie?
     var airingTodayList: [Movie]
     var popularTVShowList: [Movie]
     var topRatedTVShowList: [Movie]
-    var tvShowLatestReleaseList: [Movie]
     var mostFavoriteTVShowList: [Movie]
+    var latestReleaseTVShowList: [Movie]
     var koreanTVShowList: [Movie]
-    var USTVShowList: [Movie]
+    var westernTVShowList: [Movie]
+    var chineseTVShowList: [Movie]
 }

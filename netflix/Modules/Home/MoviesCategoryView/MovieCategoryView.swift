@@ -1,29 +1,28 @@
 //
-//  TVShowCategoryView.swift
+//  MovieCategoryView.swift
 //  netflix
 //
-//  Created by thanh tien on 8/1/20.
+//  Created by thanh tien on 8/9/20.
 //  Copyright © 2020 thanh tien. All rights reserved.
 //
 
 import Foundation
 import UIKit
+import Reusable
 import RxSwift
 import RxCocoa
 import RxDataSources
-import Reusable
 
-class TVShowCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
+class MovieCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var tableView: UITableView!
-    
-    var viewModel: TVShowCategoryViewModel!
+    var viewModel: MoviesCategoryViewModel!
     private let bag = DisposeBag()
     
     private let fetchDataTrigger = PublishSubject<Int?>()
     private let clearDataTrigger = PublishSubject<Void>()
     private var dataSources: RxTableViewSectionedReloadDataSource<HomeCategoryViewSectionModel>!
     
-    init(viewModel: TVShowCategoryViewModel, frame: CGRect) {
+    init(viewModel: MoviesCategoryViewModel, frame: CGRect) {
         super.init(frame: frame)
         self.viewModel = viewModel
         commonInit()
@@ -47,7 +46,7 @@ class TVShowCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bind() {
-        let input = TVShowCategoryViewModel.Input(
+        let input = MoviesCategoryViewModel.Input(
             fetchDataTrigger: fetchDataTrigger.asDriverOnErrorJustComplete(),
             clearDataTrigger: clearDataTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
@@ -83,7 +82,7 @@ class TVShowCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
     }
 }
 
-extension TVShowCategoryView {
+extension MovieCategoryView {
     private func configTableView() {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
@@ -116,14 +115,14 @@ extension TVShowCategoryView {
     }
 }
 
-extension TVShowCategoryView {
+extension MovieCategoryView {
     func loadData(genreID: Int?) {
         clearDataTrigger.onNext(())
         fetchDataTrigger.onNext(genreID)
     }
 }
 
-extension TVShowCategoryView: UITableViewDelegate {
+extension MovieCategoryView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

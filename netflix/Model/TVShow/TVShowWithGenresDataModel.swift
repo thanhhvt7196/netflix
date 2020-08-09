@@ -11,8 +11,8 @@ import Foundation
 struct TVShowWithGenresDataModel: Codable {
     var popularTVShowList: [Movie]
     var mostFavoriteTVShowList: [Movie]
-    var latestReleaseTVShowList: [Movie]
     var koreanTVShowList: [Movie]
-    var USTVShowList: [Movie]
+    var WesternTVShowList: [Movie]
     var japaneseTVShowList: [Movie]
+    var chineseTVShowList: [Movie]
 }

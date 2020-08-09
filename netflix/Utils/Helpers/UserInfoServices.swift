@@ -37,8 +37,8 @@ class UserInfoService {
                 self.verifyRequestToken(username: username, password: password, token: token)
             }, onError: { [weak self] error in
                 guard let self = self else { return }
-                self.loginResult.onNext(.failure(error))
                 self.activityIndicator.onNext(false)
+                self.loginResult.onNext(.failure(error))
             })
             .disposed(by: bag)
     }
@@ -50,8 +50,8 @@ class UserInfoService {
                 self.createSession(token: token, username: username, password: password)
             }, onError: { [weak self] error in
                 guard let self = self else { return }
-                self.loginResult.onNext(.failure(error))
                 self.activityIndicator.onNext(false)
+                self.loginResult.onNext(.failure(error))
             })
             .disposed(by: bag)
     }
@@ -60,18 +60,32 @@ class UserInfoService {
         HostAPIClient.performApiNetworkCall(router: .createSession(token: token), type: SessionResponse.self)
             .subscribe(onNext: { [weak self] sessionResponse in
                 guard let self = self, let sessionID = sessionResponse.sessionID else { return }
-                self.loginResult.onNext(.success(()))
-                let loginObject = LoginObject(username: username, password: password)
-                loginObject.save()
-                PersistentManager.shared.sessionID = sessionID
-                PersistentManager.shared.requestToken = token
-                print("SessionID = \(sessionID)")
-                print("token = \(token)")
-                self.activityIndicator.onNext(false)
+                self.getAccoundDetail(token: token, sessionID: sessionID, username: username, password: password)
             }, onError: { [weak self] error in
                 guard let self = self else { return }
-                self.loginResult.onNext(.failure(error))
                 self.activityIndicator.onNext(false)
+                self.loginResult.onNext(.failure(error))
+            })
+            .disposed(by: bag)
+    }
+    
+    private func getAccoundDetail(token: String, sessionID: String, username: String, password: String) {
+        HostAPIClient.performApiNetworkCall(router: .getAccountDetail(sessionID: sessionID), type: AccountDetail.self)
+            .subscribe(onNext: { [weak self] accountDetail in
+                guard let self = self else { return }
+                // save data
+                let loginObject = LoginObject(username: username, password: password)
+                loginObject.save()
+                let accountDetailObject = AccountDetailObject(accountDetail: accountDetail)
+                accountDetailObject.save()
+                PersistentManager.shared.requestToken = token
+                PersistentManager.shared.sessionID = sessionID
+                self.activityIndicator.onNext(false)
+                self.loginResult.onNext(.success(()))
+            }, onError: { [weak self] error in
+                guard let self = self else { return }
+                self.activityIndicator.onNext(false)
+                self.loginResult.onNext(.failure(error))
             })
             .disposed(by: bag)
     }

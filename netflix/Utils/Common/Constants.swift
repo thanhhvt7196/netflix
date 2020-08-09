@@ -30,6 +30,7 @@ struct APIURL {
     static let session = "/session"
     static let discover = "/discover"
     static let latest = "/latest"
+    static let account = "/account"
 }
 
 struct Constants {
@@ -54,6 +55,7 @@ struct APIParamKeys {
     static let withGenres = "with_genres"
     static let withOriginalLanguage = "with_original_language"
     static let includeVideo = "include_video"
+    static let sessionID = "session_id"
 }
 
 struct ErrorMessage {

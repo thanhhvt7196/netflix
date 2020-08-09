@@ -33,6 +33,9 @@ enum APIMovie {
     case createRequestToken
     case verifyRequestToken(username: String, password: String, token: String)
     case createSession(token: String)
+    
+    //user info
+    case getAccountDetail(sessionID: String)
 }
 
 extension APIMovie: TargetType {
@@ -72,6 +75,8 @@ extension APIMovie: TargetType {
             return APIURL.version3 + APIURL.movie + APIURL.latest
         case .discoverMovie:
             return APIURL.version3 + APIURL.discover + APIURL.movie
+        case .getAccountDetail:
+            return APIURL.version3 + APIURL.account
         }
     }
     
@@ -154,6 +159,10 @@ extension APIMovie: TargetType {
             }
             parameters[APIParamKeys.includeVideo] = video
             parameters[APIParamKeys.page] = page
+            return .requestParameters(parameters: parameters, encoding: encoding)
+        case .getAccountDetail(let sessionID):
+            encoding = URLEncoding.default
+            parameters = [APIParamKeys.APIKey: Constants.APIKey, APIParamKeys.sessionID: sessionID]
             return .requestParameters(parameters: parameters, encoding: encoding)
         default:
             return .requestParameters(parameters: parameters, encoding: encoding)

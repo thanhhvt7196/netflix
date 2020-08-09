@@ -91,6 +91,10 @@
 		0C3BC72224CA29DF00DFCEBA /* ChooseCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C3BC72124CA29DF00DFCEBA /* ChooseCategoryView.xib */; };
 		0C3BC72524CA2B2E00DFCEBA /* HomeChooseCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BC72324CA2B2E00DFCEBA /* HomeChooseCategoryCell.swift */; };
 		0C3BC72624CA2B2E00DFCEBA /* HomeChooseCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C3BC72424CA2B2E00DFCEBA /* HomeChooseCategoryCell.xib */; };
+		0C3DD64524E01A8C003156C9 /* MyListCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3DD64424E01A8C003156C9 /* MyListCategoryViewModel.swift */; };
+		0C3DD64724E01ABF003156C9 /* MyListCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3DD64624E01ABF003156C9 /* MyListCategoryView.swift */; };
+		0C3DD64924E01B5D003156C9 /* MyListCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C3DD64824E01B5D003156C9 /* MyListCategoryView.xib */; };
+		0C3DD64B24E01D00003156C9 /* AccountDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3DD64A24E01D00003156C9 /* AccountDetail.swift */; };
 		0C4A35B824C710BA007671C2 /* TabbarAnimationTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4A35B724C710BA007671C2 /* TabbarAnimationTransitioning.swift */; };
 		0C4A35BB24C71201007671C2 /* APIMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4A35BA24C71201007671C2 /* APIMovie.swift */; };
 		0C4A35BD24C7125A007671C2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4A35BC24C7125A007671C2 /* Constants.swift */; };
@@ -290,6 +294,10 @@
 		0C3BC72124CA29DF00DFCEBA /* ChooseCategoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseCategoryView.xib; sourceTree = "<group>"; };
 		0C3BC72324CA2B2E00DFCEBA /* HomeChooseCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeChooseCategoryCell.swift; sourceTree = "<group>"; };
 		0C3BC72424CA2B2E00DFCEBA /* HomeChooseCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeChooseCategoryCell.xib; sourceTree = "<group>"; };
+		0C3DD64424E01A8C003156C9 /* MyListCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListCategoryViewModel.swift; sourceTree = "<group>"; };
+		0C3DD64624E01ABF003156C9 /* MyListCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListCategoryView.swift; sourceTree = "<group>"; };
+		0C3DD64824E01B5D003156C9 /* MyListCategoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyListCategoryView.xib; sourceTree = "<group>"; };
+		0C3DD64A24E01D00003156C9 /* AccountDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetail.swift; sourceTree = "<group>"; };
 		0C4A35B724C710BA007671C2 /* TabbarAnimationTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarAnimationTransitioning.swift; sourceTree = "<group>"; };
 		0C4A35BA24C71201007671C2 /* APIMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMovie.swift; sourceTree = "<group>"; };
 		0C4A35BC24C7125A007671C2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -660,6 +668,16 @@
 			path = ChooseCategoryView;
 			sourceTree = "<group>";
 		};
+		0C3DD64324E01A4F003156C9 /* MyListCategoryView */ = {
+			isa = PBXGroup;
+			children = (
+				0C3DD64424E01A8C003156C9 /* MyListCategoryViewModel.swift */,
+				0C3DD64624E01ABF003156C9 /* MyListCategoryView.swift */,
+				0C3DD64824E01B5D003156C9 /* MyListCategoryView.xib */,
+			);
+			path = MyListCategoryView;
+			sourceTree = "<group>";
+		};
 		0C4A35B524C710A0007671C2 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
@@ -947,6 +965,7 @@
 		0C8D570B24C6DEBC00E2CB08 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0C3DD64324E01A4F003156C9 /* MyListCategoryView */,
 				0C9C5A4924DEE1E300582C1E /* MoviesCategoryView */,
 				0C72B44424D48C5C007378A4 /* DataSource */,
 				0C72B43F24D48A5E007378A4 /* TVShowCategoryView */,
@@ -1135,6 +1154,7 @@
 			isa = PBXGroup;
 			children = (
 				0CFCB18D24CEDF03005A290A /* LoginObject.swift */,
+				0C3DD64A24E01D00003156C9 /* AccountDetail.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1278,6 +1298,7 @@
 				0C94B62C24D1228000BDE3CC /* WebViewController.storyboard in Resources */,
 				0C2BAA7024C6E8CF003FD8A9 /* MESSAGE_SOUND_BOOM_BOOM.aif in Resources */,
 				0C1EE86624C69D370046BB24 /* Main.storyboard in Resources */,
+				0C3DD64924E01B5D003156C9 /* MyListCategoryView.xib in Resources */,
 				0C35E9E824D00D49001A612D /* Netflix_N_video_large.mp4 in Resources */,
 				0C2BAA7324C6E8CF003FD8A9 /* dtmf_53.wav in Resources */,
 				0C35E9E724D00D49001A612D /* Netflix_N_video.mp4 in Resources */,
@@ -1345,6 +1366,7 @@
 				0C8D570024C6DD5100E2CB08 /* Int+Extension.swift in Sources */,
 				0C9C5A4D24DEE8BB00582C1E /* MovieCategoryDataModel.swift in Sources */,
 				0C8D56EB24C6DD5100E2CB08 /* Date+Extension.swift in Sources */,
+				0C3DD64B24E01D00003156C9 /* AccountDetail.swift in Sources */,
 				0CAAE56824CD8136001C65D7 /* HeaderViewForCategory.swift in Sources */,
 				0C0247E124CE768A00C023A8 /* FloatingTextfieldSetting.swift in Sources */,
 				0C35E9F024D02A2F001A612D /* OnboardingView1.swift in Sources */,
@@ -1385,6 +1407,7 @@
 				0C8D56FE24C6DD5100E2CB08 /* UITabbarController+Extension.swift in Sources */,
 				0C78ECA824D3C10D004170F6 /* MovieListTableViewCell.swift in Sources */,
 				0C8679F124C7D9700053496B /* Result.swift in Sources */,
+				0C3DD64524E01A8C003156C9 /* MyListCategoryViewModel.swift in Sources */,
 				0C8D570224C6DD5100E2CB08 /* UIBarButtonItem+Rx.swift in Sources */,
 				0CAAE57124CD861B001C65D7 /* HeaderMovieViewModel.swift in Sources */,
 				0C1035EC24C6EDD400571EA6 /* SearchViewModel.swift in Sources */,
@@ -1468,6 +1491,7 @@
 				0CD80D8424D29E1700155393 /* SplashViewModel.swift in Sources */,
 				0C8D56F424C6DD5100E2CB08 /* UIColor+Extension.swift in Sources */,
 				0C72B42F24D41424007378A4 /* FadePushAnimator.swift in Sources */,
+				0C3DD64724E01ABF003156C9 /* MyListCategoryView.swift in Sources */,
 				0C3BC71E24CA27A100DFCEBA /* ChooseCategoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

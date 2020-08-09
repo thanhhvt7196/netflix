@@ -18,7 +18,6 @@ class HomeCategoryViewModel: ViewModel {
     
     func transform(input: Input) -> Output {
         input.clearDataTrigger.map { _ in [] }.drive(dataSource).disposed(by: bag)
-//        input.fetchDataTrigger.map { _ in true }.drive(loading).disposed(by: bag)
         let activityIndicator = ActivityIndicator()
         let data = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
             return self.getHomeCategoryData()
@@ -42,41 +41,41 @@ extension HomeCategoryViewModel {
     private func getHomeCategoryData() -> Observable<HomeCategoryDataModel> {
         let nowPlayingList = getMovieNowplaying(page: 1)
                                 .trackError(errorTracker)
-                                .compactMap { $0.results }
+                                .map { $0.results ?? [] }
                                 .catchErrorJustReturn([])
                 
         let tvShowAiringTodayList = getTVShowAiringToday(page: 1)
-                                        .compactMap { $0.results }
+                                        .map { $0.results ?? [] }
                                         .trackError(errorTracker)
                                         .catchErrorJustReturn([])
         
         let popularMoviesList = getPopularMovies(page: 1)
-                                    .compactMap { $0.results }
+                                    .map { $0.results ?? [] }
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
         
         let popularTVShowsList = getPopularTVShows(page: 1)
-                                    .compactMap { $0.results }
+                                    .map { $0.results ?? [] }
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
         
         let topRatedMoviesList = getTopRatedMovies(page: 1)
-                                    .compactMap { $0.results }
+                                    .map { $0.results ?? [] }
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
         
         let topRatedTVShowsList = getTopRatedTVShows(page: 1)
-                                    .compactMap { $0.results }
+                                    .map { $0.results ?? [] }
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
         
         let upcomingMoviesList = getUpcomingMovies(page: 1)
-                                    .compactMap { $0.results }
+                                    .map { $0.results ?? [] }
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
         
         let tvShowOnTheAirList = getTVShowOnTheAir(page: 1)
-                                    .compactMap { $0.results }
+                                    .map { $0.results ?? [] }
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
         
@@ -119,7 +118,7 @@ extension HomeCategoryViewModel {
             sections.append(.tvShowAiringToday(title: Strings.airingToday, items: [.moviesListItem(movies: data.tvShowAiringToday)]))
         }
         if data.tvShowLatestReleaseList.count > 0 {
-            sections.append(.tvShowOnTheAir(title: Strings.latestReleases, items: [.moviesListItem(movies: data.tvShowLatestReleaseList)]))
+            sections.append(.latestReleaseTVShow(title: Strings.latestReleases, items: [.moviesListItem(movies: data.tvShowLatestReleaseList)]))
         }
         if data.popularMovieList.count > 0 {
             sections.append(.popularMovies(title: Strings.popularMovies, items: [.moviesListItem(movies: data.popularMovieList)]))

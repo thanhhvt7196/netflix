@@ -19,11 +19,17 @@ enum HomeCategoryViewSectionModel {
     case topRatedMovies(title: String, items: [Item])
     case topRatedTVShows(title: String, items: [Item])
     case upcomingMovie(title: String, items: [Item])
-    case tvShowOnTheAir(title: String, items: [Item])
+    case latestReleaseTVShow(title: String, items: [Item])
+    case latestReleaseMovie(title: String, items: [Item])
     case mostFavoriteTVShow(title: String, items: [Item])
-    case USTVShow(title: String, items: [Item])
+    case WesternTVShow(title: String, items: [Item])
     case koreanTVShow(title: String, items: [Item])
     case japaneseTVShow(title: String, items: [Item])
+    case mostFavoriteMovie(title: String, items: [Item])
+    case adultMovie(title: String, items: [Item])
+    case topGrossingMovie(title: String, items: [Item])
+    case chineseTVShow(title: String, items: [Item])
+    case chineseMovie(title: String, items: [Item])
 }
 
 enum HomeCategoryViewSectionItem {
@@ -49,17 +55,29 @@ extension HomeCategoryViewSectionModel: SectionModelType {
             return items.map { $0 }
         case .upcomingMovie(_, let items):
             return items.map { $0 }
-        case .tvShowOnTheAir(_, let items):
+        case .latestReleaseTVShow(_, let items):
             return items.map { $0 }
         case .topRatedTVShows(_, let items):
             return items.map { $0 }
         case .mostFavoriteTVShow(_, let items):
             return items.map { $0 }
-        case .USTVShow(_, let items):
+        case .WesternTVShow(_, let items):
             return items.map { $0 }
         case .koreanTVShow(_, let items):
             return items.map { $0 }
         case .japaneseTVShow(_, let items):
+            return items.map { $0 }
+        case .adultMovie(_, let items):
+            return items.map { $0 }
+        case .mostFavoriteMovie(_, let items):
+            return items.map { $0 }
+        case .topGrossingMovie(_, let items):
+            return items.map { $0 }
+        case .latestReleaseMovie(_, let items):
+            return items.map { $0 }
+        case .chineseTVShow(_, let items):
+            return items.map { $0 }
+        case .chineseMovie(_, let items):
             return items.map { $0 }
         }
     }
@@ -78,7 +96,7 @@ extension HomeCategoryViewSectionModel: SectionModelType {
             return title
         case .topRatedTVShows(let title, _):
             return title
-        case .tvShowOnTheAir(let title, _):
+        case .latestReleaseTVShow(let title, _):
             return title
         case .tvShowAiringToday(let title, _):
             return title
@@ -86,11 +104,23 @@ extension HomeCategoryViewSectionModel: SectionModelType {
             return title
         case .mostFavoriteTVShow(let title, _):
             return title
-        case .USTVShow(let title, _):
+        case .WesternTVShow(let title, _):
             return title
         case .koreanTVShow(let title, _):
             return title
         case .japaneseTVShow(let title, _):
+            return title
+        case .adultMovie(let title, _):
+            return title
+        case .mostFavoriteMovie(let title, _):
+            return title
+        case .topGrossingMovie(let title, _):
+            return title
+        case .latestReleaseMovie(let title, _):
+            return title
+        case .chineseMovie(let title, _):
+            return title
+        case .chineseTVShow(let title, _):
             return title
         }
     }
@@ -113,16 +143,28 @@ extension HomeCategoryViewSectionModel: SectionModelType {
             self = .topRatedTVShows(title: title, items: items)
         case let .upcomingMovie(title: title, items: _):
             self = .upcomingMovie(title: title, items: items)
-        case let .tvShowOnTheAir(title: title, items: _):
-            self = .tvShowOnTheAir(title: title, items: items)
+        case let .latestReleaseTVShow(title: title, items: _):
+            self = .latestReleaseTVShow(title: title, items: items)
         case let .mostFavoriteTVShow(title: title, items: _):
             self = .mostFavoriteTVShow(title: title, items: items)
-        case let .USTVShow(title: title, items: _):
-            self = .USTVShow(title: title, items: items)
+        case let .WesternTVShow(title: title, items: _):
+            self = .WesternTVShow(title: title, items: items)
         case let .koreanTVShow(title: title, items: _):
             self = .koreanTVShow(title: title, items: items)
         case let .japaneseTVShow(title: title, items: _):
             self = .japaneseTVShow(title: title, items: items)
+        case let .adultMovie(title: title, items: _):
+            self = .adultMovie(title: title, items: items)
+        case let .mostFavoriteMovie(title: title, items: _):
+            self = .mostFavoriteMovie(title: title, items: items)
+        case let .topGrossingMovie(title: title, items: _):
+            self = .topGrossingMovie(title: title, items: items)
+        case let .latestReleaseMovie(title: title, items: _):
+            self = .latestReleaseMovie(title: title, items: items)
+        case let .chineseMovie(title: title, items: _):
+            self = .chineseMovie(title: title, items: items)
+        case let .chineseTVShow(title: title, items: _):
+            self = .chineseTVShow(title: title, items: items)
         }
     }
 }

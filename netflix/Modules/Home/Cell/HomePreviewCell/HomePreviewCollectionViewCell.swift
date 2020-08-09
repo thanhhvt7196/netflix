@@ -42,8 +42,8 @@ class HomePreviewCollectionViewCell: UICollectionViewCell, NibReusable, ViewMode
         let input = HomePreviewCellViewModel.Input()
         let output = viewModel.transform(input: input)
         output.movie
-            .compactMap { $0.posterPath }
-            .compactMap { ImageHelper.shared.pathToURL(path: $0, imageSize: .w200)}.drive(imageView.rx.imageURL)
+            .map { $0.posterPath }
+            .map { ImageHelper.shared.pathToURL(path: $0, imageSize: .w200)}.drive(imageView.rx.imageURL)
             .disposed(by: bag)
     }
 }

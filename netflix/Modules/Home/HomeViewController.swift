@@ -45,6 +45,7 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
     
     private var homeCategoryView: HomeCategoryView!
     private var tvShowCategoryView: TVShowCategoryView!
+    private var movieCategoryView: MovieCategoryView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,9 +63,12 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
     }
     
     private func bind() {
-        let viewDidAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:))).filter({ [weak self] _ -> Bool in
-            return (self?.isFirstLaunch ?? false)
-        }).mapToVoid().asDriverOnErrorJustComplete()
+        let viewDidAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
+            .filter({ [weak self] _ -> Bool in
+                return (self?.isFirstLaunch ?? false)
+            })
+            .mapToVoid()
+            .asDriverOnErrorJustComplete()
         
         let input = HomeViewModel.Input(getGenresTrigger: viewDidAppear)
         let output = viewModel.transform(input: input)
@@ -112,7 +116,6 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
                     PersistentManager.shared.categoryType = .tvShow
                     self.animateTVShowSelected()
                     self.changeCategoryView(type: .tvShow)
-                    //load tv show data
                 case .tvShow:
                     self.showChooseCategoryTypeView()
                 default:
@@ -128,7 +131,7 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
                 case .home:
                     PersistentManager.shared.categoryType = .movies
                     self.animateMoviesSelected()
-                    //load tv show data
+                    self.changeCategoryView(type: .movies)
                 case .movies:
                     self.showChooseCategoryTypeView()
                 default:
@@ -178,6 +181,9 @@ extension HomeViewController {
         
         let tvShowCategoryViewModel = TVShowCategoryViewModel()
         tvShowCategoryView = TVShowCategoryView(viewModel: tvShowCategoryViewModel, frame: containerView.bounds)
+        
+        let movieCategoryViewModel = MoviesCategoryViewModel()
+        movieCategoryView = MovieCategoryView(viewModel: movieCategoryViewModel, frame: containerView.bounds)
     }
     
     private func initialGenreButtons() {
@@ -390,7 +396,6 @@ extension HomeViewController {
                     self.handleCategoryTypeChange(type: type)
                     self.changeCategoryView(type: type)
                 }
-                
             })
             .disposed(by: bag)
     }
@@ -404,6 +409,14 @@ extension HomeViewController {
                 guard let self = self else { return }
                 chooseCategoryView.dismissWithAnimation {
                     self.handleCategoryChange(genre: genre)
+                    switch PersistentManager.shared.categoryType {
+                    case .home, .mylist:
+                        break
+                    case .tvShow:
+                        self.tvShowCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
+                    case .movies:
+                        self.movieCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
+                    }
                 }
             })
             .disposed(by: chooseCategoryView.bag)
@@ -437,7 +450,6 @@ extension HomeViewController {
     private func handleCategoryChange(genre: Genre) {
         PersistentManager.shared.currentGenre = genre.id
         allGenreButton.setTitle(title: genre.name ?? Strings.allGenres)
-        //load current genre data
     }
 }
 
@@ -451,7 +463,11 @@ extension HomeViewController {
         case .tvShow:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
             containerView.addSubViewWithAnimation(view: tvShowCategoryView)
-            tvShowCategoryView.loadData()
+            tvShowCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
+        case .movies:
+            containerView.subviews.forEach({ $0.removeFromSuperview()})
+            containerView.addSubViewWithAnimation(view: movieCategoryView)
+            movieCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
         default:
             break
         }

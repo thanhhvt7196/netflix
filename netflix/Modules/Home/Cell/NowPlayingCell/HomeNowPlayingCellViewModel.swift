@@ -29,6 +29,5 @@ extension HomeNowPlayingCellViewModel {
     
     struct Output {
         var movies: Driver<[Movie]>
-//        var movieSelected: Driver<Movie>
     }
 }

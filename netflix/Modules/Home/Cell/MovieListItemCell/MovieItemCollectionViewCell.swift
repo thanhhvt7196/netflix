@@ -29,6 +29,7 @@ class MovieItemCollectionViewCell: UICollectionViewCell, NibReusable, ViewModelB
     override func prepareForReuse() {
         super.prepareForReuse()
         bag = DisposeBag()
+        imageView.image = nil
     }
     
     func bindViewModel(viewModel: MovieItemCellViewModel) {
@@ -40,8 +41,8 @@ class MovieItemCollectionViewCell: UICollectionViewCell, NibReusable, ViewModelB
         let input = MovieItemCellViewModel.Input()
         let output = viewModel.transform(input: input)
         output.movie
-            .compactMap { $0.posterPath }
-            .compactMap { ImageHelper.shared.pathToURL(path: $0, imageSize: .w200)}.drive(imageView.rx.imageURL)
+            .map { $0.posterPath }
+            .map { ImageHelper.shared.pathToURL(path: $0, imageSize: .w200)}.drive(imageView.rx.imageURL)
             .disposed(by: bag)
     }
 }

@@ -16,6 +16,9 @@ enum APIMovie {
     case getPopularMovies(page: Int)
     case getTopRatedMoviesList(page: Int)
     case getUpcomingMoviesList(page: Int)
+    case getLatestMovie
+    case discoverMovie(sortBy: MovieSortType?, page: Int, genre: Int?, includeVideo: Bool, originalLanguage: LanguageCodes?)
+    
     
     //TV Shows
     case getTvShowGenresList
@@ -23,7 +26,7 @@ enum APIMovie {
     case getPopularTVShows(page: Int)
     case getTopRatedTvShowsList(page: Int)
     case getTVShowOnTheAir(page: Int)
-    case discoverTV(sortBy: MovieSortType?, page: Int, genre: Genre?, originalLanguage: LanguageCodes?)
+    case discoverTV(sortBy: TVShowSortType?, page: Int, genre: Int?, originalLanguage: LanguageCodes?)
     case getLatestTV
     
     //authentication
@@ -65,6 +68,10 @@ extension APIMovie: TargetType {
             return APIURL.version3 + APIURL.discover + APIURL.tv
         case .getLatestTV:
             return APIURL.version3 + APIURL.tv + APIURL.latest
+        case .getLatestMovie:
+            return APIURL.version3 + APIURL.movie + APIURL.latest
+        case .discoverMovie:
+            return APIURL.version3 + APIURL.discover + APIURL.movie
         }
     }
     
@@ -121,17 +128,31 @@ extension APIMovie: TargetType {
             parameters = [APIParamKeys.requestToken: token]
             urlParameter = [APIParamKeys.APIKey: Constants.APIKey]
             return .requestCompositeParameters(bodyParameters: parameters, bodyEncoding: encoding, urlParameters: urlParameter)
-        case .discoverTV(let sortBy, let page, let genres, let originalLanguage):
+        case .discoverTV(let sortBy, let page, let genre, let originalLanguage):
             encoding = URLEncoding.default
             if let sortType = sortBy?.rawValue {
                 parameters[APIParamKeys.sortBy] = sortType
             }
-            if let genres = genres {
-                parameters[APIParamKeys.withGenres] = genres
+            if let genre = genre {
+                parameters[APIParamKeys.withGenres] = genre
             }
             if let language = originalLanguage?.rawValue.lowercased() {
                 parameters[APIParamKeys.withOriginalLanguage] = language
             }
+            parameters[APIParamKeys.page] = page
+            return .requestParameters(parameters: parameters, encoding: encoding)
+        case .discoverMovie(let sortBy, let page, let genre, let video, let originalLanguage):
+            encoding = URLEncoding.default
+            if let sortType = sortBy?.rawValue {
+                parameters[APIParamKeys.sortBy] = sortType
+            }
+            if let genre = genre {
+                parameters[APIParamKeys.withGenres] = genre
+            }
+            if let language = originalLanguage?.rawValue.lowercased() {
+                parameters[APIParamKeys.withOriginalLanguage] = language
+            }
+            parameters[APIParamKeys.includeVideo] = video
             parameters[APIParamKeys.page] = page
             return .requestParameters(parameters: parameters, encoding: encoding)
         default:

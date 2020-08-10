@@ -16,25 +16,19 @@ class MyListViewModel: ViewModel {
     
     func transform(input: Input) -> Output {
         let userInfoService = UserInfoService()
-        let activityIndicator = ActivityIndicator()
-        let mylist = BehaviorRelay<[Movie]>(value: [])
-//        input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
-//                return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
-//                    .trackActivity(activityIndicator)
-//                    .asDriver(onErrorJustReturn: [])
-//            }
-//            .asObservable()
-//            .merge(with: input.clearDataTrigger.asObservable().map { _ in [] })
-//            .bind(to: mylist)
-//            .disposed(by: bag)
-        let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
-            return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
-                .trackActivity(activityIndicator)
-                .asDriver(onErrorJustReturn: [])
-        }
-        let clearDataTrigger = input.clearDataTrigger.map { _ in [Movie]() }
-        Driver.merge(myListData, clearDataTrigger).drive(mylist).disposed(by: bag)
-        return Output(mylist: mylist.asDriver())
+                let activityIndicator = ActivityIndicator()
+                let mylist = BehaviorRelay<[Movie]>(value: [])
+                let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
+                    return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
+                        .trackActivity(activityIndicator)
+                        .asDriver(onErrorJustReturn: [])
+                        .do(onNext: { watchList in
+                            PersistentManager.shared.watchList = watchList
+                        })
+                }
+                let clearDataTrigger = input.clearDataTrigger.map { _ in [Movie]() }
+                Driver.merge(myListData, clearDataTrigger).drive(mylist).disposed(by: bag)
+                return Output(mylist: mylist.asDriver())
     }
 }
 

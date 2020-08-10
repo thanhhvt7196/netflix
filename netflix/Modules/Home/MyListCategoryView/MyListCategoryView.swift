@@ -51,6 +51,12 @@ class MyListCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
             clearDataTrigger: clearDataTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
         
+        output.mylist
+            .drive(onNext: { mylist in
+                print("mylist count = \(mylist.count)")
+            })
+            .disposed(by: bag)
+        
 //        output.error
 //            .drive(onNext: { error in
 //                print("Error blahblah = \(error)")
@@ -62,5 +68,12 @@ class MyListCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
 //            .disposed(by: bag)
 //        
 //        output.indicator.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
+    }
+}
+
+extension MyListCategoryView {
+    func loadData() {
+        clearDataTrigger.onNext(())
+        fetchDataTrigger.onNext(())
     }
 }

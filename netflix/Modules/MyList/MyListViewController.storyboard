@@ -15,19 +15,7 @@
                     <view key="view" contentMode="scaleToFill" id="SyW-Ut-dqI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My list" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vB-KL-M7j">
-                                <rect key="frame" x="172" y="433" width="70" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="6vB-KL-M7j" firstAttribute="centerX" secondItem="SyW-Ut-dqI" secondAttribute="centerX" id="aGz-dE-8OQ"/>
-                            <constraint firstItem="6vB-KL-M7j" firstAttribute="centerY" secondItem="SyW-Ut-dqI" secondAttribute="centerY" id="xah-dA-RKF"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KpG-Kz-QAZ"/>
                     </view>
                 </viewController>

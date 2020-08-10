@@ -46,6 +46,7 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
     private var homeCategoryView: HomeCategoryView!
     private var tvShowCategoryView: TVShowCategoryView!
     private var movieCategoryView: MovieCategoryView!
+    private var mylistCategoryView: MyListCategoryView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,6 +158,7 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
                 case .home:
                     PersistentManager.shared.categoryType = .mylist
                     self.animateMyListSelected()
+                    self.changeCategoryView(type: .mylist)
                     //load tv show data
                 case .mylist:
                     self.showChooseCategoryTypeView()
@@ -194,6 +196,9 @@ extension HomeViewController {
         
         let movieCategoryViewModel = MoviesCategoryViewModel()
         movieCategoryView = MovieCategoryView(viewModel: movieCategoryViewModel, frame: containerView.bounds)
+        
+        let mylistCategoryViewModel = MyListCategoryViewModel()
+        mylistCategoryView = MyListCategoryView(viewModel: mylistCategoryViewModel, frame: containerView.bounds)
     }
     
     private func initialGenreButtons() {
@@ -438,13 +443,11 @@ extension HomeViewController {
         guard type != PersistentManager.shared.categoryType else {
             PersistentManager.shared.currentGenre = PersistentManager.shared.allGenre.id
             allGenreButton.setTitle(title: Strings.allGenres)
-            //load currentType data
             return
         }
         PersistentManager.shared.categoryType = type
         PersistentManager.shared.currentGenre = PersistentManager.shared.allGenre.id
         allGenreButton.setTitle(title: Strings.allGenres)
-        //load currentType data
         switch type {
         case .home:
             animateGenresDeselected()
@@ -478,8 +481,10 @@ extension HomeViewController {
             containerView.subviews.forEach({ $0.removeFromSuperview()})
             containerView.addSubViewWithAnimation(view: movieCategoryView)
             movieCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
-        default:
-            break
+        case .mylist:
+            containerView.subviews.forEach({ $0.removeFromSuperview()})
+            containerView.addSubViewWithAnimation(view: mylistCategoryView)
+            mylistCategoryView.loadData()
         }
     }
 }

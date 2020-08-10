@@ -11,8 +11,56 @@ import RxSwift
 import RxCocoa
 
 class MyListCategoryViewModel: ViewModel {
+    private let bag = DisposeBag()
+    private let errorTracker = ErrorTracker()
+    
     func transform(input: Input) -> Output {
-        return Output()
+        let userInfoService = UserInfoService()
+                let activityIndicator = ActivityIndicator()
+                let mylist = BehaviorRelay<[Movie]>(value: [])
+        //        input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
+        //                return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
+        //                    .trackActivity(activityIndicator)
+        //                    .asDriver(onErrorJustReturn: [])
+        //            }
+        //            .asObservable()
+        //            .merge(with: input.clearDataTrigger.asObservable().map { _ in [] })
+        //            .bind(to: mylist)
+        //            .disposed(by: bag)
+                let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
+                    return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
+                        .trackActivity(activityIndicator)
+                        .asDriver(onErrorJustReturn: [])
+                }
+                let clearDataTrigger = input.clearDataTrigger.map { _ in [Movie]() }
+                Driver.merge(myListData, clearDataTrigger).drive(mylist).disposed(by: bag)
+                return Output(mylist: mylist.asDriver())
+    }
+}
+
+extension MyListCategoryViewModel {
+    private func getMovieWatchList(accountID: Int) -> Observable<MovieWatchListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getMovieWatchList(accountID: accountID), type: MovieWatchListResponse.self)
+    }
+    
+    private func getTVShowWatchList(accountID: Int) -> Observable<TVShowWatchListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getTVShowWatchList(accountID: accountID), type: TVShowWatchListResponse.self)
+    }
+    
+    private func getMyListData(accountID: Int) -> Observable<[Movie]> {
+        let movieWatchList = getMovieWatchList(accountID: accountID)
+                                .trackError(errorTracker)
+                                .map { $0.results ?? [] }
+                                .catchErrorJustReturn([])
+        
+        let tvShowWatchList = getTVShowWatchList(accountID: accountID)
+                                .trackError(errorTracker)
+                                .map { $0.results ?? [] }
+                                .catchErrorJustReturn([])
+        
+        return Observable.zip(tvShowWatchList, movieWatchList)
+                        .map { [$0, $1] }
+                        .map { ArrayHelper.combine(arrays: $0) }
     }
 }
 
@@ -23,6 +71,6 @@ extension MyListCategoryViewModel {
     }
     
     struct Output {
-        
+        var mylist: Driver<[Movie]>
     }
 }

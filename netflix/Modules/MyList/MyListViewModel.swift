@@ -13,22 +13,30 @@ import RxCocoa
 class MyListViewModel: ViewModel {
     private let bag = DisposeBag()
     private let errorTracker = ErrorTracker()
+    let isTabbarItem: Bool
+    
+    init(isTabbarItem: Bool) {
+        self.isTabbarItem = isTabbarItem
+    }
     
     func transform(input: Input) -> Output {
         let userInfoService = UserInfoService()
-                let activityIndicator = ActivityIndicator()
-                let mylist = BehaviorRelay<[Movie]>(value: [])
-                let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
-                    return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
-                        .trackActivity(activityIndicator)
-                        .asDriver(onErrorJustReturn: [])
-                        .do(onNext: { watchList in
-                            PersistentManager.shared.watchList = watchList
-                        })
-                }
-                let clearDataTrigger = input.clearDataTrigger.map { _ in [Movie]() }
-                Driver.merge(myListData, clearDataTrigger).drive(mylist).disposed(by: bag)
-                return Output(mylist: mylist.asDriver())
+        let activityIndicator = ActivityIndicator()
+        let mylist = BehaviorRelay<[Movie]>(value: [])
+        let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
+            return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
+                .do(onNext: { watchList in
+                    PersistentManager.shared.watchList = watchList
+                })
+                .trackActivity(activityIndicator)
+                .asDriver(onErrorJustReturn: [])
+            
+        }
+        let clearDataTrigger = input.clearDataTrigger.map { _ in [Movie]() }
+        Driver.merge(myListData, clearDataTrigger).drive(mylist).disposed(by: bag)
+        return Output(mylist: mylist.asDriver(),
+                      error: errorTracker.asDriver(),
+                      loading: activityIndicator.asDriver())
     }
 }
 
@@ -66,5 +74,7 @@ extension MyListViewModel {
     
     struct Output {
         var mylist: Driver<[Movie]>
+        var error: Driver<Error>
+        var loading: Driver<Bool>
     }
 }

@@ -137,10 +137,12 @@ extension HomeViewController {
         moviesCategoryViewController.view.frame = containerView.bounds
         moviesCategoryViewController.didMove(toParent: self)
         
-        let mylistViewModel = MyListViewModel()
+        let mylistViewModel = MyListViewModel(isTabbarItem: false)
         mylistViewController = MyListViewController.instantiate(withViewModel: mylistViewModel)
         addChild(mylistViewController)
-        mylistViewController.view.frame = containerView.bounds
+        var frame = containerView.bounds
+        frame = CGRect(x: frame.origin.x, y: frame.origin.y + gradientView.bounds.height, width: frame.width, height: frame.height - gradientView.bounds.height)
+        mylistViewController.view.frame = frame
         mylistViewController.didMove(toParent: self)
     }
 }

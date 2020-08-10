@@ -70,7 +70,7 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
             .mapToVoid()
             .asDriverOnErrorJustComplete()
         
-        let input = HomeViewModel.Input(getGenresTrigger: viewDidAppear)
+        let input = HomeViewModel.Input(getGeneralDataTrigger: viewDidAppear)
         let output = viewModel.transform(input: input)
         
         output.error
@@ -80,22 +80,32 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
             })
             .disposed(by: bag)
         
-        output.TVGenres
+        output.homeGeneralData
+            .map { $0.tvGenres ?? [] }
             .drive(onNext: { genres in
                 TVGenreRealmObject.deleteAllGenres()
                 TVGenreRealmObject.save(genres: genres)
             })
             .disposed(by: bag)
         
-        output.movieGenres
+        output.homeGeneralData
+            .map { $0.movieGenres ?? [] }
             .drive(onNext: { genres in
                 MovieGenreRealmObject.deleteAllGenres()
                 MovieGenreRealmObject.save(genres: genres)
             })
             .disposed(by: bag)
         
-        Observable.zip(output.TVGenres.asObservable(), output.movieGenres.asObservable())
-            .subscribe(onNext: { [weak self] _ in
+        output.homeGeneralData
+            .map { [$0.tvShowWatchList ?? [], $0.movieWatchList ?? []] }
+            .map { ArrayHelper.combine(arrays: $0) }
+            .drive(onNext: { watchList in
+                PersistentManager.shared.watchList = watchList
+            })
+            .disposed(by: bag)
+        
+        output.homeGeneralData
+            .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.initialGenreButtons()
                 self.addGenreButtons()

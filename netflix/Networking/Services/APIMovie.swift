@@ -36,6 +36,9 @@ enum APIMovie {
     
     //user info
     case getAccountDetail(sessionID: String)
+    case addToWatchlist(accountID: Int, mediaType: MediaType, mediaID: Int, watchList: Bool)
+    case getMovieWatchList(accountID: Int)
+    case getTVShowWatchList(accountID: Int)
 }
 
 extension APIMovie: TargetType {
@@ -77,6 +80,12 @@ extension APIMovie: TargetType {
             return APIURL.version3 + APIURL.discover + APIURL.movie
         case .getAccountDetail:
             return APIURL.version3 + APIURL.account
+        case .addToWatchlist(let accountID, _, _, _):
+            return APIURL.version3 + APIURL.account + "/\(accountID)" + APIURL.watchList
+        case .getMovieWatchList(let accountID):
+            return APIURL.version3 + APIURL.account + "/\(accountID)" + APIURL.watchList + APIURL.movies
+        case .getTVShowWatchList(let accountID):
+            return APIURL.version3 + APIURL.account + "/\(accountID)" + APIURL.watchList + APIURL.tv
         }
     }
     
@@ -85,6 +94,8 @@ extension APIMovie: TargetType {
         case .verifyRequestToken:
             return .post
         case .createSession:
+            return .post
+        case .addToWatchlist:
             return .post
         default:
             return .get
@@ -162,7 +173,26 @@ extension APIMovie: TargetType {
             return .requestParameters(parameters: parameters, encoding: encoding)
         case .getAccountDetail(let sessionID):
             encoding = URLEncoding.default
-            parameters = [APIParamKeys.APIKey: Constants.APIKey, APIParamKeys.sessionID: sessionID]
+            parameters = [APIParamKeys.APIKey: Constants.APIKey,
+                          APIParamKeys.sessionID: sessionID]
+            return .requestParameters(parameters: parameters, encoding: encoding)
+        case .addToWatchlist(_, let mediaType, let mediaID, let watchList):
+            encoding = JSONEncoding.default
+            urlParameter = [APIParamKeys.APIKey: Constants.APIKey,
+                            APIParamKeys.sessionID: PersistentManager.shared.sessionID]
+            parameters = [APIParamKeys.mediaID: mediaID,
+                          APIParamKeys.mediaType: mediaType.rawValue,
+                          APIParamKeys.watchList: watchList]
+            return .requestCompositeParameters(bodyParameters: parameters, bodyEncoding: encoding, urlParameters: urlParameter)
+        case .getMovieWatchList:
+            encoding = URLEncoding.default
+            parameters = [APIParamKeys.APIKey: Constants.APIKey,
+                          APIParamKeys.sessionID: PersistentManager.shared.sessionID]
+            return .requestParameters(parameters: parameters, encoding: encoding)
+        case .getTVShowWatchList:
+            encoding = URLEncoding.default
+            parameters = [APIParamKeys.APIKey: Constants.APIKey,
+                          APIParamKeys.sessionID: PersistentManager.shared.sessionID]
             return .requestParameters(parameters: parameters, encoding: encoding)
         default:
             return .requestParameters(parameters: parameters, encoding: encoding)

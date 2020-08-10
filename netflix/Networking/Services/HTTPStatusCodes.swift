@@ -14,7 +14,7 @@ enum HTTPStatusCodes: Int {
     case Processing
     // 200 Success
     case OK = 200
-    case Created
+    case Created = 201
     case Accepted
     case NonAuthoritativeInformation
     case NoContent

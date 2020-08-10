@@ -27,3 +27,8 @@ enum MovieSortType: String, CaseIterable {
     case revenueDesc = "revenue.desc"
     case revenueAsc = "revenue.asc"
 }
+
+enum MediaType: String, CaseIterable {
+    case tv
+    case movie
+}

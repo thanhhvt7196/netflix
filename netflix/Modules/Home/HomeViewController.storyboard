@@ -33,7 +33,7 @@
                                                     <constraint firstAttribute="width" secondItem="OH9-x4-QAk" secondAttribute="height" id="b0D-Bz-Wku"/>
                                                 </constraints>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLG-XL-uZR">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLG-XL-uZR" customClass="CategoryAnimationView" customModule="netflix" customModuleProvider="target">
                                                 <rect key="frame" x="54" y="0.0" width="340" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>

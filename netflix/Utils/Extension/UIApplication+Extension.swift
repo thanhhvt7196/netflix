@@ -42,12 +42,8 @@ extension UIApplication {
     }
 }
 
-extension UIView {
-    func addSubViewWithAnimation(view: UIView) {
-        view.alpha = 0
-        UIView.animate(withDuration: 0.3) {
-            view.alpha = 1
-        }
-        addSubview(view)
+extension UIApplication {
+    var currentWindow: UIWindow? {
+        return windows.filter { $0.isKeyWindow }.first
     }
 }

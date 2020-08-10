@@ -14,6 +14,7 @@ struct APIURL {
     static let version3 = "/3"
     static let version4 = "/4"
     static let movie = "/movie"
+    static let movies = "/movies"
     static let popular = "/popular"
     static let genre = "/genre"
     static let list = "/list"
@@ -31,6 +32,7 @@ struct APIURL {
     static let discover = "/discover"
     static let latest = "/latest"
     static let account = "/account"
+    static let watchList = "/watchlist"
 }
 
 struct Constants {
@@ -56,6 +58,9 @@ struct APIParamKeys {
     static let withOriginalLanguage = "with_original_language"
     static let includeVideo = "include_video"
     static let sessionID = "session_id"
+    static let mediaType = "media_type"
+    static let mediaID = "media_id"
+    static let watchList = "watchlist"
 }
 
 struct ErrorMessage {

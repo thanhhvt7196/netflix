@@ -13,6 +13,7 @@ enum UserDefaultKeys {
     static let currentGenre = "CurrentGenre"
     static let requestToken = "RequestToken"
     static let sessionID = "SessionID"
+    static let watchList = "WatchList"
 }
 
 
@@ -62,6 +63,17 @@ class PersistentManager {
     }
     
     let allGenre = Genre(id: 0, name: Strings.allGenres)
+    
+    var watchList: [Movie] {
+        set {
+            let encodedArray = newValue.compactMap { $0.encodePlist() }
+            defaults.set(encodedArray, forKey: UserDefaultKeys.watchList)
+        }
+        get {
+            guard let datas = defaults.array(forKey: UserDefaultKeys.watchList) as? [Data] else { return [] }
+            return datas.compactMap { $0.decodeFromPlist() }
+        }
+    }
     
     func clearWhenExit() {
         categoryType = .home

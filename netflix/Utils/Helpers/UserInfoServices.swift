@@ -90,3 +90,12 @@ class UserInfoService {
             .disposed(by: bag)
     }
 }
+
+extension UserInfoService {
+    func getAccountDetail() -> AccountDetail? {
+        return AccountDetailObject.getAccountDetail()
+    }
+    func getAccountID() -> Int? {
+        return getAccountDetail()?.id
+    }
+}

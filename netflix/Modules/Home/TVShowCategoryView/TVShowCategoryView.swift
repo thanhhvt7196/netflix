@@ -41,6 +41,24 @@ class TVShowCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
         commonInit()
     }
     
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        createObserver()
+    }
+    
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: window)
+        removeObserver()
+    }
+    
+    private func createObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderMovieStatus(notification:)), name: .didAddToMyList, object: nil)
+    }
+    
+    private func removeObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func prepareUI() {
         configTableView()
         setupDataSources()
@@ -98,7 +116,7 @@ extension TVShowCategoryView {
             switch dataSource[indexPath] {
             case .headerMovie(let movie):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieTableViewCell
-                let viewModel = HeaderMovieViewModel(movie: movie)
+                let viewModel = HeaderMovieViewModel(movie: movie, mediaType: .tv)
                 cell.bindViewModel(viewModel: viewModel)
                 return cell
             case .previewList(let movies):
@@ -120,6 +138,21 @@ extension TVShowCategoryView {
     func loadData(genreID: Int?) {
         clearDataTrigger.onNext(())
         fetchDataTrigger.onNext(genreID)
+    }
+    
+    @objc private func updateHeaderMovieStatus(notification: Notification) {
+        if let userInfo = notification.userInfo,
+            let isMyList = userInfo["is_mylist"] as? Bool,
+            let movieID = userInfo["movie_id"] as? Int {
+            guard let indexPaths = tableView.indexPathsForVisibleRows else {
+                return
+            }
+            for indexPath in indexPaths {
+                if let cell = tableView.cellForRow(at: indexPath) as? HeaderMovieTableViewCell {
+                    cell.update(isMyList: isMyList, movieID: movieID)
+                }
+            }
+        }
     }
 }
 

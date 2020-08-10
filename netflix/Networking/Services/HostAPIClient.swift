@@ -37,7 +37,7 @@ class HostAPIClient {
                     observer.onCompleted()
                 case .success(let response):
                     let statusCode = response.statusCode
-                    if statusCode == HTTPStatusCodes.OK.rawValue {
+                    if statusCode == HTTPStatusCodes.OK.rawValue || statusCode == HTTPStatusCodes.Created.rawValue {
                         let data = response.data
                         do {
                             let object = try JSONDecoder().decode(T.self, from: data)

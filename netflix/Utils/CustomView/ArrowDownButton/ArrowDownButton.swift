@@ -120,6 +120,12 @@ class ArrowDownButton: UIView {
     }
 }
 
+extension ArrowDownButton {
+    func addTarget(target: Any?, selector: Selector) {
+        selectButton.addTarget(target, action: selector, for: .touchUpInside)
+    }
+}
+
 extension Reactive where Base: ArrowDownButton {
     var tap: ControlEvent<Void> {
         return base.selectButton.rx.tap

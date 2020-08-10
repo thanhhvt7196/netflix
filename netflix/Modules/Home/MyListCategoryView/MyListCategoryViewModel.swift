@@ -18,15 +18,6 @@ class MyListCategoryViewModel: ViewModel {
         let userInfoService = UserInfoService()
                 let activityIndicator = ActivityIndicator()
                 let mylist = BehaviorRelay<[Movie]>(value: [])
-        //        input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
-        //                return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
-        //                    .trackActivity(activityIndicator)
-        //                    .asDriver(onErrorJustReturn: [])
-        //            }
-        //            .asObservable()
-        //            .merge(with: input.clearDataTrigger.asObservable().map { _ in [] })
-        //            .bind(to: mylist)
-        //            .disposed(by: bag)
                 let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
                     return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
                         .trackActivity(activityIndicator)

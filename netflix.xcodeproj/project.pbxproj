@@ -202,6 +202,7 @@
 		0CD80D9124D2D09D00155393 /* HomePreviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD80D8F24D2D09D00155393 /* HomePreviewCollectionViewCell.swift */; };
 		0CD80D9224D2D09D00155393 /* HomePreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CD80D9024D2D09D00155393 /* HomePreviewCollectionViewCell.xib */; };
 		0CE0658024E0EE4500C40747 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0657F24E0EE4500C40747 /* NotificationName+Extension.swift */; };
+		0CE0658324E106EE00C40747 /* CategoryAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0658224E106EE00C40747 /* CategoryAnimationView.swift */; };
 		0CE9559E24CDE4B70099648B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9559D24CDE4B70099648B /* LoginViewModel.swift */; };
 		0CE955A024CDE4E20099648B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9559F24CDE4E20099648B /* LoginViewController.swift */; };
 		0CE955A224CDE5370099648B /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE955A124CDE5370099648B /* LoginViewController.storyboard */; };
@@ -412,6 +413,7 @@
 		0CD80D8F24D2D09D00155393 /* HomePreviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePreviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		0CD80D9024D2D09D00155393 /* HomePreviewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePreviewCollectionViewCell.xib; sourceTree = "<group>"; };
 		0CE0657F24E0EE4500C40747 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
+		0CE0658224E106EE00C40747 /* CategoryAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAnimationView.swift; sourceTree = "<group>"; };
 		0CE9559D24CDE4B70099648B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		0CE9559F24CDE4E20099648B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0CE955A124CDE5370099648B /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
@@ -872,6 +874,7 @@
 		0C867A0724C83B1D0053496B /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				0CE0658124E106CB00C40747 /* HomeCategoryView */,
 				0C35E9EE24D02A20001A612D /* Onboarding */,
 				0CFCB18F24CEE40F005A290A /* ProgressHUD */,
 				0C0247DD24CE6F8E00C023A8 /* FloatingTextfield */,
@@ -1141,6 +1144,14 @@
 				0CFCE75424D3C5E0001D8C18 /* HomePreviewCellViewModel.swift */,
 			);
 			path = HomePreviewCell;
+			sourceTree = "<group>";
+		};
+		0CE0658124E106CB00C40747 /* HomeCategoryView */ = {
+			isa = PBXGroup;
+			children = (
+				0CE0658224E106EE00C40747 /* CategoryAnimationView.swift */,
+			);
+			path = HomeCategoryView;
 			sourceTree = "<group>";
 		};
 		0CE9559C24CDE4950099648B /* Login */ = {
@@ -1438,6 +1449,7 @@
 				0C3BC71924CA23ED00DFCEBA /* TVGenreRealmObject.swift in Sources */,
 				0C35E9F524D02CE0001A612D /* OnboardingViewController.swift in Sources */,
 				0C1035EE24C6EDDC00571EA6 /* SearchViewController.swift in Sources */,
+				0CE0658324E106EE00C40747 /* CategoryAnimationView.swift in Sources */,
 				0C8D570924C6DE7E00E2CB08 /* ViewModelBased.swift in Sources */,
 				0C8D56ED24C6DD5100E2CB08 /* UINavigationController+Extension.swift in Sources */,
 				0C9C5A4B24DEE1F800582C1E /* MoviesCategoryViewModel.swift in Sources */,

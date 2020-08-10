@@ -15,9 +15,31 @@
                     <view key="view" contentMode="scaleToFill" id="SyW-Ut-dqI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IB7-zX-gbI">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OuU-hT-jiJ">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="KpG-Kz-QAZ" firstAttribute="trailing" secondItem="IB7-zX-gbI" secondAttribute="trailing" id="6dh-SA-5Ab"/>
+                            <constraint firstItem="KpG-Kz-QAZ" firstAttribute="bottom" secondItem="IB7-zX-gbI" secondAttribute="bottom" id="IsI-Zv-LeM"/>
+                            <constraint firstItem="IB7-zX-gbI" firstAttribute="leading" secondItem="KpG-Kz-QAZ" secondAttribute="leading" id="YEw-lF-u4s"/>
+                            <constraint firstItem="IB7-zX-gbI" firstAttribute="top" secondItem="KpG-Kz-QAZ" secondAttribute="top" id="ZFe-xM-1rF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KpG-Kz-QAZ"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="IB7-zX-gbI" id="8jf-Sn-u5n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K9e-kx-aLb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

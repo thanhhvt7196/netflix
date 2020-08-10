@@ -45,7 +45,7 @@ extension Scene: TargetScene {
             let newMoviesTabbarItem = UITabBarItem(title: Strings.comingSoon, image: Asset.extrasCardsIconNormal.image, selectedImage: Asset.extrasCardsIconNormal.image)
             newMoviesNavController.tabBarItem = newMoviesTabbarItem
             
-            let myListViewModel = MyListViewModel()
+            let myListViewModel = MyListViewModel(isTabbarItem: true)
             let myListViewController = MyListViewController.instantiate(withViewModel: myListViewModel)
             let myListNavController = UINavigationController(rootViewController: myListViewController)
             let myListTabbarItem = UITabBarItem(title: Strings.myList, image: Asset.icMylistNormal.image, selectedImage: Asset.icMylistNormal.image)

@@ -1,52 +1,35 @@
 //
-//  MovieCategoryView.swift
+//  TVShowCategoryViewController.swift
 //  netflix
 //
-//  Created by thanh tien on 8/9/20.
+//  Created by thanh tien on 8/10/20.
 //  Copyright © 2020 thanh tien. All rights reserved.
 //
 
 import Foundation
-import UIKit
-import Reusable
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Reusable
 
-class MovieCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
+class TVShowCategoryViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var tableView: UITableView!
-    var viewModel: MoviesCategoryViewModel!
+    
+    var viewModel: TVShowCategoryViewModel!
     private let bag = DisposeBag()
     
     private let fetchDataTrigger = PublishSubject<Int?>()
     private let clearDataTrigger = PublishSubject<Void>()
     private var dataSources: RxTableViewSectionedReloadDataSource<HomeCategoryViewSectionModel>!
     
-    init(viewModel: MoviesCategoryViewModel, frame: CGRect) {
-        super.init(frame: frame)
-        self.viewModel = viewModel
-        commonInit()
-    }
-    
-    private func commonInit() {
-        loadNibContent()
-        prepareUI()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createObserver()
         bind()
         handleAction()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-    
-    override func didMoveToWindow() {
-        super.didMoveToWindow()
-        createObserver()
-    }
-    
-    override func willMove(toWindow newWindow: UIWindow?) {
-        super.willMove(toWindow: window)
+    deinit {
         removeObserver()
     }
     
@@ -58,13 +41,14 @@ class MovieCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
         NotificationCenter.default.removeObserver(self)
     }
     
-    private func prepareUI() {
+    override func prepareUI() {
+        super.prepareUI()
         configTableView()
         setupDataSources()
     }
     
     private func bind() {
-        let input = MoviesCategoryViewModel.Input(
+        let input = TVShowCategoryViewModel.Input(
             fetchDataTrigger: fetchDataTrigger.asDriverOnErrorJustComplete(),
             clearDataTrigger: clearDataTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
@@ -89,18 +73,18 @@ class MovieCategoryView: UIView, NibOwnerLoadable, ViewModelBased {
                     return .empty()
                 }
                 return .just(cell)
-            }
-            .flatMapLatest { cell -> Observable<Movie> in
-                return .just(cell.viewModel.movie)
-            }
-            .subscribe(onNext: { movie in
-                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie))
-            })
+        }
+        .flatMapLatest { cell -> Observable<Movie> in
+            return .just(cell.viewModel.movie)
+        }
+        .subscribe(onNext: { movie in
+            SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie))
+        })
             .disposed(by: bag)
     }
 }
 
-extension MovieCategoryView {
+extension TVShowCategoryViewController {
     private func configTableView() {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
@@ -115,7 +99,7 @@ extension MovieCategoryView {
             switch dataSource[indexPath] {
             case .headerMovie(let movie):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieTableViewCell
-                let viewModel = HeaderMovieViewModel(movie: movie, mediaType: .movie)
+                let viewModel = HeaderMovieViewModel(movie: movie, mediaType: .tv)
                 cell.bindViewModel(viewModel: viewModel)
                 return cell
             case .previewList(let movies):
@@ -133,7 +117,7 @@ extension MovieCategoryView {
     }
 }
 
-extension MovieCategoryView {
+extension TVShowCategoryViewController {
     func loadData(genreID: Int?) {
         clearDataTrigger.onNext(())
         fetchDataTrigger.onNext(genreID)
@@ -155,7 +139,7 @@ extension MovieCategoryView {
     }
 }
 
-extension MovieCategoryView: UITableViewDelegate {
+extension TVShowCategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -178,3 +162,4 @@ extension MovieCategoryView: UITableViewDelegate {
         }
     }
 }
+

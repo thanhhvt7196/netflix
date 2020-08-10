@@ -23,10 +23,10 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
     
     private let bag = DisposeBag()
     
-    private var homeCategoryView: HomeCategoryView!
-    private var tvShowCategoryView: TVShowCategoryView!
-    private var movieCategoryView: MovieCategoryView!
-    private var mylistCategoryView: MyListCategoryView!
+    private var homeCategoryViewController: HomeCategoryViewController!
+    private var tvShowCategoryViewController: TVShowCategoryViewController!
+    private var moviesCategoryViewController: MoviesCategoryViewController!
+    private var mylistViewController: MyListViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,16 +119,29 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
 extension HomeViewController {
     private func initialChildViews() {
         let homeCategoryViewModel = HomeCategoryViewModel()
-        homeCategoryView = HomeCategoryView(viewModel: homeCategoryViewModel, frame: containerView.bounds)
+        homeCategoryViewController = HomeCategoryViewController.instantiate(withViewModel: homeCategoryViewModel)
+        addChild(homeCategoryViewController)
+        homeCategoryViewController.view.frame = containerView.bounds
+        homeCategoryViewController.didMove(toParent: self)
         
         let tvShowCategoryViewModel = TVShowCategoryViewModel()
-        tvShowCategoryView = TVShowCategoryView(viewModel: tvShowCategoryViewModel, frame: containerView.bounds)
+        tvShowCategoryViewController = TVShowCategoryViewController.instantiate(withViewModel: tvShowCategoryViewModel)
+        addChild(tvShowCategoryViewController)
+        tvShowCategoryViewController.view.frame = containerView.bounds
+        tvShowCategoryViewController.didMove(toParent: self)
+        
         
         let movieCategoryViewModel = MoviesCategoryViewModel()
-        movieCategoryView = MovieCategoryView(viewModel: movieCategoryViewModel, frame: containerView.bounds)
+        moviesCategoryViewController = MoviesCategoryViewController.instantiate(withViewModel: movieCategoryViewModel)
+        addChild(moviesCategoryViewController)
+        moviesCategoryViewController.view.frame = containerView.bounds
+        moviesCategoryViewController.didMove(toParent: self)
         
-        let mylistCategoryViewModel = MyListCategoryViewModel()
-        mylistCategoryView = MyListCategoryView(viewModel: mylistCategoryViewModel, frame: containerView.bounds)
+        let mylistViewModel = MyListViewModel()
+        mylistViewController = MyListViewController.instantiate(withViewModel: mylistViewModel)
+        addChild(mylistViewController)
+        mylistViewController.view.frame = containerView.bounds
+        mylistViewController.didMove(toParent: self)
     }
 }
 
@@ -162,9 +175,9 @@ extension HomeViewController {
                     case .home, .mylist:
                         break
                     case .tvShow:
-                        self.tvShowCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
+                        self.tvShowCategoryViewController.loadData(genreID: PersistentManager.shared.currentGenre)
                     case .movies:
-                        self.movieCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
+                        self.moviesCategoryViewController.loadData(genreID: PersistentManager.shared.currentGenre)
                     }
                 }
             })
@@ -205,20 +218,20 @@ extension HomeViewController {
         switch type {
         case .home:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
-            containerView.addSubViewWithAnimation(view: homeCategoryView)
-            homeCategoryView.loadData()
+            containerView.addSubViewWithAnimation(view: homeCategoryViewController.view)
+            homeCategoryViewController.loadData()
         case .tvShow:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
-            containerView.addSubViewWithAnimation(view: tvShowCategoryView)
-            tvShowCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
+            containerView.addSubViewWithAnimation(view: tvShowCategoryViewController.view)
+            tvShowCategoryViewController.loadData(genreID: PersistentManager.shared.currentGenre)
         case .movies:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
-            containerView.addSubViewWithAnimation(view: movieCategoryView)
-            movieCategoryView.loadData(genreID: PersistentManager.shared.currentGenre)
+            containerView.addSubViewWithAnimation(view: moviesCategoryViewController.view)
+            moviesCategoryViewController.loadData(genreID: PersistentManager.shared.currentGenre)
         case .mylist:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
-            containerView.addSubViewWithAnimation(view: mylistCategoryView)
-            mylistCategoryView.loadData()
+            containerView.addSubViewWithAnimation(view: mylistViewController.view)
+            mylistViewController.loadData()
         }
     }
 }

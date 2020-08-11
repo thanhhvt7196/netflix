@@ -28,7 +28,8 @@ class ChooseCategoryViewModel: ViewModel {
             }
             return .just(genres[indexPath.row])
         }
-        return Output(genreList: Driver.just(genres), selectedGenre: selectedGenre)
+        return Output(genreList: Driver.just(genres),
+                      selectedGenre: selectedGenre)
     }
 }
 

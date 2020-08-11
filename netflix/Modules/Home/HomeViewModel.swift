@@ -32,24 +32,6 @@ class HomeViewModel: ViewModel {
         return Output(error: errorTracker.asDriver(),
                       indicator: activityIndicator.asDriver(),
                       homeGeneralData: homeGeneralData)
-        
-//        let TVGenres = input.getGenresTrigger.flatMapLatest { [unowned self] _ in
-//            return self.getTVShowGenres()
-//                .trackError(errorTracker)
-//                .map { $0.genres ?? [] }
-//                .asDriver(onErrorJustReturn: [])
-//        }
-//
-//        let movieGenres = input.getGenresTrigger.flatMapLatest { [unowned self] _ in
-//            return self.getMovieGenres()
-//                .trackError(errorTracker)
-//                .map { $0.genres ?? [] }
-//                .asDriver(onErrorJustReturn: [])
-//        }
-//        return Output(error: errorTracker.asDriver(),
-//                      indicator: activityIndicator.asDriver(),
-//                      TVGenres: TVGenres,
-//                      movieGenres: movieGenres)
     }
 }
 
@@ -91,19 +73,31 @@ extension HomeViewModel {
 
 extension HomeViewModel {
     private func getTVShowGenres() -> Observable<GenresResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getTvShowGenresList, type: GenresResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTvShowGenresList,
+            type: GenresResponse.self
+        )
     }
     
     private func getMovieGenres() -> Observable<GenresResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getMovieGenresList, type: GenresResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getMovieGenresList,
+            type: GenresResponse.self
+        )
     }
     
     private func getMovieWatchList(accountID: Int) -> Observable<MovieWatchListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getMovieWatchList(accountID: accountID), type: MovieWatchListResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getMovieWatchList(accountID: accountID),
+            type: MovieWatchListResponse.self
+        )
     }
     
     private func getTVShowWatchList(accountID: Int) -> Observable<TVShowWatchListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getTVShowWatchList(accountID: accountID), type: TVShowWatchListResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTVShowWatchList(accountID: accountID),
+            type: TVShowWatchListResponse.self
+        )
     }
 }
 
@@ -115,8 +109,6 @@ extension HomeViewModel {
     struct Output {
         var error: Driver<Error>
         var indicator: Driver<Bool>
-//        var TVGenres: Driver<[Genre]>
-//        var movieGenres: Driver<[Genre]>
         var homeGeneralData: Driver<HomeGeneralData>
     }
 }

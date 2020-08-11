@@ -19,7 +19,8 @@ class ChooseCategoryTypeViewModel: ViewModel {
             }
             return .just(types[indexPath.row])
         }
-        return Output(categoryTypes: Driver.just(types), selectedCategoryType: selectedType)
+        return Output(categoryTypes: Driver.just(types),
+                      selectedCategoryType: selectedType)
     }
 }
 

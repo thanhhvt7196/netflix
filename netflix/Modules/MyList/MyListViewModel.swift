@@ -23,6 +23,7 @@ class MyListViewModel: ViewModel {
         let userInfoService = UserInfoService()
         let activityIndicator = ActivityIndicator()
         let mylist = BehaviorRelay<[Movie]>(value: [])
+        
         let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
             return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
                 .do(onNext: { watchList in
@@ -32,8 +33,10 @@ class MyListViewModel: ViewModel {
                 .asDriver(onErrorJustReturn: [])
             
         }
+        
         let clearDataTrigger = input.clearDataTrigger.map { _ in [Movie]() }
         Driver.merge(myListData, clearDataTrigger).drive(mylist).disposed(by: bag)
+        
         return Output(mylist: mylist.asDriver(),
                       error: errorTracker.asDriver(),
                       loading: activityIndicator.asDriver())
@@ -42,11 +45,17 @@ class MyListViewModel: ViewModel {
 
 extension MyListViewModel {
     private func getMovieWatchList(accountID: Int) -> Observable<MovieWatchListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getMovieWatchList(accountID: accountID), type: MovieWatchListResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getMovieWatchList(accountID: accountID),
+            type: MovieWatchListResponse.self
+        )
     }
     
     private func getTVShowWatchList(accountID: Int) -> Observable<TVShowWatchListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getTVShowWatchList(accountID: accountID), type: TVShowWatchListResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTVShowWatchList(accountID: accountID),
+            type: TVShowWatchListResponse.self
+        )
     }
     
     private func getMyListData(accountID: Int) -> Observable<[Movie]> {

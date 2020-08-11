@@ -9,7 +9,7 @@
 import Foundation
 
 struct HomeCategoryDataModel: Codable {
-    var nowPlayingList: [Movie]
+    var mostFavoriteMovieList: [Movie]
     var tvShowAiringToday: [Movie]
     var popularMovieList: [Movie]
     var popularTVShowList: [Movie]

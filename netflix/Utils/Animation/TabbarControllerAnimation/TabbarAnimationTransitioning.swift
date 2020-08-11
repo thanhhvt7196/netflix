@@ -14,7 +14,7 @@ final class TabBarAnimatedTransitioning: NSObject, UIViewControllerAnimatedTrans
         guard let destination = transitionContext.view(forKey: UITransitionContextViewKey.to) else { return }
 
         destination.alpha = 0.0
-        destination.transform = .init(scaleX: 1.2, y: 1.2)
+        destination.transform = CGAffineTransform(translationX: 100, y: 0)
         transitionContext.containerView.addSubview(destination)
 
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {

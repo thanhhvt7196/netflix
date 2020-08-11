@@ -163,27 +163,55 @@ extension MoviesCategoryViewModel {
     private func mapToDataSource(data: MovieWithGenreDataModel) -> [HomeCategoryViewSectionModel] {
         var sections = [HomeCategoryViewSectionModel]()
         if let headerMovie = data.popularMovieList.first {
-            sections.append(.headerMovie(title: nil, items: [.headerMovie(movie: headerMovie)]))
+            sections.append(
+                .headerMovie(title: nil,
+                             items: [.headerMovie(movie: headerMovie)]
+                )
+            )
         }
         if data.popularMovieList.count > 0 {
             if data.popularMovieList.suffix(data.popularMovieList.count - 1).count > 0 {
-                sections.append(.popularMovies(title: Strings.popularMovies, items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)))]))
+                sections.append(
+                    .popularMovies(title: Strings.popularMovies,
+                                   items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)))]
+                    )
+                )
             }
         }
         if data.mostFavoriteMovieList.count > 0 {
-            sections.append(.mostFavoriteTVShow(title: Strings.mostFavoriteMovies, items: [.moviesListItem(movies: data.mostFavoriteMovieList)]))
+            sections.append(
+                .mostFavoriteTVShow(title: Strings.mostFavoriteMovies,
+                                    items: [.moviesListItem(movies: data.mostFavoriteMovieList)]
+                )
+            )
         }
         if data.westernMovieList.count > 0 {
-            sections.append(.WesternTVShow(title: Strings.westernMovies, items: [.moviesListItem(movies: data.westernMovieList)]))
+            sections.append(
+                .WesternTVShow(title: Strings.westernMovies,
+                               items: [.moviesListItem(movies: data.westernMovieList)]
+                )
+            )
         }
         if data.koreanMovieList.count > 0 {
-            sections.append(.koreanTVShow(title: Strings.koreanMovies, items: [.moviesListItem(movies: data.koreanMovieList)]))
+            sections.append(
+                .koreanTVShow(title: Strings.koreanMovies,
+                              items: [.moviesListItem(movies: data.koreanMovieList)]
+                )
+            )
         }
         if data.japaneseMovieList.count > 0 {
-            sections.append(.japaneseTVShow(title: Strings.japaneseMovies, items: [.moviesListItem(movies: data.japaneseMovieList)]))
+            sections.append(
+                .japaneseTVShow(title: Strings.japaneseMovies,
+                                items: [.moviesListItem(movies: data.japaneseMovieList)]
+                )
+            )
         }
         if data.chineseMovieList.count > 0 {
-            sections.append(.chineseMovie(title: Strings.chineseMovies, items: [.moviesListItem(movies: data.chineseMovieList)]))
+            sections.append(
+                .chineseMovie(title: Strings.chineseMovies,
+                              items: [.moviesListItem(movies: data.chineseMovieList)]
+                )
+            )
         }
         return sections
     }
@@ -191,27 +219,54 @@ extension MoviesCategoryViewModel {
     private func mapToDataSource(data: MovieCategoryDataModel) -> [HomeCategoryViewSectionModel] {
         var sections = [HomeCategoryViewSectionModel]()
         if let headerMovie = data.popularMovieList.first {
-            sections.append(.headerMovie(title: nil, items: [.headerMovie(movie: headerMovie)]))
+            sections.append(
+                .headerMovie(title: nil, items: [.headerMovie(movie: headerMovie)]
+                )
+            )
         }
         if data.popularMovieList.count > 0 {
             if data.popularMovieList.suffix(data.popularMovieList.count - 1).count > 0 {
-                sections.append(.popularMovies(title: Strings.popularMovies, items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)))]))
+                sections.append(
+                    .popularMovies(title: Strings.popularMovies,
+                                   items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)))]
+                    )
+                )
             }
         }
         if data.nowPlayingList.count > 0 {
-            sections.append(.nowPlayingMovie(title: Strings.nowPlaying, items: [.moviesListItem(movies: data.nowPlayingList)]))
+            sections.append(
+                .nowPlayingMovie(title: Strings.nowPlaying,
+                                 items: [.moviesListItem(movies: data.nowPlayingList)]
+                )
+            )
         }
         if data.topRatedMovieList.count > 0 {
-            sections.append(.topRatedMovies(title: Strings.topRatedMovies, items: [.moviesListItem(movies: data.topRatedMovieList)]))
+            sections.append(
+                .topRatedMovies(title: Strings.topRatedMovies,
+                                items: [.moviesListItem(movies: data.topRatedMovieList)]
+                )
+            )
         }
         if data.upcomingMovieList.count > 0 {
-            sections.append(.upcomingMovie(title: Strings.upcomingMovies, items: [.moviesListItem(movies: data.upcomingMovieList)]))
+            sections.append(
+                .upcomingMovie(title: Strings.upcomingMovies,
+                               items: [.moviesListItem(movies: data.upcomingMovieList)]
+                )
+            )
         }
         if data.mostFavoriteMovieList.count > 0 {
-            sections.append(.mostFavoriteTVShow(title: Strings.mostFavoriteMovies, items: [.moviesListItem(movies: data.mostFavoriteMovieList)]))
+            sections.append(
+                .mostFavoriteTVShow(title: Strings.mostFavoriteMovies,
+                                    items: [.moviesListItem(movies: data.mostFavoriteMovieList)]
+                )
+            )
         }
         if data.topGrossingMovieList.count > 0 {
-            sections.append(.WesternTVShow(title: Strings.topGrossingMovies, items: [.moviesListItem(movies: data.topGrossingMovieList)]))
+            sections.append(
+                .WesternTVShow(title: Strings.topGrossingMovies,
+                               items: [.moviesListItem(movies: data.topGrossingMovieList)]
+                )
+            )
         }
         return sections
     }
@@ -219,19 +274,31 @@ extension MoviesCategoryViewModel {
 
 extension MoviesCategoryViewModel {
     private func getNowPlayingList(page: Int) -> Observable<NowPlayingMovieResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getMovieNowPlayingList(page: page), type: NowPlayingMovieResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getMovieNowPlayingList(page: page),
+            type: NowPlayingMovieResponse.self
+        )
     }
     
     private func getPopularMovieList(page: Int) -> Observable<PopularMoviesResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPopularMovies(page: page), type: PopularMoviesResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getPopularMovies(page: page),
+            type: PopularMoviesResponse.self
+        )
     }
     
     private func getTopRatedMovieList(page: Int) -> Observable<TopRatedMovieResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getTopRatedMoviesList(page: page), type: TopRatedMovieResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTopRatedMoviesList(page: page),
+            type: TopRatedMovieResponse.self
+        )
     }
     
     private func getUpcomingMovieList(page: Int) -> Observable<UpcomingMovieResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getUpcomingMoviesList(page: page), type: UpcomingMovieResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getUpcomingMoviesList(page: page),
+            type: UpcomingMovieResponse.self
+        )
     }
     
     private func discoverMovie(sortBy: MovieSortType? = nil,

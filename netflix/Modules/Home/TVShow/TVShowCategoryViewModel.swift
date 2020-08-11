@@ -124,11 +124,6 @@ extension TVShowCategoryViewModel {
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
         
-        let ontheAirTVShowList = getTVShowOnTheAir(page: 1)
-                                    .map { $0.results ?? [] }
-                                    .trackError(errorTracker)
-                                    .catchErrorJustReturn([])
-        
         let mostFavoriteTVShowList = discoverTV(sortBy: .voteAverageDesc)
                                         .trackError(errorTracker)
                                         .map { $0.results ?? [] }
@@ -150,20 +145,18 @@ extension TVShowCategoryViewModel {
                                     .catchErrorJustReturn([])
         
         let data = Observable.zip(tvShowAiringTodayList,
-                                  ontheAirTVShowList,
                                   popularTVShowsList,
                                   topRatedTVShowsList,
                                   mostFavoriteTVShowList,
                                   westernTVShowList,
                                   koreanTVShowList,
                                   chineseTVShowList)
-            .map { tvShowAiringTodayList, ontheAirTVShowList, popularTVShowsList, topRatedTVShowsList, mostFavoriteTVShowList, westernTVShowList, koreanTVShowList, chineseTVShowList -> TVShowCategoryDataModel in
+            .map { tvShowAiringTodayList, popularTVShowsList, topRatedTVShowsList, mostFavoriteTVShowList, westernTVShowList, koreanTVShowList, chineseTVShowList -> TVShowCategoryDataModel in
                 return TVShowCategoryDataModel(
                     airingTodayList: tvShowAiringTodayList,
                     popularTVShowList: popularTVShowsList,
                     topRatedTVShowList: topRatedTVShowsList,
                     mostFavoriteTVShowList: mostFavoriteTVShowList,
-                    latestReleaseTVShowList: ontheAirTVShowList,
                     koreanTVShowList: koreanTVShowList,
                     westernTVShowList: westernTVShowList,
                     chineseTVShowList: chineseTVShowList
@@ -204,33 +197,57 @@ extension TVShowCategoryViewModel {
     private func mapToDataSource(data: TVShowCategoryDataModel) -> [HomeCategoryViewSectionModel] {
         var sections = [HomeCategoryViewSectionModel]()
         if let headerMovie = data.popularTVShowList.first {
-            sections.append(.headerMovie(title: nil, items: [.headerMovie(movie: headerMovie)]))
+            sections.append(
+                .headerMovie(title: nil,
+                             items: [.headerMovie(movie: headerMovie)]
+                )
+            )
         }
         if data.popularTVShowList.count > 0 {
             if data.popularTVShowList.suffix(data.popularTVShowList.count - 1).count > 0 {
-                sections.append(.popularTVShows(title: Strings.popularTVShows, items: [.previewList(movies: Array(data.popularTVShowList.suffix(data.popularTVShowList.count - 1)))]))
+                sections.append(
+                    .popularTVShows(title: Strings.popularTVShows,
+                                    items: [.previewList(movies: Array(data.popularTVShowList.suffix(data.popularTVShowList.count - 1)))]
+                    )
+                )
             }
         }
         if data.airingTodayList.count > 0 {
-            sections.append(.tvShowAiringToday(title: Strings.airingToday, items: [.moviesListItem(movies: data.airingTodayList)]))
+            sections.append(
+                .tvShowAiringToday(title: Strings.airingToday,
+                                   items: [.moviesListItem(movies: data.airingTodayList)]
+                )
+            )
         }
         if data.topRatedTVShowList.count > 0 {
-            sections.append(.topRatedTVShows(title: Strings.topRatedTVShows, items: [.moviesListItem(movies: data.topRatedTVShowList)]))
+            sections.append(
+                .topRatedTVShows(title: Strings.topRatedTVShows, items: [.moviesListItem(movies: data.topRatedTVShowList)]
+                )
+            )
         }
         if data.mostFavoriteTVShowList.count > 0 {
-            sections.append(.mostFavoriteTVShow(title: Strings.mostFavoriteTVShow, items: [.moviesListItem(movies: data.mostFavoriteTVShowList)]))
-        }
-        if data.latestReleaseTVShowList.count > 0 {
-            sections.append(.latestReleaseTVShow(title: Strings.latestReleases, items: [.moviesListItem(movies: data.latestReleaseTVShowList)]))
+            sections.append(
+                .mostFavoriteTVShow(title: Strings.mostFavoriteTVShow, items: [.moviesListItem(movies: data.mostFavoriteTVShowList)]
+                )
+            )
         }
         if data.westernTVShowList.count > 0 {
-            sections.append(.WesternTVShow(title: Strings.westernTVShow, items: [.moviesListItem(movies: data.westernTVShowList)]))
+            sections.append(
+                .WesternTVShow(title: Strings.westernTVShow, items: [.moviesListItem(movies: data.westernTVShowList)]
+                )
+            )
         }
         if data.koreanTVShowList.count > 0 {
-            sections.append(.koreanTVShow(title: Strings.kDramas, items: [.moviesListItem(movies: data.koreanTVShowList)]))
+            sections.append(
+                .koreanTVShow(title: Strings.kDramas, items: [.moviesListItem(movies: data.koreanTVShowList)]
+                )
+            )
         }
         if data.chineseTVShowList.count > 0 {
-            sections.append(.chineseTVShow(title: Strings.chineseSeries, items: [.moviesListItem(movies: data.chineseTVShowList)]))
+            sections.append(
+                .chineseTVShow(title: Strings.chineseSeries, items: [.moviesListItem(movies: data.chineseTVShowList)]
+                )
+            )
         }
         return sections
     }
@@ -238,19 +255,24 @@ extension TVShowCategoryViewModel {
 
 extension TVShowCategoryViewModel {
     private func getTVShowAiringToday(page: Int) -> Observable<AiringTodayTVShowResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getAiringTodayTVShowList(page: page), type: AiringTodayTVShowResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getAiringTodayTVShowList(page: page),
+            type: AiringTodayTVShowResponse.self
+        )
     }
         
     private func getPopularTVShows(page: Int) -> Observable<PopularTVShowResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPopularTVShows(page: page), type: PopularTVShowResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getPopularTVShows(page: page),
+            type: PopularTVShowResponse.self
+        )
     }
     
     private func getTopRatedTVShows(page: Int) -> Observable<TopRatedTVShowResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getTopRatedTvShowsList(page: page), type: TopRatedTVShowResponse.self)
-    }
-    
-    private func getTVShowOnTheAir(page: Int) -> Observable<TVShowOnTheAirResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getTVShowOnTheAir(page: page), type: TVShowOnTheAirResponse.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTopRatedTvShowsList(page: page),
+            type: TopRatedTVShowResponse.self
+        )
     }
     
     private func discoverTV(sortBy: TVShowSortType? = nil,

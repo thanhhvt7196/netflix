@@ -48,7 +48,13 @@ class HeaderMovieViewModel: ViewModel {
     }
     
     private func addToWatchList(accountID: Int, watchList: Bool) -> Observable<BaseSuccessResult> {
-        return HostAPIClient.performApiNetworkCall(router: .addToWatchlist(accountID: accountID, mediaType: mediaType, mediaID: movie.id ?? -1, watchList: watchList), type: BaseSuccessResult.self)
+        return HostAPIClient.performApiNetworkCall(
+            router: .addToWatchlist(accountID: accountID,
+                                    mediaType: mediaType,
+                                    mediaID: movie.id ?? -1,
+                                    watchList: watchList),
+            type: BaseSuccessResult.self
+        )
     }
 }
 

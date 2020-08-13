@@ -31,7 +31,8 @@ class HeaderMovieViewModel: ViewModel {
             })
             .disposed(by: bag)
         
-        let addToMyListResult = input.addToMyListTrigger.flatMapLatest { [unowned self] _  in
+        let addToMyListResult = input.addToMyListTrigger.flatMapLatest { [unowned self] _ -> Driver<Bool> in
+            print("my list tapped")
             return self.addToWatchList(accountID: userInfoService.getAccountID() ?? -1, watchList: !self.isMyList)
                 .trackError(errorTracker)
                 .trackActivity(activityIndicator)
@@ -39,7 +40,7 @@ class HeaderMovieViewModel: ViewModel {
                     guard let self = self else { return false }
                     return !self.isMyList
                 }
-                .asDriverOnErrorJustComplete()
+                .asDriver(onErrorJustReturn: false)
         }
         return Output(movie: .just(movie),
                       addToMyListResult: addToMyListResult,

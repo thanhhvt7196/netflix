@@ -200,6 +200,7 @@
 		0CD80D9224D2D09D00155393 /* HomePreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CD80D9024D2D09D00155393 /* HomePreviewCollectionViewCell.xib */; };
 		0CE0658024E0EE4500C40747 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0657F24E0EE4500C40747 /* NotificationName+Extension.swift */; };
 		0CE0658324E106EE00C40747 /* CategoryAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0658224E106EE00C40747 /* CategoryAnimationView.swift */; };
+		0CE27F0D24E39E2E00110F4F /* MovieHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE27F0C24E39E2E00110F4F /* MovieHelper.swift */; };
 		0CE9559E24CDE4B70099648B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9559D24CDE4B70099648B /* LoginViewModel.swift */; };
 		0CE955A024CDE4E20099648B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9559F24CDE4E20099648B /* LoginViewController.swift */; };
 		0CE955A224CDE5370099648B /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE955A124CDE5370099648B /* LoginViewController.storyboard */; };
@@ -408,6 +409,7 @@
 		0CD80D9024D2D09D00155393 /* HomePreviewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePreviewCollectionViewCell.xib; sourceTree = "<group>"; };
 		0CE0657F24E0EE4500C40747 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		0CE0658224E106EE00C40747 /* CategoryAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAnimationView.swift; sourceTree = "<group>"; };
+		0CE27F0C24E39E2E00110F4F /* MovieHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHelper.swift; sourceTree = "<group>"; };
 		0CE9559D24CDE4B70099648B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		0CE9559F24CDE4E20099648B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0CE955A124CDE5370099648B /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
@@ -759,6 +761,7 @@
 				0C72B44924D5155A007378A4 /* Movie+Enum.swift */,
 				0C12FEF224DD8E63003EF1DE /* LanguageCodes.swift */,
 				0CCECA5824E093A700DF687A /* ArrayHelper.swift */,
+				0CE27F0C24E39E2E00110F4F /* MovieHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1438,6 +1441,7 @@
 				0C35E9F924D0307E001A612D /* OnboardingView2.swift in Sources */,
 				0CCECA4F24E077AD00DF687A /* MovieWatchListResponse.swift in Sources */,
 				0CFCB18E24CEDF03005A290A /* LoginObject.swift in Sources */,
+				0CE27F0D24E39E2E00110F4F /* MovieHelper.swift in Sources */,
 				0CFCE75524D3C5E0001D8C18 /* HomePreviewCellViewModel.swift in Sources */,
 				0CD80D8624D2A52F00155393 /* UIWindow+Extension.swift in Sources */,
 				0C1035F524C6EF9D00571EA6 /* NewMoviesViewController.swift in Sources */,

@@ -23,6 +23,7 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     
     var viewModel: HeaderMovieViewModel!
     private var bag = DisposeBag()
+    private let addToMyListTrigger = PublishSubject<Void>()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,7 +51,7 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     private func bindData() {
         let input = HeaderMovieViewModel.Input(
             showMovieDetailTrigger: infoButton.rx.tap.asDriver(),
-            addToMyListTrigger: myListButton.rx.tap.asDriver()
+            addToMyListTrigger: addToMyListTrigger.asDriverOnErrorJustComplete()
         )
         let output = viewModel.transform(input: input)
 
@@ -61,23 +62,7 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
             .disposed(by: bag)
         
         output.movie
-            .map { movie -> [String] in
-                if let ids = movie.genreIds, ids.count > 0 {
-                    let allMovieGenres = MovieGenreRealmObject.getAllGenres() ?? []
-                    let allTVShowsGenres = TVGenreRealmObject.getAllGenres() ?? []
-                    let genreIds = Set((allTVShowsGenres + allMovieGenres).compactMap { $0.id }).intersection(Set(ids))
-                    let genreNames = (allTVShowsGenres + allMovieGenres).filter { genre -> Bool in
-                        return genreIds.contains(genre.id ?? 0)
-                    }
-                    return Array(Set(genreNames.compactMap { $0.name }))
-                }
-                
-                if let genres = movie.genres, genres.count > 0 {
-                    return genres.compactMap { $0.name }
-                }
-                return []
-            }
-            .map { $0.joined(separator: " • ")}
+            .map { MovieHelper.getGenresString(movie: $0) }
             .drive(genreLabel.rx.text)
             .disposed(by: bag)
         
@@ -98,40 +83,38 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
             .drive(onNext: { [weak self] isMyList in
                 guard let self = self else { return }
                 if isMyList {
-                    if !PersistentManager.shared.watchList.compactMap({ $0.id }).contains(self.viewModel.movie.id ?? -1) {
-                        var watchList = PersistentManager.shared.watchList
-                        watchList.insert(self.viewModel.movie, at: 0)
-                        PersistentManager.shared.watchList = watchList
-                        self.myListAnimationView.play(fromProgress: 0, toProgress: 1, loopMode: .none, completion: nil)
-                        NotificationCenter.default.post(name: .didAddToMyList,
-                                                        object: nil,
-                                                        userInfo: [
-                                                            "is_mylist": true,
-                                                            "movie_id": self.viewModel.movie.id])
-                    }
+                    self.handleAddToMyList()
                 } else {
-                    if let index = PersistentManager.shared.watchList.firstIndex(where: { movie -> Bool in
-                        return movie.id == self.viewModel.movie.id && movie.id != nil
-                    }) {
-                        var watchList = PersistentManager.shared.watchList
-                        watchList.remove(at: index)
-                        PersistentManager.shared.watchList = watchList
-                        self.myListAnimationView.play(fromProgress: 1, toProgress: 0, loopMode: .none, completion: nil)
-                        NotificationCenter.default.post(name: .didAddToMyList,
-                                                        object: nil,
-                                                        userInfo: [
-                                                            "is_mylist": false,
-                                                            "movie_id": self.viewModel.movie.id])
-                    }
+                    self.handleRemoveFromMyList()
                 }
             })
             .disposed(by: bag)
         
-        output.loading.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
+//        output.loading
+//            .asObservable()
+//            .reversed()
+//            .bind(to: myListButton.rx.isEnabled)
+//            .disposed(by: bag)
+        
+//        output.loading.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
+        
+        myListButton.rx.tap
+            .withLatestFrom(output.loading)
+            .filter { !$0 }
+            .mapToVoid()
+            .bind(to: addToMyListTrigger)
+//            .subscribe(onNext: { _ in
+//
+//            })
+            .disposed(by: bag)
     }
     
     private func handleAction() {
-        
+        myListButton.rx.tap
+            .subscribe(onNext: { _ in
+//                print("my list tapped")
+            })
+            .disposed(by: bag)
     }
 }
 
@@ -144,6 +127,42 @@ extension HeaderMovieTableViewCell {
             myListAnimationView.play(fromProgress: 0, toProgress: 1, loopMode: .none, completion: nil)
         } else {
             myListAnimationView.play(fromProgress: 1, toProgress: 0, loopMode: .none, completion: nil)
+        }
+    }
+    
+    private func handleAddToMyList() {
+        if !PersistentManager.shared.watchList.compactMap({ $0.id }).contains(self.viewModel.movie.id ?? -1) {
+            var watchList = PersistentManager.shared.watchList
+            watchList.insert(self.viewModel.movie, at: 0)
+            PersistentManager.shared.watchList = watchList
+            self.myListAnimationView.play(fromProgress: 0,
+                                          toProgress: 1,
+                                          loopMode: .none,
+                                          completion: nil)
+            NotificationCenter.default.post(name: .didAddToMyList,
+                                            object: nil,
+                                            userInfo: [
+                                                "is_mylist": true,
+                                                "movie_id": viewModel.movie.id])
+        }
+    }
+    
+    private func handleRemoveFromMyList() {
+        if let index = PersistentManager.shared.watchList.firstIndex(where: { movie -> Bool in
+            return movie.id == self.viewModel.movie.id && movie.id != nil
+        }) {
+            var watchList = PersistentManager.shared.watchList
+            watchList.remove(at: index)
+            PersistentManager.shared.watchList = watchList
+            self.myListAnimationView.play(fromProgress: 1,
+                                          toProgress: 0,
+                                          loopMode: .none,
+                                          completion: nil)
+            NotificationCenter.default.post(name: .didAddToMyList,
+                                            object: nil,
+                                            userInfo: [
+                                                "is_mylist": false,
+                                                "movie_id": viewModel.movie.id])
         }
     }
 }

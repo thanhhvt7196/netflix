@@ -31,15 +31,12 @@ class HeaderMovieViewModel: ViewModel {
             })
             .disposed(by: bag)
         
-        let addToMyListResult = input.addToMyListTrigger.flatMapLatest { [unowned self] _ -> Driver<Bool> in
+        let addToMyListResult = input.addToMyListTrigger.flatMapLatest { [unowned self] watchList -> Driver<Bool> in
             print("my list tapped")
-            return self.addToWatchList(accountID: userInfoService.getAccountID() ?? -1, watchList: !self.isMyList)
+            return self.addToWatchList(accountID: userInfoService.getAccountID() ?? -1, watchList: watchList)
                 .trackError(errorTracker)
                 .trackActivity(activityIndicator)
-                .map { [weak self] _ -> Bool in
-                    guard let self = self else { return false }
-                    return !self.isMyList
-                }
+                .map { _ in watchList }
                 .asDriver(onErrorJustReturn: false)
         }
         return Output(movie: .just(movie),
@@ -60,15 +57,9 @@ class HeaderMovieViewModel: ViewModel {
 }
 
 extension HeaderMovieViewModel {
-    private var isMyList: Bool {
-        return PersistentManager.shared.watchList.compactMap { $0.id }.contains(movie.id ?? -1)
-    }
-}
-
-extension HeaderMovieViewModel {
     struct Input {
         var showMovieDetailTrigger: Driver<Void>
-        var addToMyListTrigger: Driver<Void>
+        var addToMyListTrigger: Driver<Bool>
     }
     
     struct Output {

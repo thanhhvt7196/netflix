@@ -26,4 +26,8 @@ class MovieHelper {
         }
         return genreArray.joined(separator: " • ")
     }
+    
+    static func isMyList(movie: Movie) -> Bool {
+        return PersistentManager.shared.watchList.compactMap { $0.id }.contains(movie.id ?? -1)
+    }
 }

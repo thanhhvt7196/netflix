@@ -23,7 +23,7 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     
     var viewModel: HeaderMovieViewModel!
     private var bag = DisposeBag()
-    private let addToMyListTrigger = PublishSubject<Void>()
+    private let addToMyListTrigger = PublishSubject<Bool>()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +45,6 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     func bindViewModel(viewModel: HeaderMovieViewModel) {
         self.viewModel = viewModel
         bindData()
-        handleAction()
     }
     
     private func bindData() {
@@ -58,7 +57,7 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
         output.movie
             .map { $0.posterPath }
             .map { ImageHelper.shared.pathToURL(path: $0, imageSize: .original)}
-            .drive(posterImageView.rx.imageURL)
+            .drive(posterImageView.rx.imageURL())
             .disposed(by: bag)
         
         output.movie
@@ -74,8 +73,9 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
             .disposed(by: bag)
         
         output.error
-            .drive(onNext: { error in
-                UIApplication.shared.currentWindow?.rootViewController?.showErrorAlert(message: error.localizedDescription)
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.handleAnimation(isMyList: MovieHelper.isMyList(movie: self.viewModel.movie))
             })
             .disposed(by: bag)
         
@@ -90,29 +90,19 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
             })
             .disposed(by: bag)
         
-//        output.loading
-//            .asObservable()
-//            .reversed()
-//            .bind(to: myListButton.rx.isEnabled)
-//            .disposed(by: bag)
-        
-//        output.loading.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
-        
         myListButton.rx.tap
             .withLatestFrom(output.loading)
             .filter { !$0 }
-            .mapToVoid()
-            .bind(to: addToMyListTrigger)
-//            .subscribe(onNext: { _ in
-//
-//            })
-            .disposed(by: bag)
-    }
-    
-    private func handleAction() {
-        myListButton.rx.tap
-            .subscribe(onNext: { _ in
-//                print("my list tapped")
+            .map { [weak self] _ -> Bool in
+                guard let self = self else {
+                    fatalError()
+                }
+                return !MovieHelper.isMyList(movie: self.viewModel.movie)
+            }
+            .subscribe(onNext: { [weak self] watchList in
+                guard let self = self else { return }
+                self.handleAnimation(isMyList: watchList)
+                self.addToMyListTrigger.onNext(watchList)
             })
             .disposed(by: bag)
     }
@@ -120,7 +110,7 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
 
 extension HeaderMovieTableViewCell {
     func update(isMyList: Bool, movieID: Int) {
-        guard viewModel.movie.id == movieID else {
+        guard viewModel.movie.id != movieID else {
             return
         }
         if isMyList {
@@ -135,10 +125,6 @@ extension HeaderMovieTableViewCell {
             var watchList = PersistentManager.shared.watchList
             watchList.insert(self.viewModel.movie, at: 0)
             PersistentManager.shared.watchList = watchList
-            self.myListAnimationView.play(fromProgress: 0,
-                                          toProgress: 1,
-                                          loopMode: .none,
-                                          completion: nil)
             NotificationCenter.default.post(name: .didAddToMyList,
                                             object: nil,
                                             userInfo: [
@@ -154,15 +140,25 @@ extension HeaderMovieTableViewCell {
             var watchList = PersistentManager.shared.watchList
             watchList.remove(at: index)
             PersistentManager.shared.watchList = watchList
-            self.myListAnimationView.play(fromProgress: 1,
-                                          toProgress: 0,
-                                          loopMode: .none,
-                                          completion: nil)
             NotificationCenter.default.post(name: .didAddToMyList,
                                             object: nil,
                                             userInfo: [
                                                 "is_mylist": false,
                                                 "movie_id": viewModel.movie.id])
+        }
+    }
+    
+    private func handleAnimation(isMyList: Bool) {
+        if isMyList {
+            self.myListAnimationView.play(fromProgress: 0,
+                                          toProgress: 1,
+                                          loopMode: .none,
+                                          completion: nil)
+        } else {
+            self.myListAnimationView.play(fromProgress: 1,
+                                          toProgress: 0,
+                                          loopMode: .none,
+                                          completion: nil)
         }
     }
 }

@@ -15,10 +15,22 @@ extension Reactive where Base: UIImageView {
     var imageURL: Binder<URL?> {
         return Binder(base) { imageView, url in
             imageView.sd_imageTransition = .fade
-//            imageView.sd_setImage(with: url, placeholderImage: UIColor.black.toImage())
+            imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             imageView.sd_setImage(with: url, placeholderImage: UIColor.black.toImage()) { (image, error, _, url) in
                 if error != nil {
                     imageView.image = UIImage(named: "No-Photo-Available")
+                }
+            }
+        }
+    }
+    
+    func imageURL(placeHolder: UIImage? = UIColor.black.toImage()) -> Binder<URL?> {
+        return Binder(base) { imageView, url in
+            imageView.sd_imageTransition = .fade
+            imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            imageView.sd_setImage(with: url, placeholderImage: UIColor.black.toImage()) { (image, error, _, url) in
+                if error != nil {
+                    imageView.image = placeHolder
                 }
             }
         }

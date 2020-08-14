@@ -33,6 +33,8 @@ struct APIURL {
     static let latest = "/latest"
     static let account = "/account"
     static let watchList = "/watchlist"
+    static let videos = "/videos"
+    static let recommendations = "/recommendations"
 }
 
 struct Constants {

@@ -9,10 +9,10 @@
 import Foundation
 
 struct MovieCategoryDataModel: Codable {
-    var nowPlayingList: [Movie]
-    var popularMovieList: [Movie]
-    var topRatedMovieList: [Movie]
-    var upcomingMovieList: [Movie]
-    var mostFavoriteMovieList: [Movie]
-    var topGrossingMovieList: [Movie]
+    var nowPlayingList: [Media]
+    var popularMovieList: [Media]
+    var topRatedMovieList: [Media]
+    var upcomingMovieList: [Media]
+    var mostFavoriteMovieList: [Media]
+    var topGrossingMovieList: [Media]
 }

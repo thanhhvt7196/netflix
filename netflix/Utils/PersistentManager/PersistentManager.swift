@@ -64,7 +64,7 @@ class PersistentManager {
     
     let allGenre = Genre(id: 0, name: Strings.allGenres)
     
-    var watchList: [Movie] {
+    var watchList: [Media] {
         set {
             let encodedArray = newValue.compactMap { $0.encodePlist() }
             defaults.set(encodedArray, forKey: UserDefaultKeys.watchList)

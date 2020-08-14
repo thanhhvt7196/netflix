@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Media: Codable {
     var popularity: Double?
     var voteCount: Int?
     var video: Bool?

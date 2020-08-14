@@ -119,7 +119,8 @@ extension HomeCategoryViewModel {
                 sections.append(
                     .mostFavoriteMovie(
                         title: Strings.mostFavoriteMovies,
-                        items: [.previewList(movies: Array(data.mostFavoriteMovieList.suffix(data.mostFavoriteMovieList.count - 1)))]
+                        items: [.previewList(movies: Array(data.mostFavoriteMovieList.suffix(data.mostFavoriteMovieList.count - 1)),
+                                             mediaType: .movie)]
                     )
                 )
             }
@@ -128,49 +129,56 @@ extension HomeCategoryViewModel {
         if data.tvShowAiringToday.count > 0 {
             sections.append(
                 .tvShowAiringToday(title: Strings.airingToday,
-                                   items: [.moviesListItem(movies: data.tvShowAiringToday)]
+                                   items: [.moviesListItem(movies: data.tvShowAiringToday,
+                                                           mediaType: .tv)]
                 )
             )
         }
         if data.tvShowLatestReleaseList.count > 0 {
             sections.append(
                 .latestReleaseTVShow(title: Strings.latestReleases,
-                                     items: [.moviesListItem(movies: data.tvShowLatestReleaseList)]
+                                     items: [.moviesListItem(movies: data.tvShowLatestReleaseList,
+                                                             mediaType: .tv)]
                 )
             )
         }
         if data.popularMovieList.count > 0 {
             sections.append(
                 .popularMovies(title: Strings.popularMovies,
-                               items: [.moviesListItem(movies: data.popularMovieList)]
+                               items: [.moviesListItem(movies: data.popularMovieList,
+                                                       mediaType: .movie)]
                 )
             )
         }
         if data.popularTVShowList.count > 0 {
             sections.append(
                 .popularTVShows(title: Strings.popularTVShows,
-                                items: [.moviesListItem(movies: data.popularTVShowList)]
+                                items: [.moviesListItem(movies: data.popularTVShowList,
+                                                        mediaType: .tv)]
                 )
             )
         }
         if data.topRatedMovieList.count > 0 {
             sections.append(
                 .topRatedMovies(title: Strings.topRatedMovies,
-                                items: [.moviesListItem(movies: data.topRatedMovieList)]
+                                items: [.moviesListItem(movies: data.topRatedMovieList,
+                                                        mediaType: .movie)]
                 )
             )
         }
         if data.topRatedTVShowList.count > 0 {
             sections.append(
                 .topRatedTVShows(title: Strings.topRatedTVShows,
-                                 items: [.moviesListItem(movies: data.topRatedTVShowList)]
+                                 items: [.moviesListItem(movies: data.topRatedTVShowList,
+                                                         mediaType: .tv)]
                 )
             )
         }
         if data.upcomingMovieList.count > 0 {
             sections.append(
                 .upcomingMovie(title: Strings.upcomingMovies,
-                               items: [.moviesListItem(movies: data.upcomingMovieList)]
+                               items: [.moviesListItem(movies: data.upcomingMovieList,
+                                                       mediaType: .movie)]
                 )
             )
         }

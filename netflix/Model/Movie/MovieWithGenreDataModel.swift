@@ -9,11 +9,11 @@
 import Foundation
 
 struct MovieWithGenreDataModel: Codable {
-    var popularMovieList: [Movie]
-    var mostFavoriteMovieList: [Movie]
-    var topGrossingMovieList: [Movie]
-    var westernMovieList: [Movie]
-    var koreanMovieList: [Movie]
-    var japaneseMovieList: [Movie]
-    var chineseMovieList: [Movie]
+    var popularMovieList: [Media]
+    var mostFavoriteMovieList: [Media]
+    var topGrossingMovieList: [Media]
+    var westernMovieList: [Media]
+    var koreanMovieList: [Media]
+    var japaneseMovieList: [Media]
+    var chineseMovieList: [Media]
 }

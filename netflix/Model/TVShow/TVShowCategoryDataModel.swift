@@ -9,11 +9,11 @@
 import Foundation
 
 struct TVShowCategoryDataModel: Codable {
-    var airingTodayList: [Movie]
-    var popularTVShowList: [Movie]
-    var topRatedTVShowList: [Movie]
-    var mostFavoriteTVShowList: [Movie]
-    var koreanTVShowList: [Movie]
-    var westernTVShowList: [Movie]
-    var chineseTVShowList: [Movie]
+    var airingTodayList: [Media]
+    var popularTVShowList: [Media]
+    var topRatedTVShowList: [Media]
+    var mostFavoriteTVShowList: [Media]
+    var koreanTVShowList: [Media]
+    var westernTVShowList: [Media]
+    var chineseTVShowList: [Media]
 }

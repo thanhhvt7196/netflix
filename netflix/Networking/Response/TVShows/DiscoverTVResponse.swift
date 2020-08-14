@@ -12,7 +12,7 @@ struct DiscoverTVResponse: Codable {
     var page: Int?
     var totalResults: Int?
     var totalPages: Int?
-    var results: [Movie]?
+    var results: [Media]?
     
     enum CodingKeys: String, CodingKey {
         case page

@@ -33,9 +33,9 @@ enum HomeCategoryViewSectionModel {
 }
 
 enum HomeCategoryViewSectionItem {
-    case headerMovie(movie: Movie)
-    case previewList(movies: [Movie])
-    case moviesListItem(movies: [Movie])
+    case headerMovie(movie: Media)
+    case previewList(movies: [Media], mediaType: MediaType)
+    case moviesListItem(movies: [Media], mediaType: MediaType)
 }
 
 extension HomeCategoryViewSectionModel: SectionModelType {

@@ -10,6 +10,10 @@ import Foundation
 import Moya
 
 enum APIMovie {
+    //common
+    case getVideos(mediaID: Int, mediaType: MediaType)
+    case getRecommendations(mediaID: Int, mediaType: MediaType)
+    
     //Movie
     case getMovieGenresList
     case getMovieNowPlayingList(page: Int)
@@ -18,7 +22,7 @@ enum APIMovie {
     case getUpcomingMoviesList(page: Int)
     case getLatestMovie
     case discoverMovie(sortBy: MovieSortType?, page: Int, genre: Int?, includeVideo: Bool, originalLanguage: LanguageCodes?)
-    
+    case getMovieDetail(id: Int)
     
     //TV Shows
     case getTvShowGenresList
@@ -28,6 +32,7 @@ enum APIMovie {
     case getTVShowOnTheAir(page: Int)
     case discoverTV(sortBy: TVShowSortType?, page: Int, genre: Int?, originalLanguage: LanguageCodes?)
     case getLatestTV
+    case getTVShowDetail(id:Int)
     
     //authentication
     case createRequestToken
@@ -86,6 +91,24 @@ extension APIMovie: TargetType {
             return APIURL.version3 + APIURL.account + "/\(accountID)" + APIURL.watchList + APIURL.movies
         case .getTVShowWatchList(let accountID):
             return APIURL.version3 + APIURL.account + "/\(accountID)" + APIURL.watchList + APIURL.tv
+        case .getVideos(let mediaID, let mediaType):
+            switch mediaType {
+            case .movie:
+                return APIURL.version3 + APIURL.movie + "/\(mediaID)" + APIURL.videos
+            case .tv:
+                return APIURL.version3 + APIURL.tv + "/\(mediaID)" + APIURL.videos
+            }
+        case .getRecommendations(let mediaID, let mediaType):
+            switch mediaType {
+            case .movie:
+                return APIURL.version3 + APIURL.movie + "/\(mediaID)" + APIURL.recommendations
+            case .tv:
+                return APIURL.version3 + APIURL.tv + "/\(mediaID)" + APIURL.recommendations
+            }
+        case .getMovieDetail(let id):
+            return APIURL.version3 + APIURL.movie + "/\(id)"
+        case .getTVShowDetail(let id):
+            return APIURL.version3 + APIURL.tv + "/\(id)"
         }
     }
     

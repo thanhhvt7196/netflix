@@ -32,6 +32,12 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
     private func bind() {
         let input = MovieDetailViewModel.Input(getMovieDetailTrigger: getMovieDetailTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
+        
+        output.movie
+            .drive(onNext: { detail in
+                print("detail")
+            })
+            .disposed(by: bag)
     }
     
     private func handleAction() {

@@ -11,9 +11,9 @@ import RxSwift
 import RxCocoa
 
 class HomePreviewCellViewModel: ViewModel {
-    private let movie: Driver<Movie>
+    private let movie: Driver<Media>
     
-    init(movie: Movie) {
+    init(movie: Media) {
         self.movie = .just(movie)
     }
     func transform(input: Input) -> Output {
@@ -27,6 +27,6 @@ extension HomePreviewCellViewModel {
     }
     
     struct Output {
-        var movie: Driver<Movie>
+        var movie: Driver<Media>
     }
 }

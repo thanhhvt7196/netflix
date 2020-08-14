@@ -11,6 +11,6 @@ import Foundation
 struct HomeGeneralData: Codable {
     var tvGenres: [Genre]?
     var movieGenres: [Genre]?
-    var tvShowWatchList: [Movie]?
-    var movieWatchList: [Movie]?
+    var tvShowWatchList: [Media]?
+    var movieWatchList: [Media]?
 }

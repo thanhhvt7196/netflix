@@ -74,11 +74,11 @@ class TVShowCategoryViewController: BaseViewController, StoryboardBased, ViewMod
                 }
                 return .just(cell)
         }
-        .flatMapLatest { cell -> Observable<Movie> in
+        .flatMapLatest { cell -> Observable<Media> in
             return .just(cell.viewModel.movie)
         }
         .subscribe(onNext: { movie in
-            SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie))
+            SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie, mediaType: .tv))
         })
             .disposed(by: bag)
     }
@@ -102,14 +102,14 @@ extension TVShowCategoryViewController {
                 let viewModel = HeaderMovieViewModel(movie: movie, mediaType: .tv)
                 cell.bindViewModel(viewModel: viewModel)
                 return cell
-            case .previewList(let movies):
+            case .previewList(let movies, let mediaType):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as HomeNowPlayingCell
-                let nowPlayingViewModel = HomeNowPlayingCellViewModel(movies: movies)
+                let nowPlayingViewModel = HomeNowPlayingCellViewModel(movies: movies, mediaType: mediaType)
                 cell.bindViewModel(viewModel: nowPlayingViewModel)
                 return cell
-            case .moviesListItem(let movies):
+            case .moviesListItem(let movies, let mediaType):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as MovieListTableViewCell
-                let movieListCellViewModel = MovieListCellViewModel(movies: movies)
+                let movieListCellViewModel = MovieListCellViewModel(movies: movies, mediaType: mediaType)
                 cell.bindViewModel(viewModel: movieListCellViewModel)
                 return cell
             }

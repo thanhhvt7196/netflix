@@ -173,7 +173,8 @@ extension MoviesCategoryViewModel {
             if data.popularMovieList.suffix(data.popularMovieList.count - 1).count > 0 {
                 sections.append(
                     .popularMovies(title: Strings.popularMovies,
-                                   items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)))]
+                                   items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)),
+                                                        mediaType: .movie)]
                     )
                 )
             }
@@ -181,35 +182,40 @@ extension MoviesCategoryViewModel {
         if data.mostFavoriteMovieList.count > 0 {
             sections.append(
                 .mostFavoriteTVShow(title: Strings.mostFavoriteMovies,
-                                    items: [.moviesListItem(movies: data.mostFavoriteMovieList)]
+                                    items: [.moviesListItem(movies: data.mostFavoriteMovieList,
+                                                            mediaType: .movie)]
                 )
             )
         }
         if data.westernMovieList.count > 0 {
             sections.append(
                 .WesternTVShow(title: Strings.westernMovies,
-                               items: [.moviesListItem(movies: data.westernMovieList)]
+                               items: [.moviesListItem(movies: data.westernMovieList,
+                                                       mediaType: .movie)]
                 )
             )
         }
         if data.koreanMovieList.count > 0 {
             sections.append(
                 .koreanTVShow(title: Strings.koreanMovies,
-                              items: [.moviesListItem(movies: data.koreanMovieList)]
+                              items: [.moviesListItem(movies: data.koreanMovieList,
+                                                      mediaType: .movie)]
                 )
             )
         }
         if data.japaneseMovieList.count > 0 {
             sections.append(
                 .japaneseTVShow(title: Strings.japaneseMovies,
-                                items: [.moviesListItem(movies: data.japaneseMovieList)]
+                                items: [.moviesListItem(movies: data.japaneseMovieList,
+                                                        mediaType: .movie)]
                 )
             )
         }
         if data.chineseMovieList.count > 0 {
             sections.append(
                 .chineseMovie(title: Strings.chineseMovies,
-                              items: [.moviesListItem(movies: data.chineseMovieList)]
+                              items: [.moviesListItem(movies: data.chineseMovieList,
+                                                      mediaType: .movie)]
                 )
             )
         }
@@ -228,7 +234,8 @@ extension MoviesCategoryViewModel {
             if data.popularMovieList.suffix(data.popularMovieList.count - 1).count > 0 {
                 sections.append(
                     .popularMovies(title: Strings.popularMovies,
-                                   items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)))]
+                                   items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)),
+                                                        mediaType: .movie)]
                     )
                 )
             }
@@ -236,35 +243,40 @@ extension MoviesCategoryViewModel {
         if data.nowPlayingList.count > 0 {
             sections.append(
                 .nowPlayingMovie(title: Strings.nowPlaying,
-                                 items: [.moviesListItem(movies: data.nowPlayingList)]
+                                 items: [.moviesListItem(movies: data.nowPlayingList,
+                                                         mediaType: .movie)]
                 )
             )
         }
         if data.topRatedMovieList.count > 0 {
             sections.append(
                 .topRatedMovies(title: Strings.topRatedMovies,
-                                items: [.moviesListItem(movies: data.topRatedMovieList)]
+                                items: [.moviesListItem(movies: data.topRatedMovieList,
+                                                        mediaType: .movie)]
                 )
             )
         }
         if data.upcomingMovieList.count > 0 {
             sections.append(
                 .upcomingMovie(title: Strings.upcomingMovies,
-                               items: [.moviesListItem(movies: data.upcomingMovieList)]
+                               items: [.moviesListItem(movies: data.upcomingMovieList,
+                                                       mediaType: .movie)]
                 )
             )
         }
         if data.mostFavoriteMovieList.count > 0 {
             sections.append(
                 .mostFavoriteTVShow(title: Strings.mostFavoriteMovies,
-                                    items: [.moviesListItem(movies: data.mostFavoriteMovieList)]
+                                    items: [.moviesListItem(movies: data.mostFavoriteMovieList,
+                                                            mediaType: .movie)]
                 )
             )
         }
         if data.topGrossingMovieList.count > 0 {
             sections.append(
                 .WesternTVShow(title: Strings.topGrossingMovies,
-                               items: [.moviesListItem(movies: data.topGrossingMovieList)]
+                               items: [.moviesListItem(movies: data.topGrossingMovieList,
+                                                       mediaType: .movie)]
                 )
             )
         }

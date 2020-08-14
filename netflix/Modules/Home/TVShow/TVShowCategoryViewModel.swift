@@ -168,28 +168,62 @@ extension TVShowCategoryViewModel {
     private func mapToDataSource(data: TVShowWithGenresDataModel) -> [HomeCategoryViewSectionModel] {
         var sections = [HomeCategoryViewSectionModel]()
         if let headerMovie = data.popularTVShowList.first {
-            sections.append(.headerMovie(title: nil, items: [.headerMovie(movie: headerMovie)]))
+            sections.append(
+                .headerMovie(title: nil,
+                             items: [.headerMovie(movie: headerMovie)]
+                )
+            )
         }
         if data.popularTVShowList.count > 0 {
             if data.popularTVShowList.suffix(data.popularTVShowList.count - 1).count > 0 {
-                sections.append(.popularTVShows(title: Strings.popularTVShows, items: [.previewList(movies: Array(data.popularTVShowList.suffix(data.popularTVShowList.count - 1)))]))
+                sections.append(
+                    .popularTVShows(title: Strings.popularTVShows,
+                                    items: [.previewList(movies: Array(data.popularTVShowList.suffix(data.popularTVShowList.count - 1)),
+                                                         mediaType: .movie)]
+                    )
+                )
             }
         }
         
         if data.mostFavoriteTVShowList.count > 0 {
-            sections.append(.mostFavoriteTVShow(title: Strings.mostFavoriteTVShow, items: [.moviesListItem(movies: data.mostFavoriteTVShowList)]))
+            sections.append(
+                .mostFavoriteTVShow(title: Strings.mostFavoriteTVShow,
+                                    items: [.moviesListItem(movies: data.mostFavoriteTVShowList,
+                                                            mediaType: .tv)]
+                )
+            )
         }
         if data.WesternTVShowList.count > 0 {
-            sections.append(.WesternTVShow(title: Strings.westernTVShow, items: [.moviesListItem(movies: data.WesternTVShowList)]))
+            sections.append(
+                .WesternTVShow(title: Strings.westernTVShow,
+                               items: [.moviesListItem(movies: data.WesternTVShowList,
+                                                       mediaType: .tv)]
+                )
+            )
         }
         if data.koreanTVShowList.count > 0 {
-            sections.append(.koreanTVShow(title: Strings.kDramas, items: [.moviesListItem(movies: data.koreanTVShowList)]))
+            sections.append(
+                .koreanTVShow(title: Strings.kDramas,
+                              items: [.moviesListItem(movies: data.koreanTVShowList,
+                                                      mediaType: .tv)]
+                )
+            )
         }
         if data.japaneseTVShowList.count > 0 {
-            sections.append(.japaneseTVShow(title: Strings.madeInJapan, items: [.moviesListItem(movies: data.japaneseTVShowList)]))
+            sections.append(
+                .japaneseTVShow(title: Strings.madeInJapan,
+                                items: [.moviesListItem(movies: data.japaneseTVShowList,
+                                                        mediaType: .tv)]
+                )
+            )
         }
         if data.chineseTVShowList.count > 0 {
-            sections.append(.chineseTVShow(title: Strings.chineseSeries, items: [.moviesListItem(movies: data.chineseTVShowList)]))
+            sections.append(
+                .chineseTVShow(title: Strings.chineseSeries,
+                               items: [.moviesListItem(movies: data.chineseTVShowList,
+                                                       mediaType: .tv)]
+                )
+            )
         }
         return sections
     }
@@ -207,7 +241,8 @@ extension TVShowCategoryViewModel {
             if data.popularTVShowList.suffix(data.popularTVShowList.count - 1).count > 0 {
                 sections.append(
                     .popularTVShows(title: Strings.popularTVShows,
-                                    items: [.previewList(movies: Array(data.popularTVShowList.suffix(data.popularTVShowList.count - 1)))]
+                                    items: [.previewList(movies: Array(data.popularTVShowList.suffix(data.popularTVShowList.count - 1)),
+                                                         mediaType: .tv)]
                     )
                 )
             }
@@ -215,37 +250,48 @@ extension TVShowCategoryViewModel {
         if data.airingTodayList.count > 0 {
             sections.append(
                 .tvShowAiringToday(title: Strings.airingToday,
-                                   items: [.moviesListItem(movies: data.airingTodayList)]
+                                   items: [.moviesListItem(movies: data.airingTodayList,
+                                                           mediaType: .tv)]
                 )
             )
         }
         if data.topRatedTVShowList.count > 0 {
             sections.append(
-                .topRatedTVShows(title: Strings.topRatedTVShows, items: [.moviesListItem(movies: data.topRatedTVShowList)]
+                .topRatedTVShows(title: Strings.topRatedTVShows,
+                                 items: [.moviesListItem(movies: data.topRatedTVShowList,
+                                                         mediaType: .tv)]
                 )
             )
         }
         if data.mostFavoriteTVShowList.count > 0 {
             sections.append(
-                .mostFavoriteTVShow(title: Strings.mostFavoriteTVShow, items: [.moviesListItem(movies: data.mostFavoriteTVShowList)]
+                .mostFavoriteTVShow(title: Strings.mostFavoriteTVShow,
+                                    items: [.moviesListItem(movies: data.mostFavoriteTVShowList,
+                                                            mediaType: .tv)]
                 )
             )
         }
         if data.westernTVShowList.count > 0 {
             sections.append(
-                .WesternTVShow(title: Strings.westernTVShow, items: [.moviesListItem(movies: data.westernTVShowList)]
+                .WesternTVShow(title: Strings.westernTVShow,
+                               items: [.moviesListItem(movies: data.westernTVShowList,
+                                                       mediaType: .tv)]
                 )
             )
         }
         if data.koreanTVShowList.count > 0 {
             sections.append(
-                .koreanTVShow(title: Strings.kDramas, items: [.moviesListItem(movies: data.koreanTVShowList)]
+                .koreanTVShow(title: Strings.kDramas,
+                              items: [.moviesListItem(movies: data.koreanTVShowList,
+                                                      mediaType: .tv)]
                 )
             )
         }
         if data.chineseTVShowList.count > 0 {
             sections.append(
-                .chineseTVShow(title: Strings.chineseSeries, items: [.moviesListItem(movies: data.chineseTVShowList)]
+                .chineseTVShow(title: Strings.chineseSeries,
+                               items: [.moviesListItem(movies: data.chineseTVShowList,
+                                                       mediaType: .tv)]
                 )
             )
         }

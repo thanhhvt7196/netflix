@@ -10,7 +10,7 @@ import Foundation
 
 struct UpcomingMovieResponse: Codable {
     var page: Int?
-    var results: [Movie]?
+    var results: [Media]?
     var totalResults: Int?
     var date: PeriodDate?
     var totalPages: Int?

@@ -11,10 +11,12 @@ import RxSwift
 import RxCocoa
 
 class MovieDetailViewModel: ViewModel {
-    private let movie: Movie
+    private let movie: Media
+    private let mediaType: MediaType
     
-    init(movie: Movie) {
+    init(movie: Media, mediaType: MediaType) {
         self.movie = movie
+        self.mediaType = mediaType
     }
     
     func transform(input: Input) -> Output {
@@ -28,6 +30,6 @@ extension MovieDetailViewModel {
     }
     
     struct Output {
-        var movie: Driver<Movie>
+        var movie: Driver<Media>
     }
 }

@@ -18,7 +18,7 @@ enum Scene {
     case login
     case onboarding
     case webView(url: String)
-    case movieDetail(movie: Movie)
+    case movieDetail(movie: Media, mediaType: MediaType)
 }
 
 extension Scene: TargetScene {
@@ -77,8 +77,8 @@ extension Scene: TargetScene {
             let webviewController = WebViewController.instantiate(withViewModel: webViewModel)
             let navigationController = UINavigationController(rootViewController: webviewController)
             return .present(navigationController)
-        case .movieDetail(let movie):
-            let movieDetailViewModel = MovieDetailViewModel(movie: movie)
+        case .movieDetail(let movie, let mediaType):
+            let movieDetailViewModel = MovieDetailViewModel(movie: movie, mediaType: mediaType)
             let movieDetailViewController = MovieDetailViewController.instantiate(withViewModel: movieDetailViewModel)
             return .push(movieDetailViewController)
         }

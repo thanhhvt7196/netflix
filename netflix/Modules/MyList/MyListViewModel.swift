@@ -22,7 +22,7 @@ class MyListViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let userInfoService = UserInfoService()
         let activityIndicator = ActivityIndicator()
-        let mylist = BehaviorRelay<[Movie]>(value: [])
+        let mylist = BehaviorRelay<[Media]>(value: [])
         
         let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
             return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
@@ -34,7 +34,7 @@ class MyListViewModel: ViewModel {
             
         }
         
-        let clearDataTrigger = input.clearDataTrigger.map { _ in [Movie]() }
+        let clearDataTrigger = input.clearDataTrigger.map { _ in [Media]() }
         Driver.merge(myListData, clearDataTrigger).drive(mylist).disposed(by: bag)
         
         return Output(mylist: mylist.asDriver(),
@@ -58,7 +58,7 @@ extension MyListViewModel {
         )
     }
     
-    private func getMyListData(accountID: Int) -> Observable<[Movie]> {
+    private func getMyListData(accountID: Int) -> Observable<[Media]> {
         let movieWatchList = getMovieWatchList(accountID: accountID)
                                 .trackError(errorTracker)
                                 .map { $0.results ?? [] }
@@ -82,7 +82,7 @@ extension MyListViewModel {
     }
     
     struct Output {
-        var mylist: Driver<[Movie]>
+        var mylist: Driver<[Media]>
         var error: Driver<Error>
         var loading: Driver<Bool>
     }

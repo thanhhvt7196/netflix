@@ -9,12 +9,12 @@
 import Foundation
 
 struct HomeCategoryDataModel: Codable {
-    var mostFavoriteMovieList: [Movie]
-    var tvShowAiringToday: [Movie]
-    var popularMovieList: [Movie]
-    var popularTVShowList: [Movie]
-    var topRatedMovieList: [Movie]
-    var topRatedTVShowList: [Movie]
-    var upcomingMovieList: [Movie]
-    var tvShowLatestReleaseList: [Movie]
+    var mostFavoriteMovieList: [Media]
+    var tvShowAiringToday: [Media]
+    var popularMovieList: [Media]
+    var popularTVShowList: [Media]
+    var topRatedMovieList: [Media]
+    var topRatedTVShowList: [Media]
+    var upcomingMovieList: [Media]
+    var tvShowLatestReleaseList: [Media]
 }

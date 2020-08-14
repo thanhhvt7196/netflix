@@ -9,7 +9,7 @@
 import Foundation
 
 class MovieHelper {
-    static func getGenresString(movie: Movie) -> String {
+    static func getGenresString(movie: Media) -> String {
         var genreArray = [String]()
         if let ids = movie.genreIds, ids.count > 0 {
             let allMovieGenres = MovieGenreRealmObject.getAllGenres() ?? []
@@ -27,7 +27,7 @@ class MovieHelper {
         return genreArray.joined(separator: " • ")
     }
     
-    static func isMyList(movie: Movie) -> Bool {
+    static func isMyList(movie: Media) -> Bool {
         return PersistentManager.shared.watchList.compactMap { $0.id }.contains(movie.id ?? -1)
     }
 }

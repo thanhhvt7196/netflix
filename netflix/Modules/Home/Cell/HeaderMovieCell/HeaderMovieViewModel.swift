@@ -11,11 +11,11 @@ import RxSwift
 import RxCocoa
 
 class HeaderMovieViewModel: ViewModel {
-    var movie: Movie
+    var movie: Media
     var mediaType: MediaType
     private let bag = DisposeBag()
     
-    init(movie: Movie, mediaType: MediaType) {
+    init(movie: Media, mediaType: MediaType) {
         self.movie = movie
         self.mediaType = mediaType
     }
@@ -27,7 +27,7 @@ class HeaderMovieViewModel: ViewModel {
         input.showMovieDetailTrigger
             .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movie))
+                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movie, mediaType: self.mediaType))
             })
             .disposed(by: bag)
         
@@ -63,7 +63,7 @@ extension HeaderMovieViewModel {
     }
     
     struct Output {
-        var movie: Driver<Movie>
+        var movie: Driver<Media>
         var addToMyListResult: Driver<Bool>
         var error: Driver<Error>
         var loading: Driver<Bool>

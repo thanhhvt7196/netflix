@@ -11,10 +11,12 @@ import RxSwift
 import RxCocoa
 
 class HomeNowPlayingCellViewModel: ViewModel {
-    private let movies: Driver<[Movie]>
+    private let movies: Driver<[Media]>
+    private let mediaType: MediaType
     
-    init(movies: [Movie]) {
+    init(movies: [Media], mediaType: MediaType) {
         self.movies = .just(movies)
+        self.mediaType = mediaType
     }
     
     func transform(input: Input) -> Output {
@@ -28,6 +30,6 @@ extension HomeNowPlayingCellViewModel {
     }
     
     struct Output {
-        var movies: Driver<[Movie]>
+        var movies: Driver<[Media]>
     }
 }

@@ -32,3 +32,12 @@ enum MediaType: String, CaseIterable {
     case tv
     case movie
 }
+
+enum MovieStatus: String, CaseIterable {
+    case rumored = "Rumored"
+    case planned = "Planned"
+    case inProduction = "In Production"
+    case postProduction = "Post Production"
+    case released = "Released"
+    case canceled = "Canceled"
+}

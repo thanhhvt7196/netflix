@@ -11,7 +11,7 @@ import Foundation
 struct TVEpisode: Codable {
     var airDate: String?
     var crew: Crew?
-    var guestStar: GuestStar?
+    var guestStar: Cast?
     var name: String?
     var overview: String?
     var id: Int?

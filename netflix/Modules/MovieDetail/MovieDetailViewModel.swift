@@ -12,29 +12,49 @@ import RxCocoa
 
 class MovieDetailViewModel: ViewModel {
     private let movie: Media
-    private let mediaType: MediaType
     
     private let bag = DisposeBag()
     private let errorTracker = ErrorTracker()
+    private let dataSource: BehaviorRelay<[MovieDetailSectionModel]>
     
-    init(movie: Media, mediaType: MediaType) {
+    init(movie: Media) {
         self.movie = movie
-        self.mediaType = mediaType
+        self.dataSource = BehaviorRelay<[MovieDetailSectionModel]>(value: [.headerDetail(item: [.headerMovie(media: movie, detail: nil)])])
     }
     
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
-        let movieData = input.getMovieDetailTrigger.flatMapLatest { [unowned self] _ in
+        input.getMovieDetailTrigger.flatMapLatest { [unowned self] _ in
             return self.getMovieDetailData()
                 .trackActivity(activityIndicator)
-                .asDriverOnErrorJustComplete()
-        }
-        return Output(tempMedia: .just(movie), movie: movieData)
+                .asDriver(onErrorJustReturn: nil)
+            }
+            .map { [weak self] detail -> [MovieDetailSectionModel] in
+                guard let self = self else { return [] }
+                return self.mapToDataSource(detail: detail)
+            }
+            .drive(dataSource)
+            .disposed(by: bag)
+        return Output(loading: activityIndicator.asDriver(),
+                      dataSource: dataSource)
+//        return Output(media: .just(movie),
+//                      movie: movieData,
+//                      loading: activityIndicator.asDriver(),
+//                      dataSource: dataSource)
     }
 }
 
 extension MovieDetailViewModel {
-    private func getMovieDetailData() -> Observable<MovieDetailDataModel> {
+    private func mapToDataSource(detail: MovieDetailDataModel?) -> [MovieDetailSectionModel] {
+        var sections = [MovieDetailSectionModel]()
+        sections.append(
+            .headerDetail(item: [.headerMovie(media: movie, detail: detail)])
+        )
+        
+        
+        return sections
+    }
+    private func getMovieDetailData() -> Observable<MovieDetailDataModel?> {
         let movieDetail = getMovieDetail()
                             .trackError(errorTracker)
                             .catchErrorJustReturn(nil)
@@ -49,13 +69,27 @@ extension MovieDetailViewModel {
                                 .map { $0?.results ?? [] }
                                 .catchErrorJustReturn([])
         
+        let similarMovies = getSimilarMovies()
+                                .trackError(errorTracker)
+                                .map { $0.results ?? [] }
+                                .catchErrorJustReturn([])
+        
+        let credits = getCredits()
+                        .trackError(errorTracker)
+                        .catchErrorJustReturn(nil)
+        
         return Observable.zip(movieDetail,
                               videos,
-                              recommendations)
-            .map { movieDetail, videos, recommendations -> MovieDetailDataModel in
+                              recommendations,
+                              similarMovies,
+                              credits)
+            .map { movieDetail, videos, recommendations, similarMovies, credits -> MovieDetailDataModel in
             return MovieDetailDataModel(movieDetail: movieDetail,
                                         videos: videos,
-                                        recommendations: recommendations)
+                                        recommendations: recommendations,
+                                        similarMedia: similarMovies,
+                                        cast: credits?.cast ?? [],
+                                        crew: credits?.crew ?? [])
         }
     }
 }
@@ -70,15 +104,29 @@ extension MovieDetailViewModel {
     
     private func getVideos() -> Observable<VideosResponse?> {
         return HostAPIClient.performApiNetworkCall(
-            router: .getVideos(mediaID: movie.id ?? 0, mediaType: mediaType),
+            router: .getVideos(mediaID: movie.id ?? 0, mediaType: .movie),
             type: VideosResponse?.self
         )
     }
     
     private func getRecommendations() -> Observable<RecommendationsResponse?> {
         return HostAPIClient.performApiNetworkCall(
-            router: .getRecommendations(mediaID: movie.id ?? 0, mediaType: mediaType),
+            router: .getRecommendations(mediaID: movie.id ?? 0, mediaType: .movie),
             type: RecommendationsResponse?.self
+        )
+    }
+    
+    private func getSimilarMovies() -> Observable<SimilarMediaResponse> {
+        return HostAPIClient.performApiNetworkCall(
+            router: .getSimilarMedia(mediaID: movie.id ?? 0, mediaType: .movie),
+            type: SimilarMediaResponse.self
+        )
+    }
+    
+    private func getCredits() -> Observable<CreditsResponse?> {
+        return HostAPIClient.performApiNetworkCall(
+            router: .getCredits(mediaID: movie.id ?? 0, mediaType: .movie),
+            type: CreditsResponse?.self
         )
     }
 }
@@ -89,7 +137,9 @@ extension MovieDetailViewModel {
     }
     
     struct Output {
-        var tempMedia: Driver<Media>
-        var movie: Driver<MovieDetailDataModel>
+//        var media: Driver<Media>
+//        var movie: Driver<MovieDetailDataModel>
+        var loading: Driver<Bool>
+        var dataSource: BehaviorRelay<[MovieDetailSectionModel]>
     }
 }

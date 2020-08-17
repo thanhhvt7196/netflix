@@ -15,6 +15,7 @@ struct Crew: Codable {
     var department: String?
     var job: String?
     var profilePath: String?
+    var gender: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -23,5 +24,6 @@ struct Crew: Codable {
         case department
         case job
         case profilePath = "profile_path"
+        case gender 
     }
 }

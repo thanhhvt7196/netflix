@@ -106,7 +106,7 @@ extension HomeCategoryViewModel {
     
     private func mapToDataSource(data: HomeCategoryDataModel) -> [HomeCategoryViewSectionModel] {
         var sections = [HomeCategoryViewSectionModel]()
-        if let headerMovie = data.mostFavoriteMovieList.first {
+        if let headerMovie = data.popularMovieList.first {
             sections.append(
                 .headerMovie(
                     title: nil,
@@ -114,12 +114,12 @@ extension HomeCategoryViewModel {
                 )
             )
         }
-        if data.mostFavoriteMovieList.count > 0 {
-            if data.mostFavoriteMovieList.suffix(data.mostFavoriteMovieList.count - 1).count > 0 {
+        if data.popularMovieList.count > 0 {
+            if data.popularMovieList.suffix(data.popularMovieList.count - 1).count > 0 {
                 sections.append(
-                    .mostFavoriteMovie(
-                        title: Strings.mostFavoriteMovies,
-                        items: [.previewList(movies: Array(data.mostFavoriteMovieList.suffix(data.mostFavoriteMovieList.count - 1)),
+                    .popularMovies(
+                        title: Strings.popularMovies,
+                        items: [.previewList(movies: Array(data.popularMovieList.suffix(data.popularMovieList.count - 1)),
                                              mediaType: .movie)]
                     )
                 )
@@ -142,10 +142,10 @@ extension HomeCategoryViewModel {
                 )
             )
         }
-        if data.popularMovieList.count > 0 {
+        if data.mostFavoriteMovieList.count > 0 {
             sections.append(
-                .popularMovies(title: Strings.popularMovies,
-                               items: [.moviesListItem(movies: data.popularMovieList,
+                .mostFavoriteMovie(title: Strings.mostFavoriteMovies,
+                               items: [.moviesListItem(movies: data.mostFavoriteMovieList,
                                                        mediaType: .movie)]
                 )
             )

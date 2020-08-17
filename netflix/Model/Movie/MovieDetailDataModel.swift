@@ -12,4 +12,7 @@ struct MovieDetailDataModel: Codable {
     var movieDetail: MovieDetailModel?
     var videos: [Video]
     var recommendations: [Media]
+    var similarMedia: [Media]
+    var cast: [Cast]
+    var crew: [Crew]
 }

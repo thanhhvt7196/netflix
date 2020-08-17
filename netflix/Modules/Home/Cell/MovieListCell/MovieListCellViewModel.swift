@@ -24,7 +24,12 @@ class MovieListCellViewModel: ViewModel {
         input.itemSelected
             .drive(onNext: { [weak self] indexPath in
                 guard let self = self, self.movies.indices.contains(indexPath.item) else { return }
-                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movies[indexPath.item], mediaType: self.mediaType))
+                switch self.mediaType {
+                case .tv:
+                    break
+                case .movie:
+                    SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movies[indexPath.item]))
+                }
             })
             .disposed(by: bag)
         return Output(movies: .just(movies))

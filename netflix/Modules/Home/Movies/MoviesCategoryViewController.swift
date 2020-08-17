@@ -79,7 +79,7 @@ class MoviesCategoryViewController: BaseViewController, StoryboardBased, ViewMod
             return .just(cell.viewModel.movie)
         }
         .subscribe(onNext: { movie in
-            SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie, mediaType: .movie))
+            SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie))
         })
             .disposed(by: bag)
     }

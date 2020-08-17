@@ -35,11 +35,14 @@ struct APIURL {
     static let watchList = "/watchlist"
     static let videos = "/videos"
     static let recommendations = "/recommendations"
+    static let similar = "/similar"
+    static let credits = "/credits"
 }
 
 struct Constants {
     static let APIKey = "1e0dcaa7e93980fb84e1d2430d01b887"
     static let USLanguageCode = "en-US"
+    static let defaultLocaleIdentifier = "en_US_POSIX"
     
     static let passwordMinLength = 4
     static let passwordMaxlength = 16
@@ -48,7 +51,66 @@ struct Constants {
     static let helpURL = "https://help.netflix.com/en"
 }
 
-struct APIParamKeys {
+enum CrewRole: String {
+    case director = "Director"
+    case orchestrator = "Orchestrator"
+    case vocal = "Vocals"
+    case costumer = "Costumer"
+    case dataManagementTechnician = "Data Management Technician"
+    case grip = "Grip"
+    case translator = "Translator"
+    case visualEffectProducer = "Visual Effects Producer"
+    case simulationAndEffectsArtist = "Simulation & Effects Artist"
+    case compositingArtist = "Compositing Artist"
+    case mattePainter = "Matte Painter"
+    case animation = "animation"
+    case visualEffectProductionAssistant = "Visual Effects Production Assistant"
+    case compositingLead = "Compositing Lead"
+    case lightningArtist = "Lighting Artist"
+    case VFXSupervisor = "VFX Supervisor"
+    case visualEffectSupervisor = "Visual Effects Supervisor"
+    case VFXArtist = "VFX Artist"
+    case VFXEditor = "VFX Editor"
+    case CGSupervisor = "CG Supervisor"
+    case leadAnimator = "Lead Animator"
+    case visualEffectDirector = "Visual Effects Director"
+    case compositingSupervisor = "Compositing Supervisor"
+    case matchmoveSupervisor = "Matchmove Supervisor"
+    case foleyArtist = "Foley Artist"
+    case foleyEditor = "Foley Editor"
+    case conceptArtist = "Concept Artist"
+    case firstAssistantDirector = "First Assistant Director"
+    case thirdAssistantDirector = "Third Assistant Director"
+    case secondUnitDirector = "Second Unit Director"
+    case unitProductionManager = "Unit Production Manager"
+    case productionManager = "Production Manager"
+    case specialEffectsMakeupArtist = "Special Effects Makeup Artist"
+    case coProducer = "Co-Producer"
+    case executiveProducerAssistant = "Executive Producer's Assistant"
+    case artDirection = "Art Direction"
+    case executiveProducer = "Executive Producer"
+    case lineProducer = "Line Producer"
+    case stuntCoordinator = "Stunt Coordinator"
+    case assistantDirector = "Assistant Director"
+    case screenPlay = "Screenplay"
+    case coExecutiveProducer = "Co-Executive Producer"
+    case soundEffectDesigner = "Sound Effects Designer"
+    case makeupAndHair = "Makeup & Hair"
+    case producer = "Producer"
+    case stillPhotographer = "Still Photographer"
+    case digitalIntermediate = "Digital Intermediate"
+    case originalMusicComposer = "Original Music Composer"
+    case themeSongPerformance = "Theme Song Performance"
+    case assistantEditor = "Assistant Editor"
+    case setDecoration = "Set Decoration"
+    case productionDesign = "Production Design"
+    case productionSoundMixer = "Production Sound Mixer"
+    case dolbyConsultant = "Dolby Consultant"
+    case adaptation = "Adaptation"
+    case directorOfPhotography = "Director of Photography"
+}
+
+enum APIParamKeys {
     static let APIKey = "api_key"
     static let page = "page"
     static let language = "language"
@@ -65,7 +127,7 @@ struct APIParamKeys {
     static let watchList = "watchlist"
 }
 
-struct ErrorMessage {
+enum ErrorMessage {
     static let notFound = "Not found"
     static let authenticalError = "Authentical error"
     static let badRequest = "Bad request"

@@ -79,7 +79,12 @@ class HomeCategoryViewController: BaseViewController, StoryboardBased, ViewModel
             return .just((cell.viewModel.movie, cell.viewModel.mediaType))
         }
         .subscribe(onNext: { movie, mediaType in
-            SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie, mediaType: mediaType))
+            switch mediaType {
+            case .movie:
+                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: movie))
+            case .tv:
+                break
+            }
         })
         .disposed(by: bag)
     }

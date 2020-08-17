@@ -21,7 +21,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8hC-Hf-gHv" firstAttribute="trailing" secondItem="vQ6-he-bWM" secondAttribute="trailing" id="4Dz-Y9-9aG"/>
                             <constraint firstItem="vQ6-he-bWM" firstAttribute="top" secondItem="0DI-lN-4We" secondAttribute="top" id="Ku9-to-QVA"/>
@@ -30,6 +30,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8hC-Hf-gHv"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="vQ6-he-bWM" id="nvd-bN-neU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWQ-JZ-DuB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

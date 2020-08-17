@@ -27,7 +27,12 @@ class HeaderMovieViewModel: ViewModel {
         input.showMovieDetailTrigger
             .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movie, mediaType: self.mediaType))
+                switch self.mediaType {
+                case .tv:
+                    break
+                case .movie:
+                    SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movie))
+                }
             })
             .disposed(by: bag)
         

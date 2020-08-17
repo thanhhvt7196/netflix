@@ -13,6 +13,8 @@ enum APIMovie {
     //common
     case getVideos(mediaID: Int, mediaType: MediaType)
     case getRecommendations(mediaID: Int, mediaType: MediaType)
+    case getSimilarMedia(mediaID: Int, mediaType: MediaType)
+    case getCredits(mediaID: Int, mediaType: MediaType)
     
     //Movie
     case getMovieGenresList
@@ -109,6 +111,20 @@ extension APIMovie: TargetType {
             return APIURL.version3 + APIURL.movie + "/\(id)"
         case .getTVShowDetail(let id):
             return APIURL.version3 + APIURL.tv + "/\(id)"
+        case .getSimilarMedia(let mediaID, let mediaType):
+            switch mediaType {
+            case .movie:
+                return APIURL.version3 + APIURL.movie + "/\(mediaID)" + APIURL.similar
+            case .tv:
+                return APIURL.version3 + APIURL.tv + "/\(mediaID)" + APIURL.similar
+            }
+        case .getCredits(let mediaID, let mediaType):
+            switch mediaType {
+            case .movie:
+                return APIURL.version3 + APIURL.movie + "/\(mediaID)" + APIURL.credits
+            case .tv:
+                return APIURL.version3 + APIURL.tv + "/\(mediaID)" + APIURL.credits
+            }
         }
     }
     

@@ -59,4 +59,9 @@ struct Strings {
     static let signOut = "Sign Out"
     static let yes = "Yes"
     static let no = "No"
+    
+    //format
+    static let castListFormat = "Cast: %@"
+    static let directorListFormat = "Director: %@"
+    static let apiDateFormat = "yyyy-MM-DD"
 }

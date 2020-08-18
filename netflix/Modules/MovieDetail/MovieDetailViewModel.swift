@@ -16,6 +16,7 @@ class MovieDetailViewModel: ViewModel {
     private let bag = DisposeBag()
     private let errorTracker = ErrorTracker()
     private let dataSource: BehaviorRelay<[MovieDetailSectionModel]>
+    private var movieDetail: MovieDetailDataModel?
     
     init(movie: Media) {
         self.movie = movie
@@ -24,6 +25,7 @@ class MovieDetailViewModel: ViewModel {
     
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
+        
         input.getMovieDetailTrigger.flatMapLatest { [unowned self] _ in
             return self.getMovieDetailData()
                 .trackActivity(activityIndicator)
@@ -31,26 +33,51 @@ class MovieDetailViewModel: ViewModel {
             }
             .map { [weak self] detail -> [MovieDetailSectionModel] in
                 guard let self = self else { return [] }
-                return self.mapToDataSource(detail: detail)
+                self.movieDetail = detail
+                return self.mapToDataSource(detail: detail, selectedIndex: input.selectedContent.value)
             }
             .drive(dataSource)
             .disposed(by: bag)
+        
+        input.selectedContent
+            .distinctUntilChanged()
+            .map { [weak self] selectedIndex -> [MovieDetailSectionModel] in
+                guard let self = self else { return [] }
+                return self.mapToDataSource(detail: self.movieDetail, selectedIndex: selectedIndex)
+            }
+            .bind(to: dataSource)
+            .disposed(by: bag)
+        
         return Output(loading: activityIndicator.asDriver(),
                       dataSource: dataSource)
-//        return Output(media: .just(movie),
-//                      movie: movieData,
-//                      loading: activityIndicator.asDriver(),
-//                      dataSource: dataSource)
     }
 }
 
 extension MovieDetailViewModel {
-    private func mapToDataSource(detail: MovieDetailDataModel?) -> [MovieDetailSectionModel] {
+    private func mapToDataSource(detail: MovieDetailDataModel?, selectedIndex: Int) -> [MovieDetailSectionModel] {
         var sections = [MovieDetailSectionModel]()
         sections.append(
             .headerDetail(item: [.headerMovie(media: movie, detail: detail)])
         )
         
+        var titles = [String]()
+        
+        let videos = detail?.videos ?? []
+        if videos.count > 0 {
+            titles.append(Strings.episodes.uppercased())
+        }
+        let recommendations = ArrayHelper.combine(arrays: [detail?.recommendations ?? [], detail?.similarMedia ?? []])
+        if recommendations.count > 0 {
+            titles.append(Strings.moreLikeThis.uppercased())
+        }
+        
+        if recommendations.count > 0 || videos.count > 0 {
+            sections.append(
+                .pager(item: [.pager(titles: titles,
+                                     startIndex: selectedIndex)]
+                )
+            )
+        }
         
         return sections
     }
@@ -134,11 +161,10 @@ extension MovieDetailViewModel {
 extension MovieDetailViewModel {
     struct Input {
         var getMovieDetailTrigger: Driver<Void>
+        var selectedContent: BehaviorRelay<Int>
     }
     
     struct Output {
-//        var media: Driver<Media>
-//        var movie: Driver<MovieDetailDataModel>
         var loading: Driver<Bool>
         var dataSource: BehaviorRelay<[MovieDetailSectionModel]>
     }

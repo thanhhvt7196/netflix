@@ -18,4 +18,5 @@ target 'netflix' do
 	pod 'SwiftGen'
 	pod 'NVActivityIndicatorView'
 	pod 'RealmSwift'
+	pod 'JXSegmentedView'
 end

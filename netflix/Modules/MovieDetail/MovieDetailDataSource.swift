@@ -20,7 +20,7 @@ enum MovieDetailSectionModel {
 enum MovieDetailSectionItem {
     case headerMovie(media: Media, detail: MovieDetailDataModel?)
     case headerTVShow
-    case pager
+    case pager(titles: [String], startIndex: Int)
     case episode
     case recommendMedia
 }

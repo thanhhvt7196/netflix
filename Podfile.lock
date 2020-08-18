@@ -2,6 +2,7 @@ PODS:
   - Alamofire (5.2.2)
   - Differentiator (4.0.1)
   - Hero (1.5.0)
+  - JXSegmentedView (1.2.7)
   - lottie-ios (3.1.8)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
@@ -38,6 +39,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Hero
+  - JXSegmentedView
   - lottie-ios
   - Moya
   - NVActivityIndicatorView
@@ -54,6 +56,7 @@ SPEC REPOS:
     - Alamofire
     - Differentiator
     - Hero
+    - JXSegmentedView
     - lottie-ios
     - Moya
     - NVActivityIndicatorView
@@ -71,6 +74,7 @@ SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
+  JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   NVActivityIndicatorView: f109ed069924ac1b4adbc1ae9cfaeac0be1d6c2c
@@ -84,6 +88,6 @@ SPEC CHECKSUMS:
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SwiftGen: 62e69d127507be1538d4263e137b2290cd6ab272
 
-PODFILE CHECKSUM: 30faecc8aafd17d2960b83d88ca349baf65b0364
+PODFILE CHECKSUM: 851451b800b0ac46423b22b31ab59d7eaa0bf12d
 
 COCOAPODS: 1.9.3

@@ -39,6 +39,8 @@ struct Strings {
     static let adultMovies = "Adult Movies"
     static let chineseMovies = "Chinese Movies"
     static let chineseSeries = "Chinese Series"
+    static let episodes = "episodes"
+    static let moreLikeThis = "more like this"
     
     //login validate
     static let username = "Username"

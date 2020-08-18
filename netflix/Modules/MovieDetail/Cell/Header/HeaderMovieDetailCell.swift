@@ -42,7 +42,12 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
     private func prepareUI() {
         selectionStyle = .none
         playButton.backgroundColor = .red
+        playButton.layer.cornerRadius = 3
         myListLottieView.animation = Animation.named("icon-addList")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
     
     override func prepareForReuse() {

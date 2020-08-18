@@ -45,6 +45,8 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
 //            })
 //            .disposed(by: bag)
         
+        output.loading.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
+        
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)

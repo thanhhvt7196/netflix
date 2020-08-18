@@ -45,6 +45,10 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
         myListLottieView.animation = Animation.named("icon-addList")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         bag = DisposeBag()

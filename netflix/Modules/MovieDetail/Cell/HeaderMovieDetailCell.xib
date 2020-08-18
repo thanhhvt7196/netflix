@@ -18,13 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PoZ-vh-GJs">
-                        <rect key="frame" x="0.0" y="0.0" width="296" height="355"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="PoZ-vh-GJs" secondAttribute="height" multiplier="1/1.2" id="Ul9-Ud-nFI"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="0.0" width="296" height="360"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wM-jU-WVn" customClass="GradientView" customModule="netflix" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="296" height="355"/>
+                        <rect key="frame" x="0.0" y="0.0" width="296" height="360"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XAG-no-6Ox">
@@ -80,7 +77,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C62-B3-8E4">
                                 <rect key="frame" x="0.0" y="285" width="266" height="123"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE9-dx-nSo">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE9-dx-nSo">
                                         <rect key="frame" x="0.0" y="10" width="266" height="103"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -171,9 +168,9 @@
                                         <rect key="frame" x="66.5" y="0.0" width="66.5" height="30"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbs-up_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="EPf-2X-AXa">
-                                                <rect key="frame" x="23.5" y="5" width="20" height="20"/>
+                                                <rect key="frame" x="21" y="2.5" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="228-wN-KlZ"/>
+                                                    <constraint firstAttribute="height" constant="25" id="228-wN-KlZ"/>
                                                     <constraint firstAttribute="width" secondItem="EPf-2X-AXa" secondAttribute="height" id="FfR-sG-uV9"/>
                                                 </constraints>
                                             </imageView>
@@ -262,6 +259,7 @@
                     <constraint firstItem="PoZ-vh-GJs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7CY-rX-0bK"/>
                     <constraint firstItem="8wM-jU-WVn" firstAttribute="bottom" secondItem="PoZ-vh-GJs" secondAttribute="bottom" id="Day-pN-jKA"/>
                     <constraint firstAttribute="bottom" secondItem="XAG-no-6Ox" secondAttribute="bottom" id="Rie-Gl-vEN"/>
+                    <constraint firstItem="PoZ-vh-GJs" firstAttribute="bottom" secondItem="vxk-J0-8yA" secondAttribute="bottom" constant="50" id="U4m-40-O21"/>
                     <constraint firstItem="PoZ-vh-GJs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VkH-kJ-nHK"/>
                     <constraint firstItem="XAG-no-6Ox" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Vwb-Jh-DrW"/>
                     <constraint firstItem="8wM-jU-WVn" firstAttribute="leading" secondItem="PoZ-vh-GJs" secondAttribute="leading" id="Ytc-pN-eia"/>

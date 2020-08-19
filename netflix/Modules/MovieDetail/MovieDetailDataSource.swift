@@ -14,7 +14,6 @@ enum MovieDetailSectionModel {
     
     case headerDetail(item: [Item])
     case pager(titles: [String], item: [Item])
-    case content(item: [Item])
 }
 
 enum MovieDetailSectionItem {
@@ -31,15 +30,11 @@ extension MovieDetailSectionModel: SectionModelType {
             return items.map { $0 }
         case .headerDetail(let items):
             return items.map { $0 }
-        case .content(let items):
-            return items.map { $0 }
         }
     }
     
     init(original: MovieDetailSectionModel, items: [MovieDetailSectionItem]) {
         switch original {
-        case .content:
-            self = .content(item: items)
         case .headerDetail:
             self = .headerDetail(item: items)
         case .pager(let titles, _):

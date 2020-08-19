@@ -61,7 +61,7 @@ class HomeCategoryViewController: BaseViewController, StoryboardBased, ViewModel
             .disposed(by: bag)
         
         output.dataSource
-            .bind(to: tableView.rx.items(dataSource: dataSources))
+            .drive(tableView.rx.items(dataSource: dataSources))
             .disposed(by: bag)
         
         output.indicator.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
@@ -152,20 +152,30 @@ extension HomeCategoryViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard viewModel.dataSource.value.indices.contains(section) else {
+        guard let dataSources = dataSources else {
             return .leastNonzeroMagnitude
         }
-        return viewModel.dataSource.value[section].title.isNilOrEmpty ? .leastNonzeroMagnitude : 40
+        switch dataSources[section] {
+        case .headerMovie:
+            return .leastNonzeroMagnitude
+        default:
+            return 40
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard viewModel.dataSource.value.indices.contains(section) else {
+        guard let dataSources = dataSources else {
             return nil
         }
-        if let title = viewModel.dataSource.value[section].title {
-            return HeaderViewForCategory(title: title, frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40))
-        } else {
+        switch dataSources[section] {
+        case .headerMovie:
             return nil
+        default:
+            if let title = dataSources[section].title {
+                return HeaderViewForCategory(title: title, frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40))
+            } else {
+                return nil
+            }
         }
     }
 }

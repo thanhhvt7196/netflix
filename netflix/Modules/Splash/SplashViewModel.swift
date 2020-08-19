@@ -14,17 +14,21 @@ class SplashViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let videoEnd = input.videoEnd.asObservable()
         let userInfoService = UserInfoService()
+        
         let loginResult = input.loginInfo.asObservable().flatMapLatest { loginObject -> Observable<Result<Void, Error>> in
             guard let username = loginObject?.username, let password = loginObject?.password else {
                 return .just(.failure(APIError(status_code: nil, status_message: ErrorMessage.errorOccur)))
             }
             return userInfoService.login(username: username, password: password)
         }
+        
         let splashFinish = Observable
             .zip(videoEnd, loginResult)
             .map { $0.1 }
             .asDriverOnErrorJustComplete()
-        return Output(splashFinish: splashFinish, indicator: userInfoService.activityIndicator.asDriver(onErrorJustReturn: false))
+        
+        return Output(splashFinish: splashFinish,
+                      indicator: userInfoService.activityIndicator.asDriver(onErrorJustReturn: false))
     }
 }
 

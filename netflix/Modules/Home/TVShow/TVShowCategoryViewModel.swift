@@ -11,12 +11,9 @@ import RxSwift
 import RxCocoa
 
 class TVShowCategoryViewModel: ViewModel {
-    private let bag = DisposeBag()
-    let dataSource = BehaviorRelay<[HomeCategoryViewSectionModel]>(value: [])
     private let errorTracker = ErrorTracker()
     
     func transform(input: Input) -> Output {
-        input.clearDataTrigger.map { _ in [] }.drive(dataSource).disposed(by: bag)
         
         let activityIndicator = ActivityIndicator()
         let allGenreData = input.fetchDataTrigger.filter { $0 == nil || $0 == 0 }.flatMapLatest { [unowned self] _ in
@@ -31,20 +28,27 @@ class TVShowCategoryViewModel: ViewModel {
                 .asDriverOnErrorJustComplete()
         }
         
-        allGenreData.map { [weak self] tvShowCategoryData -> [HomeCategoryViewSectionModel] in
+        let allGenreDataSource = allGenreData.asObservable()
+            .map { [weak self] tvShowCategoryData -> [HomeCategoryViewSectionModel] in
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: tvShowCategoryData)
             }
-            .drive(dataSource)
-            .disposed(by: bag)
         
-        specificGenreData.map { [weak self] tvShowWithGenreData -> [HomeCategoryViewSectionModel] in
+        let specificGenreDataSource = specificGenreData.asObservable()
+            .map { [weak self] tvShowWithGenreData -> [HomeCategoryViewSectionModel] in
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: tvShowWithGenreData)
             }
-            .drive(dataSource)
-            .disposed(by: bag)
         
+        let dataSource = Observable.merge(
+                [
+                    allGenreDataSource,
+                    specificGenreDataSource,
+                    input.clearDataTrigger.asObservable().map { _ in [] }
+                ]
+            )
+            .asDriver(onErrorJustReturn: [])
+
         return Output(dataSource: dataSource,
                       error: errorTracker.asDriver(),
                       indicator: activityIndicator.asDriver())
@@ -343,7 +347,7 @@ extension TVShowCategoryViewModel {
     }
     
     struct Output {
-        var dataSource: BehaviorRelay<[HomeCategoryViewSectionModel]>
+        var dataSource: Driver<[HomeCategoryViewSectionModel]>
         var error: Driver<Error>
         var indicator: Driver<Bool>
     }

@@ -11,26 +11,24 @@ import RxSwift
 import RxCocoa
 
 class HomeCategoryViewModel: ViewModel {
-    private let bag = DisposeBag()
-    let dataSource = BehaviorRelay<[HomeCategoryViewSectionModel]>(value: [])
     private let loading = BehaviorRelay<Bool>(value: false)
     private let errorTracker = ErrorTracker()
     
     func transform(input: Input) -> Output {
-        input.clearDataTrigger.map { _ in [] }.drive(dataSource).disposed(by: bag)
         let activityIndicator = ActivityIndicator()
-        let data = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
-            return self.getHomeCategoryData()
-                .trackActivity(activityIndicator)
-                .asDriverOnErrorJustComplete()
-        }
-        
-        data.map { [weak self] homeCategoryData -> [HomeCategoryViewSectionModel] in
+        let dataSource = input.fetchDataTrigger
+            .asObservable()
+            .flatMapLatest { [unowned self] _ in
+                return self.getHomeCategoryData()
+                    .trackActivity(activityIndicator)
+                    .asDriverOnErrorJustComplete()
+            }
+            .map { [weak self] homeCategoryData -> [HomeCategoryViewSectionModel] in
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: homeCategoryData)
             }
-            .drive(dataSource)
-            .disposed(by: bag)
+            .merge(with: input.clearDataTrigger.asObservable().map { _ in [] })
+            .asDriver(onErrorJustReturn: [])
         
         return Output(dataSource: dataSource,
                       error: errorTracker.asDriver(),
@@ -255,7 +253,7 @@ extension HomeCategoryViewModel {
     }
     
     struct Output {
-        var dataSource: BehaviorRelay<[HomeCategoryViewSectionModel]>
+        var dataSource: Driver<[HomeCategoryViewSectionModel]>
         var error: Driver<Error>
         var indicator: Driver<Bool>
     }

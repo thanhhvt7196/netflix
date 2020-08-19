@@ -30,6 +30,7 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
     @IBOutlet weak var directorView: UIView!
     @IBOutlet weak var actionStackView: UIStackView!
     @IBOutlet weak var actionTitleStackView: UIStackView!
+    @IBOutlet weak var durationLabel: UILabel!
     
     var viewModel: HeaderMovieDetailViewModel!
     private var bag = DisposeBag()
@@ -99,6 +100,12 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
             .map { $0.releaseDate ?? "" }
             .map { DateHelper.getYear(dateString: $0) }
             .drive(yearLabel.rx.text)
+            .disposed(by: bag)
+        
+        output.movieDetail
+            .map { $0?.movieDetail?.runtime }
+            .map { DateHelper.minutesToHourMinutes(minutes: $0)}
+            .drive(durationLabel.rx.text)
             .disposed(by: bag)
         
         output.movieDetail

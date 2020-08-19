@@ -26,11 +26,13 @@ class MovieDetailViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
-        input.getMovieDetailTrigger.flatMapLatest { [unowned self] _ in
+        let movieDetailData = input.getMovieDetailTrigger.flatMapLatest { [unowned self] _ in
             return self.getMovieDetailData()
                 .trackActivity(activityIndicator)
                 .asDriver(onErrorJustReturn: nil)
             }
+        
+        movieDetailData
             .map { [weak self] detail -> [MovieDetailSectionModel] in
                 guard let self = self else { return [] }
                 self.movieDetail = detail
@@ -70,17 +72,26 @@ extension MovieDetailViewModel {
         if recommendations.count > 0 {
             titles.append(Strings.moreLikeThis.uppercased())
         }
+
+        let videoItems = videos.map { MovieDetailSectionItem.episode(video: $0) }
+        let recommendationItems = Array(recommendations.chunked(into: 3).prefix(2)).map { MovieDetailSectionItem.recommendMedia(medias: $0) }
         
-        if recommendations.count > 0 || videos.count > 0 {
-            sections.append(
-                .pager(item: [.pager(titles: titles,
-                                     startIndex: selectedIndex)]
-                )
-            )
+        if !(videoItems.count == 0 && recommendationItems.count == 0) {
+            var items = [[MovieDetailSectionItem]]()
+            if videoItems.count > 0 {
+                items.append(videoItems)
+            }
+            if recommendationItems.count > 0 {
+                items.append(recommendationItems)
+            }
+            if items.indices.contains(selectedIndex) {
+                sections.append(.pager(titles: titles, item: items[selectedIndex]))
+            }
         }
         
         return sections
     }
+        
     private func getMovieDetailData() -> Observable<MovieDetailDataModel?> {
         let movieDetail = getMovieDetail()
                             .trackError(errorTracker)

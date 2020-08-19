@@ -35,6 +35,7 @@ PODS:
     - SDWebImage/Core (= 5.8.4)
   - SDWebImage/Core (5.8.4)
   - SwiftGen (6.2.1)
+  - XCDYouTubeKit (2.14.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - RxSwift
   - SDWebImage
   - SwiftGen
+  - XCDYouTubeKit
 
 SPEC REPOS:
   trunk:
@@ -69,6 +71,7 @@ SPEC REPOS:
     - RxSwift
     - SDWebImage
     - SwiftGen
+    - XCDYouTubeKit
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
@@ -87,7 +90,8 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SwiftGen: 62e69d127507be1538d4263e137b2290cd6ab272
+  XCDYouTubeKit: 5d50bbacdd9fedf26fb578bab901d946ff3d064c
 
-PODFILE CHECKSUM: 851451b800b0ac46423b22b31ab59d7eaa0bf12d
+PODFILE CHECKSUM: 303e8429eb36d76c89a42582cdf8304060cf58f0
 
 COCOAPODS: 1.9.3

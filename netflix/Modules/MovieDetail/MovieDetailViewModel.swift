@@ -85,7 +85,7 @@ extension MovieDetailViewModel {
                 items.append(recommendationItems)
             }
             if items.indices.contains(selectedIndex) {
-                sections.append(.pager(titles: titles, item: items[selectedIndex]))
+                sections.append(.content(titles: titles, item: items[selectedIndex]))
             }
         }
         

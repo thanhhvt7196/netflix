@@ -21,7 +21,8 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
     
     var viewModel: MovieDetailViewModel!
     private let bag = DisposeBag()
-    private var dataSource: RxTableViewSectionedReloadDataSource<MovieDetailSectionModel>!
+//    private var dataSource: RxTableViewSectionedReloadDataSource<MovieDetailSectionModel>!
+    private var dataSource: RxTableViewSectionedAnimatedDataSource<MovieDetailSectionModel>!
     
     private let getMovieDetailTrigger = PublishSubject<Void>()
     private let selectedContentIndex = BehaviorRelay<Int>(value: 0)
@@ -76,7 +77,24 @@ extension MovieDetailViewController {
     }
     
     private func setupDataSource() {
-        dataSource = RxTableViewSectionedReloadDataSource<MovieDetailSectionModel>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
+//        dataSource = RxTableViewSectionedReloadDataSource<MovieDetailSectionModel>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
+//            switch dataSource[indexPath] {
+//            case .headerMovie(let media, let detail):
+//                let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieDetailCell
+//                let viewModel = HeaderMovieDetailViewModel(media: media, detail: detail)
+//                cell.bindViewModel(viewModel: viewModel)
+//                return cell
+//            case .recommendMedia(let medias):
+//                let cell = tableView.dequeueReusableCell(for: indexPath) as RecommendationMediaCell
+//                let viewModel = RecommendationMediaCellViewModel(medias: medias, mediaType: .movie)
+//                cell.bindViewModel(viewModel: viewModel)
+//                return cell
+//            default:
+//                return UITableViewCell()
+//            }
+//        })
+        
+        dataSource = RxTableViewSectionedAnimatedDataSource<MovieDetailSectionModel>(animationConfiguration: AnimationConfiguration(insertAnimation: .left, reloadAnimation: .left, deleteAnimation: .left), configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
             switch dataSource[indexPath] {
             case .headerMovie(let media, let detail):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieDetailCell
@@ -111,7 +129,7 @@ extension MovieDetailViewController: UITableViewDelegate {
             return .leastNonzeroMagnitude
         }
         switch dataSource[section] {
-        case .pager:
+        case .content:
             return 40
         default:
             return .leastNonzeroMagnitude
@@ -127,7 +145,7 @@ extension MovieDetailViewController: UITableViewDelegate {
             return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: .leastNonzeroMagnitude))
         }
         switch dataSource[section] {
-        case .pager(let titles, _):
+        case .content(let titles, _):
             pagerHeaderView.setTitles(titles: titles)
             return pagerHeaderView
         default:

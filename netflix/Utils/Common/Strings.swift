@@ -41,6 +41,7 @@ struct Strings {
     static let chineseSeries = "Chinese Series"
     static let episodes = "episodes"
     static let moreLikeThis = "more like this"
+    static let trendingToday = "Trending Today"
     
     //login validate
     static let username = "Username"

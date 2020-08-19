@@ -13,20 +13,47 @@ enum MovieDetailSectionModel {
     typealias Item = MovieDetailSectionItem
     
     case headerDetail(item: [Item])
-    case pager(titles: [String], item: [Item])
+    case content(titles: [String], item: [Item])
 }
 
 enum MovieDetailSectionItem {
     case headerMovie(media: Media, detail: MovieDetailDataModel?)
-    case headerTVShow(media: Media)
     case episode(video: Video)
     case recommendMedia(medias: [Media])
 }
 
-extension MovieDetailSectionModel: SectionModelType {
+extension MovieDetailSectionItem: IdentifiableType, Equatable {
+    static func == (lhs: MovieDetailSectionItem, rhs: MovieDetailSectionItem) -> Bool {
+        return lhs.identity == rhs.identity
+    }
+    
+    var identity: String {
+        switch self {
+        case .headerMovie(let media, _):
+            return "\(media.id ?? 0)"
+        case .episode(let video):
+            return video.id ?? ""
+        case .recommendMedia(let medias):
+            return String(medias.compactMap { "\($0.id ?? 0)" }.reduce("", { $0 + $1 }))
+        }
+    }
+    
+    
+}
+
+extension MovieDetailSectionModel: AnimatableSectionModelType {
+    var identity: Int {
+        switch self {
+        case .headerDetail:
+            return 0
+        case .content:
+            return 1
+        }
+    }
+    
     var items: [MovieDetailSectionItem] {
         switch self {
-        case .pager(_, let items):
+        case .content(_, let items):
             return items.map { $0 }
         case .headerDetail(let items):
             return items.map { $0 }
@@ -37,8 +64,8 @@ extension MovieDetailSectionModel: SectionModelType {
         switch original {
         case .headerDetail:
             self = .headerDetail(item: items)
-        case .pager(let titles, _):
-            self = .pager(titles: titles, item: items)
+        case .content(let titles, _):
+            self = .content(titles: titles, item: items)
         }
     }
 }

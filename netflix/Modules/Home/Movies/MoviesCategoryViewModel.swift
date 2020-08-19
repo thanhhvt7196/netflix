@@ -126,6 +126,11 @@ extension MoviesCategoryViewModel {
                                     .map { $0.results ?? [] }
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
+        
+        let trendingTodayMovieList = getTrendingTodayMovieList()
+                                        .trackError(errorTracker)
+                                        .map { $0.results ?? [] }
+                                        .catchErrorJustReturn([])
                 
         let upcomingMovieList = getUpcomingMovieList(page: 1)
                                     .trackError(errorTracker)
@@ -145,14 +150,16 @@ extension MoviesCategoryViewModel {
         let data = Observable.zip(nowPlayingList,
                                   popularMovieList,
                                   topRatedMovieList,
+                                  trendingTodayMovieList,
                                   upcomingMovieList,
                                   mostFavoriteMovieList,
                                   topGrossingMovieList)
-            .map { nowPlayingList, popularMovieList, topRatedMovieList, upcomingMovieList, mostFavoriteMovieList, topGrossingMovieList  -> MovieCategoryDataModel in
+            .map { nowPlayingList, popularMovieList, topRatedMovieList, trendingTodayMovieList, upcomingMovieList, mostFavoriteMovieList, topGrossingMovieList  -> MovieCategoryDataModel in
                 return MovieCategoryDataModel(
                     nowPlayingList: nowPlayingList,
                     popularMovieList: popularMovieList,
                     topRatedMovieList: topRatedMovieList,
+                    trendingMovieList: trendingTodayMovieList,
                     upcomingMovieList: upcomingMovieList,
                     mostFavoriteMovieList: mostFavoriteMovieList,
                     topGrossingMovieList: topGrossingMovieList
@@ -258,6 +265,14 @@ extension MoviesCategoryViewModel {
                 )
             )
         }
+        if data.trendingMovieList.count > 0 {
+            sections.append(
+                .trendingToday(title: Strings.trendingToday,
+                               items: [.moviesListItem(movies: data.trendingMovieList,
+                                                       mediaType: .movie)]
+                )
+            )
+        }
         if data.upcomingMovieList.count > 0 {
             sections.append(
                 .upcomingMovie(title: Strings.upcomingMovies,
@@ -312,6 +327,14 @@ extension MoviesCategoryViewModel {
         return HostAPIClient.performApiNetworkCall(
             router: .getUpcomingMoviesList(page: page),
             type: UpcomingMovieResponse.self
+        )
+    }
+    
+    private func getTrendingTodayMovieList() -> Observable<TrendingMoviesResponse> {
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTrendingMedia(mediaType: .movie,
+                                      period: .day),
+            type: TrendingMoviesResponse.self
         )
     }
     

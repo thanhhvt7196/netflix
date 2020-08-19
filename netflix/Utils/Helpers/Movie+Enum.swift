@@ -41,3 +41,8 @@ enum MovieStatus: String, CaseIterable {
     case released = "Released"
     case canceled = "Canceled"
 }
+
+enum TimePeriod: String {
+    case day
+    case week
+}

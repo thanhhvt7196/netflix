@@ -133,6 +133,11 @@ extension TVShowCategoryViewModel {
                                         .map { $0.results ?? [] }
                                         .catchErrorJustReturn([])
         
+        let trendingTodayTVShowList = getTrendingTodayTVShow()
+                                        .trackError(errorTracker)
+                                        .map { $0.results ?? [] }
+                                        .catchErrorJustReturn([])
+        
         let koreanTVShowList = discoverTV(originalLanguage: .ko)
                                     .trackError(errorTracker)
                                     .map { $0.results ?? [] }
@@ -152,15 +157,17 @@ extension TVShowCategoryViewModel {
                                   popularTVShowsList,
                                   topRatedTVShowsList,
                                   mostFavoriteTVShowList,
+                                  trendingTodayTVShowList,
                                   westernTVShowList,
                                   koreanTVShowList,
                                   chineseTVShowList)
-            .map { tvShowAiringTodayList, popularTVShowsList, topRatedTVShowsList, mostFavoriteTVShowList, westernTVShowList, koreanTVShowList, chineseTVShowList -> TVShowCategoryDataModel in
+            .map { tvShowAiringTodayList, popularTVShowsList, topRatedTVShowsList, mostFavoriteTVShowList, trendingTodayTVShowList, westernTVShowList, koreanTVShowList, chineseTVShowList -> TVShowCategoryDataModel in
                 return TVShowCategoryDataModel(
                     airingTodayList: tvShowAiringTodayList,
                     popularTVShowList: popularTVShowsList,
                     topRatedTVShowList: topRatedTVShowsList,
                     mostFavoriteTVShowList: mostFavoriteTVShowList,
+                    trendingTodayTVShowList: trendingTodayTVShowList,
                     koreanTVShowList: koreanTVShowList,
                     westernTVShowList: westernTVShowList,
                     chineseTVShowList: chineseTVShowList
@@ -275,6 +282,13 @@ extension TVShowCategoryViewModel {
                 )
             )
         }
+        if data.trendingTodayTVShowList.count > 0 {
+            sections.append(
+                .trendingToday(title: Strings.trendingToday,
+                               items: [.moviesListItem(movies: data.trendingTodayTVShowList, mediaType: .tv)]
+                )
+            )
+        }
         if data.westernTVShowList.count > 0 {
             sections.append(
                 .WesternTVShow(title: Strings.westernTVShow,
@@ -322,6 +336,13 @@ extension TVShowCategoryViewModel {
         return HostAPIClient.performApiNetworkCall(
             router: .getTopRatedTvShowsList(page: page),
             type: TopRatedTVShowResponse.self
+        )
+    }
+    
+    private  func getTrendingTodayTVShow() -> Observable<TrendingTVShowResponse> {
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTrendingMedia(mediaType: .tv, period: .week),
+            type: TrendingTVShowResponse.self
         )
     }
     

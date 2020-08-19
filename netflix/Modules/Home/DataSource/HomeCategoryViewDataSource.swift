@@ -30,6 +30,7 @@ enum HomeCategoryViewSectionModel {
     case topGrossingMovie(title: String, items: [Item])
     case chineseTVShow(title: String, items: [Item])
     case chineseMovie(title: String, items: [Item])
+    case trendingToday(title: String, items: [Item])
 }
 
 enum HomeCategoryViewSectionItem {
@@ -79,6 +80,8 @@ extension HomeCategoryViewSectionModel: SectionModelType {
             return items.map { $0 }
         case .chineseMovie(_, let items):
             return items.map { $0 }
+        case .trendingToday(_, let items):
+            return items.map { $0 }
         }
     }
     
@@ -121,6 +124,8 @@ extension HomeCategoryViewSectionModel: SectionModelType {
         case .chineseMovie(let title, _):
             return title
         case .chineseTVShow(let title, _):
+            return title
+        case .trendingToday(let title, _):
             return title
         }
     }
@@ -165,6 +170,8 @@ extension HomeCategoryViewSectionModel: SectionModelType {
             self = .chineseMovie(title: title, items: items)
         case let .chineseTVShow(title: title, items: _):
             self = .chineseTVShow(title: title, items: items)
+        case let .trendingToday(title: title, items: _):
+            self = .trendingToday(title: title, items: items)
         }
     }
 }

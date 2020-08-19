@@ -11,6 +11,7 @@ import Foundation
 struct APIURL {
     static let baseURL = "https://api.themoviedb.org"
     static let imageBaseURL = "https://image.tmdb.org/t/p"
+    static let youtubeImageURL = "https://img.youtube.com/vi/%@/default.jpg"
     static let version3 = "/3"
     static let version4 = "/4"
     static let movie = "/movie"

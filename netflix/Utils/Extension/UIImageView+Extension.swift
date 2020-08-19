@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 extension UIImageView {
     func blurImage() {
@@ -35,5 +36,16 @@ extension UIImageView {
         
         let processedImage = UIImage(cgImage: cgimg)
         self.image = processedImage
+    }
+}
+
+extension UIImageView {
+    func setImageWithPlaceHolder(url: URL?) {
+        self.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        self.sd_setImage(with: url, placeholderImage: UIColor.black.toImage()) { (image, error, _, url) in
+            if error != nil {
+                self.image = UIImage(named: "No-Photo-Available")
+            }
+        }
     }
 }

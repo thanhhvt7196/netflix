@@ -13,22 +13,21 @@ enum MovieDetailSectionModel {
     typealias Item = MovieDetailSectionItem
     
     case headerDetail(item: [Item])
-    case pager(item: [Item])
+    case pager(titles: [String], item: [Item])
     case content(item: [Item])
 }
 
 enum MovieDetailSectionItem {
     case headerMovie(media: Media, detail: MovieDetailDataModel?)
-    case headerTVShow
-    case pager(titles: [String], startIndex: Int)
-    case episode
-    case recommendMedia
+    case headerTVShow(media: Media)
+    case episode(video: Video)
+    case recommendMedia(medias: [Media])
 }
 
 extension MovieDetailSectionModel: SectionModelType {
     var items: [MovieDetailSectionItem] {
         switch self {
-        case .pager(let items):
+        case .pager(_, let items):
             return items.map { $0 }
         case .headerDetail(let items):
             return items.map { $0 }
@@ -43,8 +42,8 @@ extension MovieDetailSectionModel: SectionModelType {
             self = .content(item: items)
         case .headerDetail:
             self = .headerDetail(item: items)
-        case .pager:
-            self = .pager(item: items)
+        case .pager(let titles, _):
+            self = .pager(titles: titles, item: items)
         }
     }
 }

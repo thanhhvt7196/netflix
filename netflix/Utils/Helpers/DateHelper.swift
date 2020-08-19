@@ -25,4 +25,13 @@ class DateHelper {
         }
         return "\(Calendar.current.component(.year, from: date))"
     }
+    
+    static func minutesToHourMinutes(minutes: Int?) -> String? {
+        guard let minutes = minutes, minutes > 0 else { return nil }
+        if minutes / 60 >= 1 {
+            return "\(minutes / 60)h \(minutes % 60)m"
+        } else {
+            return "\(minutes % 60)m"
+        }
+    }
 }

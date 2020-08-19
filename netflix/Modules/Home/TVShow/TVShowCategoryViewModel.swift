@@ -11,12 +11,9 @@ import RxSwift
 import RxCocoa
 
 class TVShowCategoryViewModel: ViewModel {
-    private let bag = DisposeBag()
-    let dataSource = BehaviorRelay<[HomeCategoryViewSectionModel]>(value: [])
     private let errorTracker = ErrorTracker()
     
     func transform(input: Input) -> Output {
-        input.clearDataTrigger.map { _ in [] }.drive(dataSource).disposed(by: bag)
         
         let activityIndicator = ActivityIndicator()
         let allGenreData = input.fetchDataTrigger.filter { $0 == nil || $0 == 0 }.flatMapLatest { [unowned self] _ in
@@ -31,20 +28,27 @@ class TVShowCategoryViewModel: ViewModel {
                 .asDriverOnErrorJustComplete()
         }
         
-        allGenreData.map { [weak self] tvShowCategoryData -> [HomeCategoryViewSectionModel] in
+        let allGenreDataSource = allGenreData.asObservable()
+            .map { [weak self] tvShowCategoryData -> [HomeCategoryViewSectionModel] in
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: tvShowCategoryData)
             }
-            .drive(dataSource)
-            .disposed(by: bag)
         
-        specificGenreData.map { [weak self] tvShowWithGenreData -> [HomeCategoryViewSectionModel] in
+        let specificGenreDataSource = specificGenreData.asObservable()
+            .map { [weak self] tvShowWithGenreData -> [HomeCategoryViewSectionModel] in
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: tvShowWithGenreData)
             }
-            .drive(dataSource)
-            .disposed(by: bag)
         
+        let dataSource = Observable.merge(
+                [
+                    allGenreDataSource,
+                    specificGenreDataSource,
+                    input.clearDataTrigger.asObservable().map { _ in [] }
+                ]
+            )
+            .asDriver(onErrorJustReturn: [])
+
         return Output(dataSource: dataSource,
                       error: errorTracker.asDriver(),
                       indicator: activityIndicator.asDriver())
@@ -129,6 +133,11 @@ extension TVShowCategoryViewModel {
                                         .map { $0.results ?? [] }
                                         .catchErrorJustReturn([])
         
+        let trendingTodayTVShowList = getTrendingTodayTVShow()
+                                        .trackError(errorTracker)
+                                        .map { $0.results ?? [] }
+                                        .catchErrorJustReturn([])
+        
         let koreanTVShowList = discoverTV(originalLanguage: .ko)
                                     .trackError(errorTracker)
                                     .map { $0.results ?? [] }
@@ -148,15 +157,17 @@ extension TVShowCategoryViewModel {
                                   popularTVShowsList,
                                   topRatedTVShowsList,
                                   mostFavoriteTVShowList,
+                                  trendingTodayTVShowList,
                                   westernTVShowList,
                                   koreanTVShowList,
                                   chineseTVShowList)
-            .map { tvShowAiringTodayList, popularTVShowsList, topRatedTVShowsList, mostFavoriteTVShowList, westernTVShowList, koreanTVShowList, chineseTVShowList -> TVShowCategoryDataModel in
+            .map { tvShowAiringTodayList, popularTVShowsList, topRatedTVShowsList, mostFavoriteTVShowList, trendingTodayTVShowList, westernTVShowList, koreanTVShowList, chineseTVShowList -> TVShowCategoryDataModel in
                 return TVShowCategoryDataModel(
                     airingTodayList: tvShowAiringTodayList,
                     popularTVShowList: popularTVShowsList,
                     topRatedTVShowList: topRatedTVShowsList,
                     mostFavoriteTVShowList: mostFavoriteTVShowList,
+                    trendingTodayTVShowList: trendingTodayTVShowList,
                     koreanTVShowList: koreanTVShowList,
                     westernTVShowList: westernTVShowList,
                     chineseTVShowList: chineseTVShowList
@@ -271,6 +282,13 @@ extension TVShowCategoryViewModel {
                 )
             )
         }
+        if data.trendingTodayTVShowList.count > 0 {
+            sections.append(
+                .trendingToday(title: Strings.trendingToday,
+                               items: [.moviesListItem(movies: data.trendingTodayTVShowList, mediaType: .tv)]
+                )
+            )
+        }
         if data.westernTVShowList.count > 0 {
             sections.append(
                 .WesternTVShow(title: Strings.westernTVShow,
@@ -321,6 +339,13 @@ extension TVShowCategoryViewModel {
         )
     }
     
+    private  func getTrendingTodayTVShow() -> Observable<TrendingTVShowResponse> {
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTrendingMedia(mediaType: .tv, period: .week),
+            type: TrendingTVShowResponse.self
+        )
+    }
+    
     private func discoverTV(sortBy: TVShowSortType? = nil,
                             page: Int = 1,
                             genre: Int? = nil,
@@ -343,7 +368,7 @@ extension TVShowCategoryViewModel {
     }
     
     struct Output {
-        var dataSource: BehaviorRelay<[HomeCategoryViewSectionModel]>
+        var dataSource: Driver<[HomeCategoryViewSectionModel]>
         var error: Driver<Error>
         var indicator: Driver<Bool>
     }

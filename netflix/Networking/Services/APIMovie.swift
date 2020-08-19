@@ -15,6 +15,7 @@ enum APIMovie {
     case getRecommendations(mediaID: Int, mediaType: MediaType)
     case getSimilarMedia(mediaID: Int, mediaType: MediaType)
     case getCredits(mediaID: Int, mediaType: MediaType)
+    case getTrendingMedia(mediaType: MediaType, period: TimePeriod)
     
     //Movie
     case getMovieGenresList
@@ -125,6 +126,8 @@ extension APIMovie: TargetType {
             case .tv:
                 return APIURL.version3 + APIURL.tv + "/\(mediaID)" + APIURL.credits
             }
+        case .getTrendingMedia(let mediaType, let period):
+            return APIURL.version3 + APIURL.trending + "/\(mediaType.rawValue)" + "/\(period.rawValue)"
         }
     }
     

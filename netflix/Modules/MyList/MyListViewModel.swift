@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 class MyListViewModel: ViewModel {
-    private let bag = DisposeBag()
     private let errorTracker = ErrorTracker()
     let isTabbarItem: Bool
     
@@ -22,7 +21,6 @@ class MyListViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let userInfoService = UserInfoService()
         let activityIndicator = ActivityIndicator()
-        let mylist = BehaviorRelay<[Media]>(value: [])
         
         let myListData = input.fetchDataTrigger.flatMapLatest { [unowned self] _ in
             return self.getMyListData(accountID: userInfoService.getAccountID() ?? -1)
@@ -35,9 +33,9 @@ class MyListViewModel: ViewModel {
         }
         
         let clearDataTrigger = input.clearDataTrigger.map { _ in [Media]() }
-        Driver.merge(myListData, clearDataTrigger).drive(mylist).disposed(by: bag)
+        let myList = Driver.merge(myListData, clearDataTrigger)
         
-        return Output(mylist: mylist.asDriver(),
+        return Output(mylist: myList,
                       error: errorTracker.asDriver(),
                       loading: activityIndicator.asDriver())
     }

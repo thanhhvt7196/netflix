@@ -12,12 +12,8 @@ import RxCocoa
 
 class MoviesCategoryViewModel: ViewModel {
     private let errorTracker = ErrorTracker()
-    private let bag = DisposeBag()
-    let dataSource = BehaviorRelay<[HomeCategoryViewSectionModel]>(value: [])
     
     func transform(input: Input) -> Output {
-        input.clearDataTrigger.map { _ in [] }.drive(dataSource).disposed(by: bag)
-        
         let activityIndicator = ActivityIndicator()
         let allGenreData = input.fetchDataTrigger.filter { $0 == nil || $0 == 0 }.flatMapLatest { [unowned self] _ in
             return self.getMoviesAllData()
@@ -31,20 +27,26 @@ class MoviesCategoryViewModel: ViewModel {
                 .asDriverOnErrorJustComplete()
         }
         
-        allGenreData.map { [weak self] movieCategoryData -> [HomeCategoryViewSectionModel] in
+        let allGenreDataSource = allGenreData.asObservable()
+            .map { [weak self] movieCategoryData -> [HomeCategoryViewSectionModel] in
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: movieCategoryData)
             }
-            .drive(dataSource)
-            .disposed(by: bag)
 
-        specificGenreData.map { [weak self] movieWithGenreData -> [HomeCategoryViewSectionModel] in
+        let specificGenreDataSource = specificGenreData.asObservable()
+            .map { [weak self] movieWithGenreData -> [HomeCategoryViewSectionModel] in
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: movieWithGenreData)
             }
-            .drive(dataSource)
-            .disposed(by: bag)
-        
+
+        let dataSource = Observable.merge(
+                [
+                    allGenreDataSource,
+                    specificGenreDataSource,
+                    input.clearDataTrigger.asObservable().map { _ in [] }
+                ]
+            )
+            .asDriver(onErrorJustReturn: [])
         return Output(dataSource: dataSource,
                       error: errorTracker.asDriver(),
                       indicator: activityIndicator.asDriver())
@@ -124,6 +126,11 @@ extension MoviesCategoryViewModel {
                                     .map { $0.results ?? [] }
                                     .trackError(errorTracker)
                                     .catchErrorJustReturn([])
+        
+        let trendingTodayMovieList = getTrendingTodayMovieList()
+                                        .trackError(errorTracker)
+                                        .map { $0.results ?? [] }
+                                        .catchErrorJustReturn([])
                 
         let upcomingMovieList = getUpcomingMovieList(page: 1)
                                     .trackError(errorTracker)
@@ -143,14 +150,16 @@ extension MoviesCategoryViewModel {
         let data = Observable.zip(nowPlayingList,
                                   popularMovieList,
                                   topRatedMovieList,
+                                  trendingTodayMovieList,
                                   upcomingMovieList,
                                   mostFavoriteMovieList,
                                   topGrossingMovieList)
-            .map { nowPlayingList, popularMovieList, topRatedMovieList, upcomingMovieList, mostFavoriteMovieList, topGrossingMovieList  -> MovieCategoryDataModel in
+            .map { nowPlayingList, popularMovieList, topRatedMovieList, trendingTodayMovieList, upcomingMovieList, mostFavoriteMovieList, topGrossingMovieList  -> MovieCategoryDataModel in
                 return MovieCategoryDataModel(
                     nowPlayingList: nowPlayingList,
                     popularMovieList: popularMovieList,
                     topRatedMovieList: topRatedMovieList,
+                    trendingMovieList: trendingTodayMovieList,
                     upcomingMovieList: upcomingMovieList,
                     mostFavoriteMovieList: mostFavoriteMovieList,
                     topGrossingMovieList: topGrossingMovieList
@@ -256,6 +265,14 @@ extension MoviesCategoryViewModel {
                 )
             )
         }
+        if data.trendingMovieList.count > 0 {
+            sections.append(
+                .trendingToday(title: Strings.trendingToday,
+                               items: [.moviesListItem(movies: data.trendingMovieList,
+                                                       mediaType: .movie)]
+                )
+            )
+        }
         if data.upcomingMovieList.count > 0 {
             sections.append(
                 .upcomingMovie(title: Strings.upcomingMovies,
@@ -313,6 +330,14 @@ extension MoviesCategoryViewModel {
         )
     }
     
+    private func getTrendingTodayMovieList() -> Observable<TrendingMoviesResponse> {
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTrendingMedia(mediaType: .movie,
+                                      period: .day),
+            type: TrendingMoviesResponse.self
+        )
+    }
+    
     private func discoverMovie(sortBy: MovieSortType? = nil,
                                page: Int = 1,
                                genre: Int? = nil,
@@ -337,7 +362,7 @@ extension MoviesCategoryViewModel {
     }
     
     struct Output {
-        var dataSource: BehaviorRelay<[HomeCategoryViewSectionModel]>
+        var dataSource: Driver<[HomeCategoryViewSectionModel]>
         var error: Driver<Error>
         var indicator: Driver<Bool>
     }

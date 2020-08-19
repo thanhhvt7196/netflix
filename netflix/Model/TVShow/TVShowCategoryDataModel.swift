@@ -13,6 +13,7 @@ struct TVShowCategoryDataModel: Codable {
     var popularTVShowList: [Media]
     var topRatedTVShowList: [Media]
     var mostFavoriteTVShowList: [Media]
+    var trendingTodayTVShowList: [Media]
     var koreanTVShowList: [Media]
     var westernTVShowList: [Media]
     var chineseTVShowList: [Media]

@@ -15,17 +15,26 @@ import RxDataSources
 import JXSegmentedView
 
 class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, ViewModelBased {
+    @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var blurViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     private let pagerHeaderView = PagerHeaderSectionView()
     
     var viewModel: MovieDetailViewModel!
     private let bag = DisposeBag()
-//    private var dataSource: RxTableViewSectionedReloadDataSource<MovieDetailSectionModel>!
     private var dataSource: RxTableViewSectionedAnimatedDataSource<MovieDetailSectionModel>!
+    
+    private let defaultBlueViewHeight: CGFloat = 300
     
     private let getMovieDetailTrigger = PublishSubject<Void>()
     private let selectedContentIndex = BehaviorRelay<Int>(value: 0)
+    
+    override func loadView() {
+        super.loadView()
+        blurViewHeightConstraint.constant = defaultBlueViewHeight
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +58,12 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
         let output = viewModel.transform(input: input)
             
         output.loading.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
+        
+        output.media
+            .map { $0.posterPath }
+            .map { ImageHelper.shared.pathToURL(path: $0, imageSize: .w500)}
+            .drive(backgroundImageView.rx.imageURL(blur: true))
+            .disposed(by: bag)
         
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
@@ -78,7 +93,12 @@ extension MovieDetailViewController {
     }
     
     private func setupDataSource() {
-        dataSource = RxTableViewSectionedAnimatedDataSource<MovieDetailSectionModel>(animationConfiguration: AnimationConfiguration(insertAnimation: .fade, reloadAnimation: .fade, deleteAnimation: .fade), configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
+        dataSource = RxTableViewSectionedAnimatedDataSource<MovieDetailSectionModel>(
+            animationConfiguration: AnimationConfiguration(insertAnimation: .fade, reloadAnimation: .fade, deleteAnimation: .fade),
+            decideViewTransition: { _,_,_  in
+                return .reload
+            },
+            configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
             switch dataSource[indexPath] {
             case .headerMovie(let media, let detail):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieDetailCell
@@ -141,6 +161,10 @@ extension MovieDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: .leastNonzeroMagnitude))
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        blurViewHeightConstraint.constant = defaultBlueViewHeight - scrollView.contentOffset.y
     }
 }
 

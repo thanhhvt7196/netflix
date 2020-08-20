@@ -11,28 +11,28 @@ import RxSwift
 import RxCocoa
 
 class MovieListCellViewModel: ViewModel {
-    private let movies: [Media]
+    private let medias: [Media]
     private let mediaType: MediaType
     private let bag = DisposeBag()
     
-    init(movies: [Media], mediaType: MediaType) {
-        self.movies = movies
+    init(medias: [Media], mediaType: MediaType) {
+        self.medias = medias
         self.mediaType = mediaType 
     }
     
     func transform(input: Input) -> Output {
-        input.itemSelected
-            .drive(onNext: { [weak self] indexPath in
-                guard let self = self, self.movies.indices.contains(indexPath.item) else { return }
-                switch self.mediaType {
-                case .tv:
-                    break
-                case .movie:
-                    SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: self.movies[indexPath.item]))
+        let movieSelected = input.itemSelected
+            .flatMapLatest { [unowned self] indexPath -> Driver<Media> in
+                guard self.medias.indices.contains(indexPath.item) else {
+                    return .empty()
                 }
-            })
-            .disposed(by: bag)
-        return Output(movies: .just(movies))
+                return .just(self.medias[indexPath.item])
+            }
+            .asDriver()
+        
+        return Output(medias: .just(medias),
+                      mediaSelected: movieSelected,
+                      mediaType: .just(mediaType))
     }
 }
 
@@ -42,6 +42,8 @@ extension MovieListCellViewModel {
     }
     
     struct Output {
-        var movies: Driver<[Media]>
+        var medias: Driver<[Media]>
+        var mediaSelected: Driver<Media>
+        var mediaType: Driver<MediaType>
     }
 }

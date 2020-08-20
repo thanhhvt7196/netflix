@@ -13,7 +13,6 @@ import RxCocoa
 import Lottie
 
 class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
-    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
@@ -67,12 +66,6 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
         
         output.media
             .map { $0.posterPath }
-            .map { ImageHelper.shared.pathToURL(path: $0, imageSize: .original)}
-            .drive(backgroundImageView.rx.imageURL(blur: true))
-            .disposed(by: bag)
-        
-        output.media
-            .map { $0.posterPath }
             .map { ImageHelper.shared.pathToURL(path: $0, imageSize: .w200)}
             .drive(bannerImageView.rx.imageURL)
             .disposed(by: bag)
@@ -106,6 +99,11 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
             .map { $0?.movieDetail?.runtime }
             .map { DateHelper.minutesToHourMinutes(minutes: $0)}
             .drive(durationLabel.rx.text)
+            .disposed(by: bag)
+        
+        output.movieDetail
+            .map { $0?.movieDetail?.runtime == nil }
+            .drive(durationLabel.rx.isHidden)
             .disposed(by: bag)
         
         output.movieDetail

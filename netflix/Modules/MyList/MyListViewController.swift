@@ -58,6 +58,10 @@ class MyListViewController: FadeAnimatedViewController, StoryboardBased, ViewMod
         
         output.loading.drive(ProgressHUD.rx.isAnimating).disposed(by: bag)
     }
+    
+    private func handleAction() {
+        collectionView.rx.itemSelected
+    }
 }
 
 extension MyListViewController {

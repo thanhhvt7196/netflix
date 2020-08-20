@@ -29,8 +29,8 @@ extension MovieDetailSectionItem: IdentifiableType, Equatable {
     
     var identity: String {
         switch self {
-        case .headerMovie(let media, _):
-            return "\(media.id ?? 0)"
+        case .headerMovie(_, let detail):
+            return "\(detail?.movieDetail?.id ?? 0)"
         case .episode(let video):
             return video.id ?? ""
         case .recommendMedia(let medias):

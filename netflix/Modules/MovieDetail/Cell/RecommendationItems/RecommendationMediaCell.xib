@@ -17,18 +17,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="350" height="190"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="HmU-PM-dCa">
-                        <rect key="frame" x="15" y="10" width="320" height="145"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HmU-PM-dCa">
+                        <rect key="frame" x="10" y="10" width="330" height="155"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w2e-Dz-Eri">
-                                <rect key="frame" x="0.0" y="0.0" width="96.5" height="145"/>
+                                <rect key="frame" x="0.0" y="0.0" width="103.5" height="155"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xj3-YC-TsP">
-                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="145"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="155"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHG-LF-V7A">
-                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="145"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="155"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                 </subviews>
@@ -46,14 +46,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwb-5Y-Bzr">
-                                <rect key="frame" x="111.5" y="0.0" width="97" height="145"/>
+                                <rect key="frame" x="113.5" y="0.0" width="103" height="155"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FfN-Q8-WjH">
-                                        <rect key="frame" x="0.0" y="0.0" width="97" height="145"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103" height="155"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTl-O2-Y5K">
-                                        <rect key="frame" x="0.0" y="0.0" width="97" height="145"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103" height="155"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                 </subviews>
@@ -70,14 +70,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3v-Vl-Etm">
-                                <rect key="frame" x="223.5" y="0.0" width="96.5" height="145"/>
+                                <rect key="frame" x="226.5" y="0.0" width="103.5" height="155"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SlI-lb-PmJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="145"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="155"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Igh-hE-TAJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="145"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="155"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                 </subviews>
@@ -96,7 +96,7 @@
                         </subviews>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdc-nf-O8e">
-                        <rect key="frame" x="0.0" y="155" width="350" height="35"/>
+                        <rect key="frame" x="0.0" y="165" width="350" height="25"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -105,9 +105,9 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="HmU-PM-dCa" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="HeB-Zg-tdt"/>
                     <constraint firstAttribute="trailing" secondItem="Bdc-nf-O8e" secondAttribute="trailing" id="JNN-6t-dGv"/>
-                    <constraint firstAttribute="trailing" secondItem="HmU-PM-dCa" secondAttribute="trailing" constant="15" id="ZuT-KP-GV0"/>
-                    <constraint firstItem="HmU-PM-dCa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="cSl-Bj-u17"/>
+                    <constraint firstItem="HmU-PM-dCa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="cSl-Bj-u17"/>
                     <constraint firstItem="HmU-PM-dCa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ekn-yp-KQK"/>
                     <constraint firstItem="Bdc-nf-O8e" firstAttribute="top" secondItem="HmU-PM-dCa" secondAttribute="bottom" id="jkz-tC-fgM"/>
                     <constraint firstAttribute="bottom" secondItem="Bdc-nf-O8e" secondAttribute="bottom" id="lDG-Hb-qbW"/>

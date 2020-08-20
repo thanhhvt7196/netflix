@@ -78,7 +78,7 @@ extension Scene: TargetScene {
             let navigationController = UINavigationController(rootViewController: webviewController)
             return .present(navigationController)
         case .movieDetail(let movie):
-            let movieDetailViewModel = MovieDetailViewModel(movie: movie)
+            let movieDetailViewModel = MovieDetailViewModel(media: movie)
             let movieDetailViewController = MovieDetailViewController.instantiate(withViewModel: movieDetailViewModel)
             return .push(movieDetailViewController)
         }

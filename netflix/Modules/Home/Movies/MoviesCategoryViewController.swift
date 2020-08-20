@@ -110,7 +110,7 @@ extension MoviesCategoryViewController {
                 return cell
             case .moviesListItem(let movies, let mediaType):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as MovieListTableViewCell
-                let movieListCellViewModel = MovieListCellViewModel(movies: movies, mediaType: mediaType)
+                let movieListCellViewModel = MovieListCellViewModel(medias: movies, mediaType: mediaType)
                 cell.bindViewModel(viewModel: movieListCellViewModel)
                 return cell
             }

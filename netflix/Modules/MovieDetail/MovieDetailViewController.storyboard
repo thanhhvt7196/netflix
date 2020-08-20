@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="J0o-wY-rrc">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -13,24 +13,54 @@
             <objects>
                 <viewController id="J0o-wY-rrc" customClass="MovieDetailViewController" customModule="netflix" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0DI-lN-4We">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vQ6-he-bWM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBy-2r-z9r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lNe-nc-9b0">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                    </imageView>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJ6-H4-f9N" customClass="GradientView" customModule="netflix" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="8Ms-em-4F9"/>
+                                    <constraint firstItem="lNe-nc-9b0" firstAttribute="leading" secondItem="VBy-2r-z9r" secondAttribute="leading" id="98q-yT-ZNU"/>
+                                    <constraint firstItem="VJ6-H4-f9N" firstAttribute="leading" secondItem="VBy-2r-z9r" secondAttribute="leading" id="Q34-gl-5pD"/>
+                                    <constraint firstAttribute="trailing" secondItem="VJ6-H4-f9N" secondAttribute="trailing" id="Tnr-ov-TFn"/>
+                                    <constraint firstAttribute="bottom" secondItem="VJ6-H4-f9N" secondAttribute="bottom" id="bYx-yZ-meI"/>
+                                    <constraint firstAttribute="bottom" secondItem="lNe-nc-9b0" secondAttribute="bottom" id="dOW-Fo-xhN"/>
+                                    <constraint firstItem="VJ6-H4-f9N" firstAttribute="top" secondItem="VBy-2r-z9r" secondAttribute="top" id="fOA-WY-97h"/>
+                                    <constraint firstItem="lNe-nc-9b0" firstAttribute="top" secondItem="VBy-2r-z9r" secondAttribute="top" id="pIO-0r-sFJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="lNe-nc-9b0" secondAttribute="trailing" id="r8r-fr-Xjb"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vQ6-he-bWM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8hC-Hf-gHv" firstAttribute="trailing" secondItem="vQ6-he-bWM" secondAttribute="trailing" id="4Dz-Y9-9aG"/>
+                            <constraint firstItem="VBy-2r-z9r" firstAttribute="top" secondItem="0DI-lN-4We" secondAttribute="top" id="DVT-aZ-Ck8"/>
                             <constraint firstItem="vQ6-he-bWM" firstAttribute="top" secondItem="0DI-lN-4We" secondAttribute="top" id="Ku9-to-QVA"/>
+                            <constraint firstItem="VBy-2r-z9r" firstAttribute="leading" secondItem="8hC-Hf-gHv" secondAttribute="leading" id="OWb-wF-rIQ"/>
                             <constraint firstItem="vQ6-he-bWM" firstAttribute="leading" secondItem="8hC-Hf-gHv" secondAttribute="leading" id="OmR-aW-Q7W"/>
                             <constraint firstItem="8hC-Hf-gHv" firstAttribute="bottom" secondItem="vQ6-he-bWM" secondAttribute="bottom" id="rGd-2d-O82"/>
+                            <constraint firstItem="8hC-Hf-gHv" firstAttribute="trailing" secondItem="VBy-2r-z9r" secondAttribute="trailing" id="uAK-13-wao"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8hC-Hf-gHv"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundImageView" destination="lNe-nc-9b0" id="let-a8-mKw"/>
+                        <outlet property="blurView" destination="VBy-2r-z9r" id="m69-lw-A0j"/>
+                        <outlet property="blurViewHeightConstraint" destination="8Ms-em-4F9" id="wpi-Az-Thz"/>
                         <outlet property="tableView" destination="vQ6-he-bWM" id="nvd-bN-neU"/>
                     </connections>
                 </viewController>

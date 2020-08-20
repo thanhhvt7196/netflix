@@ -42,7 +42,7 @@ class MovieListTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
         let input = MovieListCellViewModel.Input(itemSelected: collectionView.rx.itemSelected.asDriver())
         let output = viewModel.transform(input: input)
         
-        output.movies
+        output.medias
             .drive(collectionView.rx.items) { collectionView, item, movie in
                 let indexPath = IndexPath(item: item, section: 0)
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as MovieItemCollectionViewCell
@@ -50,6 +50,21 @@ class MovieListTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
                 cell.bindViewModel(viewModel: movieItemCellViewModel)
                 return cell
             }
+            .disposed(by: bag)
+        
+        
+        output.mediaSelected
+            .withLatestFrom(output.mediaType, resultSelector: { (media, mediaType) -> (Media, MediaType) in
+                return (media, mediaType)
+            })
+            .drive(onNext: { (media, mediaType) in
+                switch mediaType {
+                case .movie:
+                    SceneCoordinator.shared.transition(to: Scene.movieDetail(movie: media))
+                case .tv:
+                    break
+                }
+            })
             .disposed(by: bag)
     }
 }

@@ -11,16 +11,16 @@ import RxSwift
 import RxCocoa
 
 class MovieDetailViewModel: ViewModel {
-    private let movie: Media
+    private let media: Media
     
     private let bag = DisposeBag()
     private let errorTracker = ErrorTracker()
     private let dataSource: BehaviorRelay<[MovieDetailSectionModel]>
     private var movieDetail: MovieDetailDataModel?
     
-    init(movie: Media) {
-        self.movie = movie
-        self.dataSource = BehaviorRelay<[MovieDetailSectionModel]>(value: [.headerDetail(item: [.headerMovie(media: movie, detail: nil)])])
+    init(media: Media) {
+        self.media = media
+        self.dataSource = BehaviorRelay<[MovieDetailSectionModel]>(value: [.headerDetail(item: [.headerMovie(media: media, detail: nil)])])
     }
     
     func transform(input: Input) -> Output {
@@ -51,7 +51,8 @@ class MovieDetailViewModel: ViewModel {
             .disposed(by: bag)
         
         return Output(loading: activityIndicator.asDriver(),
-                      dataSource: dataSource)
+                      dataSource: dataSource,
+                      media: .just(media))
     }
 }
 
@@ -59,7 +60,7 @@ extension MovieDetailViewModel {
     private func mapToDataSource(detail: MovieDetailDataModel?, selectedIndex: Int) -> [MovieDetailSectionModel] {
         var sections = [MovieDetailSectionModel]()
         sections.append(
-            .headerDetail(item: [.headerMovie(media: movie, detail: detail)])
+            .headerDetail(item: [.headerMovie(media: media, detail: detail)])
         )
         
         var titles = [String]()
@@ -135,35 +136,35 @@ extension MovieDetailViewModel {
 extension MovieDetailViewModel {
     private func getMovieDetail() -> Observable<MovieDetailModel?> {
         return HostAPIClient.performApiNetworkCall(
-            router: .getMovieDetail(id: movie.id ?? 0),
+            router: .getMovieDetail(id: media.id ?? 0),
             type: MovieDetailModel?.self
         )
     }
     
     private func getVideos() -> Observable<VideosResponse?> {
         return HostAPIClient.performApiNetworkCall(
-            router: .getVideos(mediaID: movie.id ?? 0, mediaType: .movie),
+            router: .getVideos(mediaID: media.id ?? 0, mediaType: .movie),
             type: VideosResponse?.self
         )
     }
     
     private func getRecommendations() -> Observable<RecommendationsResponse?> {
         return HostAPIClient.performApiNetworkCall(
-            router: .getRecommendations(mediaID: movie.id ?? 0, mediaType: .movie),
+            router: .getRecommendations(mediaID: media.id ?? 0, mediaType: .movie),
             type: RecommendationsResponse?.self
         )
     }
     
     private func getSimilarMovies() -> Observable<SimilarMediaResponse> {
         return HostAPIClient.performApiNetworkCall(
-            router: .getSimilarMedia(mediaID: movie.id ?? 0, mediaType: .movie),
+            router: .getSimilarMedia(mediaID: media.id ?? 0, mediaType: .movie),
             type: SimilarMediaResponse.self
         )
     }
     
     private func getCredits() -> Observable<CreditsResponse?> {
         return HostAPIClient.performApiNetworkCall(
-            router: .getCredits(mediaID: movie.id ?? 0, mediaType: .movie),
+            router: .getCredits(mediaID: media.id ?? 0, mediaType: .movie),
             type: CreditsResponse?.self
         )
     }
@@ -178,5 +179,6 @@ extension MovieDetailViewModel {
     struct Output {
         var loading: Driver<Bool>
         var dataSource: BehaviorRelay<[MovieDetailSectionModel]>
+        var media: Driver<Media>
     }
 }

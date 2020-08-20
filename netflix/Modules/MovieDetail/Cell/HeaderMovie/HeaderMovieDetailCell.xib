@@ -17,13 +17,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="296" height="648"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PoZ-vh-GJs">
-                        <rect key="frame" x="0.0" y="0.0" width="296" height="360"/>
-                    </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wM-jU-WVn" customClass="GradientView" customModule="netflix" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="296" height="360"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XAG-no-6Ox">
                         <rect key="frame" x="15" y="30" width="266" height="598"/>
                         <subviews>
@@ -43,9 +36,6 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGG-lB-bwz">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="15"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="15" id="FAq-Gc-5oU"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -57,6 +47,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="JLO-Tv-Ki7"/>
+                                        </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDc-3f-46S">
                                         <rect key="frame" x="0.0" y="250" width="266" height="30"/>
@@ -274,27 +267,19 @@
                         </subviews>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="PoZ-vh-GJs" secondAttribute="trailing" id="5ea-Ms-lC5"/>
-                    <constraint firstItem="PoZ-vh-GJs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7CY-rX-0bK"/>
-                    <constraint firstItem="8wM-jU-WVn" firstAttribute="bottom" secondItem="PoZ-vh-GJs" secondAttribute="bottom" id="Day-pN-jKA"/>
                     <constraint firstAttribute="bottom" secondItem="XAG-no-6Ox" secondAttribute="bottom" constant="20" id="Rie-Gl-vEN"/>
-                    <constraint firstItem="PoZ-vh-GJs" firstAttribute="bottom" secondItem="vxk-J0-8yA" secondAttribute="bottom" constant="50" id="U4m-40-O21"/>
-                    <constraint firstItem="PoZ-vh-GJs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VkH-kJ-nHK"/>
                     <constraint firstItem="XAG-no-6Ox" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Vwb-Jh-DrW"/>
-                    <constraint firstItem="8wM-jU-WVn" firstAttribute="leading" secondItem="PoZ-vh-GJs" secondAttribute="leading" id="Ytc-pN-eia"/>
                     <constraint firstItem="XAG-no-6Ox" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bJo-J6-h9t"/>
-                    <constraint firstItem="8wM-jU-WVn" firstAttribute="trailing" secondItem="PoZ-vh-GJs" secondAttribute="trailing" id="mLs-lY-YwL"/>
                     <constraint firstItem="XAG-no-6Ox" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="ywA-qG-jv0"/>
-                    <constraint firstItem="8wM-jU-WVn" firstAttribute="top" secondItem="PoZ-vh-GJs" secondAttribute="top" id="zFD-R5-q0t"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="actionStackView" destination="qkK-rG-4IM" id="r3n-J9-BLF"/>
                 <outlet property="actionTitleStackView" destination="aZA-ca-M8r" id="PFj-bN-5gV"/>
-                <outlet property="backgroundImageView" destination="PoZ-vh-GJs" id="XY1-A1-i8z"/>
                 <outlet property="bannerImageView" destination="lcP-N7-BCf" id="OsE-b7-Js6"/>
                 <outlet property="castLabel" destination="REn-CW-w3L" id="UBQ-8r-a8o"/>
                 <outlet property="castView" destination="l02-Lr-qfk" id="X8t-8Y-irE"/>

@@ -46,3 +46,7 @@ enum TimePeriod: String {
     case day
     case week
 }
+
+enum MovieSite: String, CaseIterable {
+    case youtube = "Youtube"
+}

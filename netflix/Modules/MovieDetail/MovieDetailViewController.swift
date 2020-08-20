@@ -69,6 +69,7 @@ extension MovieDetailViewController {
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         tableView.register(cellType: RecommendationMediaCell.self)
         tableView.register(cellType: HeaderMovieDetailCell.self)
+        tableView.register(cellType: MovieDetailVideoCell.self)
     }
     
     private func configViewPager() {
@@ -77,24 +78,7 @@ extension MovieDetailViewController {
     }
     
     private func setupDataSource() {
-//        dataSource = RxTableViewSectionedReloadDataSource<MovieDetailSectionModel>(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
-//            switch dataSource[indexPath] {
-//            case .headerMovie(let media, let detail):
-//                let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieDetailCell
-//                let viewModel = HeaderMovieDetailViewModel(media: media, detail: detail)
-//                cell.bindViewModel(viewModel: viewModel)
-//                return cell
-//            case .recommendMedia(let medias):
-//                let cell = tableView.dequeueReusableCell(for: indexPath) as RecommendationMediaCell
-//                let viewModel = RecommendationMediaCellViewModel(medias: medias, mediaType: .movie)
-//                cell.bindViewModel(viewModel: viewModel)
-//                return cell
-//            default:
-//                return UITableViewCell()
-//            }
-//        })
-        
-        dataSource = RxTableViewSectionedAnimatedDataSource<MovieDetailSectionModel>(animationConfiguration: AnimationConfiguration(insertAnimation: .left, reloadAnimation: .left, deleteAnimation: .left), configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
+        dataSource = RxTableViewSectionedAnimatedDataSource<MovieDetailSectionModel>(animationConfiguration: AnimationConfiguration(insertAnimation: .fade, reloadAnimation: .fade, deleteAnimation: .fade), configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
             switch dataSource[indexPath] {
             case .headerMovie(let media, let detail):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieDetailCell
@@ -106,8 +90,10 @@ extension MovieDetailViewController {
                 let viewModel = RecommendationMediaCellViewModel(medias: medias, mediaType: .movie)
                 cell.bindViewModel(viewModel: viewModel)
                 return cell
-            default:
-                return UITableViewCell()
+            case .episode(let video):
+                let cell = tableView.dequeueReusableCell(for: indexPath) as MovieDetailVideoCell
+                cell.configCell(video: video)
+                return cell
             }
         })
     }

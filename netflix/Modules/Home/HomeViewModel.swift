@@ -57,15 +57,29 @@ extension HomeViewModel {
                                 .map { $0.results ?? [] }
                                 .catchErrorJustReturn([])
         
+        let movieFavoriteList = getMovieFavoriteList(accountID: accountID)
+                                .trackError(errorTracker)
+                                .map { $0.results ?? [] }
+                                .catchErrorJustReturn([])
+        
+        let tvShowFavoriteList = getTVShowFavoriteList(accountID: accountID)
+                                .trackError(errorTracker)
+                                .map { $0.results ?? [] }
+                                .catchErrorJustReturn([])
+        
         let data = Observable.zip(tvShowGenres,
                                   movieGenres,
                                   tvShowWatchList,
-                                  movieWatchList)
-            .map { tvShowGenres, movieGenres, tvShowWatchList, movieWatchList -> HomeGeneralData in
+                                  movieWatchList,
+                                  tvShowFavoriteList,
+                                  movieFavoriteList)
+            .map { tvShowGenres, movieGenres, tvShowWatchList, movieWatchList, tvShowFavoriteList, movieFavoriteList -> HomeGeneralData in
                 return HomeGeneralData(tvGenres: tvShowGenres,
                                        movieGenres: movieGenres,
                                        tvShowWatchList: tvShowWatchList,
-                                       movieWatchList: movieWatchList)
+                                       movieWatchList: movieWatchList,
+                                       tvShowFavoriteList: tvShowFavoriteList,
+                                       movieFavoriteList: movieFavoriteList)
         }
         return data
     }
@@ -97,6 +111,20 @@ extension HomeViewModel {
         return HostAPIClient.performApiNetworkCall(
             router: .getTVShowWatchList(accountID: accountID),
             type: TVShowWatchListResponse.self
+        )
+    }
+    
+    private func getMovieFavoriteList(accountID: Int) -> Observable<MovieFavoriteListResponse> {
+        return HostAPIClient.performApiNetworkCall(
+            router: .getMovieFavoriteList(accountID: accountID),
+            type: MovieFavoriteListResponse.self
+        )
+    }
+    
+    private func getTVShowFavoriteList(accountID: Int) -> Observable<TVShowFavoriteListResponse> {
+        return HostAPIClient.performApiNetworkCall(
+            router: .getTVShowFavoriteList(accountID: accountID),
+            type: TVShowFavoriteListResponse.self
         )
     }
 }

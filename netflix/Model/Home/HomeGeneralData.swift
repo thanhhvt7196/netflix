@@ -13,4 +13,6 @@ struct HomeGeneralData: Codable {
     var movieGenres: [Genre]?
     var tvShowWatchList: [Media]?
     var movieWatchList: [Media]?
+    var tvShowFavoriteList: [Media]?
+    var movieFavoriteList: [Media]?
 }

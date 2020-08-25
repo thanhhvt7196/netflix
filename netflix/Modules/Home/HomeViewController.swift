@@ -90,6 +90,14 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
             .disposed(by: bag)
         
         output.homeGeneralData
+            .map { [$0.tvShowFavoriteList ?? [], $0.movieFavoriteList ?? []] }
+            .map { ArrayHelper.combine(arrays: $0) }
+            .drive(onNext: { favoriteList in
+                PersistentManager.shared.favoriteList = favoriteList
+            })
+            .disposed(by: bag)
+        
+        output.homeGeneralData
             .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 let spacing: CGFloat = 10

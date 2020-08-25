@@ -128,7 +128,7 @@ extension HomeCategoryViewController {
     func loadData() {
         clearDataTrigger.onNext(())
         fetchDataTrigger.onNext(())
-        print(PersistentManager.shared.watchList.count)
+        print(PersistentManager.shared.favoriteList.count)
     }
     
     @objc private func updateHeaderMovieStatus(notification: Notification) {

@@ -75,6 +75,17 @@ class PersistentManager {
         }
     }
     
+    var favoriteList: [Media] {
+        set {
+            let encodedArray = newValue.compactMap { $0.encodePlist() }
+            defaults.set(encodedArray, forKey: UserDefaultKeys.watchList)
+        }
+        get {
+            guard let datas = defaults.array(forKey: UserDefaultKeys.watchList) as? [Data] else { return [] }
+            return datas.compactMap { $0.decodeFromPlist() }
+        }
+    }
+    
     func clearWhenExit() {
         categoryType = .home
         currentGenre = allGenre.id

@@ -47,6 +47,9 @@ enum APIMovie {
     case addToWatchlist(accountID: Int, mediaType: MediaType, mediaID: Int, watchList: Bool)
     case getMovieWatchList(accountID: Int)
     case getTVShowWatchList(accountID: Int)
+    case getMovieFavoriteList(accountID: Int)
+    case getTVShowFavoriteList(accountID: Int)
+    case markAsFavorite(accountID: Int, mediaType: MediaType, mediaID: Int, favorite: Bool)
 }
 
 extension APIMovie: TargetType {
@@ -128,6 +131,12 @@ extension APIMovie: TargetType {
             }
         case .getTrendingMedia(let mediaType, let period):
             return APIURL.version3 + APIURL.trending + "/\(mediaType.rawValue)" + "/\(period.rawValue)"
+        case .getMovieFavoriteList(let accountID):
+            return APIURL.version3 + APIURL.account + "/\(accountID)" + APIURL.favorite + APIURL.movies
+        case .getTVShowFavoriteList(let accountID):
+            return APIURL.version3 + APIURL.account + "/\(accountID)" + APIURL.favorite + APIURL.tv
+        case .markAsFavorite(let accountID, _, _, _):
+            return APIURL.version3 + APIURL.account + "/\(accountID)" + APIURL.favorite
         }
     }
     
@@ -137,7 +146,7 @@ extension APIMovie: TargetType {
             return .post
         case .createSession:
             return .post
-        case .addToWatchlist:
+        case .addToWatchlist, .markAsFavorite:
             return .post
         default:
             return .get
@@ -232,6 +241,16 @@ extension APIMovie: TargetType {
                           APIParamKeys.sessionID: PersistentManager.shared.sessionID]
             return .requestParameters(parameters: parameters, encoding: encoding)
         case .getTVShowWatchList:
+            encoding = URLEncoding.default
+            parameters = [APIParamKeys.APIKey: Constants.APIKey,
+                          APIParamKeys.sessionID: PersistentManager.shared.sessionID]
+            return .requestParameters(parameters: parameters, encoding: encoding)
+        case .getMovieFavoriteList:
+            encoding = URLEncoding.default
+            parameters = [APIParamKeys.APIKey: Constants.APIKey,
+                          APIParamKeys.sessionID: PersistentManager.shared.sessionID]
+            return .requestParameters(parameters: parameters, encoding: encoding)
+        case .getTVShowFavoriteList:
             encoding = URLEncoding.default
             parameters = [APIParamKeys.APIKey: Constants.APIKey,
                           APIParamKeys.sessionID: PersistentManager.shared.sessionID]

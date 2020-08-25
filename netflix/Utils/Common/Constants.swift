@@ -39,6 +39,7 @@ struct APIURL {
     static let similar = "/similar"
     static let credits = "/credits"
     static let trending = "/trending"
+    static let favorite = "/favorite"
 }
 
 struct Constants {

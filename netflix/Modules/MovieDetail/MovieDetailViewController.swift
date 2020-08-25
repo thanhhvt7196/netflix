@@ -19,6 +19,9 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var blurViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var closeView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var closeImageView: UIImageView!
     
     private let pagerHeaderView = PagerHeaderSectionView()
     
@@ -27,9 +30,12 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
     private var dataSource: RxTableViewSectionedAnimatedDataSource<MovieDetailSectionModel>!
     
     private let defaultBlueViewHeight: CGFloat = 300
+    let offSetToPopToRoot: CGFloat = -120
+    private let offSetToHideCloseButton: CGFloat = -100
     
     private let getMovieDetailTrigger = PublishSubject<Void>()
     private let selectedContentIndex = BehaviorRelay<Int>(value: 0)
+    private var isPoppedToRoot = false
     
     override func loadView() {
         super.loadView()
@@ -38,13 +44,27 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createObserver()
         bind()
         handleAction()
         getMovieDetail()
     }
     
+    deinit {
+        removeObserver()
+    }
+    
+    private func createObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderMovieStatus(notification:)), name: .didAddToMyList, object: nil)
+    }
+    
+    private func removeObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func prepareUI() {
         super.prepareUI()
+        configButton()
         configTableView()
         configViewPager()
         setupDataSource()
@@ -71,11 +91,19 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
     }
     
     private func handleAction() {
-        
+        closeButton.rx.tap
+            .subscribe(onNext: { _ in
+                SceneCoordinator.shared.pop(animated: true, toRoot: false)
+            })
+            .disposed(by: bag)
     }
 }
 
 extension MovieDetailViewController {
+    private func configButton() {
+        closeView.layer.cornerRadius = closeView.bounds.height/2
+    }
+    
     private func configTableView() {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
@@ -165,11 +193,45 @@ extension MovieDetailViewController: UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         blurViewHeightConstraint.constant = defaultBlueViewHeight - scrollView.contentOffset.y
+        guard (scrollView as? UITableView) == tableView else {
+            return
+        }
+        if tableView.contentOffset.y < 0 {
+            let alpha = tableView.contentOffset.y / offSetToHideCloseButton
+            closeImageView.alpha = 1 - alpha
+            closeView.alpha = 1 - alpha
+            closeButton.isEnabled = alpha < 1
+        } else {
+            closeImageView.alpha = 1
+            closeView.alpha = 1
+            closeButton.isEnabled = true
+        }
+        if !isPoppedToRoot && tableView.contentOffset.y <= offSetToPopToRoot {
+            SceneCoordinator.shared.pop(animated: true, toRoot: true)
+            isPoppedToRoot = true
+        }
     }
 }
 
 extension MovieDetailViewController: PagerHeaderSectionViewDelegate {
     func itemSelected(at index: Int) {
         selectedContentIndex.accept(index)
+    }
+}
+
+extension MovieDetailViewController {
+    @objc private func updateHeaderMovieStatus(notification: Notification) {
+        if let userInfo = notification.userInfo,
+            let isMyList = userInfo["is_mylist"] as? Bool,
+            let movieID = userInfo["movie_id"] as? Int {
+            guard let indexPaths = tableView.indexPathsForVisibleRows else {
+                return
+            }
+            for indexPath in indexPaths {
+                if let cell = tableView.cellForRow(at: indexPath) as? HeaderMovieDetailCell {
+                    cell.update(isMyList: isMyList, mediaID: movieID)
+                }
+            }
+        }
     }
 }

@@ -43,7 +43,7 @@ class WebViewController: FadeAnimatedViewController, StoryboardBased, ViewModelB
         leftBarButtonItem.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
-                SceneCoordinator.shared.pop(animated: true)
+                SceneCoordinator.shared.pop(animated: true, toRoot: false)
             })
             .disposed(by: bag)
     }

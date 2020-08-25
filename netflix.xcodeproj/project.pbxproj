@@ -113,7 +113,7 @@
 		0C6E44C324E136E0005C22B7 /* HomeCategoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C6E44C224E136E0005C22B7 /* HomeCategoryViewController.storyboard */; };
 		0C72B42D24D413E9007378A4 /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B42C24D413E9007378A4 /* CustomAnimator.swift */; };
 		0C72B42F24D41424007378A4 /* FadePushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B42E24D41424007378A4 /* FadePushAnimator.swift */; };
-		0C72B43124D4147A007378A4 /* FadePopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43024D4147A007378A4 /* FadePopAnimator.swift */; };
+		0C72B43124D4147A007378A4 /* DismissedPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43024D4147A007378A4 /* DismissedPopAnimator.swift */; };
 		0C72B43424D41547007378A4 /* SystemPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43224D41547007378A4 /* SystemPushAnimator.swift */; };
 		0C72B43524D41547007378A4 /* SystemPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43324D41547007378A4 /* SystemPopAnimator.swift */; };
 		0C72B43724D416D2007378A4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C72B43624D416D2007378A4 /* BaseViewController.swift */; };
@@ -360,7 +360,7 @@
 		0C6E44C224E136E0005C22B7 /* HomeCategoryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeCategoryViewController.storyboard; sourceTree = "<group>"; };
 		0C72B42C24D413E9007378A4 /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
 		0C72B42E24D41424007378A4 /* FadePushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadePushAnimator.swift; sourceTree = "<group>"; };
-		0C72B43024D4147A007378A4 /* FadePopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadePopAnimator.swift; sourceTree = "<group>"; };
+		0C72B43024D4147A007378A4 /* DismissedPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissedPopAnimator.swift; sourceTree = "<group>"; };
 		0C72B43224D41547007378A4 /* SystemPushAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPushAnimator.swift; sourceTree = "<group>"; };
 		0C72B43324D41547007378A4 /* SystemPopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPopAnimator.swift; sourceTree = "<group>"; };
 		0C72B43624D416D2007378A4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -904,7 +904,7 @@
 			children = (
 				0C72B42C24D413E9007378A4 /* CustomAnimator.swift */,
 				0C72B42E24D41424007378A4 /* FadePushAnimator.swift */,
-				0C72B43024D4147A007378A4 /* FadePopAnimator.swift */,
+				0C72B43024D4147A007378A4 /* DismissedPopAnimator.swift */,
 				0C72B43224D41547007378A4 /* SystemPushAnimator.swift */,
 				0C72B43324D41547007378A4 /* SystemPopAnimator.swift */,
 			);
@@ -1789,7 +1789,7 @@
 				0CB13AEF24EB162E00285C4D /* UIImageView+Extension.swift in Sources */,
 				0C94B62A24D1210B00BDE3CC /* WebViewController.swift in Sources */,
 				0C10577624C98B1700C88177 /* GradientView.swift in Sources */,
-				0C72B43124D4147A007378A4 /* FadePopAnimator.swift in Sources */,
+				0C72B43124D4147A007378A4 /* DismissedPopAnimator.swift in Sources */,
 				0C8D56F724C6DD5100E2CB08 /* UIStackView+Extension.swift in Sources */,
 				0C72D9B424EBC73E003CCE6C /* ViewPager.swift in Sources */,
 				0CD80D8424D29E1700155393 /* SplashViewModel.swift in Sources */,

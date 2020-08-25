@@ -110,13 +110,19 @@ class HeaderMovieTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
 
 extension HeaderMovieTableViewCell {
     func update(isMyList: Bool, movieID: Int) {
-        guard viewModel.movie.id != movieID else {
+        guard viewModel.movie.id == movieID else {
             return
         }
         if isMyList {
-            myListAnimationView.play(fromProgress: 0, toProgress: 1, loopMode: .none, completion: nil)
+            guard myListAnimationView.currentProgress != 1 else {
+                return
+            }
+            myListAnimationView.play(fromProgress: myListAnimationView.currentProgress, toProgress: 1, loopMode: .none, completion: nil)
         } else {
-            myListAnimationView.play(fromProgress: 1, toProgress: 0, loopMode: .none, completion: nil)
+            guard myListAnimationView.currentProgress != 0 else {
+                return
+            }
+            myListAnimationView.currentProgress = 0
         }
     }
     

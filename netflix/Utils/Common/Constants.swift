@@ -42,7 +42,7 @@ struct APIURL {
 }
 
 struct Constants {
-    static let APIKey = "1e0dcaa7e93980fb84e1d2430d01b887"
+    static let APIKey = "85ab510c7fab5ad12a9ca0098ceab35e"
     static let USLanguageCode = "en-US"
     static let defaultLocaleIdentifier = "en_US_POSIX"
     

@@ -17,19 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBy-2r-z9r">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="330"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lNe-nc-9b0">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="330"/>
                                     </imageView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJ6-H4-f9N" customClass="GradientView" customModule="netflix" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="330"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="8Ms-em-4F9"/>
+                                    <constraint firstAttribute="height" constant="330" id="8Ms-em-4F9"/>
                                     <constraint firstItem="lNe-nc-9b0" firstAttribute="leading" secondItem="VBy-2r-z9r" secondAttribute="leading" id="98q-yT-ZNU"/>
                                     <constraint firstItem="VJ6-H4-f9N" firstAttribute="leading" secondItem="VBy-2r-z9r" secondAttribute="leading" id="Q34-gl-5pD"/>
                                     <constraint firstAttribute="trailing" secondItem="VJ6-H4-f9N" secondAttribute="trailing" id="Tnr-ov-TFn"/>
@@ -44,6 +44,33 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Std-Yf-ein">
+                                <rect key="frame" x="333" y="15" width="27" height="27"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="9bv-1i-WmS">
+                                        <rect key="frame" x="4.5" y="4.5" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="9bv-1i-WmS" secondAttribute="height" id="LpQ-mI-yAO"/>
+                                            <constraint firstAttribute="width" constant="18" id="xE8-Ak-M1O"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CK-OM-jrx">
+                                        <rect key="frame" x="0.0" y="0.0" width="27" height="27"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.7981404049295775" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7CK-OM-jrx" secondAttribute="trailing" id="ATM-vG-Xar"/>
+                                    <constraint firstAttribute="bottom" secondItem="7CK-OM-jrx" secondAttribute="bottom" id="SGj-Tg-QMX"/>
+                                    <constraint firstAttribute="width" secondItem="Std-Yf-ein" secondAttribute="height" id="YR5-sc-Zdv"/>
+                                    <constraint firstItem="7CK-OM-jrx" firstAttribute="top" secondItem="Std-Yf-ein" secondAttribute="top" id="eEh-ZP-ExM"/>
+                                    <constraint firstItem="9bv-1i-WmS" firstAttribute="centerY" secondItem="Std-Yf-ein" secondAttribute="centerY" id="eX7-bo-RSu"/>
+                                    <constraint firstItem="7CK-OM-jrx" firstAttribute="leading" secondItem="Std-Yf-ein" secondAttribute="leading" id="jcd-Ph-6Wi"/>
+                                    <constraint firstAttribute="width" constant="27" id="ymC-fc-Adt"/>
+                                    <constraint firstItem="9bv-1i-WmS" firstAttribute="centerX" secondItem="Std-Yf-ein" secondAttribute="centerX" id="zd3-Ja-1Dd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -52,6 +79,8 @@
                             <constraint firstItem="vQ6-he-bWM" firstAttribute="top" secondItem="0DI-lN-4We" secondAttribute="top" id="Ku9-to-QVA"/>
                             <constraint firstItem="VBy-2r-z9r" firstAttribute="leading" secondItem="8hC-Hf-gHv" secondAttribute="leading" id="OWb-wF-rIQ"/>
                             <constraint firstItem="vQ6-he-bWM" firstAttribute="leading" secondItem="8hC-Hf-gHv" secondAttribute="leading" id="OmR-aW-Q7W"/>
+                            <constraint firstItem="Std-Yf-ein" firstAttribute="top" secondItem="8hC-Hf-gHv" secondAttribute="top" constant="15" id="YrY-4U-iaH"/>
+                            <constraint firstItem="8hC-Hf-gHv" firstAttribute="trailing" secondItem="Std-Yf-ein" secondAttribute="trailing" constant="15" id="l9g-XO-Vae"/>
                             <constraint firstItem="8hC-Hf-gHv" firstAttribute="bottom" secondItem="vQ6-he-bWM" secondAttribute="bottom" id="rGd-2d-O82"/>
                             <constraint firstItem="8hC-Hf-gHv" firstAttribute="trailing" secondItem="VBy-2r-z9r" secondAttribute="trailing" id="uAK-13-wao"/>
                         </constraints>
@@ -61,6 +90,9 @@
                         <outlet property="backgroundImageView" destination="lNe-nc-9b0" id="let-a8-mKw"/>
                         <outlet property="blurView" destination="VBy-2r-z9r" id="m69-lw-A0j"/>
                         <outlet property="blurViewHeightConstraint" destination="8Ms-em-4F9" id="wpi-Az-Thz"/>
+                        <outlet property="closeButton" destination="7CK-OM-jrx" id="mK3-re-Mzm"/>
+                        <outlet property="closeImageView" destination="9bv-1i-WmS" id="Cpu-8d-I8a"/>
+                        <outlet property="closeView" destination="Std-Yf-ein" id="H7o-G1-xUl"/>
                         <outlet property="tableView" destination="vQ6-he-bWM" id="nvd-bN-neU"/>
                     </connections>
                 </viewController>
@@ -69,4 +101,7 @@
             <point key="canvasLocation" x="132" y="74"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="close_Normal" width="18" height="18"/>
+    </resources>
 </document>

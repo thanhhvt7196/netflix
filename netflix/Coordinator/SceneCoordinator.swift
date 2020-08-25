@@ -86,16 +86,21 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
             .take(1)
     }
     
-    func pop(animated: Bool) {
+    func pop(animated: Bool, toRoot: Bool) {
         if let presentingViewController = currentViewController.presentingViewController {
             currentViewController.dismiss(animated: animated) {
                 self.currentViewController = SceneCoordinator.actualViewController(for: presentingViewController)
             }
         } else if let navigationController = currentViewController.navigationController {
-            guard navigationController.popViewController(animated: animated) != nil else {
-                fatalError("can't navigate back from \(currentViewController)")
+            if toRoot {
+                navigationController.popToRootViewController(animated: animated)
+                currentViewController = SceneCoordinator.actualViewController(for: navigationController.viewControllers.first!)
+            } else {
+                guard navigationController.popViewController(animated: animated) != nil else {
+                    fatalError("can't navigate back from \(currentViewController)")
+                }
+                currentViewController = SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
             }
-            currentViewController = SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
         } else {
             fatalError("Not a modal, no navigation controller: can't navigate back from \(currentViewController)")
         }
@@ -119,7 +124,7 @@ extension SceneCoordinator: UINavigationControllerDelegate {
             }
         case .pop:
             if fromVC is FadeAnimatedViewController {
-                return FadePopAnimator(type: .navigation)
+                return DismissedPopAnimator(type: .navigation)
             } else {
                 return nil
             }

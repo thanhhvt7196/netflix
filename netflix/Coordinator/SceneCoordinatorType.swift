@@ -13,5 +13,5 @@ protocol SceneCoordinatorType {
     init(window: UIWindow)
     
     @discardableResult func transition(to scene: TargetScene) -> Observable<Void>
-    func pop(animated: Bool)
+    func pop(animated: Bool, toRoot: Bool)
 }

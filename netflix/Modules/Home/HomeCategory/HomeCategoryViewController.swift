@@ -35,7 +35,8 @@ class HomeCategoryViewController: BaseViewController, StoryboardBased, ViewModel
     }
     
     private func createObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderMovieStatus(notification:)), name: .didAddToMyList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(
+        updateHeaderMovieStatus(notification:)), name: .didAddToMyList, object: nil)
     }
     
     private func removeObserver() {
@@ -179,4 +180,3 @@ extension HomeCategoryViewController: UITableViewDelegate {
         }
     }
 }
-

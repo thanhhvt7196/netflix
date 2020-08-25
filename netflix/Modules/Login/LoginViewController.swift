@@ -111,7 +111,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         
         leftBarButtonItem.rx.tap
             .subscribe(onNext: { _ in
-                SceneCoordinator.shared.pop(animated: true)
+                SceneCoordinator.shared.pop(animated: true, toRoot: false)
             })
             .disposed(by: bag)
         

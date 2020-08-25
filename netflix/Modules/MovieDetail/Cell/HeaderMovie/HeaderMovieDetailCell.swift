@@ -33,6 +33,7 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
     
     var viewModel: HeaderMovieDetailViewModel!
     private var bag = DisposeBag()
+    private let addToMyListTrigger = PublishSubject<Bool>()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,7 +62,7 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
     }
     
     private func bindData() {
-        let input = HeaderMovieDetailViewModel.Input()
+        let input = HeaderMovieDetailViewModel.Input(addToMyListTrigger: addToMyListTrigger.asDriverOnErrorJustComplete())
         let output = viewModel.transform(input: input)
         
         output.media
@@ -119,5 +120,95 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
             }
             .drive(directorLabel.rx.text)
             .disposed(by: bag)
+        
+        output.media
+            .map { $0.id }
+            .drive(onNext: { [weak self] id in
+                guard let self = self, let id = id else { return }
+                self.myListLottieView.currentProgress = PersistentManager.shared.watchList.compactMap { $0.id }.contains(id) ? 1 : 0
+            })
+            .disposed(by: bag)
+        
+        output.addToMyListResult
+            .drive(onNext: { [weak self] isMyList in
+                guard let self = self else { return }
+                if isMyList {
+                    self.handleAddToMyList()
+                } else {
+                    self.handleRemoveFromMyList()
+                }
+            })
+            .disposed(by: bag)
+
+        mylistButton.rx.tap
+            .withLatestFrom(output.loading)
+            .filter { !$0 }
+            .map { [weak self] _ -> Bool in
+                guard let self = self else {
+                    fatalError()
+                }
+                return !MovieHelper.isMyList(movie: self.viewModel.media)
+            }
+            .subscribe(onNext: { [weak self] watchList in
+                guard let self = self else { return }
+                self.handleAnimation(isMyList: watchList)
+                self.addToMyListTrigger.onNext(watchList)
+            })
+            .disposed(by: bag)
+    }
+}
+
+extension HeaderMovieDetailCell {
+    func update(isMyList: Bool, mediaID: Int) {
+        guard viewModel.media.id != mediaID else {
+            return
+        }
+        if isMyList {
+            myListLottieView.play(fromProgress: 0, toProgress: 1, loopMode: .none, completion: nil)
+        } else {
+            myListLottieView.play(fromProgress: 1, toProgress: 0, loopMode: .none, completion: nil)
+        }
+    }
+    
+    private func handleAddToMyList() {
+        if !PersistentManager.shared.watchList.compactMap({ $0.id }).contains(self.viewModel.media.id ?? -1) {
+            var watchList = PersistentManager.shared.watchList
+            watchList.insert(self.viewModel.media, at: 0)
+            PersistentManager.shared.watchList = watchList
+            NotificationCenter.default.post(name: .didAddToMyList,
+                                            object: nil,
+                                            userInfo: [
+                                                "is_mylist": true,
+                                                "movie_id": viewModel.media.id])
+        }
+    }
+    
+    private func handleRemoveFromMyList() {
+        if let index = PersistentManager.shared.watchList.firstIndex(where: { movie -> Bool in
+            return movie.id == self.viewModel.media.id && movie.id != nil
+        }) {
+            var watchList = PersistentManager.shared.watchList
+            watchList.remove(at: index)
+            PersistentManager.shared.watchList = watchList
+            NotificationCenter.default.post(name: .didAddToMyList,
+                                            object: nil,
+                                            userInfo: [
+                                                "is_mylist": false,
+                                                "movie_id": viewModel.media.id])
+        }
+    }
+    
+    private func handleAnimation(isMyList: Bool) {
+        if isMyList {
+            self.myListLottieView.play(fromProgress: 0,
+                                          toProgress: 1,
+                                          loopMode: .none,
+                                          completion: nil)
+        } else {
+            self.myListLottieView.play(fromProgress: 1,
+                                          toProgress: 0,
+                                          loopMode: .none,
+                                          completion: nil)
+        }
     }
 }

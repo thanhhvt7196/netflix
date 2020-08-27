@@ -29,9 +29,13 @@ class DismissedPopAnimator: CustomAnimator {
         }
 
         let duration = transitionDuration(using: transitionContext)
-        if let movieDetailViewController = fromViewController as? MovieDetailViewController, movieDetailViewController.tableView.contentOffset.y < movieDetailViewController.offSetToPopToRoot {
+        if let movieDetailViewController = fromViewController as? MovieDetailViewController, movieDetailViewController.tableView.contentOffset.y <= movieDetailViewController.offSetToPopToRoot {
+            movieDetailViewController.tableView.setContentOffset(.zero, animated: false)
+            movieDetailViewController.clearData()
             UIView.animate(withDuration: duration, animations: {
-                fromViewController.view.transform = CGAffineTransform(translationX: 0, y: fromViewController.view.frame.height)
+                let frame = movieDetailViewController.view.frame
+                movieDetailViewController.view.frame.origin.y = frame.height
+                movieDetailViewController.view.alpha = 0
             }, completion: { _ in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             })

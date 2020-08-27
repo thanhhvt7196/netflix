@@ -34,6 +34,7 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
     private let offSetToHideCloseButton: CGFloat = -100
     
     private let getMovieDetailTrigger = PublishSubject<Void>()
+    private let clearDataTrigger = PublishSubject<Void>()
     private let selectedContentIndex = BehaviorRelay<Int>(value: 0)
     private var isPoppedToRoot = false
     
@@ -73,7 +74,8 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
     private func bind() {
         let input = MovieDetailViewModel.Input(
             getMovieDetailTrigger: getMovieDetailTrigger.asDriverOnErrorJustComplete(),
-            selectedContent: selectedContentIndex
+            selectedContent: selectedContentIndex,
+            clearDataTrigger: clearDataTrigger.asDriverOnErrorJustComplete()
         )
         let output = viewModel.transform(input: input)
             
@@ -150,6 +152,10 @@ extension MovieDetailViewController {
 extension MovieDetailViewController {
     private func getMovieDetail() {
         getMovieDetailTrigger.onNext(())
+    }
+    
+    func clearData() {
+        clearDataTrigger.onNext(())
     }
 }
 

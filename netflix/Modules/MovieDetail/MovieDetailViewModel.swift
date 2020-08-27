@@ -50,6 +50,8 @@ class MovieDetailViewModel: ViewModel {
             .bind(to: dataSource)
             .disposed(by: bag)
         
+        input.clearDataTrigger.map { _ in [] }.drive(dataSource).disposed(by: bag)
+        
         return Output(loading: activityIndicator.asDriver(),
                       dataSource: dataSource,
                       media: .just(media))
@@ -174,6 +176,7 @@ extension MovieDetailViewModel {
     struct Input {
         var getMovieDetailTrigger: Driver<Void>
         var selectedContent: BehaviorRelay<Int>
+        var clearDataTrigger: Driver<Void>
     }
     
     struct Output {

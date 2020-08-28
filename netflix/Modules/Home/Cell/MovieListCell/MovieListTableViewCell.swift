@@ -16,6 +16,7 @@ class MovieListTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
     var viewModel: MovieListCellViewModel!
     
     private var bag = DisposeBag()
+    weak var delegate: ListCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,13 +33,12 @@ class MovieListTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
         bag = DisposeBag()
     }
     
-    func bindViewModel(viewModel: MovieListCellViewModel) {
+    func bindViewModel(viewModel: MovieListCellViewModel, contentOffset: CGPoint) {
         self.viewModel = viewModel
-        bindData()
-        
+        bindData(contentOffset: contentOffset)
     }
     
-    private func bindData() {
+    private func bindData(contentOffset: CGPoint) {
         let input = MovieListCellViewModel.Input(itemSelected: collectionView.rx.itemSelected.asDriver())
         let output = viewModel.transform(input: input)
         
@@ -51,7 +51,6 @@ class MovieListTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
                 return cell
             }
             .disposed(by: bag)
-        
         
         output.mediaSelected
             .withLatestFrom(output.mediaType, resultSelector: { (media, mediaType) -> (Media, MediaType) in
@@ -66,11 +65,14 @@ class MovieListTableViewCell: UITableViewCell, NibReusable, ViewModelBased {
                 }
             })
             .disposed(by: bag)
+        
+        collectionView.setContentOffset(contentOffset, animated: false)
     }
 }
 
 extension MovieListTableViewCell {
     private func configCollectionView() {
+        collectionView.delegate = self
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 10
@@ -80,5 +82,14 @@ extension MovieListTableViewCell {
         collectionView.collectionViewLayout = flowLayout
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(cellType: MovieItemCollectionViewCell.self)
+    }
+}
+
+extension MovieListTableViewCell: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard (scrollView as? UICollectionView) == collectionView else {
+            return
+        }
+        delegate?.collectionViewDidScroll(contentOffset: collectionView.contentOffset, indexPath: viewModel.rowIndexPath)
     }
 }

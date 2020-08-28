@@ -14,8 +14,24 @@ class HomeCategoryViewModel: ViewModel {
     private let loading = BehaviorRelay<Bool>(value: false)
     private let errorTracker = ErrorTracker()
     
+    var rowContentOffSets: [IndexPath: CGPoint] = [:] {
+        didSet {
+            print(rowContentOffSets)
+        }
+    }
+    
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
+        
+        let clearData = input.clearDataTrigger.asObservable()
+            .do(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.rowContentOffSets = [:]
+            })
+            .map { _ -> [HomeCategoryViewSectionModel] in
+                return []
+            }
+        
         let dataSource = input.fetchDataTrigger
             .asObservable()
             .flatMapLatest { [unowned self] _ in
@@ -27,9 +43,9 @@ class HomeCategoryViewModel: ViewModel {
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: homeCategoryData)
             }
-            .merge(with: input.clearDataTrigger.asObservable().map { _ in [] })
-            .asDriver(onErrorJustReturn: [])
-        
+        .merge(with: clearData)
+        .asDriver(onErrorJustReturn: [])
+                
         return Output(dataSource: dataSource,
                       error: errorTracker.asDriver(),
                       indicator: activityIndicator.asDriver())

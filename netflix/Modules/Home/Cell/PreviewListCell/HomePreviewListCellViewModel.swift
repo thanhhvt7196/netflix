@@ -10,26 +10,28 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class HomeNowPlayingCellViewModel: ViewModel {
-    private let movies: Driver<[Media]>
+class HomePreviewListCellViewModel: ViewModel {
+    private let medias: [Media]
     private let mediaType: MediaType
+    let rowIndexPath: IndexPath
     
-    init(movies: [Media], mediaType: MediaType) {
-        self.movies = .just(movies)
+    init(medias: [Media], mediaType: MediaType, indexPath: IndexPath) {
+        self.medias = medias.filter { !$0.posterPath.isNilOrEmpty }
         self.mediaType = mediaType
+        self.rowIndexPath = indexPath
     }
     
     func transform(input: Input) -> Output {
-        return Output(movies: movies)
+        return Output(medias: .just(medias))
     }
 }
 
-extension HomeNowPlayingCellViewModel {
+extension HomePreviewListCellViewModel {
     struct Input {
         var itemSelected: Driver<IndexPath>
     }
     
     struct Output {
-        var movies: Driver<[Media]>
+        var medias: Driver<[Media]>
     }
 }

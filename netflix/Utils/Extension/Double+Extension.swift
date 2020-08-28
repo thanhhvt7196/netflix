@@ -17,3 +17,9 @@ extension Double {
         return String(formatter.string(from: number) ?? "")
     }
 }
+
+extension Optional where Wrapped == Double {
+    var isNilOrZero: Bool {
+        return self == nil || self == 0
+    }
+}

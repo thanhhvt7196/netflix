@@ -13,11 +13,12 @@ import RxCocoa
 class MovieListCellViewModel: ViewModel {
     private let medias: [Media]
     private let mediaType: MediaType
-    private let bag = DisposeBag()
+    let rowIndexPath: IndexPath
     
-    init(medias: [Media], mediaType: MediaType) {
-        self.medias = medias
-        self.mediaType = mediaType 
+    init(medias: [Media], mediaType: MediaType, indexPath: IndexPath) {
+        self.medias = medias.filter { !$0.posterPath.isNilOrEmpty }
+        self.mediaType = mediaType
+        self.rowIndexPath = indexPath
     }
     
     func transform(input: Input) -> Output {

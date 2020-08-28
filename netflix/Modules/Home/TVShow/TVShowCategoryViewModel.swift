@@ -12,10 +12,15 @@ import RxCocoa
 
 class TVShowCategoryViewModel: ViewModel {
     private let errorTracker = ErrorTracker()
+    var rowContentOffSets: [IndexPath: CGPoint] = [:] {
+        didSet {
+            print(rowContentOffSets)
+        }
+    }
     
     func transform(input: Input) -> Output {
-        
         let activityIndicator = ActivityIndicator()
+        
         let allGenreData = input.fetchDataTrigger.filter { $0 == nil || $0 == 0 }.flatMapLatest { [unowned self] _ in
             return self.getTVShowAllData()
                 .trackActivity(activityIndicator)
@@ -40,14 +45,19 @@ class TVShowCategoryViewModel: ViewModel {
                 return self.mapToDataSource(data: tvShowWithGenreData)
             }
         
-        let dataSource = Observable.merge(
-                [
-                    allGenreDataSource,
-                    specificGenreDataSource,
-                    input.clearDataTrigger.asObservable().map { _ in [] }
-                ]
-            )
-            .asDriver(onErrorJustReturn: [])
+        let clearData = input.clearDataTrigger.asObservable()
+            .do(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.rowContentOffSets = [:]
+            })
+            .map { _ -> [HomeCategoryViewSectionModel] in
+                return []
+            }
+        
+        let dataSource = Observable.merge(allGenreDataSource,
+                                          specificGenreDataSource,
+                                          clearData)
+                                    .asDriver(onErrorJustReturn: [])
 
         return Output(dataSource: dataSource,
                       error: errorTracker.asDriver(),

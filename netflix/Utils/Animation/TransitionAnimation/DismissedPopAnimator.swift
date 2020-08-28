@@ -30,7 +30,6 @@ class DismissedPopAnimator: CustomAnimator {
 
         let duration = transitionDuration(using: transitionContext)
         if let movieDetailViewController = fromViewController as? MovieDetailViewController, movieDetailViewController.tableView.contentOffset.y <= movieDetailViewController.offSetToPopToRoot {
-            movieDetailViewController.tableView.setContentOffset(.zero, animated: false)
             movieDetailViewController.clearData()
             UIView.animate(withDuration: duration, animations: {
                 let frame = movieDetailViewController.view.frame

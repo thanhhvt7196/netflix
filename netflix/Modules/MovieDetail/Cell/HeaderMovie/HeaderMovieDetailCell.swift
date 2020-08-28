@@ -103,7 +103,7 @@ class HeaderMovieDetailCell: UITableViewCell, NibReusable, ViewModelBased {
             .disposed(by: bag)
         
         output.movieDetail
-            .map { $0?.movieDetail?.runtime == nil }
+            .map { $0?.movieDetail?.runtime.isNilOrZero ?? true }
             .drive(durationLabel.rx.isHidden)
             .disposed(by: bag)
         

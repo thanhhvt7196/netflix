@@ -28,3 +28,9 @@ extension Int {
         return "\(n.description)M"
     }
 }
+
+extension Optional where Wrapped == Int {
+    var isNilOrZero: Bool {
+        return self == nil || self == 0
+    }
+}

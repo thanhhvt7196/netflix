@@ -12,6 +12,11 @@ import RxCocoa
 
 class MoviesCategoryViewModel: ViewModel {
     private let errorTracker = ErrorTracker()
+    var rowContentOffSets: [IndexPath: CGPoint] = [:] {
+        didSet {
+            print(rowContentOffSets)
+        }
+    }
     
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
@@ -38,15 +43,20 @@ class MoviesCategoryViewModel: ViewModel {
                 guard let self = self else { return [] }
                 return self.mapToDataSource(data: movieWithGenreData)
             }
+        
+        let clearData = input.clearDataTrigger.asObservable()
+            .do(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.rowContentOffSets = [:]
+            })
+            .map { _ -> [HomeCategoryViewSectionModel] in
+                return []
+            }
 
-        let dataSource = Observable.merge(
-                [
-                    allGenreDataSource,
-                    specificGenreDataSource,
-                    input.clearDataTrigger.asObservable().map { _ in [] }
-                ]
-            )
-            .asDriver(onErrorJustReturn: [])
+        let dataSource = Observable.merge(allGenreDataSource,
+                                          specificGenreDataSource,
+                                          clearData)
+                                    .asDriver(onErrorJustReturn: [])
         return Output(dataSource: dataSource,
                       error: errorTracker.asDriver(),
                       indicator: activityIndicator.asDriver())

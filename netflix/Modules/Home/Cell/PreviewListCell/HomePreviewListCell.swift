@@ -11,11 +11,13 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class HomeNowPlayingCell: UITableViewCell, NibReusable, ViewModelBased {
+class HomePreviewListCell: UITableViewCell, NibReusable, ViewModelBased {
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var viewModel: HomeNowPlayingCellViewModel!
+    var viewModel: HomePreviewListCellViewModel!
     private var bag = DisposeBag()
+    
+    weak var delegate: ListCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,16 +34,16 @@ class HomeNowPlayingCell: UITableViewCell, NibReusable, ViewModelBased {
         bag = DisposeBag()
     }
     
-    func bindViewModel(viewModel: HomeNowPlayingCellViewModel) {
+    func bindViewModel(viewModel: HomePreviewListCellViewModel, contentOffset: CGPoint = .zero) {
         self.viewModel = viewModel
-        bindData()
+        bindData(contentOffset: contentOffset)
     }
     
-    private func bindData() {
-        let input = HomeNowPlayingCellViewModel.Input(itemSelected: collectionView.rx.itemSelected.asDriver())
+    private func bindData(contentOffset: CGPoint) {
+        let input = HomePreviewListCellViewModel.Input(itemSelected: collectionView.rx.itemSelected.asDriver())
         let output = viewModel.transform(input: input)
         
-        output.movies
+        output.medias
             .drive(collectionView.rx.items) { collectionView, item, movie in
                 let indexPath = IndexPath(item: item, section: 0)
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as HomePreviewCollectionViewCell
@@ -50,11 +52,14 @@ class HomeNowPlayingCell: UITableViewCell, NibReusable, ViewModelBased {
                 return cell
             }
             .disposed(by: bag)
+        
+        collectionView.setContentOffset(contentOffset, animated: false)
     }
 }
 
-extension HomeNowPlayingCell {
+extension HomePreviewListCell {
     private func configCollectionView() {
+        collectionView.delegate = self
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 10
@@ -64,5 +69,14 @@ extension HomeNowPlayingCell {
         collectionView.collectionViewLayout = flowLayout
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(cellType: HomePreviewCollectionViewCell.self)
+    }
+}
+
+extension HomePreviewListCell: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard (scrollView as? UICollectionView) == collectionView else {
+            return
+        }
+        delegate?.collectionViewDidScroll(contentOffset: collectionView.contentOffset, indexPath: viewModel.rowIndexPath)
     }
 }

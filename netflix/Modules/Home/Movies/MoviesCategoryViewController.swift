@@ -91,12 +91,13 @@ extension MoviesCategoryViewController {
         tableView.delegate = self
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: .leastNonzeroMagnitude))
         tableView.register(cellType: HeaderMovieTableViewCell.self)
-        tableView.register(cellType: HomeNowPlayingCell.self)
+        tableView.register(cellType: HomePreviewListCell.self)
         tableView.register(cellType: MovieListTableViewCell.self)
     }
     
     private func setupDataSources() {
-        dataSources = RxTableViewSectionedReloadDataSource(configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
+        dataSources = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
+            guard let self = self else { return UITableViewCell() }
             switch dataSource[indexPath] {
             case .headerMovie(let movie):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as HeaderMovieTableViewCell
@@ -104,14 +105,16 @@ extension MoviesCategoryViewController {
                 cell.bindViewModel(viewModel: viewModel)
                 return cell
             case .previewList(let movies, let mediaType):
-                let cell = tableView.dequeueReusableCell(for: indexPath) as HomeNowPlayingCell
-                let nowPlayingViewModel = HomeNowPlayingCellViewModel(movies: movies, mediaType: mediaType)
-                cell.bindViewModel(viewModel: nowPlayingViewModel)
+                let cell = tableView.dequeueReusableCell(for: indexPath) as HomePreviewListCell
+                let previewListViewModel = HomePreviewListCellViewModel(medias: movies, mediaType: mediaType, indexPath: indexPath)
+                cell.delegate = self
+                cell.bindViewModel(viewModel: previewListViewModel, contentOffset: self.viewModel.rowContentOffSets[indexPath] ?? .zero)
                 return cell
             case .moviesListItem(let movies, let mediaType):
                 let cell = tableView.dequeueReusableCell(for: indexPath) as MovieListTableViewCell
-                let movieListCellViewModel = MovieListCellViewModel(medias: movies, mediaType: mediaType)
-                cell.bindViewModel(viewModel: movieListCellViewModel)
+                let movieListCellViewModel = MovieListCellViewModel(medias: movies, mediaType: mediaType, indexPath: indexPath)
+                cell.delegate = self
+                cell.bindViewModel(viewModel: movieListCellViewModel, contentOffset: self.viewModel.rowContentOffSets[indexPath] ?? .zero)
                 return cell
             }
         })
@@ -120,8 +123,12 @@ extension MoviesCategoryViewController {
 
 extension MoviesCategoryViewController {
     func loadData(genreID: Int?) {
-        clearDataTrigger.onNext(())
+        clearData()
         fetchDataTrigger.onNext(genreID)
+    }
+    
+    private func clearData() {
+        clearDataTrigger.onNext(())
     }
     
     @objc private func updateHeaderMovieStatus(notification: Notification) {
@@ -174,3 +181,9 @@ extension MoviesCategoryViewController: UITableViewDelegate {
     }
 }
 
+
+extension MoviesCategoryViewController: ListCellDelegate {
+    func collectionViewDidScroll(contentOffset: CGPoint, indexPath: IndexPath) {
+        viewModel.rowContentOffSets[indexPath] = contentOffset
+    }
+}

@@ -23,6 +23,8 @@ class MoviesCategoryViewController: BaseViewController, StoryboardBased, ViewMod
     private let clearDataTrigger = PublishSubject<Void>()
     private var dataSources: RxTableViewSectionedReloadDataSource<HomeCategoryViewSectionModel>!
     
+    weak var scrollDelegate: ScrollDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createObserver()
@@ -178,6 +180,13 @@ extension MoviesCategoryViewController: UITableViewDelegate {
                 return nil
             }
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard (scrollView as? UITableView) == tableView else {
+            return
+        }
+        scrollDelegate?.didScroll?(scrollView: tableView)
     }
 }
 

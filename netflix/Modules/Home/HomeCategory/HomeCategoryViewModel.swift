@@ -14,11 +14,7 @@ class HomeCategoryViewModel: ViewModel {
     private let loading = BehaviorRelay<Bool>(value: false)
     private let errorTracker = ErrorTracker()
     
-    var rowContentOffSets: [IndexPath: CGPoint] = [:] {
-        didSet {
-            print(rowContentOffSets)
-        }
-    }
+    var rowContentOffSets: [IndexPath: CGPoint] = [:] 
     
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()

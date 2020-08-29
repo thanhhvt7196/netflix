@@ -20,6 +20,8 @@ class MyListViewController: FadeAnimatedViewController, StoryboardBased, ViewMod
     private let fetchDataTrigger = PublishSubject<Void>()
     private let clearDataTrigger = PublishSubject<Void>()
     
+    weak var scrollDelegate: ScrollDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -66,6 +68,7 @@ class MyListViewController: FadeAnimatedViewController, StoryboardBased, ViewMod
 
 extension MyListViewController {
     private func configCollectionView() {
+        collectionView.delegate = self
         let numberOfItemPerRow: CGFloat = 3.0
         let spacing: CGFloat = 10
         let padding: CGFloat = 15
@@ -86,5 +89,12 @@ extension MyListViewController {
     func loadData() {
         clearDataTrigger.onNext(())
         fetchDataTrigger.onNext(())
+    }
+}
+
+extension MyListViewController: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard (scrollView as? UICollectionView) == collectionView else { return }
+        scrollDelegate?.didScroll?(scrollView: collectionView)
     }
 }

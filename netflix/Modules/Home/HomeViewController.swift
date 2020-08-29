@@ -19,14 +19,38 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
     @IBOutlet weak var categoryView: CategoryAnimationView!
     @IBOutlet weak var logoButton: UIButton!
     @IBOutlet weak var containerView: UIView!
-    private var isFirstLaunch = true
+    @IBOutlet weak var gradientContainerTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var gradientViewTopConstraint: NSLayoutConstraint!
     
+    private var isFirstLaunch = true
     private let bag = DisposeBag()
     
     private var homeCategoryViewController: HomeCategoryViewController!
     private var tvShowCategoryViewController: TVShowCategoryViewController!
     private var moviesCategoryViewController: MoviesCategoryViewController!
     private var mylistViewController: MyListViewController!
+    
+    private var gradientViewHeight: CGFloat!
+    
+    private var scrollableView: UIScrollView? {
+        didSet {
+            stopFollowScrollView()
+            followScrollView()
+        }
+    }
+    private var panGestureRecognizer: UIPanGestureRecognizer?
+
+    private var previousOrientation: UIDeviceOrientation = UIDevice.current.orientation
+    private var previousState = CategoryViewState.expanded
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func loadView() {
+        super.loadView()
+        gradientContainerTopConstraint.constant = UIApplication.shared.currentWindow?.safeAreaInsets.top ?? 0
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +66,7 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isFirstLaunch {
+            gradientViewHeight = gradientView.frame.height
             isFirstLaunch = false
         }
         view.bringSubviewToFront(iconImageView)
@@ -131,27 +156,29 @@ extension HomeViewController {
         addChild(homeCategoryViewController)
         homeCategoryViewController.view.frame = containerView.bounds
         homeCategoryViewController.didMove(toParent: self)
+        homeCategoryViewController.scrollDelegate = self
         
         let tvShowCategoryViewModel = TVShowCategoryViewModel()
         tvShowCategoryViewController = TVShowCategoryViewController.instantiate(withViewModel: tvShowCategoryViewModel)
         addChild(tvShowCategoryViewController)
         tvShowCategoryViewController.view.frame = containerView.bounds
         tvShowCategoryViewController.didMove(toParent: self)
-        
+        tvShowCategoryViewController.scrollDelegate = self
         
         let movieCategoryViewModel = MoviesCategoryViewModel()
         moviesCategoryViewController = MoviesCategoryViewController.instantiate(withViewModel: movieCategoryViewModel)
         addChild(moviesCategoryViewController)
         moviesCategoryViewController.view.frame = containerView.bounds
         moviesCategoryViewController.didMove(toParent: self)
+        moviesCategoryViewController.scrollDelegate = self
         
         let mylistViewModel = MyListViewModel(isTabbarItem: false)
         mylistViewController = MyListViewController.instantiate(withViewModel: mylistViewModel)
         addChild(mylistViewController)
-        var frame = containerView.bounds
-        frame = CGRect(x: frame.origin.x, y: frame.origin.y + gradientView.bounds.height, width: frame.width, height: frame.height - gradientView.bounds.height)
-        mylistViewController.view.frame = frame
+        mylistViewController.view.frame = containerView.bounds
+        mylistViewController.collectionView.contentInset = UIEdgeInsets(top: categoryView.frame.height, left: 0, bottom: 0, right: 0)
         mylistViewController.didMove(toParent: self)
+        mylistViewController.scrollDelegate = self
     }
 }
 
@@ -230,18 +257,22 @@ extension HomeViewController {
             containerView.subviews.forEach({ $0.removeFromSuperview()})
             containerView.addSubViewWithAnimation(view: homeCategoryViewController.view)
             homeCategoryViewController.loadData()
+            scrollableView = homeCategoryViewController.tableView
         case .tvShow:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
             containerView.addSubViewWithAnimation(view: tvShowCategoryViewController.view)
             tvShowCategoryViewController.loadData(genreID: PersistentManager.shared.currentGenre)
+            scrollableView = tvShowCategoryViewController.tableView
         case .movies:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
             containerView.addSubViewWithAnimation(view: moviesCategoryViewController.view)
             moviesCategoryViewController.loadData(genreID: PersistentManager.shared.currentGenre)
+            scrollableView = moviesCategoryViewController.tableView
         case .mylist:
             containerView.subviews.forEach({ $0.removeFromSuperview()})
             containerView.addSubViewWithAnimation(view: mylistViewController.view)
             mylistViewController.loadData()
+            scrollableView = mylistViewController.collectionView
         }
     }
 }
@@ -288,5 +319,148 @@ extension HomeViewController: CategoryAnimationViewDelegate {
     
     func genreTapped() {
         self.showChooseCategoryView()
+    }
+}
+
+extension HomeViewController {
+    private func stopFollowScrollView() {
+        if let gesture = panGestureRecognizer {
+            scrollableView?.removeGestureRecognizer(gesture)
+        }
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    private func followScrollView() {
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        panGestureRecognizer?.maximumNumberOfTouches = 1
+        panGestureRecognizer?.delegate = self
+        panGestureRecognizer?.cancelsTouchesInView = false
+        if let gesture = panGestureRecognizer {
+            scrollableView?.addGestureRecognizer(gesture)
+        }
+        gradientView.backgroundColor = UIColor.black.withAlphaComponent(0)
+        previousOrientation = UIDevice.current.orientation
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive(_:)), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didRotate(_:)), name: UIDevice.orientationDidChangeNotification, object:  nil)
+    }
+    
+    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        switch gesture.state {
+        case .changed:
+            if gradientViewTopConstraint.constant <= 0 && gradientViewTopConstraint.constant >= -gradientViewHeight {
+                let constant = gradientViewTopConstraint.constant
+                if constant + translation.y > 0 {
+                    gradientViewTopConstraint.constant = 0
+                } else if constant + translation.y < -gradientViewHeight {
+                    gradientViewTopConstraint.constant = -gradientViewHeight
+                } else {
+                    gradientViewTopConstraint.constant = constant + translation.y
+                }
+                gesture.setTranslation(.zero, in: view)
+            }
+        case .ended:
+            abs(gradientViewTopConstraint.constant/gradientViewHeight) < 0.5 ? showCategoryView() : hideCategoryView()
+        default:
+            break
+        }
+    }
+}
+
+extension HomeViewController {
+    private func showCategoryView() {
+        gradientViewTopConstraint.constant = 0
+        UIView.animate(withDuration: 0.2) {
+            self.gradientView.backgroundColor = UIColor.black.withAlphaComponent(self.percentage)
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func hideCategoryView() {
+        gradientViewTopConstraint.constant = -self.gradientViewHeight
+        UIView.animate(withDuration: 0.2) {
+            self.gradientView.backgroundColor = UIColor.black.withAlphaComponent(self.percentage)
+            self.view.layoutIfNeeded()
+        }
+    }
+}
+
+extension HomeViewController {
+    private enum CategoryViewState: Int {
+        case collapsed
+        case expanded
+        case scrolling
+        
+        var description: String {
+            switch self {
+            case .collapsed:
+                return "collapsed"
+            case .expanded:
+                return "expanded"
+            case .scrolling:
+                return "scrolling"
+            }
+        }
+    }
+    
+    private var state: CategoryViewState {
+        if gradientViewTopConstraint.constant <= -gradientView.frame.height {
+            return .collapsed
+        } else if gradientViewTopConstraint.constant == 0 {
+            return .expanded
+        } else {
+            return .scrolling
+        }
+    }
+    
+    private var percentage: CGFloat {
+        switch PersistentManager.shared.categoryType {
+        case .mylist:
+            return 1
+        default:
+            guard let tableView = scrollableView as? UITableView,
+                let cell = tableView.visibleCells.compactMap({ $0 as? HeaderMovieTableViewCell }).first
+            else {
+                return 1
+            }
+            return min(1, max(tableView.contentOffset.y, 0) / (cell.bounds.height/2)) 
+        }
+    }
+}
+
+extension HomeViewController {
+    @objc private func willResignActive(_ notification: Notification) {
+        previousState = state
+    }
+    
+    @objc private func didRotate(_ notification: Notification) {
+        
+    }
+}
+
+extension HomeViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard let currentTableView = scrollableView else { return false }
+        return touch.view?.isDescendant(of: currentTableView) ?? false
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let recognizer = gestureRecognizer as? UIPanGestureRecognizer else {
+            return true
+        }
+        let velocity = recognizer.velocity(in: gestureRecognizer.view)
+        return abs(velocity.y) > abs(velocity.x)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+extension HomeViewController: ScrollDelegate {
+    func didScroll(scrollView: UIScrollView) {
+        gradientView.backgroundColor = UIColor.black.withAlphaComponent(percentage)
     }
 }

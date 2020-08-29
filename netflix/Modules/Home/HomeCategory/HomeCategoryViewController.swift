@@ -22,6 +22,7 @@ class HomeCategoryViewController: BaseViewController, StoryboardBased, ViewModel
     private let fetchDataTrigger = PublishSubject<Void>()
     private let clearDataTrigger = PublishSubject<Void>()
     private var dataSources: RxTableViewSectionedReloadDataSource<HomeCategoryViewSectionModel>!
+    weak var scrollDelegate: ScrollDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,6 +185,11 @@ extension HomeCategoryViewController: UITableViewDelegate {
                 return nil
             }
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard (scrollView as? UITableView) == tableView else { return }
+        scrollDelegate?.didScroll?(scrollView: scrollView)
     }
 }
 

@@ -14,14 +14,40 @@ class GradientView: UIView {
         return CAGradientLayer.classForCoder()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        let gradientLayer = self.layer as! CAGradientLayer
-        gradientLayer.colors = [
-            UIColor.black.withAlphaComponent(0.5).cgColor,
-            UIColor.clear.cgColor,
-            UIColor.black.cgColor
-        ]
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    convenience init(colors: [CGColor]) {
+        self.init()
+        self.colors = colors
+    }
+    
+    private func commonInit() {
+        setLayerColors(colors: colors)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    var colors: [CGColor] = [
+        UIColor.black.withAlphaComponent(0.5).cgColor,
+        UIColor.clear.cgColor,
+        UIColor.black.cgColor
+        ] {
+        didSet {
+            setLayerColors(colors: colors)
+        }
+    }
+    
+    private func setLayerColors(colors: [CGColor]) {
+        guard let gradientLayer = layer as? CAGradientLayer else {
+            return
+        }
+        gradientLayer.colors = colors
         backgroundColor = UIColor.clear
     }
 }

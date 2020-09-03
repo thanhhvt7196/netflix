@@ -119,9 +119,11 @@ extension SceneCoordinator: UINavigationControllerDelegate {
         case .push:
             if toVC is FadeAnimatedViewController {
                 return FadePushAnimator(type: .navigation)
-            } else {
-                return nil
             }
+            if toVC is PlayerViewController {
+                return RotatePresentAnimation(type: .navigation)
+            }
+            return nil
         case .pop:
             if fromVC is FadeAnimatedViewController {
                 return DismissedPopAnimator(type: .navigation)

@@ -52,9 +52,30 @@ class MovieDetailViewModel: ViewModel {
         
         input.clearDataTrigger.map { _ in [] }.drive(dataSource).disposed(by: bag)
         
+        let selectedVideo = input.selectedItem.flatMapLatest { [unowned self] indexPath -> Driver<Video> in
+            guard self.dataSource.value.indices.contains(indexPath.section) else {
+                return .empty()
+            }
+            switch self.dataSource.value[indexPath.section] {
+            case .content(titles: _, let items):
+                guard items.indices.contains(indexPath.row) else {
+                    return .empty()
+                }
+                let item = items[indexPath.row]
+                if case .episode(let video) = item {
+                    return .just(video)
+                } else {
+                    return .empty()
+                }
+            default:
+                return .empty()
+            }
+        }
+        
         return Output(loading: activityIndicator.asDriver(),
                       dataSource: dataSource,
-                      media: .just(media))
+                      media: .just(media),
+                      selectedVideo: selectedVideo)
     }
 }
 
@@ -177,11 +198,13 @@ extension MovieDetailViewModel {
         var getMovieDetailTrigger: Driver<Void>
         var selectedContent: BehaviorRelay<Int>
         var clearDataTrigger: Driver<Void>
+        var selectedItem: Driver<IndexPath>
     }
     
     struct Output {
         var loading: Driver<Bool>
         var dataSource: BehaviorRelay<[MovieDetailSectionModel]>
         var media: Driver<Media>
+        var selectedVideo: Driver<Video>
     }
 }

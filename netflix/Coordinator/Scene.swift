@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import XCDYouTubeKit
+import AVKit
 
 protocol TargetScene {
     var transition: SceneTransitionType { get }
@@ -19,6 +21,7 @@ enum Scene {
     case onboarding
     case webView(url: String)
     case movieDetail(movie: Media)
+    case player(video: Video)
 }
 
 extension Scene: TargetScene {
@@ -29,31 +32,31 @@ extension Scene: TargetScene {
             
             let homeViewModel = HomeViewModel()
             let homeViewController = HomeViewController.instantiate(withViewModel: homeViewModel)
-            let homeNavController = UINavigationController(rootViewController: homeViewController)
+            let homeNavController = BaseNavigationController(rootViewController: homeViewController)
             let homeTabbarItem = UITabBarItem(title: Strings.home, image: Asset.tabIconHomeNormal.image, selectedImage: Asset.tabIconHomeNormal.image)
             homeNavController.tabBarItem = homeTabbarItem
             
             let searchViewModel = SearchViewModel()
             let searchViewController = SearchViewController.instantiate(withViewModel: searchViewModel)
-            let searchNavController = UINavigationController(rootViewController: searchViewController)
+            let searchNavController = BaseNavigationController(rootViewController: searchViewController)
             let searchTabbarItem = UITabBarItem(title: Strings.search, image: Asset.tabIconSearchNormal.image, selectedImage: Asset.tabIconSearchNormal.image)
             searchNavController.tabBarItem = searchTabbarItem
             
             let newMoviesViewModel = NewMoviesViewModel()
             let newMoviesViewController = NewMoviesViewController.instantiate(withViewModel: newMoviesViewModel)
-            let newMoviesNavController = UINavigationController(rootViewController: newMoviesViewController)
+            let newMoviesNavController = BaseNavigationController(rootViewController: newMoviesViewController)
             let newMoviesTabbarItem = UITabBarItem(title: Strings.comingSoon, image: Asset.extrasCardsIconNormal.image, selectedImage: Asset.extrasCardsIconNormal.image)
             newMoviesNavController.tabBarItem = newMoviesTabbarItem
             
             let myListViewModel = MyListViewModel(isTabbarItem: true)
             let myListViewController = MyListViewController.instantiate(withViewModel: myListViewModel)
-            let myListNavController = UINavigationController(rootViewController: myListViewController)
+            let myListNavController = BaseNavigationController(rootViewController: myListViewController)
             let myListTabbarItem = UITabBarItem(title: Strings.myList, image: Asset.icMylistNormal.image, selectedImage: Asset.icMylistNormal.image)
             myListNavController.tabBarItem = myListTabbarItem
             
             let moreViewModel = MoreViewModel()
             let moreViewController = MoreViewController.instantiate(withViewModel: moreViewModel)
-            let moreNavController = UINavigationController(rootViewController: moreViewController)
+            let moreNavController = BaseNavigationController(rootViewController: moreViewController)
             let moreTabbarItem = UITabBarItem(title: Strings.more, image: Asset.mcflyMoreNormal.image, selectedImage: Asset.mcflyMoreNormal.image)
             moreNavController.tabBarItem = moreTabbarItem
             
@@ -66,7 +69,7 @@ extension Scene: TargetScene {
             return .push(loginViewController)
         case .onboarding:
             let onboardingViewController = OnboardingViewController.instantiate()
-            let navigationController = UINavigationController(rootViewController: onboardingViewController)
+            let navigationController = BaseNavigationController(rootViewController: onboardingViewController)
             return .root(navigationController)
         case .splash:
             let splashViewModel = SplashViewModel()
@@ -75,12 +78,17 @@ extension Scene: TargetScene {
         case .webView(let url):
             let webViewModel = WebViewModel(url: url)
             let webviewController = WebViewController.instantiate(withViewModel: webViewModel)
-            let navigationController = UINavigationController(rootViewController: webviewController)
+            let navigationController = BaseNavigationController(rootViewController: webviewController)
             return .present(navigationController)
         case .movieDetail(let movie):
             let movieDetailViewModel = MovieDetailViewModel(media: movie)
             let movieDetailViewController = MovieDetailViewController.instantiate(withViewModel: movieDetailViewModel)
             return .push(movieDetailViewController)
+        case .player(let video):
+            let playerViewModel = PlayerViewModel(video: video)
+            let playerViewController = PlayerViewController.instantiate(withViewModel: playerViewModel)
+            playerViewController.hidesBottomBarWhenPushed = true
+            return .push(playerViewController)
         }
     }
 }

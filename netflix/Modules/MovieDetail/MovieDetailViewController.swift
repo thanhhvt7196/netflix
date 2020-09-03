@@ -75,7 +75,8 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
         let input = MovieDetailViewModel.Input(
             getMovieDetailTrigger: getMovieDetailTrigger.asDriverOnErrorJustComplete(),
             selectedContent: selectedContentIndex,
-            clearDataTrigger: clearDataTrigger.asDriverOnErrorJustComplete()
+            clearDataTrigger: clearDataTrigger.asDriverOnErrorJustComplete(),
+            selectedItem: tableView.rx.itemSelected.asDriver()
         )
         let output = viewModel.transform(input: input)
             
@@ -89,6 +90,12 @@ class MovieDetailViewController: FadeAnimatedViewController, StoryboardBased, Vi
         
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: bag)
+        
+        output.selectedVideo
+            .drive(onNext: { video in
+                SceneCoordinator.shared.transition(to: Scene.player(video: video))
+            })
             .disposed(by: bag)
     }
     

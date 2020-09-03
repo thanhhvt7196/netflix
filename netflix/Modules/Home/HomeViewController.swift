@@ -34,8 +34,8 @@ class HomeViewController: FadeAnimatedViewController, StoryboardBased, ViewModel
     
     private var scrollableView: UIScrollView? {
         didSet {
-            stopFollowScrollView()
-            followScrollView()
+//            stopFollowScrollView()
+//            followScrollView()
         }
     }
     private var panGestureRecognizer: UIPanGestureRecognizer?
